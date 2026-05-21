@@ -3,13 +3,16 @@ export interface Props {
   title: string;
   description: string;
   ogImage?: string;
+  ogType?: 'website' | 'profile' | 'article';
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const { title, description, ogImage } = Astro.props;
+const { title, description, ogImage, ogType = 'website', jsonLd } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImageURL = ogImage
   ? new URL(ogImage, Astro.site).toString()
   : undefined;
+const jsonLdItems = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 ---
 
 <!DOCTYPE html>
@@ -23,10 +26,12 @@ const ogImageURL = ogImage
     <link rel="canonical" href={canonicalURL} />
 
     <!-- OGP -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:site_name" content="青山霊園 偉人録" />
     {ogImageURL && <meta property="og:image" content={ogImageURL} />}
 
     <!-- Twitter -->
@@ -34,6 +39,10 @@ const ogImageURL = ogImage
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     {ogImageURL && <meta name="twitter:image" content={ogImageURL} />}
+
+    {jsonLdItems.map((item) => (
+      <script type="application/ld+json" set:html={JSON.stringify(item)} />
+    ))}
 
     <link rel="stylesheet" href="/styles/global.css" />
   </head>

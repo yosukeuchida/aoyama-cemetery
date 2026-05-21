@@ -63,9 +63,37 @@ const sectionOptions: ParsedSection[] = Array.from(sectionCounts.entries())
 
 const title = '青山霊園 偉人録';
 const description = '東京・青山霊園に眠る偉人たちを紹介するサイト。明治維新を担った政治家、文学者、軍人、文化人の足跡をたどります。';
+
+const siteOrigin = new URL('/', Astro.site).toString();
+
+const websiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: title,
+  description,
+  url: siteOrigin,
+  inLanguage: 'ja',
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: title,
+      item: siteOrigin,
+    },
+  ],
+};
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  jsonLd={[websiteJsonLd, breadcrumbJsonLd]}
+>
   <noscript>
     <style>
       .era-filter,

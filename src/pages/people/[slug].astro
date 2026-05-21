@@ -27,9 +27,69 @@ const works = await getWorksForPerson(person.id);
 
 const title = `${person.data.name} - 青山霊園 偉人録`;
 const description = person.data.shortDescription;
+
+const portraitSrc = person.data.portrait?.src;
+const ogImage = person.data.ogImage ?? portraitSrc;
+const absolutePortraitURL = portraitSrc
+  ? new URL(portraitSrc, Astro.site).toString()
+  : undefined;
+const pageURL = new URL(Astro.url.pathname, Astro.site).toString();
+const siteOrigin = new URL('/', Astro.site).toString();
+
+const sameAs = (person.data.references ?? [])
+  .map((r) => r.url)
+  .filter((u) => u.includes('wikipedia.org'));
+
+const personJsonLd: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: person.data.name,
+  alternateName: person.data.nameKana,
+  birthDate: person.data.birthDate,
+  deathDate: person.data.deathDate,
+  description: person.data.shortDescription,
+  url: pageURL,
+  ...(absolutePortraitURL ? { image: absolutePortraitURL } : {}),
+  ...(sameAs.length > 0 ? { sameAs } : {}),
+  burialPlace: {
+    '@type': 'Place',
+    name: '青山霊園',
+    address: {
+      '@type': 'PostalAddress',
+      addressCountry: 'JP',
+      addressLocality: '東京都港区',
+      streetAddress: '南青山2丁目',
+    },
+    ...(person.data.graveSection ? { description: `区画: ${person.data.graveSection}` } : {}),
+  },
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: '青山霊園 偉人録',
+      item: siteOrigin,
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: person.data.name,
+    },
+  ],
+};
 ---
 
-<BaseLayout title={title} description={description} ogImage={person.data.ogImage}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={ogImage}
+  ogType="profile"
+  jsonLd={[personJsonLd, breadcrumbJsonLd]}
+>
   <article class="person-detail">
     <h1>{person.data.name}</h1>
     <p class="kana">{person.data.nameKana}({person.data.nameRomaji})</p>
