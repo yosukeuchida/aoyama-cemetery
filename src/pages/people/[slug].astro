@@ -2,6 +2,8 @@
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import GravePhotoGallery from '../../components/GravePhotoGallery.astro';
+import NearbyGraves from '../../components/NearbyGraves.astro';
+import { getNearbyPeople } from '../../utils/nearby-graves';
 
 export async function getStaticPaths() {
   const people = await getCollection('people');
@@ -17,6 +19,7 @@ interface Props {
 
 const { person } = Astro.props;
 const { Content } = await render(person);
+const { block, nearby } = await getNearbyPeople(person);
 
 const title = `${person.data.name} - 青山霊園 偉人録`;
 const description = person.data.shortDescription;
@@ -74,6 +77,8 @@ const description = person.data.shortDescription;
         </section>
       );
     })()}
+
+    {block && nearby.length > 0 && <NearbyGraves block={block} nearby={nearby} />}
 
     {person.data.references && person.data.references.length > 0 && (
       <section class="references">
