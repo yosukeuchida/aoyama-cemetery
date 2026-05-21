@@ -99,6 +99,26 @@ main {
 }
 
 /* 偉人詳細ページ */
+.person-detail .breadcrumb {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.person-detail .breadcrumb a {
+  color: var(--color-text-muted);
+  text-decoration: none;
+}
+
+.person-detail .breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.person-detail .breadcrumb span[aria-hidden] {
+  margin: 0 0.3rem;
+  color: #b8b0a0;
+}
+
 .person-detail h1 {
   margin-bottom: 0.2rem;
 }

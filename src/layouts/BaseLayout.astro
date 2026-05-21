@@ -20,6 +20,7 @@ const jsonLdItems = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#5a4a2a" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -48,7 +49,7 @@ const jsonLdItems = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
   </head>
   <body>
     <header class="site-header">
-      <nav>
+      <nav aria-label="メインナビゲーション">
         <a href="/" class="site-title">青山霊園 偉人録</a>
         <ul class="nav-links">
           <li><a href="/">トップ</a></li>

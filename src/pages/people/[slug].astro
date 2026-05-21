@@ -81,6 +81,36 @@ const breadcrumbJsonLd = {
     },
   ],
 };
+
+const faqAnswers: { q: string; a: string }[] = [
+  {
+    q: `${person.data.name}とはどのような人物ですか?`,
+    a: person.data.shortDescription,
+  },
+  {
+    q: `${person.data.name}の生没年はいつですか?`,
+    a: `${person.data.birthDate} 生まれ、${person.data.deathDate} 没。時代区分は${person.data.era.join('・')}。`,
+  },
+];
+if (person.data.graveSection) {
+  faqAnswers.push({
+    q: `${person.data.name}はどこに眠っていますか?`,
+    a: `東京・青山霊園 ${person.data.graveSection} に埋葬されている。`,
+  });
+}
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqAnswers.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: a,
+    },
+  })),
+};
 ---
 
 <BaseLayout
@@ -88,9 +118,15 @@ const breadcrumbJsonLd = {
   description={description}
   ogImage={ogImage}
   ogType="profile"
-  jsonLd={[personJsonLd, breadcrumbJsonLd]}
+  jsonLd={[personJsonLd, breadcrumbJsonLd, faqJsonLd]}
 >
   <article class="person-detail">
+    <nav class="breadcrumb" aria-label="パンくずリスト">
+      <a href="/">トップ</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">{person.data.name}</span>
+    </nav>
+
     <h1>{person.data.name}</h1>
     <p class="kana">{person.data.nameKana}({person.data.nameRomaji})</p>
 
@@ -105,7 +141,7 @@ const breadcrumbJsonLd = {
 
     <table class="meta-table">
       <tbody>
-        <tr><th>生没年</th><td>{person.data.birthDate} 〜 {person.data.deathDate}</td></tr>
+        <tr><th>生没年</th><td><time datetime={person.data.birthDate}>{person.data.birthDate}</time> 〜 <time datetime={person.data.deathDate}>{person.data.deathDate}</time></td></tr>
         <tr><th>時代</th><td>{person.data.era.join('・')}</td></tr>
         <tr><th>分野</th><td>{person.data.category}</td></tr>
         {person.data.graveSection && <tr><th>墓所区画</th><td>{person.data.graveSection}</td></tr>}
