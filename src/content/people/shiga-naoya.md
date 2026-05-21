@@ -7,9 +7,6 @@ deathDate: "1971-10-21"
 era: 昭和
 category: 文化人
 graveSection: 1種イ2号11側
-coords:
-  lat: 35.66819278792736
-  lng: 139.7211753929548
 shortDescription: 「小説の神様」と称された白樺派の中心作家。簡潔で写実的な文体を確立し、長編『暗夜行路』を遺した。
 tags:
   - 白樺派

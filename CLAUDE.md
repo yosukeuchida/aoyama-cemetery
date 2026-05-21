@@ -20,30 +20,38 @@
 1. `src/content/people/<slug>.md` を作成(slug はローマ字ハイフン区切り、例 `okubo-toshimichi`)
 2. frontmatter は `src/content.config.ts` の zod スキーマに準拠
 3. 事実確認(没年月日・役職・業績)を `references` の出典で照合
-4. **墓所位置**: 区画番号を Wikipedia/港区資料で確認し `graveSection` に記入、Google Maps 航空写真で位置を特定して `coords: { lat, lng }` を frontmatter に追加(coords 未設定でも掲載可、地図にだけ出ない)
-5. `npm run dev` でローカル目視確認
+4. **墓所位置**: 区画番号を Wikipedia/港区資料で確認し `graveSection` に記入(地図は次項参照)
+5. `npm run dev` でローカル目視確認(地図が正しい墓所 POI に着地するかも確認)
 6. `git commit && git push` → Cloudflare Pages が自動デプロイ
 
-### coords 取得手順(Google Maps)
+## 地図機能
+
+地図は **デフォルト ON**。偉人ページ(`src/pages/people/[slug].astro`)で本文下に Google Maps の iframe を表示する。3 通りの挙動を frontmatter で制御:
+
+| frontmatter | 地図 URL | 用途 |
+|---|---|---|
+| 何も書かない(デフォルト) | `?q={name}の墓 青山霊園` の **名称検索方式** | Google Maps が POI を持っている著名な偉人。最も多いパターン |
+| `hideMap: true` | 地図セクション非表示 | POI 未登録で地図を出したくない場合 |
+| `coords: { lat, lng }` | `?q={lat},{lng}` の **座標方式** | POI 未登録だが正確な座標がわかる場合(座標ピンが立つだけで POI ラベルは出ない) |
+
+- iframe・「Google マップで開く」リンクとも keyless(API key 不要)
+- `coords` のスキーマ範囲は青山霊園内に限定(範囲外だと zod が build を弾く)
+- トップページに複数ピンの overview 地図は持たない(個別偉人ページで完結する設計)
+
+### 新規偉人で地図を確認する手順
+
+1. ローカル(`npm run dev`)で偉人ページを開く、または `https://www.google.com/maps?q={偉人名}の墓+青山霊園` を直接ブラウザで検索
+2. **正しい墓所 POI に着地する** → 何もしなくて OK(デフォルトで地図表示)
+3. **別の場所が出る / 全く違う POI が出る** → 以下のどちらか
+   - `hideMap: true` を frontmatter に追加(地図を出さない)
+   - Google Maps 航空写真で正確な lat/lng を取得して `coords: { lat, lng }` を frontmatter に追加(座標ピンで表示)
+
+### coords 取得手順(Google Maps 航空写真)
 
 1. Google Maps で「青山霊園」を開き航空写真モードに切替
 2. `graveSection` の区画番号(例 `1種イ8号8側`)を区画案内図と照合して位置を絞り込む
 3. 該当位置を右クリック → 緯度経度をコピー
-4. frontmatter に追加: `coords:\n  lat: 35.66xx\n  lng: 139.71xx` (範囲外だと zod が build を弾く)
-
-## 地図機能
-
-- 偉人ページ(`src/pages/people/[slug].astro`)で coords を持つ偉人のみ、本文下に Google Maps の iframe 埋め込みを表示(coords は「表示するかの flag」として使用)
-- iframe URL は `https://maps.google.com/maps?q={name}の墓 青山霊園&output=embed` の **名称検索方式**(keyless、API key 不要)。Google Maps が POI として持っている偉人の墓に自動でランディングする(志賀直哉・大久保利通・犬養毅 etc.)
-- coords の lat/lng 値は現状フォールバック未使用だが将来 Google POI 未登録の偉人で活用予定
-- 「Google マップで開く」リンクも同じ検索クエリで併設し、経路案内・ストリートビューへの導線にする
-- トップページに複数ピンの overview 地図は持たない(個別偉人ページで完結する設計)
-
-### 新規偉人で地図を出すかの判断
-
-1. Google Maps で「{偉人名}の墓 青山霊園」を検索し、正しい POI にランディングするか目視確認
-2. OK なら frontmatter に `coords` を設定(値は精度低くてもよい、フラグ目的)
-3. POI 未登録なら coords は未設定にして地図セクションを出さない、もしくは正しい lat/lng を載せて URL を coords 方式に分岐させる実装に変更
+4. frontmatter に追加: `coords:\n  lat: 35.66xx\n  lng: 139.71xx`(範囲外だと zod が build を弾く)
 
 ## コンテンツ方針
 

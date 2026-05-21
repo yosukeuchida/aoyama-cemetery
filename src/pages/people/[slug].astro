@@ -40,29 +40,37 @@ const description = person.data.shortDescription;
 
     <Content />
 
-    {person.data.coords && (
-      <section class="grave-map">
-        <h2>墓所の位置</h2>
-        <iframe
-          title={`${person.data.name}の墓所地図`}
-          src={`https://maps.google.com/maps?q=${encodeURIComponent(`${person.data.name}の墓 青山霊園`)}&z=18&output=embed`}
-          width="100%"
-          height="450"
-          style="border:0; border-radius:8px;"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-        ></iframe>
-        <p class="map-link">
-          <a
-            href={`https://www.google.com/maps?q=${encodeURIComponent(`${person.data.name}の墓 青山霊園`)}`}
-            target="_blank"
-            rel="noopener"
-          >
-            Google マップで開く →
-          </a>
-        </p>
-      </section>
-    )}
+    {!person.data.hideMap && (() => {
+      const mapQuery = person.data.coords
+        ? `${person.data.coords.lat},${person.data.coords.lng}`
+        : `${person.data.name}の墓 青山霊園`;
+      const linkQuery = person.data.coords
+        ? `${person.data.coords.lat},${person.data.coords.lng}(${person.data.name}の墓)`
+        : `${person.data.name}の墓 青山霊園`;
+      return (
+        <section class="grave-map">
+          <h2>墓所の位置</h2>
+          <iframe
+            title={`${person.data.name}の墓所地図`}
+            src={`https://maps.google.com/maps?q=${encodeURIComponent(mapQuery)}&z=18&output=embed`}
+            width="100%"
+            height="450"
+            style="border:0; border-radius:8px;"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+          <p class="map-link">
+            <a
+              href={`https://www.google.com/maps?q=${encodeURIComponent(linkQuery)}`}
+              target="_blank"
+              rel="noopener"
+            >
+              Google マップで開く →
+            </a>
+          </p>
+        </section>
+      );
+    })()}
 
     {person.data.references && person.data.references.length > 0 && (
       <section class="references">

@@ -18,6 +18,7 @@ const people = defineCollection({
         lng: z.number().gte(139.71).lte(139.73),
       })
       .optional(),
+    hideMap: z.boolean().optional(),
     shortDescription: z.string().min(20).max(100),
     tags: z.array(z.string()).optional(),
     references: z
