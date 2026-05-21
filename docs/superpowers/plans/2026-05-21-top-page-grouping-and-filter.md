@@ -616,6 +616,262 @@ Run: `npm run preview`
 
 ---
 
+---
+
+## Task 8: 職業チップフィルタ追加 + 時代フィルタと AND 合成
+
+**追加日: 2026-05-21**(spec 改訂版に対応。Task 1-7 完了後の追加機能)
+
+時代フィルタの下に職業フィルタを並べ、両者は AND 条件で適用。各 article に `data-category` 属性を追加、URL hash を URLSearchParams 形式(`#era=X&cat=Y`)に変更。noscript fallback も `.category-filter` を追加する。
+
+**Files:**
+- Modify: `src/pages/index.astro`(フロントマター・HTML・CSS・JS の 4 箇所同時改修)
+
+- [ ] **Step 1: フロントマターに `presentCategories` を追加**
+
+`const presentEras = ERA_ORDER.filter((era) => people.some((p) => p.data.era === era));` の直後に追加:
+
+```ts
+const presentCategories = CATEGORY_ORDER.filter((cat) => groups[cat].length > 0);
+```
+
+- [ ] **Step 2: 各 article に `data-category` 属性を追加**
+
+```astro
+<article class="person-card" data-era={person.data.era} data-category={person.data.category}>
+```
+
+(他は変更なし)
+
+- [ ] **Step 3: era-filter-label を共通 `.filter-label` に rename し、職業チップバーを追加**
+
+HTML 側:
+- 既存の `<span class="era-filter-label">時代:</span>` を `<span class="filter-label">時代:</span>` に変更
+- 既存の `.era-filter` `<div>` の閉じタグの直後、`<p class="people-count">` の前に職業バーを挿入:
+
+```astro
+  <div class="category-filter" role="toolbar" aria-label="職業で絞り込み">
+    <span class="filter-label">職業:</span>
+    <button type="button" class="category-chip is-active" data-category="all" aria-pressed="true">
+      すべて
+    </button>
+    {
+      presentCategories.map((cat) => (
+        <button type="button" class="category-chip" data-category={cat} aria-pressed="false">
+          {cat}
+        </button>
+      ))
+    }
+  </div>
+```
+
+- [ ] **Step 4: CSS — `.era-filter` / `.era-chip` ルールを 2 バー対応に拡張**
+
+既存 CSS を以下に置き換える(該当 4 ルールのみ。他はそのまま):
+
+```css
+  .era-filter,
+  .category-filter {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  .category-filter {
+    margin-top: 0.3rem;
+  }
+
+  .filter-label {
+    color: #555;
+    font-size: 0.9rem;
+    margin-right: 0.2rem;
+  }
+
+  .era-chip,
+  .category-chip {
+    background: #fff;
+    border: 1px solid #ccc;
+    color: #333;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .era-chip:hover,
+  .category-chip:hover {
+    background: #f5f5f5;
+  }
+
+  .era-chip.is-active,
+  .category-chip.is-active {
+    background: #333;
+    color: #fff;
+    border-color: #333;
+  }
+```
+
+(旧 `.era-filter-label` ルールは削除し `.filter-label` に置き換え)
+
+- [ ] **Step 5: noscript ブロックに `.category-filter` を追加**
+
+```astro
+  <noscript>
+    <style>
+      .era-filter,
+      .category-filter,
+      .people-count {
+        display: none;
+      }
+    </style>
+  </noscript>
+```
+
+- [ ] **Step 6: JS を AND フィルタ + URLSearchParams hash に書き換え**
+
+`<script>` ブロック全体を以下に置き換える:
+
+```ts
+<script>
+  const eraChips = document.querySelectorAll<HTMLButtonElement>('.era-chip');
+  const catChips = document.querySelectorAll<HTMLButtonElement>('.category-chip');
+  const articles = document.querySelectorAll<HTMLElement>('.person-card');
+  const sections = document.querySelectorAll<HTMLElement>('.category-section');
+  const countEl = document.querySelector<HTMLElement>('.people-count');
+  const totalCount = articles.length;
+
+  let currentEra = 'all';
+  let currentCategory = 'all';
+
+  function applyFilter() {
+    eraChips.forEach((chip) => {
+      const active = chip.dataset.era === currentEra;
+      chip.classList.toggle('is-active', active);
+      chip.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+    catChips.forEach((chip) => {
+      const active = chip.dataset.category === currentCategory;
+      chip.classList.toggle('is-active', active);
+      chip.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+
+    let visible = 0;
+    articles.forEach((article) => {
+      const matchEra = currentEra === 'all' || article.dataset.era === currentEra;
+      const matchCat = currentCategory === 'all' || article.dataset.category === currentCategory;
+      const match = matchEra && matchCat;
+      article.hidden = !match;
+      if (match) visible += 1;
+    });
+
+    sections.forEach((section) => {
+      const cards = section.querySelectorAll<HTMLElement>('.person-card');
+      const visibleInSection = Array.from(cards).filter((c) => !c.hidden).length;
+      section.hidden = visibleInSection === 0;
+      const countSpan = section.querySelector<HTMLElement>('.section-count');
+      if (countSpan) countSpan.textContent = `(${visibleInSection})`;
+    });
+
+    if (countEl) {
+      const filtered = currentEra !== 'all' || currentCategory !== 'all';
+      countEl.textContent = filtered
+        ? `${visible} 名を表示中 (全 ${totalCount} 名)`
+        : `全 ${totalCount} 名`;
+    }
+  }
+
+  function parseHash(): { era: string; category: string } {
+    const result = { era: 'all', category: 'all' };
+    const raw = location.hash.startsWith('#') ? location.hash.slice(1) : '';
+    if (!raw) return result;
+    let params: URLSearchParams;
+    try {
+      params = new URLSearchParams(raw);
+    } catch {
+      return result;
+    }
+    const era = params.get('era');
+    if (era && Array.from(eraChips).some((c) => c.dataset.era === era)) {
+      result.era = era;
+    }
+    const category = params.get('cat');
+    if (category && Array.from(catChips).some((c) => c.dataset.category === category)) {
+      result.category = category;
+    }
+    return result;
+  }
+
+  function syncHash() {
+    const params = new URLSearchParams();
+    if (currentEra !== 'all') params.set('era', currentEra);
+    if (currentCategory !== 'all') params.set('cat', currentCategory);
+    const query = params.toString();
+    const url = query
+      ? `${location.pathname}${location.search}#${query}`
+      : location.pathname + location.search;
+    history.replaceState(null, '', url);
+  }
+
+  eraChips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      currentEra = chip.dataset.era || 'all';
+      applyFilter();
+      syncHash();
+    });
+  });
+
+  catChips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      currentCategory = chip.dataset.category || 'all';
+      applyFilter();
+      syncHash();
+    });
+  });
+
+  window.addEventListener('hashchange', () => {
+    const parsed = parseHash();
+    currentEra = parsed.era;
+    currentCategory = parsed.category;
+    applyFilter();
+  });
+
+  const initial = parseHash();
+  currentEra = initial.era;
+  currentCategory = initial.category;
+  applyFilter();
+</script>
+```
+
+- [ ] **Step 7: 検証**
+
+```bash
+cd /Users/uchidayousuke/workspace/personal/aoyama-cemetery
+npm run build
+grep -c 'class="category-chip' dist/index.html       # 6 expected: 1 すべて + 5 categories (政治家/軍人/実業家/学者/文化人)
+grep -c 'class="era-chip' dist/index.html            # 4 expected (unchanged: すべて+明治+大正+昭和)
+grep -c 'role="toolbar"' dist/index.html             # 2 expected (era + category bars)
+grep -c 'data-category=' dist/index.html             # ≥ 29 (cards) + 6 (chips) + 5 (sections) = 40-ish
+grep -c 'aria-live="polite"' dist/index.html         # 1
+grep -c 'noscript' dist/index.html                   # 2
+```
+
+- [ ] **Step 8: commit**
+
+```bash
+git add src/pages/index.astro docs/superpowers/specs/2026-05-21-top-page-grouping-and-filter-design.md docs/superpowers/plans/2026-05-21-top-page-grouping-and-filter.md
+git commit -m "$(cat <<'EOF'
+feat: add category filter combining with era filter (AND)
+
+Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
+EOF
+)"
+```
+
+---
+
 ## Self-Review
 
 - **Spec coverage**:

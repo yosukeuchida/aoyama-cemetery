@@ -6,7 +6,12 @@
 
 ## 背景
 
-掲載偉人が 29 名まで増え、最終的に 100 名前後を想定している。現状トップは没年月日昇順のフラットな card list で、(1) 目的の人を探しにくい、(2) 並びが単調で興味を引きにくい、(3) 偉人同士の関係性(同時代・職業クラスタ)が見えない、(4) 見た目を整えたい、という 4 つの困りごとが顕在化した。本設計は職業別セクション + 時代フィルタを軸にトップを再構成する。
+掲載偉人が 29 名まで増え、最終的に 100 名前後を想定している。現状トップは没年月日昇順のフラットな card list で、(1) 目的の人を探しにくい、(2) 並びが単調で興味を引きにくい、(3) 偉人同士の関係性(同時代・職業クラスタ)が見えない、(4) 見た目を整えたい、という 4 つの困りごとが顕在化した。本設計は職業別セクション + 時代フィルタ + 職業フィルタを軸にトップを再構成する。
+
+## 改訂履歴
+
+- 2026-05-21 初版
+- 2026-05-21 職業チップフィルタを追加(時代フィルタの下に並ぶ第 2 のチップバー。両者は AND で適用)。URL hash スキーマを `#era=X` から `#era=X&cat=Y` の URLSearchParams 形式に変更。
 
 ## ゴール / 非ゴール
 
@@ -48,6 +53,10 @@
 
 「すべて / 江戸 / 明治 / 大正 / 昭和」の 5 種。該当する偉人が 1 名もいない時代のチップは描画しない(将来江戸期不在の状態を許容)。
 
+### 職業チップ
+
+「すべて / 政治家 / 軍人 / 実業家 / 学者 / 文化人 / その他」の 7 種。`CATEGORY_ORDER` の並びで描画。該当者 0 のカテゴリのチップは描画しない(現状「その他」が該当)。時代チップバーの直下に並ぶ第 2 のチップバー。両フィルタは **AND 条件** で適用される(例: 「明治」+「政治家」で明治期の政治家のみ表示)。
+
 ## レイアウト
 
 ```
@@ -86,27 +95,34 @@
 ### チップバー
 
 - sticky にはしない(スクロール追従させない)
-- `<div role="toolbar" aria-label="時代で絞り込み">` で包む
-- 各チップは `<button type="button" aria-pressed="false" data-era="明治">明治</button>`
-- 「すべて」だけ `data-era=""` または `data-era="all"` で扱う
-- active 状態は `aria-pressed="true"` と CSS で色反転(背景濃く・文字白)
+- 時代バー: `<div class="era-filter" role="toolbar" aria-label="時代で絞り込み">`
+- 職業バー: `<div class="category-filter" role="toolbar" aria-label="職業で絞り込み">`(時代バーの直下)
+- 各チップは `<button type="button" aria-pressed="false" data-era="明治">明治</button>` / `<button data-category="政治家">政治家</button>`
+- 「すべて」は `data-era="all"` / `data-category="all"`
+- active 状態は `aria-pressed="true"` + `.is-active` クラスで CSS が色反転(背景濃く・文字白)
+- ラベル「時代:」「職業:」は共通の `.filter-label` クラスでスタイリング
 
 ## インタラクション仕様
 
 ### チップ操作
 
-1. クリック時、他のチップの `aria-pressed` を false に、自身を true に
-2. 「すべて」以外を選んだら、各 `<article data-era="X">` のうち X が一致しないものに `hidden` 属性を付与
-3. 各セクション見出しの `(n)` を絞り込み後件数で更新
-4. セクション内可視件数が 0 になったら、そのセクション(`<section>`)ごと `hidden` 属性を付与
-5. 件数表示エリアを `◯ 名を表示中 (全 ◯ 名)` に更新(全件時は `全 ◯ 名` だけ)
+1. クリック時、同じバー内の他チップの `aria-pressed` を false に、自身を true に
+2. 状態として `currentEra` と `currentCategory` を保持
+3. 各 `<article>` について `matchEra && matchCat` で表示判定し、不一致なら `hidden` 属性付与
+   - `matchEra = currentEra === 'all' || article.dataset.era === currentEra`
+   - `matchCat = currentCategory === 'all' || article.dataset.category === currentCategory`
+4. 各セクション見出しの `(n)` を絞り込み後件数で更新
+5. セクション内可視件数が 0 になったら、そのセクション(`<section>`)ごと `hidden` 属性を付与
+6. 件数表示エリアを `◯ 名を表示中 (全 ◯ 名)`(どちらかでも絞り込み中)/ `全 ◯ 名`(両方 all)に更新
 
 ### URL 同期
 
-- 「すべて」以外を選択中: `history.replaceState(null, '', '#era=明治')`
-- 「すべて」に戻したら `history.replaceState(null, '', location.pathname)` で hash を消す
-- ページロード時に `location.hash` を読み、`#era=<val>` がマッチすれば該当チップを初期 active に
-- `window.addEventListener('hashchange', ...)` で戻る/進むに追従
+- hash は **URLSearchParams 形式**: `#era=明治&cat=政治家`(キー名は `era` と `cat`)
+- 片方のみ絞り込み中なら片方だけ書く: `#era=明治` / `#cat=政治家`
+- 両方 `all` なら hash を消す
+- 書き換えは `history.replaceState` のみ(履歴を汚さない)
+- ページロード時とブラウザ戻る/進む(`hashchange`)時に hash → `currentEra` / `currentCategory` を復元して再適用
+- 不正値・未知の era/cat は `all` にフォールバック
 
 ### 件数表示
 
@@ -115,7 +131,7 @@
 
 ### JS 無効時
 
-- `<noscript><style>.era-filter, .people-count { display: none }</style></noscript>` でチップバーと件数表示を隠す
+- `<noscript><style>.era-filter, .category-filter, .people-count { display: none }</style></noscript>` で両チップバーと件数表示を隠す
 - カードは全件普通に並ぶ
 - 検索エンジンには全件が見える
 
@@ -146,14 +162,16 @@
 
 ### 手動受け入れ基準
 
-1. トップを開くと「すべて」が active、全件がカテゴリ別に並ぶ
+1. トップを開くと両バーで「すべて」が active、全件がカテゴリ別に並ぶ
 2. 「明治」チップで明治以外が hidden / 各セクションカウント更新 / 0 件セクションは消える
-3. URL に `#era=明治` が付き、再読込しても明治 active のまま復元される
-4. ブラウザの戻るで「すべて」に戻る
-5. JS を無効化しても全件が普通に並ぶ
-6. キーボード Tab でチップを順に focus、Space/Enter で切替できる
-7. モバイル(<640px)で 1 列、カード内テキストが破綻しない
-8. Lighthouse Accessibility スコアが現状から下がらない
+3. 「政治家」チップで政治家以外のセクションが hidden、政治家セクション内は全件表示
+4. 「明治」+「政治家」で明治期の政治家のみ表示(AND)
+5. URL に `#era=明治&cat=政治家` が付き、再読込しても両 active のまま復元される
+6. 片方を「すべて」に戻すと hash が `#cat=政治家` のように片方だけ残る
+7. JS を無効化しても全件が普通に並ぶ(両チップバー + 件数表示が消える)
+8. キーボード Tab で全チップを順に focus、Space/Enter で切替できる
+9. モバイル(<640px)で 1 列、カード内テキストが破綻しない
+10. Lighthouse Accessibility スコアが現状から下がらない
 
 ## オープン項目
 
