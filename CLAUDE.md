@@ -33,10 +33,17 @@
 
 ## 地図機能
 
-- 偉人ページ(`src/pages/people/[slug].astro`)で coords を持つ偉人のみ、本文下に Google Maps の iframe 埋め込みを表示
-- iframe URL は `https://maps.google.com/maps?q={lat},{lng}&z=18&output=embed` の keyless 形式(API key 不要・課金なし)
-- 「Google マップで開く」リンクも併設し、ユーザーは新規タブで経路案内・ストリートビューに進める
+- 偉人ページ(`src/pages/people/[slug].astro`)で coords を持つ偉人のみ、本文下に Google Maps の iframe 埋め込みを表示(coords は「表示するかの flag」として使用)
+- iframe URL は `https://maps.google.com/maps?q={name}の墓 青山霊園&output=embed` の **名称検索方式**(keyless、API key 不要)。Google Maps が POI として持っている偉人の墓に自動でランディングする(志賀直哉・大久保利通・犬養毅 etc.)
+- coords の lat/lng 値は現状フォールバック未使用だが将来 Google POI 未登録の偉人で活用予定
+- 「Google マップで開く」リンクも同じ検索クエリで併設し、経路案内・ストリートビューへの導線にする
 - トップページに複数ピンの overview 地図は持たない(個別偉人ページで完結する設計)
+
+### 新規偉人で地図を出すかの判断
+
+1. Google Maps で「{偉人名}の墓 青山霊園」を検索し、正しい POI にランディングするか目視確認
+2. OK なら frontmatter に `coords` を設定(値は精度低くてもよい、フラグ目的)
+3. POI 未登録なら coords は未設定にして地図セクションを出さない、もしくは正しい lat/lng を載せて URL を coords 方式に分岐させる実装に変更
 
 ## コンテンツ方針
 
