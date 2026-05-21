@@ -1,17 +1,30 @@
 ---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
 
+const people = await getCollection('people');
+people.sort((a, b) => a.data.deathDate.localeCompare(b.data.deathDate));
+
+const title = '青山霊園 偉人録';
+const description = '東京・青山霊園に眠る偉人たちを紹介するサイト。明治維新を担った政治家、文学者、軍人、文化人の足跡をたどります。';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title={title} description={description}>
+  <h1>青山霊園 偉人録</h1>
+  <p>東京都港区にある青山霊園は、明治以降の日本を築いた多くの偉人が眠る場所です。本サイトでは、彼らの生涯と業績を紹介します。</p>
+
+  <h2>掲載されている偉人</h2>
+  <div class="people-list">
+    {
+      people.map((person) => (
+        <article class="person-card">
+          <a href={`/people/${person.id}/`}>{person.data.name}</a>
+          <p class="meta">
+            {person.data.nameKana}({person.data.birthDate.slice(0, 4)} - {person.data.deathDate.slice(0, 4)})・{person.data.category}
+          </p>
+          <p class="description">{person.data.shortDescription}</p>
+        </article>
+      ))
+    }
+  </div>
+</BaseLayout>

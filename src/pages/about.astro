@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = '青山霊園について - 青山霊園 偉人録';
+const description = '青山霊園の歴史、所在地、アクセス方法。明治以降の日本を築いた偉人が眠る都立霊園。';
+---
+
+<BaseLayout title={title} description={description}>
+  <h1>青山霊園について</h1>
+
+  <h2>概要</h2>
+  <p>青山霊園は東京都港区南青山にある、東京都が管理する都立霊園です。1872 年(明治 5 年)に開設され、日本初の公営墓地として知られます。総面積は約 26 万平方メートル。</p>
+
+  <h2>所在地</h2>
+  <p>東京都港区南青山 2-32-2</p>
+
+  <h2>アクセス</h2>
+  <ul>
+    <li>東京メトロ銀座線・千代田線・半蔵門線「表参道」駅 徒歩 5 分</li>
+    <li>都営大江戸線「青山一丁目」駅 徒歩 5 分</li>
+  </ul>
+
+  <h2>特徴</h2>
+  <p>明治期に活躍した政治家、軍人、文人、実業家など、近代日本の礎を築いた多くの著名人が埋葬されています。春には桜の名所としても親しまれています。</p>
+
+  <p class="note"><small>本ページの情報は変更される可能性があります。最新情報は<a href="https://www.tokyo-park.or.jp/reien/park/index076.html" target="_blank" rel="noopener">東京都公園協会公式サイト</a>でご確認ください。</small></p>
+</BaseLayout>

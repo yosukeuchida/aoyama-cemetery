@@ -1,0 +1,56 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const people = await getCollection('people');
+  return people.map((person) => ({
+    params: { slug: person.id },
+    props: { person },
+  }));
+}
+
+interface Props {
+  person: CollectionEntry<'people'>;
+}
+
+const { person } = Astro.props;
+const { Content } = await render(person);
+
+const title = `${person.data.name} - 青山霊園 偉人録`;
+const description = person.data.shortDescription;
+---
+
+<BaseLayout title={title} description={description} ogImage={person.data.ogImage}>
+  <article class="person-detail">
+    <h1>{person.data.name}</h1>
+    <p class="kana">{person.data.nameKana}({person.data.nameRomaji})</p>
+
+    <table class="meta-table">
+      <tbody>
+        <tr><th>生没年</th><td>{person.data.birthDate} 〜 {person.data.deathDate}</td></tr>
+        <tr><th>時代</th><td>{person.data.era}</td></tr>
+        <tr><th>分野</th><td>{person.data.category}</td></tr>
+        {person.data.graveSection && <tr><th>墓所区画</th><td>{person.data.graveSection}</td></tr>}
+        {person.data.tags && person.data.tags.length > 0 && (
+          <tr><th>タグ</th><td>{person.data.tags.join(' / ')}</td></tr>
+        )}
+      </tbody>
+    </table>
+
+    <Content />
+
+    {person.data.references && person.data.references.length > 0 && (
+      <section class="references">
+        <h2>参考資料</h2>
+        <ul>
+          {person.data.references.map((ref) => (
+            <li><a href={ref.url} target="_blank" rel="noopener">{ref.title}</a></li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    <p><a href="/">← 偉人一覧に戻る</a></p>
+  </article>
+</BaseLayout>
