@@ -45,6 +45,15 @@ PAIRS = [
     ("tanaka-hisashige", "TanakaHisashige.jpg"),
     ("ueki-emori", "Emori_Ueki.JPG"),
     ("yamamoto-gonbee", "Gonbee_Yamamoto.jpg"),
+    # 2026-05-22 追加分(public domain 確認済)
+    ("goto-shojiro", "Goto_Shojiro.jpg"),
+    ("soejima-taneomi", "Taneomi_Soejima.jpg"),
+    ("morinaga-taichiro", "Taichiro_Morinaga.png"),
+    ("sato-giryo", "Yoshisuke_Sato.jpg"),
+    ("kawaji-toshiyoshi", "Kawaji_Toshiyoshi.jpg"),
+    ("nishi-takeichi", "Nishi_Takeichi.jpg"),
+    ("nagayo-sensai", "Nagayo_Sensai.jpg"),
+    ("joseph-heco", "Joseph_Heco.JPG"),
 ]
 
 OUT_DIR = "src/assets/portraits"
