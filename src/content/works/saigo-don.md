@@ -6,6 +6,7 @@ year: 2018
 publisher: NHK
 personSlugs:
   - okubo-toshimichi
+  - kawaji-toshiyoshi
 url: https://ja.wikipedia.org/wiki/西郷どん_(NHK大河ドラマ)
 ---
 

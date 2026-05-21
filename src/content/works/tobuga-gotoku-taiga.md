@@ -6,6 +6,9 @@ year: 1990
 publisher: NHK
 personSlugs:
   - okubo-toshimichi
+  - kawaji-toshiyoshi
+  - goto-shojiro
+  - soejima-taneomi
 url: https://ja.wikipedia.org/wiki/翔ぶが如く_(NHK大河ドラマ)
 ---
 

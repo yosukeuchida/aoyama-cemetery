@@ -6,6 +6,9 @@ year: 1972
 publisher: 文藝春秋
 personSlugs:
   - okubo-toshimichi
+  - kawaji-toshiyoshi
+  - goto-shojiro
+  - soejima-taneomi
 url: https://ja.wikipedia.org/wiki/翔ぶが如く
 ---
 
