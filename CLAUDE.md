@@ -20,8 +20,16 @@
 1. `src/content/people/<slug>.md` を作成(slug はローマ字ハイフン区切り、例 `okubo-toshimichi`)
 2. frontmatter は `src/content.config.ts` の zod スキーマに準拠
 3. 事実確認(没年月日・役職・業績)を `references` の出典で照合
-4. `npm run dev` でローカル目視確認
-5. `git commit && git push` → Cloudflare Pages が自動デプロイ
+4. **墓所位置**: 区画番号を Wikipedia/港区資料で確認し `graveSection` に記入、Google Maps 航空写真で位置を特定して `coords: { lat, lng }` を frontmatter に追加(coords 未設定でも掲載可、地図にだけ出ない)
+5. `npm run dev` でローカル目視確認
+6. `git commit && git push` → Cloudflare Pages が自動デプロイ
+
+### coords 取得手順(Google Maps)
+
+1. Google Maps で「青山霊園」を開き航空写真モードに切替
+2. `graveSection` の区画番号(例 `1種イ8号8側`)を区画案内図と照合して位置を絞り込む
+3. 該当位置を右クリック → 緯度経度をコピー
+4. frontmatter に追加: `coords:\n  lat: 35.66xx\n  lng: 139.71xx` (範囲外だと zod が build を弾く)
 
 ## コンテンツ方針
 

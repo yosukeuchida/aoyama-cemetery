@@ -12,6 +12,12 @@ const people = defineCollection({
     era: z.enum(['江戸', '明治', '大正', '昭和']),
     category: z.enum(['政治家', '文化人', '軍人', '実業家', '学者', 'その他']),
     graveSection: z.string().optional(),
+    coords: z
+      .object({
+        lat: z.number().gte(35.66).lte(35.68),
+        lng: z.number().gte(139.71).lte(139.73),
+      })
+      .optional(),
     shortDescription: z.string().min(20).max(100),
     tags: z.array(z.string()).optional(),
     references: z

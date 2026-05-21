@@ -1,6 +1,7 @@
 ---
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import CemeteryMap from '../../components/CemeteryMap.astro';
 
 export async function getStaticPaths() {
   const people = await getCollection('people');
@@ -39,6 +40,13 @@ const description = person.data.shortDescription;
     </table>
 
     <Content />
+
+    {person.data.coords && (
+      <section class="grave-map">
+        <h2>墓所の位置</h2>
+        <CemeteryMap mode="focus" focusSlug={person.id} />
+      </section>
+    )}
 
     {person.data.references && person.data.references.length > 0 && (
       <section class="references">
