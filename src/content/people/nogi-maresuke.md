@@ -4,7 +4,7 @@ nameKana: のぎ まれすけ
 nameRomaji: Nogi Maresuke
 birthDate: "1849-12-25"
 deathDate: "1912-09-13"
-era: 明治
+era: [明治]
 category: 軍人
 graveSection: 1種ロ10号26側
 shortDescription: 日露戦争で旅順を陥落させた陸軍大将。明治天皇の大喪の日に妻静子とともに自刃した。

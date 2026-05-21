@@ -4,7 +4,7 @@ nameKana: いのうえ じゅんのすけ
 nameRomaji: Inoue Junnosuke
 birthDate: "1869-05-06"
 deathDate: "1932-02-09"
-era: 昭和
+era: [大正, 昭和]
 category: 政治家
 graveSection: 1種ロ8号1・14側
 shortDescription: 浜口・若槻内閣の蔵相として金解禁を断行した日本銀行総裁経験者。血盟団事件で暗殺された大分日田出身の財政家。

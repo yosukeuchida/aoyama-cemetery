@@ -9,7 +9,7 @@ const people = defineCollection({
     nameRomaji: z.string(),
     birthDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'YYYY-MM-DD 形式で入力'),
     deathDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'YYYY-MM-DD 形式で入力'),
-    era: z.enum(['江戸', '明治', '大正', '昭和']),
+    era: z.array(z.enum(['江戸', '明治', '大正', '昭和'])).min(1).max(2),
     category: z.enum(['政治家', '文化人', '軍人', '実業家', '学者', 'その他']),
     graveSection: z.string().optional(),
     coords: z

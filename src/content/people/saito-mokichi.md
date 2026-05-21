@@ -4,7 +4,7 @@ nameKana: さいとう もきち
 nameRomaji: Saito Mokichi
 birthDate: "1882-05-14"
 deathDate: "1953-02-25"
-era: 昭和
+era: [大正, 昭和]
 category: 文化人
 graveSection: 1種イ2号15側
 hideMap: true

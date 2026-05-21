@@ -4,7 +4,7 @@ nameKana: たなか ひさしげ
 nameRomaji: Tanaka Hisashige
 birthDate: "1799-10-16"
 deathDate: "1881-01-11"
-era: 明治
+era: [江戸, 明治]
 category: 実業家
 graveSection: 1種ロ12号31側
 shortDescription: 「からくり儀右衛門」と呼ばれた江戸末期の発明家。万年時計を完成させ、後に東芝の源流となる田中製造所を創業した。

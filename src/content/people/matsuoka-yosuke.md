@@ -4,7 +4,7 @@ nameKana: まつおか ようすけ
 nameRomaji: Matsuoka Yosuke
 birthDate: "1880-03-04"
 deathDate: "1946-06-27"
-era: 昭和
+era: [昭和]
 category: 政治家
 graveSection: 1種イ3号1側
 shortDescription: 国際連盟脱退時の首席全権、第二次近衛内閣の外相として日独伊三国同盟・日ソ中立条約を主導した山口出身の外交官。

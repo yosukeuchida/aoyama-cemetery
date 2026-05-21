@@ -4,7 +4,7 @@ nameKana: おおとり けいすけ
 nameRomaji: Otori Keisuke
 birthDate: "1833-04-14"
 deathDate: "1911-06-15"
-era: 明治
+era: [明治]
 category: 政治家
 graveSection: 1種イ1号2側
 hideMap: true

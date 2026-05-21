@@ -4,7 +4,7 @@ nameKana: いぬかい つよし
 nameRomaji: Inukai Tsuyoshi
 birthDate: "1855-06-04"
 deathDate: "1932-05-15"
-era: 昭和
+era: [大正, 昭和]
 category: 政治家
 graveSection: 1種ロ8号1・14側
 shortDescription: 第29代内閣総理大臣。立憲政友会総裁。五・一五事件で首相官邸にて凶弾に倒れた憲政の闘士。
