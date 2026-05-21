@@ -38,4 +38,17 @@ const people = defineCollection({
     }),
 });
 
-export const collections = { people };
+const works = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/works' }),
+  schema: z.object({
+    title: z.string(),
+    type: z.enum(['小説', '映画', '漫画', 'ドラマ', 'NHK大河', '研究本', '評伝', '代表作', 'その他']),
+    creator: z.string(),
+    year: z.union([z.number(), z.string()]).optional(),
+    publisher: z.string().optional(),
+    personSlugs: z.array(z.string()).min(1),
+    url: z.string().url().optional(),
+  }),
+});
+
+export const collections = { people, works };

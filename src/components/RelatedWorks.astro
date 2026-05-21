@@ -1,0 +1,130 @@
+---
+import { render } from 'astro:content';
+import type { Work } from '../utils/related-works';
+
+interface Props {
+  works: Work[];
+}
+
+const { works } = Astro.props;
+
+const rendered = await Promise.all(
+  works.map(async (w) => {
+    const { Content } = await render(w);
+    return { work: w, Content };
+  })
+);
+
+const TYPE_COLOR: Record<string, string> = {
+  代表作: '#3a5a3a',
+  小説: '#8a5a2a',
+  評伝: '#6b8e23',
+  研究本: '#4a6fa5',
+  漫画: '#c75d3b',
+  映画: '#7b4b94',
+  ドラマ: '#5b8baf',
+  NHK大河: '#a23b56',
+  その他: '#777',
+};
+---
+
+{works.length > 0 && (
+  <section class="related-works">
+    <h2>もっと知りたい人へ — この偉人を扱った作品</h2>
+    <ul class="works-grid">
+      {rendered.map(({ work, Content }) => (
+        <li class="work-card">
+          <div class="work-header">
+            <span
+              class="work-type"
+              style={`background:${TYPE_COLOR[work.data.type] ?? '#777'};`}
+            >
+              {work.data.type}
+            </span>
+            <h3 class="work-title">
+              {work.data.url ? (
+                <a href={work.data.url} target="_blank" rel="noopener">
+                  {work.data.title}
+                </a>
+              ) : (
+                work.data.title
+              )}
+            </h3>
+          </div>
+          <p class="work-meta">
+            {work.data.creator}
+            {work.data.year && ` / ${work.data.year}`}
+            {work.data.publisher && ` / ${work.data.publisher}`}
+          </p>
+          <div class="work-summary">
+            <Content />
+          </div>
+        </li>
+      ))}
+    </ul>
+  </section>
+)}
+
+<style>
+  .related-works {
+    margin-top: 2.5rem;
+  }
+  .works-grid {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+  .work-card {
+    padding: 1rem 1.1rem 1.1rem;
+    border: 1px solid #d6d3c7;
+    border-radius: 8px;
+    background: #faf8f3;
+    display: flex;
+    flex-direction: column;
+  }
+  .work-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.4rem;
+    flex-wrap: wrap;
+  }
+  .work-type {
+    display: inline-block;
+    padding: 0.15rem 0.55rem;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .work-title {
+    font-size: 1.05rem;
+    margin: 0;
+    color: #5a4a2a;
+    line-height: 1.35;
+  }
+  .work-title a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px dotted #a89c7d;
+  }
+  .work-title a:hover {
+    border-bottom-style: solid;
+  }
+  .work-meta {
+    margin: 0 0 0.5rem;
+    font-size: 0.78rem;
+    color: #8a7a55;
+  }
+  .work-summary {
+    font-size: 0.88rem;
+    color: #444;
+    line-height: 1.65;
+  }
+  .work-summary :global(p) {
+    margin: 0;
+  }
+</style>
