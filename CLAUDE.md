@@ -31,6 +31,13 @@
 3. 該当位置を右クリック → 緯度経度をコピー
 4. frontmatter に追加: `coords:\n  lat: 35.66xx\n  lng: 139.71xx` (範囲外だと zod が build を弾く)
 
+## 地図機能
+
+- 偉人ページ(`src/pages/people/[slug].astro`)で coords を持つ偉人のみ、本文下に Google Maps の iframe 埋め込みを表示
+- iframe URL は `https://maps.google.com/maps?q={lat},{lng}&z=18&output=embed` の keyless 形式(API key 不要・課金なし)
+- 「Google マップで開く」リンクも併設し、ユーザーは新規タブで経路案内・ストリートビューに進める
+- トップページに複数ピンの overview 地図は持たない(個別偉人ページで完結する設計)
+
 ## コンテンツ方針
 
 - 出典: Wikipedia(CC BY-SA)等の公開情報をベースに Claude が要約・再構成

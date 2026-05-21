@@ -1,7 +1,6 @@
 ---
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import CemeteryMap from '../../components/CemeteryMap.astro';
 
 export async function getStaticPaths() {
   const people = await getCollection('people');
@@ -44,7 +43,24 @@ const description = person.data.shortDescription;
     {person.data.coords && (
       <section class="grave-map">
         <h2>墓所の位置</h2>
-        <CemeteryMap mode="focus" focusSlug={person.id} />
+        <iframe
+          title={`${person.data.name}の墓所地図`}
+          src={`https://maps.google.com/maps?q=${person.data.coords.lat},${person.data.coords.lng}&z=18&output=embed`}
+          width="100%"
+          height="450"
+          style="border:0; border-radius:8px;"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+        <p class="map-link">
+          <a
+            href={`https://www.google.com/maps?q=${person.data.coords.lat},${person.data.coords.lng}`}
+            target="_blank"
+            rel="noopener"
+          >
+            Google マップで開く →
+          </a>
+        </p>
       </section>
     )}
 
