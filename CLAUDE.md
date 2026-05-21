@@ -82,6 +82,36 @@ python3 scripts/verify-map-pois.py
 - 肖像写真は public domain(没後 70 年経過済)のみ使用可
 - 事実誤認は本サイトの致命傷なので、ビルド前にユーザー目視確認を必ず通す
 
+## 肖像写真の取得(Wikimedia Commons)
+
+肖像写真を Wikimedia Commons から一括取得する際は、**`Special:FilePath` への直接アクセスは避ける**(レート制限 HTTP 429 が厳しく、~10 件連続で ban される)。代わりに MediaWiki API で `thumburl`(`upload.wikimedia.org` の CDN URL)を取得してからダウンロードする。
+
+```
+方法 A (NG): https://commons.wikimedia.org/wiki/Special:FilePath/<filename>
+                → 連続アクセスで 429 連発、長時間待機が必要に
+方法 B (推奨): https://commons.wikimedia.org/w/api.php?action=query&titles=File:<filename>
+                  &prop=imageinfo&iiprop=url&iiurlwidth=600&format=json
+                → imageinfo[0].thumburl が CDN URL、レート制限が緩い
+```
+
+実装済み再利用スクリプト: `scripts/download-portraits.py`(slug ↔ ファイル名のリストを定義して走らせるだけ、idempotent)。ライセンスは Wikipedia の File ページで Public domain in Japan / U.S. の表記を確認してから取得。frontmatter には `portrait: ../../assets/portraits/<slug>.jpg` + `portraitCredit: Wikimedia Commons / Public Domain` を統一して付与。詳細経緯: `~/Desktop/Obsidian/claude-code/2026-05-21-aoyama-cemetery-Wikimedia-Commons-肖像取得.md`
+
+## frontmatter 記法の注意
+
+people / works の frontmatter で、**値にコロン `:` を含む文字列はダブルクオートで囲む**。YAML パーサが「キー: 値」の構造と誤認識して `bad indentation of a mapping entry` エラーで build が止まる。
+
+```yaml
+# ✗ NG
+creator: NHK / 脚本: 大森美香
+publisher: 文藝春秋(訳: 廣中和歌子)
+
+# ✓ OK
+creator: "NHK / 脚本: 大森美香"
+publisher: "文藝春秋(訳: 廣中和歌子)"
+```
+
+特に works コレクションの `creator` / `publisher`(脚本家・原作者・訳者などコロンを含む表記が頻出)で踏みやすい。新規 markdown 追加後は必ず `npm run build` で YAML 検証を通す。
+
 ## 開発コマンド
 
 ```bash
