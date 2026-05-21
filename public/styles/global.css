@@ -1,0 +1,128 @@
+:root {
+  --color-text: #222;
+  --color-text-muted: #666;
+  --color-bg: #fafaf7;
+  --color-accent: #6b4423;
+  --color-border: #ddd;
+  --max-width: 720px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.7;
+}
+
+.site-header {
+  border-bottom: 1px solid var(--color-border);
+  background: white;
+}
+
+.site-header nav {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.site-title {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.nav-links a:hover {
+  color: var(--color-accent);
+}
+
+main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+/* 偉人カード(トップ) */
+.person-card {
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  background: white;
+}
+
+.person-card a {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.person-card .meta {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  margin: 0.3rem 0 0.7rem;
+}
+
+.person-card .description {
+  margin: 0;
+}
+
+/* 偉人詳細ページ */
+.person-detail h1 {
+  margin-bottom: 0.2rem;
+}
+
+.person-detail .kana {
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  margin: 0 0 1rem;
+}
+
+.person-detail .meta-table {
+  border-collapse: collapse;
+  margin: 1rem 0 2rem;
+  width: 100%;
+}
+
+.person-detail .meta-table th,
+.person-detail .meta-table td {
+  border-bottom: 1px solid var(--color-border);
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.person-detail .meta-table th {
+  background: #f5f3ee;
+  width: 30%;
+}
