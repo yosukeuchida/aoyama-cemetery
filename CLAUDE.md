@@ -23,6 +23,7 @@
 4. **墓所位置**: 区画番号を Wikipedia/港区資料で確認し `graveSection` に記入(地図は次項参照)
 5. `npm run dev` でローカル目視確認(地図が正しい墓所 POI に着地するかも確認)
 6. `git commit && git push` → Cloudflare Pages が自動デプロイ
+7. **墓参り写真がある場合**: `./scripts/add-grave-photo.sh <slug> <写真ファイル...>` で自動的にリサイズ(長辺 1600px / quality 85)+ HEIC→JPEG 変換 + 規則ファイル名で配置される。frontmatter 編集不要、`src/assets/grave-photos/<slug>/YYYY-MM-DD-<caption>.jpg` に置けば自動でギャラリー表示。詳細: `docs/superpowers/specs/2026-05-21-grave-photo-gallery-design.md`
 
 ## 地図機能
 

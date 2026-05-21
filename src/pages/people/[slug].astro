@@ -1,6 +1,7 @@
 ---
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import GravePhotoGallery from '../../components/GravePhotoGallery.astro';
 
 export async function getStaticPaths() {
   const people = await getCollection('people');
@@ -39,6 +40,8 @@ const description = person.data.shortDescription;
     </table>
 
     <Content />
+
+    <GravePhotoGallery slug={person.id} />
 
     {!person.data.hideMap && (() => {
       const mapQuery = person.data.coords

@@ -1,0 +1,70 @@
+---
+import { Image } from 'astro:assets';
+import { getGravePhotos } from '../utils/grave-photos';
+
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props;
+const photos = getGravePhotos(slug);
+
+function formatDate(iso: string): string {
+  const [y, m, d] = iso.split('-');
+  return `${y}年${Number(m)}月${Number(d)}日`;
+}
+---
+
+{photos.length > 0 && (
+  <section class="grave-photos">
+    <h2>墓参り写真</h2>
+    <ul class="photo-grid">
+      {photos.map((photo) => (
+        <li class="photo-item">
+          <a href={photo.image.src}>
+            <Image
+              src={photo.image}
+              alt={photo.caption ?? `${formatDate(photo.date)} の墓参り写真`}
+              widths={[400, 800]}
+              sizes="(min-width: 720px) 320px, 50vw"
+              loading="lazy"
+              format="webp"
+            />
+          </a>
+          <p class="photo-meta">
+            <time datetime={photo.date}>{formatDate(photo.date)}</time>
+            {photo.caption && <span class="photo-caption"> — {photo.caption}</span>}
+          </p>
+        </li>
+      ))}
+    </ul>
+  </section>
+)}
+
+<style>
+  .grave-photos {
+    margin: 2rem 0;
+  }
+  .photo-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+  .photo-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+  }
+  .photo-meta {
+    font-size: 0.875rem;
+    color: #555;
+    margin: 0.4rem 0 0;
+  }
+  .photo-caption {
+    color: #333;
+  }
+</style>
