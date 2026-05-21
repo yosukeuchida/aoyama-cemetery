@@ -4,7 +4,7 @@ nameKana: まつかた まさよし
 nameRomaji: Matsukata Masayoshi
 birthDate: "1835-03-23"
 deathDate: "1924-07-02"
-era: 大正
+era: [明治]
 category: 政治家
 graveSection: 1種ロ17号1側
 shortDescription: 第4代・第6代内閣総理大臣。日本銀行を創設し松方デフレで近代財政の基礎を築いた薩摩出身の財政家。

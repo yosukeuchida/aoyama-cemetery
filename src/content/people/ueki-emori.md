@@ -4,7 +4,7 @@ nameKana: うえき えもり
 nameRomaji: Ueki Emori
 birthDate: "1857-02-14"
 deathDate: "1892-01-23"
-era: 明治
+era: [明治]
 category: 政治家
 graveSection: 1種イ11号12側
 hideMap: true

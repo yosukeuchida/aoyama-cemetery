@@ -27,7 +27,7 @@ for (const cat of CATEGORY_ORDER) {
 const totalCount = people.length;
 
 const ERA_ORDER = ['江戸', '明治', '大正', '昭和'] as const;
-const presentEras = ERA_ORDER.filter((era) => people.some((p) => p.data.era === era));
+const presentEras = ERA_ORDER.filter((era) => people.some((p) => p.data.era.includes(era)));
 const presentCategories = CATEGORY_ORDER.filter((cat) => groups[cat].length > 0);
 
 const title = '青山霊園 偉人録';
@@ -89,14 +89,14 @@ const description = '東京・青山霊園に眠る偉人たちを紹介する�
           </h2>
           <div class="people-grid">
             {list.map((person) => (
-              <article class="person-card" data-era={person.data.era} data-category={person.data.category}>
+              <article class="person-card" data-eras={person.data.era.join(',')} data-category={person.data.category}>
                 <h3 class="person-name">
                   <a href={`/people/${person.id}/`}>{person.data.name}</a>
                 </h3>
                 <p class="person-kana">{person.data.nameKana}</p>
                 <p class="person-meta">
                   {person.data.birthDate.slice(0, 4)} - {person.data.deathDate.slice(0, 4)}
-                  <span class="era-badge">{person.data.era}</span>
+                  <span class="era-badge">{person.data.era.join('・')}</span>
                 </p>
                 <p class="person-desc">{person.data.shortDescription}</p>
               </article>
@@ -281,7 +281,9 @@ const description = '東京・青山霊園に眠る偉人たちを紹介する�
 
     let visible = 0;
     articles.forEach((article) => {
-      const matchEra = currentEra === 'all' || article.dataset.era === currentEra;
+      const matchEra =
+        currentEra === 'all' ||
+        (article.dataset.eras ?? '').split(',').includes(currentEra);
       const matchCat = currentCategory === 'all' || article.dataset.category === currentCategory;
       const match = matchEra && matchCat;
       article.hidden = !match;

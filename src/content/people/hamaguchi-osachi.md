@@ -4,7 +4,7 @@ nameKana: はまぐち おさち
 nameRomaji: Hamaguchi Osachi
 birthDate: "1870-04-01"
 deathDate: "1931-08-26"
-era: 昭和
+era: [大正, 昭和]
 category: 政治家
 graveSection: 1種ロ8号1・14側
 shortDescription: 第27代内閣総理大臣。「ライオン宰相」と呼ばれた立憲民政党総裁。東京駅で狙撃され翌年死去した。

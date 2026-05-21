@@ -4,7 +4,7 @@ nameKana: きたさと しばさぶろう
 nameRomaji: Kitasato Shibasaburo
 birthDate: "1853-01-29"
 deathDate: "1931-06-13"
-era: 昭和
+era: [明治]
 category: 学者
 graveSection: 1種イ19号2側
 mapQuery: 北里柴三郎の墓

@@ -4,7 +4,7 @@ nameKana: まきの のぶあき
 nameRomaji: Makino Nobuaki
 birthDate: "1861-11-24"
 deathDate: "1949-01-25"
-era: 昭和
+era: [大正, 昭和]
 category: 政治家
 graveSection: 1種ロ8号1・14側
 hideMap: true

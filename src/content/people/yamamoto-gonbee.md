@@ -4,7 +4,7 @@ nameKana: やまもと ごんべえ
 nameRomaji: Yamamoto Gonbee
 birthDate: "1852-11-26"
 deathDate: "1933-12-08"
-era: 昭和
+era: [明治, 大正]
 category: 政治家
 graveSection: 1種イ9号26側
 shortDescription: 第16・22代内閣総理大臣。日本海軍の制度を一手に作り上げた薩摩出身の海軍大将。

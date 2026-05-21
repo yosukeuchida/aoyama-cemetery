@@ -4,7 +4,7 @@ nameKana: あきやま よしふる
 nameRomaji: Akiyama Yoshifuru
 birthDate: "1859-02-09"
 deathDate: "1930-11-04"
-era: 昭和
+era: [明治]
 category: 軍人
 graveSection: 1種イ19号2側
 hideMap: true

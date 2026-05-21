@@ -4,7 +4,7 @@ nameKana: さの つねたみ
 nameRomaji: Sano Tsunetami
 birthDate: "1823-02-08"
 deathDate: "1902-12-07"
-era: 明治
+era: [明治]
 category: 政治家
 graveSection: 1種イ5号26側
 shortDescription: 博愛社(後の日本赤十字社)を創設した佐賀出身の政治家。元老院議長・大蔵卿などを歴任し、日本の人道事業の礎を築いた。

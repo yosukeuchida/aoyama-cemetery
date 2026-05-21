@@ -4,7 +4,7 @@ nameKana: みきもと こうきち
 nameRomaji: Mikimoto Kokichi
 birthDate: "1858-03-10"
 deathDate: "1954-09-21"
-era: 昭和
+era: [明治, 大正]
 category: 実業家
 graveSection: 1種イ1号11側
 hideMap: true

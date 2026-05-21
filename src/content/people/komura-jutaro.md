@@ -4,7 +4,7 @@ nameKana: こむら じゅたろう
 nameRomaji: Komura Jutaro
 birthDate: "1855-10-26"
 deathDate: "1911-11-26"
-era: 明治
+era: [明治]
 category: 政治家
 graveSection: 1種ロ12号1・6側
 shortDescription: 日露戦争を終結させたポーツマス条約全権大使。日英同盟と関税自主権回復を主導した日向飫肥出身の外交官。

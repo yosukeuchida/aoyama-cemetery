@@ -4,7 +4,7 @@ nameKana: くにきだ どっぽ
 nameRomaji: Kunikida Doppo
 birthDate: "1871-08-30"
 deathDate: "1908-06-23"
-era: 明治
+era: [明治]
 category: 文化人
 graveSection: 1種ロ16号16
 hideMap: true

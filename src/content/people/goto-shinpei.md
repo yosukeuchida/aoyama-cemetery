@@ -4,7 +4,7 @@ nameKana: ごとう しんぺい
 nameRomaji: Goto Shinpei
 birthDate: "1857-07-24"
 deathDate: "1929-04-13"
-era: 大正
+era: [明治, 大正]
 category: 政治家
 graveSection: 1種イ5号1側
 shortDescription: 医師出身の政治家。台湾統治・満鉄初代総裁・関東大震災後の帝都復興を主導し「大風呂敷」と呼ばれた。
