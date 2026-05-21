@@ -29,7 +29,7 @@ const description = person.data.shortDescription;
     <table class="meta-table">
       <tbody>
         <tr><th>生没年</th><td>{person.data.birthDate} 〜 {person.data.deathDate}</td></tr>
-        <tr><th>時代</th><td>{person.data.era}</td></tr>
+        <tr><th>時代</th><td>{person.data.era.join('・')}</td></tr>
         <tr><th>分野</th><td>{person.data.category}</td></tr>
         {person.data.graveSection && <tr><th>墓所区画</th><td>{person.data.graveSection}</td></tr>}
         {person.data.tags && person.data.tags.length > 0 && (
