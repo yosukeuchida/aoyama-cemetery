@@ -3,6 +3,7 @@ import { getCollection, render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import GravePhotoGallery from '../../components/GravePhotoGallery.astro';
 import NearbyGraves from '../../components/NearbyGraves.astro';
+import PersonPortrait from '../../components/PersonPortrait.astro';
 import { getNearbyPeople } from '../../utils/nearby-graves';
 
 export async function getStaticPaths() {
@@ -29,6 +30,15 @@ const description = person.data.shortDescription;
   <article class="person-detail">
     <h1>{person.data.name}</h1>
     <p class="kana">{person.data.nameKana}({person.data.nameRomaji})</p>
+
+    {person.data.portrait && (
+      <PersonPortrait
+        portrait={person.data.portrait}
+        name={person.data.name}
+        caption={person.data.portraitCaption}
+        credit={person.data.portraitCredit}
+      />
+    )}
 
     <table class="meta-table">
       <tbody>
