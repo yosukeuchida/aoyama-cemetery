@@ -134,6 +134,8 @@ const faqJsonLd = {
       <PersonPortrait
         portrait={person.data.portrait}
         name={person.data.name}
+        birthYear={person.data.birthDate.slice(0, 4)}
+        deathYear={person.data.deathDate.slice(0, 4)}
         caption={person.data.portraitCaption}
         credit={person.data.portraitCredit}
       />

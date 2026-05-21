@@ -5,17 +5,21 @@ import type { ImageMetadata } from 'astro';
 interface Props {
   portrait: ImageMetadata;
   name: string;
+  birthYear?: string;
+  deathYear?: string;
   caption?: string;
   credit?: string;
 }
 
-const { portrait, name, caption, credit } = Astro.props;
+const { portrait, name, birthYear, deathYear, caption, credit } = Astro.props;
+const lifeSpan = birthYear && deathYear ? ` (${birthYear}-${deathYear})` : '';
+const altText = `${name}${lifeSpan}の肖像`;
 ---
 
 <figure class="person-portrait">
   <Image
     src={portrait}
-    alt={`${name}の肖像`}
+    alt={altText}
     widths={[240, 360, 480]}
     sizes="(max-width: 480px) 240px, 360px"
     width={360}
