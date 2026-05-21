@@ -43,10 +43,10 @@ const description = person.data.shortDescription;
     {!person.data.hideMap && (() => {
       const mapQuery = person.data.coords
         ? `${person.data.coords.lat},${person.data.coords.lng}`
-        : `${person.data.name}の墓 青山霊園`;
+        : person.data.mapQuery ?? `${person.data.name}の墓 青山霊園`;
       const linkQuery = person.data.coords
         ? `${person.data.coords.lat},${person.data.coords.lng}(${person.data.name}の墓)`
-        : `${person.data.name}の墓 青山霊園`;
+        : person.data.mapQuery ?? `${person.data.name}の墓 青山霊園`;
       return (
         <section class="grave-map">
           <h2>墓所の位置</h2>

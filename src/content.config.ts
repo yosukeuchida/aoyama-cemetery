@@ -19,6 +19,7 @@ const people = defineCollection({
       })
       .optional(),
     hideMap: z.boolean().optional(),
+    mapQuery: z.string().optional(),
     shortDescription: z.string().min(20).max(100),
     tags: z.array(z.string()).optional(),
     references: z

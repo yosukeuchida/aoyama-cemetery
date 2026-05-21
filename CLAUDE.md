@@ -26,13 +26,16 @@
 
 ## 地図機能
 
-地図は **デフォルト ON**。偉人ページ(`src/pages/people/[slug].astro`)で本文下に Google Maps の iframe を表示する。3 通りの挙動を frontmatter で制御:
+地図は **デフォルト ON**。偉人ページ(`src/pages/people/[slug].astro`)で本文下に Google Maps の iframe を表示する。frontmatter で挙動を 4 通りに制御:
 
 | frontmatter | 地図 URL | 用途 |
 |---|---|---|
 | 何も書かない(デフォルト) | `?q={name}の墓 青山霊園` の **名称検索方式** | Google Maps が POI を持っている著名な偉人。最も多いパターン |
-| `hideMap: true` | 地図セクション非表示 | POI 未登録で地図を出したくない場合 |
+| `mapQuery: "..."` | 指定文字列で検索 | デフォルトクエリで POI に着地しない場合の上書き(例: `北里柴三郎の墓` のように「青山霊園」を外すと spotlit になる偉人がいる) |
 | `coords: { lat, lng }` | `?q={lat},{lng}` の **座標方式** | POI 未登録だが正確な座標がわかる場合(座標ピンが立つだけで POI ラベルは出ない) |
+| `hideMap: true` | 地図セクション非表示 | どのクエリでも POI が出ない、または出したくない場合 |
+
+優先順位: `hideMap` > `coords` > `mapQuery` > デフォルト
 
 - iframe・「Google マップで開く」リンクとも keyless(API key 不要)
 - `coords` のスキーマ範囲は青山霊園内に限定(範囲外だと zod が build を弾く)
@@ -42,9 +45,27 @@
 
 1. ローカル(`npm run dev`)で偉人ページを開く、または `https://www.google.com/maps?q={偉人名}の墓+青山霊園` を直接ブラウザで検索
 2. **正しい墓所 POI に着地する** → 何もしなくて OK(デフォルトで地図表示)
-3. **別の場所が出る / 全く違う POI が出る** → 以下のどちらか
-   - `hideMap: true` を frontmatter に追加(地図を出さない)
-   - Google Maps 航空写真で正確な lat/lng を取得して `coords: { lat, lng }` を frontmatter に追加(座標ピンで表示)
+3. **POI が出ない / 違う場所が出る** → 以下を順に試す
+   - `mapQuery: "{偉人名}の墓"`(「青山霊園」を外す)で spotlit になる偉人がいる(例: 北里柴三郎・黒田清隆・加藤高明)
+   - 別の表記(`{偉人名}先生の墓` 等)を `mapQuery` に試す
+   - Google Maps 航空写真で正確な lat/lng を取得して `coords: { lat, lng }` を frontmatter に追加(座標ピン)
+   - どれも駄目なら `hideMap: true`(例: 御木本幸吉)
+
+### POI 自動判定スクリプト
+
+`scripts/verify-map-pois.py` で全偉人の地図 POI 着地を一括検証できる。新規偉人追加後や push 前のチェック用:
+
+```bash
+python3 scripts/verify-map-pois.py
+```
+
+判定基準:
+- ✅ **OK**: spotlit パターン(固有 POI 着地)
+- ⚠️ **CATEGORICAL**: 複数候補のみ(具体的 POI 未着地)→ `mapQuery` で別表記を試す
+- ⚠️ **GENERIC_POI**: 着地座標が青山霊園マスター POI (35.6656277, 139.7220659) → `hideMap: true` 推奨(個別の墓ではなく霊園そのものを指している)
+- **SKIP**: `hideMap` または `coords` 設定済
+
+要対応件数が出たら exit code 1 を返すので CI にも組み込み可能。
 
 ### coords 取得手順(Google Maps 航空写真)
 
