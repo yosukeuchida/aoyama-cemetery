@@ -7,6 +7,7 @@ deathDate: "1931-06-13"
 era: 昭和
 category: 学者
 graveSection: 1種イ19号2側
+mapQuery: 北里柴三郎の墓
 shortDescription: 破傷風菌の純粋培養と血清療法を確立した細菌学者。「日本の細菌学の父」と称される。
 tags:
   - 細菌学
