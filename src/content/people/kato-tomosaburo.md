@@ -4,7 +4,7 @@ nameKana: かとう ともさぶろう
 nameRomaji: Kato Tomosaburo
 birthDate: "1861-04-01"
 deathDate: "1923-08-24"
-era: [大正]
+era: [明治, 大正]
 category: 政治家
 graveSection: 1種ロ12号1・6側
 mapQuery: 加藤友三郎先生の墓

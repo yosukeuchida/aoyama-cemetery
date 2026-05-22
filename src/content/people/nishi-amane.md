@@ -4,7 +4,7 @@ nameKana: にし あまね
 nameRomaji: Nishi Amane
 birthDate: "1829-03-07"
 deathDate: "1897-01-31"
-era: [明治]
+era: [江戸, 明治]
 category: 学者
 graveSection: 1種ロ8号19側
 hideMap: true

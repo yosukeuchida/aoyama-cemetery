@@ -4,7 +4,7 @@ nameKana: かとう たかあき
 nameRomaji: Kato Takaaki
 birthDate: "1860-01-25"
 deathDate: "1926-01-28"
-era: [大正]
+era: [明治, 大正]
 category: 政治家
 graveSection: 1種ロ8号1・14側
 mapQuery: 加藤高明の墓

@@ -4,7 +4,7 @@ nameKana: おおくぼ としみち
 nameRomaji: Okubo Toshimichi
 birthDate: "1830-09-26"
 deathDate: "1878-05-14"
-era: [明治]
+era: [江戸, 明治]
 category: 政治家
 graveSection: 1種イ2号15側
 shortDescription: 明治維新三傑の一人。初代内務卿として近代日本の基礎を築いた薩摩出身の政治家。

@@ -4,7 +4,7 @@ nameKana: きん ぎょくきん
 nameRomaji: Kim Ok-gyun
 birthDate: "1851-02-23"
 deathDate: "1894-03-28"
-era: [江戸, 明治]
+era: [明治]
 category: その他
 hideMap: true
 shortDescription: 朝鮮王朝末期の開化派指導者。日本に学んで甲申政変(1884)を主導するも失敗、日本に亡命。10 年後上海で暗殺。頭山満・福澤諭吉らが支援した朝鮮近代化の象徴的人物。

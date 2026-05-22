@@ -4,7 +4,7 @@ nameKana: くろだ きよたか
 nameRomaji: Kuroda Kiyotaka
 birthDate: "1840-11-09"
 deathDate: "1900-08-23"
-era: [明治]
+era: [江戸, 明治]
 category: 政治家
 graveSection: 1種イ1号9側
 hideMap: true
