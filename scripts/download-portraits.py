@@ -65,6 +65,17 @@ PAIRS = [
     ("saigo-itoko", "Saigō_Itoko.jpg"),
     ("nakamura-kichiemon-i", "Kichiemon_Nakamura_I_1951.jpg"),
     # katsu-kokichi: Wikipedia に肖像なし(没後 70 年経過済だが画像未収録)
+    # 2026-05-22 追加分その3
+    ("yoshihara-shigetoshi", "Yoshihara_Shigetoshi.jpg"),
+    ("matsudaira-tsuneo", "Tsuneo_Matsudaira.jpg"),
+    ("verbeck", "Guido_Herman_Fridolin_Verbeck.jpg"),
+    ("chiossone", "Edoardo_Chiossone.jpg"),
+    ("kim-okgyun", "KimOkkyun.jpg"),
+    ("mishima-michitsune", "Mishima_Michitsune.jpg"),
+    ("ijichi-masaharu", "Masaharu_Ijichi.jpg"),
+    ("ogata-taketora", "Taketora_Ogata.jpg"),
+    # sugita-gentan: Wikipedia に肖像なし
+    # watanabe-noboru: Wikipedia 単独記事なし(同名人物多数の曖昧さ回避ページのみ)
 ]
 
 OUT_DIR = "src/assets/portraits"
