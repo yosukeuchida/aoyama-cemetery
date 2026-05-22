@@ -7,6 +7,7 @@ import PersonPortrait from '../../components/PersonPortrait.astro';
 import RelatedWorks from '../../components/RelatedWorks.astro';
 import { getNearbyPeople } from '../../utils/nearby-graves';
 import { getWorksForPerson } from '../../utils/related-works';
+import { getRoutesForPerson } from '../../utils/routes-for-person';
 import { getGitDates } from '../../utils/git-dates';
 
 export async function getStaticPaths() {
@@ -25,6 +26,7 @@ const { person } = Astro.props;
 const { Content } = await render(person);
 const { block, nearby } = await getNearbyPeople(person);
 const works = await getWorksForPerson(person.id);
+const routes = await getRoutesForPerson(person.id);
 
 const title = `${person.data.name} - 青山霊園 偉人録`;
 const description = person.data.shortDescription;
@@ -259,6 +261,24 @@ const articleJsonLd: Record<string, unknown> = {
 
     {works.length > 0 && <RelatedWorks works={works} />}
 
+    {routes.length > 0 && (
+      <section class="person-routes">
+        <h2>この偉人を含む散歩コース</h2>
+        <ul class="person-routes-list">
+          {routes.map((route) => (
+            <li>
+              <a href={`/routes/${route.id}/`}>
+                <span class="person-route-title">{route.data.title}</span>
+                <span class="person-route-meta">
+                  {route.data.theme} / 所要 {route.data.estimatedMinutes} 分 / {route.data.stops.length} 名
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
     {person.data.references && person.data.references.length > 0 && (
       <section class="references">
         <h2>参考資料</h2>
@@ -273,3 +293,45 @@ const articleJsonLd: Record<string, unknown> = {
     <p><a href="/">← 偉人一覧に戻る</a></p>
   </article>
 </BaseLayout>
+
+<style>
+  .person-routes {
+    margin-top: 2.5rem;
+  }
+  .person-routes h2 {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.3rem;
+    margin-bottom: 1rem;
+  }
+  .person-routes-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0.6rem;
+  }
+  .person-routes-list a {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid #d6d3c7;
+    border-radius: 6px;
+    background: #faf8f3;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 120ms ease;
+  }
+  .person-routes-list a:hover {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  }
+  .person-route-title {
+    font-size: 0.95rem;
+    color: #5a4a2a;
+    font-weight: 500;
+  }
+  .person-route-meta {
+    font-size: 0.78rem;
+    color: #8a7a55;
+  }
+</style>

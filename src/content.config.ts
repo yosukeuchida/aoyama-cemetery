@@ -60,4 +60,24 @@ const works = defineCollection({
   }),
 });
 
-export const collections = { people, works };
+const routes = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/routes' }),
+  schema: z.object({
+    title: z.string(),
+    subtitle: z.string().optional(),
+    theme: z.enum(['維新', '戊辰戦争', '昭和', '文人', 'お雇い外国人', '女性とハチ公', '軍人', 'その他']),
+    description: z.string().min(40).max(400),
+    estimatedMinutes: z.number().int().positive(),
+    stops: z
+      .array(
+        z.object({
+          slug: z.string(),
+          note: z.string().optional(),
+        })
+      )
+      .min(3),
+    order: z.number().int().default(100),
+  }),
+});
+
+export const collections = { people, works, routes };

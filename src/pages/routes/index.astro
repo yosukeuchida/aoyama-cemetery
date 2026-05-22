@@ -1,0 +1,144 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const routes = await getCollection('routes');
+routes.sort((a, b) => a.data.order - b.data.order);
+
+const title = '散歩コース - 青山霊園 偉人録';
+const description = '青山霊園に眠る偉人をテーマ別に巡る散歩コース。明治維新・戊辰戦争・昭和の宰相・文人・お雇い外国人・軍人など、興味と所要時間に合わせて選べる 7 コース。';
+
+const THEME_COLOR: Record<string, string> = {
+  維新: '#8a5a2a',
+  戊辰戦争: '#6b3a2a',
+  昭和: '#3a5a8a',
+  文人: '#3a5a3a',
+  お雇い外国人: '#7b4b94',
+  女性とハチ公: '#c75d3b',
+  軍人: '#5a4a2a',
+  その他: '#777',
+};
+
+const siteOrigin = new URL('/', Astro.site).toString();
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: siteOrigin },
+    { '@type': 'ListItem', position: 2, name: '散歩コース', item: new URL('/routes/', Astro.site).toString() },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description} jsonLd={breadcrumbJsonLd}>
+  <h1>散歩コース</h1>
+  <p>青山霊園に眠る偉人を、テーマ別に巡る散歩コースです。明治維新・戊辰戦争・昭和の宰相・文人・お雇い外国人・女性とハチ公・軍人 — 興味と所要時間に合わせて選んでください。</p>
+  <p class="note">各コースの stops は物語の流れで並べています。実際の散策では、各人物ページに記載した区画番号(graveSection)を確認して動線を組むのがおすすめです。</p>
+
+  <ul class="routes-grid">
+    {routes.map((route) => (
+      <li class="route-card">
+        <div class="route-header">
+          <span
+            class="route-theme"
+            style={`background:${THEME_COLOR[route.data.theme] ?? '#777'};`}
+          >
+            {route.data.theme}
+          </span>
+          <span class="route-meta">{route.data.estimatedMinutes} 分 / {route.data.stops.length} 名</span>
+        </div>
+        <h2 class="route-title">
+          <a href={`/routes/${route.id}/`}>{route.data.title}</a>
+        </h2>
+        {route.data.subtitle && <p class="route-subtitle">{route.data.subtitle}</p>}
+        <p class="route-description">{route.data.description}</p>
+      </li>
+    ))}
+  </ul>
+</BaseLayout>
+
+<style>
+  h1 {
+    margin-bottom: 0.5rem;
+  }
+  .note {
+    color: #777;
+    font-size: 0.85rem;
+    margin: 0.5rem 0 1.5rem;
+  }
+  .routes-grid {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1rem;
+  }
+  .route-card {
+    padding: 1rem 1.1rem 1.1rem;
+    border: 1px solid #d6d3c7;
+    border-radius: 8px;
+    background: #faf8f3;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 120ms ease, transform 120ms ease;
+  }
+  .route-card:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1px);
+  }
+  .route-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.6rem;
+  }
+  .route-theme {
+    display: inline-block;
+    padding: 0.15rem 0.55rem;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .route-meta {
+    color: #8a7a55;
+    font-size: 0.78rem;
+  }
+  .route-title {
+    font-size: 1.15rem;
+    margin: 0 0 0.3rem;
+    color: #5a4a2a;
+    line-height: 1.35;
+  }
+  .route-title a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px dotted #a89c7d;
+  }
+  .route-title a:hover {
+    border-bottom-style: solid;
+  }
+  .route-subtitle {
+    margin: 0 0 0.5rem;
+    color: #8a7a55;
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+  .route-description {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #444;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .route-card {
+      transition: none;
+    }
+    .route-card:hover {
+      transform: none;
+    }
+  }
+</style>

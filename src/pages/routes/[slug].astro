@@ -1,0 +1,347 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const routes = await getCollection('routes');
+  const people = await getCollection('people');
+  const peopleMap = new Map(people.map((p) => [p.id, p]));
+  return routes.map((route) => ({
+    params: { slug: route.id },
+    props: { route, peopleMap },
+  }));
+}
+
+interface Props {
+  route: CollectionEntry<'routes'>;
+  peopleMap: Map<string, CollectionEntry<'people'>>;
+}
+
+const { route, peopleMap } = Astro.props;
+const { Content } = await render(route);
+
+type Stop = (typeof route.data.stops)[number];
+
+const stops = route.data.stops.map((stop: Stop) => ({
+  stop,
+  person: peopleMap.get(stop.slug),
+}));
+
+const missing = stops.filter((s) => !s.person).map((s) => s.stop.slug);
+if (missing.length > 0) {
+  throw new Error(
+    `Route ${route.id} references unknown person slug(s): ${missing.join(', ')}`
+  );
+}
+
+const THEME_COLOR: Record<string, string> = {
+  維新: '#8a5a2a',
+  戊辰戦争: '#6b3a2a',
+  昭和: '#3a5a8a',
+  文人: '#3a5a3a',
+  お雇い外国人: '#7b4b94',
+  女性とハチ公: '#c75d3b',
+  軍人: '#5a4a2a',
+  その他: '#777',
+};
+
+function waypointFor(person: CollectionEntry<'people'>): string | null {
+  if (person.data.hideMap) return null;
+  if (person.data.coords) {
+    return `${person.data.coords.lat},${person.data.coords.lng}`;
+  }
+  return person.data.mapQuery ?? `${person.data.name}の墓 青山霊園`;
+}
+
+const visibleStops = stops.filter((s) => s.person && !s.person.data.hideMap);
+const hiddenStops = stops.filter((s) => s.person && s.person.data.hideMap);
+
+let mapsUrl: string | null = null;
+if (visibleStops.length >= 2) {
+  const points = visibleStops
+    .map((s) => waypointFor(s.person!))
+    .filter((p): p is string => p !== null);
+  const destination = points[points.length - 1];
+  const waypoints = points.slice(0, -1);
+  const params = new URLSearchParams({ api: '1', destination });
+  if (waypoints.length > 0) {
+    params.set('waypoints', waypoints.join('|'));
+  }
+  params.set('travelmode', 'walking');
+  mapsUrl = `https://www.google.com/maps/dir/?${params.toString()}`;
+}
+
+const title = `${route.data.title} - 散歩コース | 青山霊園 偉人録`;
+const description = route.data.description;
+
+const siteOrigin = new URL('/', Astro.site).toString();
+
+const itemListJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: route.data.title,
+  description: route.data.description,
+  numberOfItems: stops.length,
+  itemListElement: stops.map((s, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: s.person!.data.name,
+    url: new URL(`/people/${s.person!.id}/`, Astro.site).toString(),
+  })),
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: siteOrigin },
+    { '@type': 'ListItem', position: 2, name: '散歩コース', item: new URL('/routes/', Astro.site).toString() },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: route.data.title,
+      item: new URL(`/routes/${route.id}/`, Astro.site).toString(),
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  jsonLd={[itemListJsonLd, breadcrumbJsonLd]}
+>
+  <p class="back-link"><a href="/routes/">← 散歩コース一覧へ</a></p>
+
+  <header class="route-header">
+    <div class="route-meta-row">
+      <span
+        class="route-theme"
+        style={`background:${THEME_COLOR[route.data.theme] ?? '#777'};`}
+      >
+        {route.data.theme}
+      </span>
+      <span class="route-meta">所要 {route.data.estimatedMinutes} 分 / {route.data.stops.length} 名</span>
+    </div>
+    <h1>{route.data.title}</h1>
+    {route.data.subtitle && <p class="route-subtitle">{route.data.subtitle}</p>}
+    <p class="route-description">{route.data.description}</p>
+  </header>
+
+  {mapsUrl && (
+    <p class="maps-link-wrap">
+      <a class="maps-link" href={mapsUrl} target="_blank" rel="noopener noreferrer">
+        🗺️ Google マップで全 stops を一括表示(徒歩ルート)
+      </a>
+    </p>
+  )}
+
+  <article class="route-content">
+    <Content />
+  </article>
+
+  <section class="stops">
+    <h2>巡る人物({stops.length} 名)</h2>
+    <ol class="stops-list">
+      {stops.map(({ stop, person }, i) => (
+        <li class="stop-item">
+          <div class="stop-num">{i + 1}</div>
+          <div class="stop-body">
+            <h3 class="stop-name">
+              <a href={`/people/${person!.id}/`}>{person!.data.name}</a>
+              <span class="stop-kana">{person!.data.nameKana}</span>
+            </h3>
+            <p class="stop-life">
+              {person!.data.birthDate.slice(0, 4)} - {person!.data.deathDate.slice(0, 4)}
+              <span class="era-badge">{person!.data.era.join('・')}</span>
+              <span class="category-badge">{person!.data.category}</span>
+              {person!.data.graveSection && (
+                <span class="section-badge">{person!.data.graveSection}</span>
+              )}
+            </p>
+            {stop.note && <p class="stop-note">{stop.note}</p>}
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  {hiddenStops.length > 0 && (
+    <p class="hidden-note">
+      ※ 一括地図表示は墓所が特定できない人物(
+      {hiddenStops.map((s) => s.person!.data.name).join('・')}
+      )を経路から除外しています。各人物ページから個別に位置情報を確認してください。
+    </p>
+  )}
+</BaseLayout>
+
+<style>
+  .back-link {
+    margin: 0 0 1rem;
+    font-size: 0.85rem;
+  }
+  .back-link a {
+    color: #8a7a55;
+    text-decoration: none;
+    border-bottom: 1px dotted #a89c7d;
+  }
+  .back-link a:hover {
+    border-bottom-style: solid;
+  }
+  .route-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e5e5e5;
+  }
+  .route-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.5rem;
+  }
+  .route-theme {
+    display: inline-block;
+    padding: 0.15rem 0.6rem;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .route-meta {
+    color: #8a7a55;
+    font-size: 0.85rem;
+  }
+  h1 {
+    margin: 0 0 0.3rem;
+  }
+  .route-subtitle {
+    margin: 0 0 0.8rem;
+    color: #8a7a55;
+    font-style: italic;
+  }
+  .route-description {
+    margin: 0;
+    color: #444;
+    line-height: 1.7;
+  }
+  .maps-link-wrap {
+    margin: 1rem 0 1.5rem;
+  }
+  .maps-link {
+    display: inline-block;
+    padding: 0.6rem 1rem;
+    background: #5a4a2a;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 120ms ease;
+  }
+  .maps-link:hover {
+    background: #6b5a3a;
+  }
+  .route-content {
+    margin-bottom: 2rem;
+    line-height: 1.8;
+    color: #333;
+  }
+  .route-content :global(h2) {
+    font-size: 1.1rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.6rem;
+    color: #5a4a2a;
+  }
+  .stops h2 {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.3rem;
+    margin-bottom: 1rem;
+  }
+  .stops-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .stop-item {
+    display: flex;
+    gap: 0.8rem;
+    padding: 0.9rem 1rem;
+    border: 1px solid #d6d3c7;
+    border-radius: 8px;
+    background: #faf8f3;
+  }
+  .stop-num {
+    flex: 0 0 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #5a4a2a;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  .stop-body {
+    flex: 1;
+    min-width: 0;
+  }
+  .stop-name {
+    margin: 0 0 0.3rem;
+    font-size: 1rem;
+    color: #5a4a2a;
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+  .stop-name a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px dotted #a89c7d;
+  }
+  .stop-name a:hover {
+    border-bottom-style: solid;
+  }
+  .stop-kana {
+    font-size: 0.75rem;
+    color: #8a7a55;
+    font-weight: normal;
+  }
+  .stop-life {
+    margin: 0 0 0.4rem;
+    color: #555;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+  .era-badge,
+  .category-badge,
+  .section-badge {
+    background: #f0f0f0;
+    color: #444;
+    padding: 0.1rem 0.5rem;
+    border-radius: 3px;
+    font-size: 0.7rem;
+  }
+  .stop-note {
+    margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: #444;
+  }
+  .hidden-note {
+    margin-top: 1.5rem;
+    padding: 0.8rem 1rem;
+    background: #fff8e7;
+    border-left: 3px solid #d4a73c;
+    font-size: 0.85rem;
+    color: #6b5a2a;
+    line-height: 1.6;
+  }
+</style>
