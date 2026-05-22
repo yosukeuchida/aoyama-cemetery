@@ -7,6 +7,7 @@ import PersonPortrait from '../../components/PersonPortrait.astro';
 import RelatedWorks from '../../components/RelatedWorks.astro';
 import { getNearbyPeople } from '../../utils/nearby-graves';
 import { getWorksForPerson } from '../../utils/related-works';
+import { getGitDates } from '../../utils/git-dates';
 
 export async function getStaticPaths() {
   const people = await getCollection('people');
@@ -111,6 +112,33 @@ const faqJsonLd = {
     },
   })),
 };
+
+const { datePublished, dateModified } = getGitDates(`src/content/people/${person.id}.md`);
+
+const publisher = {
+  '@type': 'Organization',
+  name: '青山霊園 偉人録',
+  url: siteOrigin,
+};
+
+const articleJsonLd: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description,
+  datePublished,
+  dateModified,
+  author: publisher,
+  publisher,
+  mainEntityOfPage: pageURL,
+  ...(absolutePortraitURL ? { image: absolutePortraitURL } : {}),
+  about: {
+    '@type': 'Person',
+    name: person.data.name,
+    url: pageURL,
+  },
+  inLanguage: 'ja',
+};
 ---
 
 <BaseLayout
@@ -118,7 +146,7 @@ const faqJsonLd = {
   description={description}
   ogImage={ogImage}
   ogType="profile"
-  jsonLd={[personJsonLd, breadcrumbJsonLd, faqJsonLd]}
+  jsonLd={[articleJsonLd, personJsonLd, breadcrumbJsonLd, faqJsonLd]}
 >
   <article class="person-detail">
     <nav class="breadcrumb" aria-label="パンくずリスト">

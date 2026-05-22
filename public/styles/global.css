@@ -19,6 +19,25 @@ body {
   line-height: 1.7;
 }
 
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0.5rem 1rem;
+  background: #5a4a2a;
+  color: #fff;
+  text-decoration: none;
+  z-index: 100;
+  transform: translateY(-150%);
+  transition: transform 0.15s ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+  outline: 2px solid #f0e68c;
+  outline-offset: 2px;
+}
+
 .site-header {
   border-bottom: 1px solid var(--color-border);
   background: white;
