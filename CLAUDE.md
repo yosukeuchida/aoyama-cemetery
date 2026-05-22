@@ -81,6 +81,7 @@ python3 scripts/verify-map-pois.py
 - 直接コピペ禁止、必ず再構成 + `references` に出典明記
 - 肖像写真は public domain(没後 70 年経過済)のみ使用可
 - 事実誤認は本サイトの致命傷なので、ビルド前にユーザー目視確認を必ず通す
+- **本文に `**bold**` 記法を使わない**。プレーンテキストで記述する。LLM 生成時に強調したくなる衝動を抑える(画面では地の文の流れの方が大事、structural な強調はセクション見出しで既に効いている)。2026-05-22 に過去 54 ファイル × 約 3,500 個の `**` を一括 strip した経緯あり(commit `942a704`)。新規偉人 md は最初から bold なしで書く。works コレクションも同様。詳細経緯: `~/Desktop/Obsidian/claude-code/2026-05-22-aoyama-cemetery-メタテーブル拡張と出身地filter.md`
 
 ## 肖像写真の取得(Wikimedia Commons)
 
