@@ -45,32 +45,6 @@ const THEME_COLOR: Record<string, string> = {
   その他: '#777',
 };
 
-function waypointFor(person: CollectionEntry<'people'>): string | null {
-  if (person.data.hideMap) return null;
-  if (person.data.coords) {
-    return `${person.data.coords.lat},${person.data.coords.lng}`;
-  }
-  return person.data.mapQuery ?? `${person.data.name}の墓 青山霊園`;
-}
-
-const visibleStops = stops.filter((s) => s.person && !s.person.data.hideMap);
-const hiddenStops = stops.filter((s) => s.person && s.person.data.hideMap);
-
-let mapsUrl: string | null = null;
-if (visibleStops.length >= 2) {
-  const points = visibleStops
-    .map((s) => waypointFor(s.person!))
-    .filter((p): p is string => p !== null);
-  const destination = points[points.length - 1];
-  const waypoints = points.slice(0, -1);
-  const params = new URLSearchParams({ api: '1', destination });
-  if (waypoints.length > 0) {
-    params.set('waypoints', waypoints.join('|'));
-  }
-  params.set('travelmode', 'walking');
-  mapsUrl = `https://www.google.com/maps/dir/?${params.toString()}`;
-}
-
 const title = `${route.data.title} - 散歩コース | 青山霊園 偉人録`;
 const description = route.data.description;
 
@@ -128,14 +102,6 @@ const breadcrumbJsonLd = {
     <p class="route-description">{route.data.description}</p>
   </header>
 
-  {mapsUrl && (
-    <p class="maps-link-wrap">
-      <a class="maps-link" href={mapsUrl} target="_blank" rel="noopener noreferrer">
-        🗺️ Google マップで全 stops を一括表示(徒歩ルート)
-      </a>
-    </p>
-  )}
-
   <article class="route-content">
     <Content />
   </article>
@@ -166,13 +132,6 @@ const breadcrumbJsonLd = {
     </ol>
   </section>
 
-  {hiddenStops.length > 0 && (
-    <p class="hidden-note">
-      ※ 一括地図表示は墓所が特定できない人物(
-      {hiddenStops.map((s) => s.person!.data.name).join('・')}
-      )を経路から除外しています。各人物ページから個別に位置情報を確認してください。
-    </p>
-  )}
 </BaseLayout>
 
 <style>
@@ -224,23 +183,6 @@ const breadcrumbJsonLd = {
     margin: 0;
     color: #444;
     line-height: 1.7;
-  }
-  .maps-link-wrap {
-    margin: 1rem 0 1.5rem;
-  }
-  .maps-link {
-    display: inline-block;
-    padding: 0.6rem 1rem;
-    background: #5a4a2a;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: background 120ms ease;
-  }
-  .maps-link:hover {
-    background: #6b5a3a;
   }
   .route-content {
     margin-bottom: 2rem;
@@ -334,14 +276,5 @@ const breadcrumbJsonLd = {
     font-size: 0.88rem;
     line-height: 1.6;
     color: #444;
-  }
-  .hidden-note {
-    margin-top: 1.5rem;
-    padding: 0.8rem 1rem;
-    background: #fff8e7;
-    border-left: 3px solid #d4a73c;
-    font-size: 0.85rem;
-    color: #6b5a2a;
-    line-height: 1.6;
   }
 </style>
