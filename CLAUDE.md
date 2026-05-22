@@ -96,6 +96,14 @@ python3 scripts/verify-map-pois.py
 
 実装済み再利用スクリプト: `scripts/download-portraits.py`(slug ↔ ファイル名のリストを定義して走らせるだけ、idempotent)。ライセンスは Wikipedia の File ページで Public domain in Japan / U.S. の表記を確認してから取得。frontmatter には `portrait: ../../assets/portraits/<slug>.jpg` + `portraitCredit: Wikimedia Commons / Public Domain` を統一して付与。詳細経緯: `~/Desktop/Obsidian/claude-code/2026-05-21-aoyama-cemetery-Wikimedia-Commons-肖像取得.md`
 
+### Public Domain 判定の事前チェック
+
+新規偉人を追加する前に、**没年から 70 年が経過しているか**を確認する。日本国内の著作権法は **著作者の死後 70 年**で Public Domain になるルール(2018 年 12 月 30 日施行・TPP 関連法改正)。70 年未経過の人物は Wikimedia Commons にも Public Domain 画像が存在しないため、`portrait` フィールドなしで作成し、ページ上部は冒頭文の視覚的インパクトで補う方針とする。
+
+- 例(2026 年現在で PD 経過): 後藤象二郎(1897 没)・副島種臣(1905 没)・川路利良(1879 没)・西竹一(1945 没・滑り込み)・長与専斎(1902 没)・ジョセフ・ヒコ(1897 没)・森永太一郎(1937 没)・佐藤義亮(1951 没)等
+- 例(PD 未経過のため肖像なし): **星新一(1997 没 → 2068 年に PD)**・**橋本龍太郎(2006 没 → 2077 年に PD)**
+- 判定式: `今年 - 没年 ≥ 71` なら PD 経過(没年当年は計算に含まない年起算ルール)。境界年は Wikipedia の File ページで `{{PD-Japan}}` テンプレートを確認してから取得
+
 ## frontmatter 記法の注意
 
 people / works の frontmatter で、**値にコロン `:` を含む文字列はダブルクオートで囲む**。YAML パーサが「キー: 値」の構造と誤認識して `bad indentation of a mapping entry` エラーで build が止まる。
