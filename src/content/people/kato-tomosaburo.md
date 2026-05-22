@@ -14,6 +14,17 @@ tags:
   - 海軍大将
   - ワシントン海軍軍縮条約
   - 広島藩
+birthPlace: "安芸国広島城下(現・広島県広島市)"
+deathPlace: "東京"
+jobTitle: "第21代内閣総理大臣・海軍大将"
+knowsAbout:
+  - 海軍
+  - 軍縮外交
+  - 国際協調
+nationality: "JP"
+alumniOf:
+  - 海軍兵学校
+  - 海軍大学校
 portrait: ../../assets/portraits/kato-tomosaburo.jpg
 portraitCaption: 加藤 友三郎の肖像
 portraitCredit: Wikimedia Commons / Public Domain

@@ -13,6 +13,15 @@ tags:
   - ミルクキャラメル
   - キリスト教徒
   - エンゼルマーク
+birthPlace: "佐賀県伊万里(現・佐賀県伊万里市)"
+deathPlace: "九州から東京へ向かう船中(伊万里で病に倒れる)"
+jobTitle: 実業家
+knowsAbout:
+  - 西洋菓子製造
+  - 経営
+  - キリスト教伝道
+  - 製菓技術
+nationality: JP
 portrait: ../../assets/portraits/morinaga-taichiro.png
 portraitCaption: 森永 太一郎の肖像
 portraitCredit: Wikimedia Commons / Public Domain

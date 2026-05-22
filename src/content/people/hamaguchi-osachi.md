@@ -13,6 +13,19 @@ tags:
   - 立憲民政党
   - ライオン宰相
   - 金解禁
+birthPlace: "高知県高知市"
+deathPlace: "東京"
+jobTitle: "内閣総理大臣"
+knowsAbout:
+  - 財政政策
+  - 金本位制
+  - 政党政治
+  - 軍縮
+nationality: "JP"
+alumniOf:
+  - 東京帝国大学
+memberOf:
+  - 立憲民政党
 portrait: ../../assets/portraits/hamaguchi-osachi.jpg
 portraitCaption: 浜口 雄幸の肖像
 portraitCredit: Wikimedia Commons / Public Domain

@@ -13,6 +13,22 @@ tags:
   - 立憲政友会
   - 五・一五事件
   - 憲政の神様
+birthPlace: "備中国(現・岡山県岡山市)"
+deathPlace: "東京(首相官邸)"
+jobTitle: "内閣総理大臣"
+knowsAbout:
+  - 議会政治
+  - 護憲運動
+  - 普通選挙
+  - 漢詩
+  - 書道
+nationality: "JP"
+alumniOf:
+  - 慶應義塾
+memberOf:
+  - 立憲政友会
+  - 立憲改進党
+  - 革新倶楽部
 portrait: ../../assets/portraits/inukai-tsuyoshi.jpg
 portraitCaption: 犬養 毅の肖像
 portraitCredit: Wikimedia Commons / Public Domain

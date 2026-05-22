@@ -14,6 +14,21 @@ tags:
   - 橋本行革
   - 平成研究会
   - 普天間返還合意
+birthPlace: "東京都渋谷区"
+deathPlace: "東京"
+jobTitle: "内閣総理大臣"
+knowsAbout:
+  - 行政改革
+  - 財政政策
+  - 日米通商交渉
+  - 金融制度改革
+nationality: "JP"
+alumniOf:
+  - 麻布中学校・高等学校
+  - 慶應義塾大学
+memberOf:
+  - 自由民主党
+  - 平成研究会
 references:
   - title: Wikipedia「橋本龍太郎」
     url: https://ja.wikipedia.org/wiki/橋本龍太郎

@@ -14,6 +14,17 @@ tags:
   - 武蔵野
   - 小説家
   - 千葉県銚子
+birthPlace: "下総国海上郡銚子(現・千葉県銚子市)"
+deathPlace: "神奈川県茅ヶ崎"
+jobTitle: "小説家"
+knowsAbout:
+  - 自然主義文学
+  - 私小説
+  - 詩
+  - 新聞記者
+nationality: "JP"
+alumniOf:
+  - 東京専門学校(現・早稲田大学)
 portrait: ../../assets/portraits/kunikida-doppo.jpg
 portraitCaption: 国木田 独歩の肖像
 portraitCredit: Wikimedia Commons / Public Domain

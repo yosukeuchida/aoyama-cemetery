@@ -23,6 +23,15 @@ const people = defineCollection({
       mapQuery: z.string().optional(),
       shortDescription: z.string().min(20).max(100),
       tags: z.array(z.string()).optional(),
+      birthPlace: z.string().optional(),
+      deathPlace: z.string().optional(),
+      jobTitle: z.string().optional(),
+      knowsAbout: z.array(z.string()).optional(),
+      nationality: z.string().default('JP'),
+      alumniOf: z.array(z.string()).optional(),
+      honorificSuffix: z.string().optional(),
+      award: z.array(z.string()).optional(),
+      memberOf: z.array(z.string()).optional(),
       references: z
         .array(
           z.object({

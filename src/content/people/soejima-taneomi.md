@@ -15,6 +15,21 @@ tags:
   - マリア・ルス号事件
   - 民撰議院設立建白書
   - 書の達人
+birthPlace: "佐賀県佐賀市(佐賀城下)"
+deathPlace: "東京都"
+jobTitle: "政治家・外交官・書家"
+honorificSuffix: "伯爵"
+knowsAbout:
+  - 外交
+  - 国際法
+  - 漢学
+  - 国学
+  - 書道
+nationality: JP
+alumniOf:
+  - 弘道館
+memberOf:
+  - 義祭同盟
 portrait: ../../assets/portraits/soejima-taneomi.jpg
 portraitCaption: 副島 種臣の肖像
 portraitCredit: Wikimedia Commons / Public Domain

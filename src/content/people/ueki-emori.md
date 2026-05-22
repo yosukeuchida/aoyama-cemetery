@@ -14,6 +14,22 @@ tags:
   - 東洋大日本国国憲按
   - 立志社
   - 土佐藩
+birthPlace: "高知県高知市(土佐国高知城下)"
+deathPlace: "東京都"
+jobTitle: "思想家・政治家"
+knowsAbout:
+  - 自由民権思想
+  - 憲法学
+  - 人民主権
+  - 啓蒙著述
+nationality: JP
+alumniOf:
+  - 開成学校
+  - 慶應義塾
+memberOf:
+  - 立志社
+  - 自由党
+  - 立憲自由党
 portrait: ../../assets/portraits/ueki-emori.jpg
 portraitCaption: 植木 枝盛の肖像
 portraitCredit: Wikimedia Commons / Public Domain

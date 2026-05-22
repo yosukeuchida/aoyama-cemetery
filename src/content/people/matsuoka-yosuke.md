@@ -13,6 +13,18 @@ tags:
   - 日独伊三国同盟
   - 満鉄総裁
   - 外務大臣
+birthPlace: "山口県熊毛郡室津村(現・山口県光市)"
+deathPlace: "東京"
+jobTitle: "外務大臣"
+knowsAbout:
+  - 外交
+  - 国際関係
+  - 鉄道経営
+nationality: "JP"
+alumniOf:
+  - "オレゴン州立大学(現・オレゴン大学とは別組織)"
+memberOf:
+  - 立憲政友会
 portrait: ../../assets/portraits/matsuoka-yosuke.jpg
 portraitCaption: 松岡 洋右の肖像
 portraitCredit: Wikimedia Commons / Public Domain

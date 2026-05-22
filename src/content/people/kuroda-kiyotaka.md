@@ -14,6 +14,15 @@ tags:
   - 北海道開拓使
   - 戊辰戦争
   - 薩摩藩
+birthPlace: "薩摩国鹿児島城下(現・鹿児島県鹿児島市)"
+deathPlace: "東京"
+jobTitle: "第2代内閣総理大臣"
+knowsAbout:
+  - 政治
+  - 開拓行政
+  - 軍事
+nationality: "JP"
+honorificSuffix: "伯爵"
 portrait: ../../assets/portraits/kuroda-kiyotaka.jpg
 portraitCaption: 黒田 清隆の肖像
 portraitCredit: Wikimedia Commons / Public Domain

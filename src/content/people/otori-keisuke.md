@@ -14,6 +14,20 @@ tags:
   - 外交官
   - 学習院長
   - 蘭学
+birthPlace: "播磨国赤穂郡細念村(現・兵庫県上郡町岩木)"
+deathPlace: "東京"
+jobTitle: 官僚
+knowsAbout:
+  - 蘭学
+  - 洋式兵学
+  - 工学教育
+  - 外交
+nationality: JP
+alumniOf:
+  - 閑谷学校
+  - 適塾
+  - 蕃書調所
+honorificSuffix: 男爵
 portrait: ../../assets/portraits/otori-keisuke.jpg
 portraitCaption: 大鳥 圭介の肖像
 portraitCredit: Wikimedia Commons / Public Domain

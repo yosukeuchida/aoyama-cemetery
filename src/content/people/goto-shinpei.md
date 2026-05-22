@@ -13,6 +13,18 @@ tags:
   - 満鉄
   - 台湾総督府
   - 内務大臣
+birthPlace: "岩手県奥州市"
+deathPlace: "京都"
+jobTitle: "内務大臣"
+knowsAbout:
+  - 衛生行政
+  - 植民地統治
+  - 帝都復興
+  - 都市計画
+  - 鉄道経営
+nationality: "JP"
+alumniOf:
+  - 須賀川医学校
 portrait: ../../assets/portraits/goto-shinpei.jpg
 portraitCaption: 後藤 新平の肖像
 portraitCredit: Wikimedia Commons / Public Domain

@@ -14,6 +14,20 @@ tags:
   - 日本銀行総裁
   - 金解禁
   - 血盟団事件
+birthPlace: "大分県日田市"
+deathPlace: "東京"
+jobTitle: "大蔵大臣"
+knowsAbout:
+  - 金融政策
+  - 金本位制
+  - 国際金融
+  - 緊縮財政
+nationality: "JP"
+alumniOf:
+  - 第三高等学校
+  - 東京帝国大学
+memberOf:
+  - 立憲民政党
 portrait: ../../assets/portraits/inoue-junnosuke.jpg
 portraitCaption: 井上 準之助の肖像
 portraitCredit: Wikimedia Commons / Public Domain

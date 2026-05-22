@@ -12,6 +12,15 @@ tags:
   - 日露戦争
   - 陸軍大将
   - 長州藩
+birthPlace: "江戸・長府藩上屋敷(現・東京都港区)"
+deathPlace: "東京"
+jobTitle: 陸軍大将
+knowsAbout:
+  - 軍事指揮
+  - 要塞攻略
+  - 武士道
+  - 皇族教育
+nationality: JP
 portrait: ../../assets/portraits/nogi-maresuke.jpg
 portraitCaption: 乃木 希典の肖像
 portraitCredit: Wikimedia Commons / Public Domain

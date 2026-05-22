@@ -50,8 +50,34 @@ const personJsonLd: Record<string, unknown> = {
   deathDate: person.data.deathDate,
   description: person.data.shortDescription,
   url: pageURL,
+  nationality: person.data.nationality,
   ...(absolutePortraitURL ? { image: absolutePortraitURL } : {}),
   ...(sameAs.length > 0 ? { sameAs } : {}),
+  ...(person.data.birthPlace
+    ? { birthPlace: { '@type': 'Place', name: person.data.birthPlace } }
+    : {}),
+  ...(person.data.deathPlace
+    ? { deathPlace: { '@type': 'Place', name: person.data.deathPlace } }
+    : {}),
+  ...(person.data.jobTitle ? { jobTitle: person.data.jobTitle } : {}),
+  ...(person.data.knowsAbout && person.data.knowsAbout.length > 0
+    ? { knowsAbout: person.data.knowsAbout }
+    : {}),
+  ...(person.data.alumniOf && person.data.alumniOf.length > 0
+    ? {
+        alumniOf: person.data.alumniOf.map((name) => ({
+          '@type': 'EducationalOrganization',
+          name,
+        })),
+      }
+    : {}),
+  ...(person.data.honorificSuffix ? { honorificSuffix: person.data.honorificSuffix } : {}),
+  ...(person.data.award && person.data.award.length > 0 ? { award: person.data.award } : {}),
+  ...(person.data.memberOf && person.data.memberOf.length > 0
+    ? {
+        memberOf: person.data.memberOf.map((name) => ({ '@type': 'Organization', name })),
+      }
+    : {}),
   burialPlace: {
     '@type': 'Place',
     name: '青山霊園',

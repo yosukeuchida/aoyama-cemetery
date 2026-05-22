@@ -14,6 +14,15 @@ tags:
   - 新潮
   - 世界文学全集
   - 出版人
+birthPlace: "秋田県仙北市角館町(旧・仙北郡角館町)"
+deathPlace: "東京都"
+jobTitle: "出版人・新潮社創業者"
+knowsAbout:
+  - 出版
+  - 文芸雑誌編集
+  - 円本出版
+  - 自然主義文学
+nationality: JP
 portrait: ../../assets/portraits/sato-giryo.jpg
 portraitCaption: 佐藤 義亮の肖像
 portraitCredit: Wikimedia Commons / Public Domain

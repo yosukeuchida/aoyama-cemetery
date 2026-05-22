@@ -13,6 +13,18 @@ tags:
   - ポーツマス条約
   - 日英同盟
   - 飫肥藩
+birthPlace: "日向国飫肥藩(現・宮崎県日南市)"
+deathPlace: "東京"
+jobTitle: "外務大臣"
+knowsAbout:
+  - 外交
+  - 国際法
+  - 条約改正
+nationality: "JP"
+alumniOf:
+  - 大学南校
+  - ハーバード大学法学部
+honorificSuffix: "侯爵"
 portrait: ../../assets/portraits/komura-jutaro.jpg
 portraitCaption: 小村 寿太郎の肖像
 portraitCredit: Wikimedia Commons / Public Domain

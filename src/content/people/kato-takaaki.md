@@ -14,6 +14,20 @@ tags:
   - 憲政会
   - 普通選挙法
   - 護憲三派
+birthPlace: "尾張国愛知郡(現・愛知県名古屋市)"
+deathPlace: "東京"
+jobTitle: "第24代内閣総理大臣"
+knowsAbout:
+  - 外交
+  - 政党政治
+  - 憲政
+nationality: "JP"
+alumniOf:
+  - 東京大学法学部
+honorificSuffix: "伯爵"
+memberOf:
+  - 憲政会
+  - 立憲同志会
 portrait: ../../assets/portraits/kato-takaaki.jpg
 portraitCaption: 加藤 高明の肖像
 portraitCredit: Wikimedia Commons / Public Domain

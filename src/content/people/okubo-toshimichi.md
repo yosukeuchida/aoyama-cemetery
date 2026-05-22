@@ -12,6 +12,17 @@ tags:
   - 明治維新
   - 薩摩藩
   - 内務省
+birthPlace: "薩摩国鹿児島城下加治屋町(現・鹿児島県鹿児島市)"
+deathPlace: "東京・紀尾井坂(暗殺)"
+jobTitle: 政治家
+knowsAbout:
+  - 国家行政
+  - 地方制度
+  - 殖産興業
+  - 警察制度
+  - 地租改正
+nationality: JP
+honorificSuffix: "贈右大臣・贈正二位"
 portrait: ../../assets/portraits/okubo-toshimichi.jpg
 portraitCaption: 明治初期の大久保利通(1878 年以前)
 portraitCredit: Wikimedia Commons / Public Domain

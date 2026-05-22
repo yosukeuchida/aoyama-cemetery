@@ -13,6 +13,22 @@ tags:
   - 元老院議長
   - 佐賀藩
   - パリ万博
+birthPlace: "佐賀県佐賀市(肥前国佐賀郡)"
+deathPlace: "東京都"
+jobTitle: "政治家・人道事業家"
+honorificSuffix: "伯爵"
+knowsAbout:
+  - 蘭学
+  - 近代工業技術
+  - 戦時救護
+  - 国際赤十字
+  - 国家経営
+nationality: JP
+alumniOf:
+  - 適塾
+memberOf:
+  - 日本赤十字社
+  - 元老院
 portrait: ../../assets/portraits/sano-tsunetami.jpg
 portraitCaption: 佐野 常民の肖像
 portraitCredit: Wikimedia Commons / Public Domain

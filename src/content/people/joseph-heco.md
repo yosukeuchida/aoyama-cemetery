@@ -13,6 +13,15 @@ tags:
   - 漂流民
   - 海外新聞
   - 日本新聞の父
+birthPlace: "播磨国阿閉村(現・兵庫県加古郡播磨町)"
+deathPlace: "東京"
+jobTitle: "ジャーナリスト"
+knowsAbout:
+  - 新聞発行
+  - 日米貿易
+  - 英語通訳
+  - 海外情勢
+nationality: "US"
 portrait: ../../assets/portraits/joseph-heco.jpg
 portraitCaption: ジョセフ・ヒコ(浜田 彦蔵)の肖像
 portraitCredit: Wikimedia Commons / Public Domain

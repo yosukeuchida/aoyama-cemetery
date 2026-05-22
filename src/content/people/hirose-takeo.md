@@ -13,6 +13,17 @@ tags:
   - 海軍中佐
   - 軍神
   - 大分県竹田
+birthPlace: "豊後国岡藩(現・大分県竹田市)"
+deathPlace: "旅順港(現・中国遼寧省)"
+jobTitle: "海軍中佐"
+knowsAbout:
+  - 海軍戦術
+  - ロシア研究
+  - 柔道
+nationality: "JP"
+alumniOf:
+  - 海軍兵学校
+  - 海軍大学校
 portrait: ../../assets/portraits/hirose-takeo.jpg
 portraitCaption: 広瀬 武夫の肖像
 portraitCredit: Wikimedia Commons / Public Domain

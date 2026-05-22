@@ -14,6 +14,18 @@ tags:
   - パリ講和会議
   - 大久保利通の次男
   - 吉田茂の岳父
+birthPlace: "薩摩国鹿児島城下(現・鹿児島県鹿児島市)"
+deathPlace: "東京"
+jobTitle: "内大臣"
+knowsAbout:
+  - 外交
+  - 宮中政治
+  - 教育行政
+nationality: "JP"
+alumniOf:
+  - 東京開成学校
+  - 東京大学法学部
+honorificSuffix: "伯爵"
 portrait: ../../assets/portraits/makino-nobuaki.jpg
 portraitCaption: 牧野 伸顕の肖像
 portraitCredit: Wikimedia Commons / Public Domain

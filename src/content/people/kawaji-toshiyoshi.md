@@ -13,6 +13,14 @@ tags:
   - 日本警察の父
   - 西南戦争
   - 邏卒
+birthPlace: "薩摩国鹿児島郡比志島村(現・鹿児島県鹿児島市)"
+deathPlace: "東京"
+jobTitle: "警視庁初代大警視"
+knowsAbout:
+  - 警察制度
+  - 治安行政
+  - 砲術
+nationality: "JP"
 portrait: ../../assets/portraits/kawaji-toshiyoshi.jpg
 portraitCaption: 川路 利良の肖像
 portraitCredit: Wikimedia Commons / Public Domain

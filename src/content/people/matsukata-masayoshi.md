@@ -13,6 +13,17 @@ tags:
   - 日本銀行
   - 松方財政
   - 薩摩藩
+birthPlace: "薩摩国鹿児島城下(現・鹿児島県鹿児島市)"
+deathPlace: "東京"
+jobTitle: "第4代・第6代内閣総理大臣"
+knowsAbout:
+  - 財政
+  - 金融
+  - 中央銀行制度
+nationality: "JP"
+alumniOf:
+  - 造士館
+honorificSuffix: "公爵"
 portrait: ../../assets/portraits/matsukata-masayoshi.jpg
 portraitCaption: 松方 正義の肖像
 portraitCredit: Wikimedia Commons / Public Domain

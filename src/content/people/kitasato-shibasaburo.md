@@ -14,6 +14,19 @@ tags:
   - 慶應義塾大学医学部
   - 北里研究所
   - 千円札
+birthPlace: "肥後国阿蘇郡小国郷北里村(現・熊本県小国町)"
+deathPlace: "東京"
+jobTitle: "細菌学者"
+knowsAbout:
+  - 細菌学
+  - 免疫学
+  - 血清療法
+  - 公衆衛生
+nationality: "JP"
+alumniOf:
+  - 熊本医学校
+  - 東京医学校(現・東京大学医学部)
+  - ベルリン大学
 portrait: ../../assets/portraits/kitasato-shibasaburo.jpg
 portraitCaption: 北里 柴三郎の肖像
 portraitCredit: Wikimedia Commons / Public Domain

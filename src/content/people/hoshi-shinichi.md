@@ -14,6 +14,21 @@ tags:
   - ショートショート
   - 日本SF御三家
   - 星製薬
+birthPlace: "東京都文京区"
+deathPlace: "東京"
+jobTitle: "小説家"
+knowsAbout:
+  - ショートショート
+  - SF
+  - 発酵学
+  - 管理社会批評
+nationality: "JP"
+alumniOf:
+  - 東京府立第三中学校
+  - 東京高等学校
+  - 東京帝国大学
+award:
+  - 日本推理作家協会賞
 references:
   - title: Wikipedia「星新一」
     url: https://ja.wikipedia.org/wiki/星新一

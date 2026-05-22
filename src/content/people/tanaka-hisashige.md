@@ -13,6 +13,16 @@ tags:
   - 万年時計
   - 東芝
   - 久留米
+birthPlace: "福岡県久留米市(筑後国久留米)"
+deathPlace: "東京都"
+jobTitle: "発明家・実業家"
+knowsAbout:
+  - からくり機構
+  - 精密機械
+  - 蒸気機関
+  - 電信機
+  - 近代工業技術
+nationality: JP
 portrait: ../../assets/portraits/tanaka-hisashige.jpg
 portraitCaption: 田中 久重の肖像
 portraitCredit: Wikimedia Commons / Public Domain

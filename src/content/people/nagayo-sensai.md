@@ -14,6 +14,18 @@ tags:
   - 内務省衛生局
   - 適塾
   - 岩倉使節団
+birthPlace: "肥前国大村藩(現・長崎県大村市)"
+deathPlace: "東京"
+jobTitle: 医療官僚
+knowsAbout:
+  - 公衆衛生
+  - 蘭方医学
+  - 医療制度
+  - 伝染病対策
+nationality: JP
+alumniOf:
+  - 適塾
+honorificSuffix: 男爵
 portrait: ../../assets/portraits/nagayo-sensai.jpg
 portraitCaption: 長与 専斎の肖像
 portraitCredit: Wikimedia Commons / Public Domain

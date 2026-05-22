@@ -13,6 +13,19 @@ tags:
   - 明六社
   - 薩摩藩
   - 一橋大学
+birthPlace: "薩摩国鹿児島城下(現・鹿児島県鹿児島市)"
+deathPlace: "東京"
+jobTitle: 政治家
+knowsAbout:
+  - 教育行政
+  - 外交
+  - 啓蒙思想
+  - 商業教育
+nationality: JP
+alumniOf:
+  - 造士館
+memberOf:
+  - 明六社
 portrait: ../../assets/portraits/mori-arinori.jpg
 portraitCaption: 森 有礼の肖像
 portraitCredit: Wikimedia Commons / Public Domain

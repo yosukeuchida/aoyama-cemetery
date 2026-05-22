@@ -14,6 +14,22 @@ tags:
   - 哲学
   - 啓蒙思想
   - 津和野藩
+birthPlace: "石見国津和野藩(現・島根県津和野町)"
+deathPlace: "東京"
+jobTitle: 啓蒙思想家
+knowsAbout:
+  - 哲学
+  - 蘭学
+  - 法学
+  - 論理学
+  - 学術用語翻訳
+nationality: JP
+alumniOf:
+  - 養老館
+  - 蕃書調所
+  - ライデン大学
+memberOf:
+  - 明六社
 portrait: ../../assets/portraits/nishi-amane.jpg
 portraitCaption: 西 周の肖像
 portraitCredit: Wikimedia Commons / Public Domain

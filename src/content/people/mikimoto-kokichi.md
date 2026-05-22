@@ -14,6 +14,15 @@ tags:
   - ミキモト真珠
   - 養殖
   - 三重県鳥羽
+birthPlace: "伊勢国志摩郡鳥羽浦(現・三重県鳥羽市)"
+deathPlace: "三重県鳥羽市"
+jobTitle: 実業家
+knowsAbout:
+  - 真珠養殖
+  - 宝飾
+  - 経営
+  - 資源保護
+nationality: JP
 portrait: ../../assets/portraits/mikimoto-kokichi.jpg
 portraitCaption: 御木本 幸吉の肖像
 portraitCredit: Wikimedia Commons / Public Domain

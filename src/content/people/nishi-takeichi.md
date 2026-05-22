@@ -15,6 +15,21 @@ tags:
   - バロン西
   - 硫黄島
   - 男爵
+birthPlace: "東京府東京市麻布(現・東京都港区)"
+deathPlace: "硫黄島"
+jobTitle: 陸軍中佐
+knowsAbout:
+  - 馬術
+  - 騎兵戦術
+  - 戦車運用
+nationality: JP
+alumniOf:
+  - 学習院
+  - 陸軍士官学校
+  - イタリア・ピネロロ騎兵学校
+honorificSuffix: 男爵
+award:
+  - 金メダル(ロサンゼルスオリンピック馬術大障害飛越競技)
 portrait: ../../assets/portraits/nishi-takeichi.jpg
 portraitCaption: 西 竹一の肖像
 portraitCredit: Wikimedia Commons / Public Domain

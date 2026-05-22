@@ -13,6 +13,17 @@ tags:
   - 東洋のルソー
   - 思想家
   - 土佐藩
+birthPlace: "土佐国高知城下(現・高知県高知市)"
+deathPlace: "東京"
+jobTitle: 啓蒙思想家
+knowsAbout:
+  - 政治思想
+  - フランス哲学
+  - 自由民権思想
+  - 唯物論
+nationality: JP
+memberOf:
+  - 立憲自由党
 portrait: ../../assets/portraits/nakae-chomin.jpg
 portraitCaption: 中江 兆民の肖像
 portraitCredit: Wikimedia Commons / Public Domain

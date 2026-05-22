@@ -13,6 +13,18 @@ tags:
   - 金色夜叉
   - 擬古典主義
   - 我楽多文庫
+birthPlace: "東京都港区芝(江戸芝中門前町)"
+deathPlace: "東京都新宿区横寺町(牛込横寺町)"
+jobTitle: "小説家"
+knowsAbout:
+  - 小説
+  - 雅俗折衷体
+  - 新聞連載小説
+  - 擬古典主義文学
+nationality: JP
+alumniOf:
+  - 第一高等中学校
+  - 東京帝国大学国文科
 portrait: ../../assets/portraits/ozaki-koyo.jpg
 portraitCaption: 尾崎 紅葉の肖像
 portraitCredit: Wikimedia Commons / Public Domain

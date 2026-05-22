@@ -13,6 +13,19 @@ tags:
   - 海軍大将
   - 薩摩藩
   - 帝都復興
+birthPlace: "鹿児島県鹿児島市(薩摩国鹿児島城下)"
+deathPlace: "東京都"
+jobTitle: "海軍大将・内閣総理大臣"
+honorificSuffix: "伯爵"
+knowsAbout:
+  - 海軍
+  - 軍政
+  - 内閣運営
+  - 艦隊整備
+  - 帝都復興
+nationality: JP
+alumniOf:
+  - 海軍兵学寮
 portrait: ../../assets/portraits/yamamoto-gonbee.jpg
 portraitCaption: 山本 権兵衛の肖像
 portraitCredit: Wikimedia Commons / Public Domain

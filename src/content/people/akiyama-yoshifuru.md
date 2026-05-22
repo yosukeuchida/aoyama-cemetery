@@ -14,6 +14,19 @@ tags:
   - 陸軍大将
   - 日本騎兵の父
   - 坂の上の雲
+birthPlace: "愛媛県松山市"
+deathPlace: "愛媛県松山市"
+jobTitle: "陸軍大将"
+knowsAbout:
+  - 騎兵戦術
+  - 日露戦争
+  - 連合戦闘
+  - 軍事教育
+nationality: "JP"
+alumniOf:
+  - 陸軍士官学校
+  - サンシール陸軍士官学校
+  - ソミュール騎兵学校
 portrait: ../../assets/portraits/akiyama-yoshifuru.jpg
 portraitCaption: 秋山 好古の肖像
 portraitCredit: Wikimedia Commons / Public Domain

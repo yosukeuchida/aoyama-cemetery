@@ -14,6 +14,19 @@ tags:
   - 自由民権運動
   - 大同団結
   - 伯爵
+birthPlace: "土佐国(現・高知県高知市)"
+deathPlace: "東京"
+jobTitle: "農商務大臣"
+knowsAbout:
+  - 大政奉還
+  - 自由民権運動
+  - 大同団結
+  - 殖産興業
+nationality: "JP"
+honorificSuffix: "伯爵"
+memberOf:
+  - 海援隊
+  - 自由党
 portrait: ../../assets/portraits/goto-shojiro.jpg
 portraitCaption: 後藤 象二郎の肖像
 portraitCredit: Wikimedia Commons / Public Domain

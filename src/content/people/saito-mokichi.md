@@ -14,6 +14,23 @@ tags:
   - 短歌
   - 精神科医
   - 山形県上山
+birthPlace: "山形県上山市金瓶(旧・南村山郡金瓶村)"
+deathPlace: "東京都"
+jobTitle: "歌人・精神科医"
+knowsAbout:
+  - 短歌
+  - 写生
+  - 精神医学
+  - アララギ派
+nationality: JP
+alumniOf:
+  - 開成中学校
+  - 第一高等学校
+  - 東京帝国大学医科大学
+award:
+  - 文化勲章(1947年)
+memberOf:
+  - アララギ
 portrait: ../../assets/portraits/saito-mokichi.jpg
 portraitCaption: 斎藤 茂吉の肖像
 portraitCredit: Wikimedia Commons / Public Domain

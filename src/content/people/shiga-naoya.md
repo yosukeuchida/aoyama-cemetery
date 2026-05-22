@@ -12,6 +12,19 @@ tags:
   - 白樺派
   - 文豪
   - 小説の神様
+birthPlace: "宮城県石巻市(旧・牡鹿郡石巻町)"
+deathPlace: "東京都"
+jobTitle: "小説家"
+knowsAbout:
+  - 小説
+  - 私小説
+  - 心境小説
+  - 白樺派
+nationality: JP
+alumniOf:
+  - 学習院初等科
+  - 学習院高等科
+  - 東京帝国大学英文学科
 portrait: ../../assets/portraits/shiga-naoya.jpg
 portraitCaption: 志賀 直哉の肖像
 portraitCredit: Wikimedia Commons / Public Domain
