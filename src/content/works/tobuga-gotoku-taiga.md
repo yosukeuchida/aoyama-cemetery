@@ -9,6 +9,9 @@ personSlugs:
   - kawaji-toshiyoshi
   - goto-shojiro
   - soejima-taneomi
+  - ijichi-masaharu
+  - yoshii-tomozane
+  - kaieda-nobuyoshi
 url: https://ja.wikipedia.org/wiki/翔ぶが如く_(NHK大河ドラマ)
 ---
 

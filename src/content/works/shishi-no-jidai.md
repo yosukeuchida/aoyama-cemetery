@@ -6,6 +6,8 @@ year: 1980
 publisher: NHK
 personSlugs:
   - mori-arinori
+  - ijichi-masaharu
+  - sagara-sozo
 url: https://ja.wikipedia.org/wiki/獅子の時代
 ---
 

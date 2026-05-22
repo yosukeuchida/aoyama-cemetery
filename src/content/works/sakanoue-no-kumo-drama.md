@@ -9,6 +9,7 @@ personSlugs:
   - hirose-takeo
   - komura-jutaro
   - kato-tomosaburo
+  - kawakami-soroku
 url: https://ja.wikipedia.org/wiki/坂の上の雲_(テレビドラマ)
 ---
 

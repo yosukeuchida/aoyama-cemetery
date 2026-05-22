@@ -7,6 +7,9 @@ publisher: NHK
 personSlugs:
   - okubo-toshimichi
   - kawaji-toshiyoshi
+  - saigo-itoko
+  - ijichi-masaharu
+  - yoshii-tomozane
 url: https://ja.wikipedia.org/wiki/西郷どん_(NHK大河ドラマ)
 ---
 

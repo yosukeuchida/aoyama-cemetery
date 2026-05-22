@@ -7,6 +7,7 @@ publisher: NHK
 personSlugs:
   - kato-takaaki
   - okubo-toshimichi
+  - mishima-michitsune
 url: https://ja.wikipedia.org/wiki/青天を衝け
 ---
 

@@ -9,6 +9,10 @@ personSlugs:
   - kawaji-toshiyoshi
   - goto-shojiro
   - soejima-taneomi
+  - ijichi-masaharu
+  - yoshii-tomozane
+  - kaieda-nobuyoshi
+  - mishima-michitsune
 url: https://ja.wikipedia.org/wiki/翔ぶが如く
 ---
 
