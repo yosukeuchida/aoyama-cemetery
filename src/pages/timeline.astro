@@ -31,7 +31,6 @@ type Row = {
   startPercent: number;
   widthPercent: number;
   color: string;
-  isLifeShort: boolean;
 };
 
 const rows: Row[] = people
@@ -53,7 +52,6 @@ const rows: Row[] = people
       startPercent,
       widthPercent: endPercent - startPercent,
       color: CATEGORY_COLOR[p.data.category] ?? '#777',
-      isLifeShort: deathYear - birthYear < 30,
     };
   })
   .sort((a, b) => a.birthYear - b.birthYear || a.deathYear - b.deathYear);
@@ -94,7 +92,7 @@ const presentEras = ERA_ORDER.filter((era) => rows.some((r) => r.era.includes(er
 
 <BaseLayout title={title} description={description} jsonLd={breadcrumbJsonLd}>
   <h1>同時代タイムライン</h1>
-  <p>青山霊園に眠る {rows.length} 名の偉人を生年順に並べたタイムライン。各人の生涯(誕生 → 没年)を 1 本の帯で表し、背景に幕末から現代までの主要な歴史的事件を縦線で重ねた。</p>
+  <p>青山霊園に眠る {rows.length} 名の偉人を生年順に並べたタイムライン。各人の生涯を 1 本の帯で表し、背景に幕末から現代までの主要な歴史的事件を縦線で重ねた。</p>
   <p class="note">同じ時代に誰が生きていたか、明治維新・日露戦争・関東大震災・太平洋戦争を誰が共通体験したかを、一画面で俯瞰できる。各バーをクリックすると個別ページへ。</p>
 
   <div class="filters">
@@ -127,53 +125,62 @@ const presentEras = ERA_ORDER.filter((era) => rows.some((r) => r.era.includes(er
   </div>
 
   <div class="timeline-scroll">
-    <div class="timeline">
-      <header class="timeline-header">
-        <div class="name-col-header">人物</div>
-        <div class="bar-col-header">
-          {decadeLabels.map((d) => (
-            <span class="year-label" style={`left:${d.percent}%`}>{d.year}</span>
-          ))}
-          {events.map((e) => {
-            const percent = ((e.year - TIMELINE_START) / SPAN) * 100;
-            return (
-              <span class="event-label" style={`left:${percent}%`} title={`${e.year}年: ${e.label}`}>
-                {e.label}<br /><small>{e.year}</small>
-              </span>
-            );
-          })}
-        </div>
-      </header>
-
-      <div class="timeline-body">
-        <div class="bars-area">
-          {events.map((e) => {
-            const percent = ((e.year - TIMELINE_START) / SPAN) * 100;
-            return <div class="event-line" style={`left:${percent}%`} aria-hidden="true"></div>;
-          })}
-
-          {rows.map((row) => (
-            <a
-              class="bar-row"
-              href={`/people/${row.id}/`}
-              data-category={row.category}
-              data-eras={row.era.join(',')}
-              title={`${row.name} (${row.birthYear}-${row.deathYear}) / ${row.category}`}
-            >
-              <span class="name-cell">{row.name}</span>
-              <span class="bar-track">
-                <span
-                  class="bar"
-                  style={`left:${row.startPercent}%; width:${row.widthPercent}%; background:${row.color};`}
-                >
-                  <span class="bar-year-start">{row.birthYear}</span>
-                  <span class="bar-year-end">{row.deathYear}</span>
-                </span>
-              </span>
-            </a>
-          ))}
-        </div>
+    <div class="timeline-grid" style={`--row-count: ${rows.length};`}>
+      <div class="header-name">人物</div>
+      <div class="header-bar">
+        {decadeLabels.map((d) => (
+          <span class="year-label" style={`left:${d.percent}%`}>{d.year}</span>
+        ))}
+        {events.map((e) => {
+          const percent = ((e.year - TIMELINE_START) / SPAN) * 100;
+          return (
+            <span class="event-label" style={`left:${percent}%`} title={`${e.year}年: ${e.label}`}>
+              <span class="event-label-name">{e.label}</span>
+              <span class="event-label-year">{e.year}</span>
+            </span>
+          );
+        })}
       </div>
+
+      <div class="event-overlay" aria-hidden="true">
+        {events.map((e) => {
+          const percent = ((e.year - TIMELINE_START) / SPAN) * 100;
+          return <div class="event-line" style={`left:${percent}%`}></div>;
+        })}
+      </div>
+
+      {rows.map((row, idx) => (
+        <>
+          <a
+            class="row-name"
+            href={`/people/${row.id}/`}
+            data-category={row.category}
+            data-eras={row.era.join(',')}
+            data-row-idx={idx}
+            style={`grid-row: ${idx + 2};`}
+            title={`${row.name} (${row.birthYear}-${row.deathYear})`}
+          >
+            {row.name}
+          </a>
+          <a
+            class="row-bar"
+            href={`/people/${row.id}/`}
+            data-category={row.category}
+            data-eras={row.era.join(',')}
+            data-row-idx={idx}
+            style={`grid-row: ${idx + 2};`}
+            title={`${row.name} (${row.birthYear}-${row.deathYear}) / ${row.category}`}
+          >
+            <span
+              class="bar"
+              style={`left:${row.startPercent}%; width:${row.widthPercent}%; background:${row.color};`}
+            >
+              <span class="bar-year-start">{row.birthYear}</span>
+              <span class="bar-year-end">{row.deathYear}</span>
+            </span>
+          </a>
+        </>
+      ))}
     </div>
   </div>
 </BaseLayout>
@@ -228,43 +235,47 @@ const presentEras = ERA_ORDER.filter((era) => rows.some((r) => r.era.includes(er
   }
 
   .timeline-scroll {
-    overflow-x: auto;
-    overflow-y: visible;
+    overflow: auto;
+    max-height: 80vh;
     margin-top: 0.6rem;
     border: 1px solid #e5e5e5;
     border-radius: 6px;
     background: #fafaf7;
   }
-  .timeline {
+  .timeline-grid {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    grid-template-rows: 56px repeat(var(--row-count, 1), 22px);
     min-width: 1100px;
-    display: flex;
-    flex-direction: column;
   }
-  .timeline-header {
+
+  /* Header cells (sticky top) */
+  .header-name {
+    grid-column: 1;
+    grid-row: 1;
     position: sticky;
     top: 0;
-    z-index: 3;
-    display: flex;
-    background: #f5f3ec;
-    border-bottom: 1px solid #d6d3c7;
-    height: 56px;
-  }
-  .name-col-header {
-    flex: 0 0 130px;
-    padding: 0.5rem 0.7rem;
+    left: 0;
+    z-index: 5;
     background: #f5f3ec;
     border-right: 1px solid #d6d3c7;
+    border-bottom: 1px solid #d6d3c7;
+    padding: 0.5rem 0.7rem;
     font-size: 0.85rem;
     color: #5a4a2a;
     font-weight: 600;
-    position: sticky;
-    left: 0;
-    z-index: 4;
+    display: flex;
+    align-items: center;
   }
-  .bar-col-header {
-    flex: 1;
-    position: relative;
-    min-width: 0;
+  .header-bar {
+    grid-column: 2;
+    grid-row: 1;
+    position: sticky;
+    top: 0;
+    z-index: 4;
+    background: #f5f3ec;
+    border-bottom: 1px solid #d6d3c7;
+    overflow: hidden;
   }
   .year-label {
     position: absolute;
@@ -273,6 +284,7 @@ const presentEras = ERA_ORDER.filter((era) => rows.some((r) => r.era.includes(er
     font-size: 0.7rem;
     color: #8a7a55;
     font-variant-numeric: tabular-nums;
+    pointer-events: none;
   }
   .event-label {
     position: absolute;
@@ -284,21 +296,24 @@ const presentEras = ERA_ORDER.filter((era) => rows.some((r) => r.era.includes(er
     line-height: 1.1;
     white-space: nowrap;
     font-weight: 600;
-  }
-  .event-label small {
-    color: #c47898;
-    font-weight: 500;
-  }
-
-  .timeline-body {
-    position: relative;
-    display: flex;
-  }
-  .bars-area {
-    flex: 1;
-    position: relative;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    pointer-events: auto;
+  }
+  .event-label-year {
+    color: #c47898;
+    font-weight: 500;
+    font-size: 0.6rem;
+  }
+
+  /* Event overlay (spans all body rows, behind bars) */
+  .event-overlay {
+    grid-column: 2;
+    grid-row: 2 / -1;
+    position: relative;
+    pointer-events: none;
+    z-index: 1;
   }
   .event-line {
     position: absolute;
@@ -306,53 +321,52 @@ const presentEras = ERA_ORDER.filter((era) => rows.some((r) => r.era.includes(er
     bottom: 0;
     width: 1px;
     background: rgba(162, 59, 86, 0.25);
-    pointer-events: none;
-    z-index: 1;
   }
 
-  .bar-row {
-    display: flex;
-    align-items: center;
-    height: 22px;
-    text-decoration: none;
-    color: inherit;
+  /* Person rows */
+  .row-name {
+    grid-column: 1;
+    position: sticky;
+    left: 0;
+    z-index: 3;
+    background: #fafaf7;
+    border-right: 1px solid #e5e5e5;
     border-bottom: 1px solid #f0ede5;
-    transition: background 120ms ease;
-  }
-  .bar-row:hover {
-    background: rgba(90, 74, 42, 0.06);
-  }
-  .bar-row:hover .bar {
-    filter: brightness(1.1);
-  }
-  .bar-row.is-hidden {
-    display: none;
-  }
-  .name-cell {
-    flex: 0 0 130px;
     padding: 0 0.7rem;
     font-size: 0.78rem;
     color: #333;
-    background: #fafaf7;
-    border-right: 1px solid #e5e5e5;
-    position: sticky;
-    left: 0;
-    z-index: 2;
-    height: 100%;
+    text-decoration: none;
     display: flex;
     align-items: center;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    transition: background 120ms ease;
   }
-  .bar-row:hover .name-cell {
+  .row-name:hover {
+    background: rgba(90, 74, 42, 0.1);
+  }
+  .row-bar {
+    grid-column: 2;
+    position: relative;
+    border-bottom: 1px solid #f0ede5;
+    text-decoration: none;
+    color: inherit;
+    transition: background 120ms ease;
+  }
+  .row-bar:hover {
     background: rgba(90, 74, 42, 0.06);
   }
-  .bar-track {
-    flex: 1;
-    position: relative;
-    height: 100%;
+  .row-bar:hover .bar,
+  .row-name:hover + .row-bar .bar,
+  .row-bar:has(+ .row-name:hover) .bar {
+    filter: brightness(1.1);
   }
+  .row-name.is-hidden,
+  .row-bar.is-hidden {
+    display: none;
+  }
+
   .bar {
     position: absolute;
     top: 4px;
@@ -364,6 +378,7 @@ const presentEras = ERA_ORDER.filter((era) => rows.some((r) => r.era.includes(er
     justify-content: space-between;
     overflow: hidden;
     min-width: 4px;
+    container-type: inline-size;
   }
   .bar-year-start,
   .bar-year-end {
@@ -371,21 +386,10 @@ const presentEras = ERA_ORDER.filter((era) => rows.some((r) => r.era.includes(er
     font-size: 0.6rem;
     padding: 0 4px;
     font-variant-numeric: tabular-nums;
-  }
-  .bar-year-start {
     flex: 0 0 auto;
   }
   .bar-year-end {
-    flex: 0 0 auto;
     text-align: right;
-  }
-  .bar[style*="width: 0"],
-  .bar[style*="width:0"] {
-    display: none;
-  }
-  /* Hide year text on very narrow bars */
-  .bar {
-    container-type: inline-size;
   }
   @container (max-width: 50px) {
     .bar-year-start,
@@ -395,12 +399,12 @@ const presentEras = ERA_ORDER.filter((era) => rows.some((r) => r.era.includes(er
   }
 
   @media (max-width: 720px) {
-    .timeline {
+    .timeline-grid {
       min-width: 900px;
+      grid-template-columns: 96px 1fr;
     }
-    .name-col-header,
-    .name-cell {
-      flex-basis: 96px;
+    .header-name,
+    .row-name {
       padding: 0 0.4rem;
       font-size: 0.7rem;
     }
@@ -409,9 +413,10 @@ const presentEras = ERA_ORDER.filter((era) => rows.some((r) => r.era.includes(er
 
 <script>
   const chips = document.querySelectorAll<HTMLButtonElement>('.chip');
-  const rows = document.querySelectorAll<HTMLElement>('.bar-row');
+  const nameRows = document.querySelectorAll<HTMLElement>('.row-name');
+  const barRows = document.querySelectorAll<HTMLElement>('.row-bar');
   const countEl = document.querySelector<HTMLElement>('.filter-count');
-  const totalCount = rows.length;
+  const totalCount = nameRows.length;
 
   let currentCategory = 'all';
   let currentEra = 'all';
@@ -428,12 +433,14 @@ const presentEras = ERA_ORDER.filter((era) => rows.some((r) => r.era.includes(er
     });
 
     let visible = 0;
-    rows.forEach((row) => {
+    nameRows.forEach((row, i) => {
+      const barRow = barRows[i];
       const matchCat = currentCategory === 'all' || row.dataset.category === currentCategory;
       const matchEra =
         currentEra === 'all' || (row.dataset.eras ?? '').split(',').includes(currentEra);
       const match = matchCat && matchEra;
       row.classList.toggle('is-hidden', !match);
+      barRow?.classList.toggle('is-hidden', !match);
       if (match) visible += 1;
     });
 
