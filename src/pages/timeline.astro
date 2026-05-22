@@ -1,0 +1,459 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const people = await getCollection('people');
+
+const TIMELINE_START = 1795;
+const TIMELINE_END = 2010;
+const SPAN = TIMELINE_END - TIMELINE_START;
+
+const CATEGORY_COLOR: Record<string, string> = {
+  政治家: '#8a5a2a',
+  軍人: '#6b3a2a',
+  学者: '#4a5a6b',
+  文化人: '#3a5a3a',
+  実業家: '#8a6a2a',
+  その他: '#777',
+};
+
+const CATEGORY_ORDER = ['政治家', '軍人', '実業家', '学者', '文化人', 'その他'] as const;
+const ERA_ORDER = ['江戸', '明治', '大正', '昭和'] as const;
+
+type Row = {
+  id: string;
+  name: string;
+  nameKana: string;
+  birthYear: number;
+  deathYear: number;
+  category: string;
+  era: readonly string[];
+  startPercent: number;
+  widthPercent: number;
+  color: string;
+  isLifeShort: boolean;
+};
+
+const rows: Row[] = people
+  .map((p) => {
+    const birthYear = parseInt(p.data.birthDate.slice(0, 4), 10);
+    const deathYear = parseInt(p.data.deathDate.slice(0, 4), 10);
+    const clampedBirth = Math.max(birthYear, TIMELINE_START);
+    const clampedDeath = Math.min(deathYear, TIMELINE_END);
+    const startPercent = ((clampedBirth - TIMELINE_START) / SPAN) * 100;
+    const endPercent = ((clampedDeath - TIMELINE_START) / SPAN) * 100;
+    return {
+      id: p.id,
+      name: p.data.name,
+      nameKana: p.data.nameKana,
+      birthYear,
+      deathYear,
+      category: p.data.category,
+      era: p.data.era,
+      startPercent,
+      widthPercent: endPercent - startPercent,
+      color: CATEGORY_COLOR[p.data.category] ?? '#777',
+      isLifeShort: deathYear - birthYear < 30,
+    };
+  })
+  .sort((a, b) => a.birthYear - b.birthYear || a.deathYear - b.deathYear);
+
+const events = [
+  { year: 1853, label: 'ペリー来航' },
+  { year: 1868, label: '明治維新' },
+  { year: 1894, label: '日清戦争' },
+  { year: 1904, label: '日露戦争' },
+  { year: 1923, label: '関東大震災' },
+  { year: 1941, label: '太平洋戦争' },
+  { year: 1945, label: '敗戦' },
+  { year: 1960, label: '高度成長' },
+];
+
+const decadeLabels: { year: number; percent: number }[] = [];
+for (let y = 1800; y <= 2000; y += 25) {
+  decadeLabels.push({ year: y, percent: ((y - TIMELINE_START) / SPAN) * 100 });
+}
+
+const title = '同時代タイムライン - 青山霊園 偉人録';
+const description = '青山霊園に眠る偉人 90 名超を生年順に並べたタイムライン。江戸末期から現代まで、明治維新・日露戦争・関東大震災・太平洋戦争などの歴史的事件と人物の生涯を一画面で俯瞰できる。';
+
+const siteOrigin = new URL('/', Astro.site).toString();
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: siteOrigin },
+    { '@type': 'ListItem', position: 2, name: '同時代タイムライン', item: new URL('/timeline/', Astro.site).toString() },
+  ],
+};
+
+const presentCategories = CATEGORY_ORDER.filter((cat) => rows.some((r) => r.category === cat));
+const presentEras = ERA_ORDER.filter((era) => rows.some((r) => r.era.includes(era)));
+---
+
+<BaseLayout title={title} description={description} jsonLd={breadcrumbJsonLd}>
+  <h1>同時代タイムライン</h1>
+  <p>青山霊園に眠る {rows.length} 名の偉人を生年順に並べたタイムライン。各人の生涯(誕生 → 没年)を 1 本の帯で表し、背景に幕末から現代までの主要な歴史的事件を縦線で重ねた。</p>
+  <p class="note">同じ時代に誰が生きていたか、明治維新・日露戦争・関東大震災・太平洋戦争を誰が共通体験したかを、一画面で俯瞰できる。各バーをクリックすると個別ページへ。</p>
+
+  <div class="filters">
+    <div class="filter-row" role="toolbar" aria-label="職業で絞り込み">
+      <span class="filter-label">職業:</span>
+      <button type="button" class="chip is-active" data-filter-type="category" data-filter-value="all" aria-pressed="true">すべて</button>
+      {presentCategories.map((cat) => (
+        <button
+          type="button"
+          class="chip"
+          data-filter-type="category"
+          data-filter-value={cat}
+          aria-pressed="false"
+          style={`--chip-color:${CATEGORY_COLOR[cat]};`}
+        >
+          {cat}
+        </button>
+      ))}
+    </div>
+    <div class="filter-row" role="toolbar" aria-label="時代で絞り込み">
+      <span class="filter-label">時代:</span>
+      <button type="button" class="chip is-active" data-filter-type="era" data-filter-value="all" aria-pressed="true">すべて</button>
+      {presentEras.map((era) => (
+        <button type="button" class="chip" data-filter-type="era" data-filter-value={era} aria-pressed="false">
+          {era}
+        </button>
+      ))}
+    </div>
+    <p class="filter-count" aria-live="polite">全 {rows.length} 名</p>
+  </div>
+
+  <div class="timeline-scroll">
+    <div class="timeline">
+      <header class="timeline-header">
+        <div class="name-col-header">人物</div>
+        <div class="bar-col-header">
+          {decadeLabels.map((d) => (
+            <span class="year-label" style={`left:${d.percent}%`}>{d.year}</span>
+          ))}
+          {events.map((e) => {
+            const percent = ((e.year - TIMELINE_START) / SPAN) * 100;
+            return (
+              <span class="event-label" style={`left:${percent}%`} title={`${e.year}年: ${e.label}`}>
+                {e.label}<br /><small>{e.year}</small>
+              </span>
+            );
+          })}
+        </div>
+      </header>
+
+      <div class="timeline-body">
+        <div class="bars-area">
+          {events.map((e) => {
+            const percent = ((e.year - TIMELINE_START) / SPAN) * 100;
+            return <div class="event-line" style={`left:${percent}%`} aria-hidden="true"></div>;
+          })}
+
+          {rows.map((row) => (
+            <a
+              class="bar-row"
+              href={`/people/${row.id}/`}
+              data-category={row.category}
+              data-eras={row.era.join(',')}
+              title={`${row.name} (${row.birthYear}-${row.deathYear}) / ${row.category}`}
+            >
+              <span class="name-cell">{row.name}</span>
+              <span class="bar-track">
+                <span
+                  class="bar"
+                  style={`left:${row.startPercent}%; width:${row.widthPercent}%; background:${row.color};`}
+                >
+                  <span class="bar-year-start">{row.birthYear}</span>
+                  <span class="bar-year-end">{row.deathYear}</span>
+                </span>
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  h1 {
+    margin-bottom: 0.5rem;
+  }
+  .note {
+    color: #777;
+    font-size: 0.85rem;
+    margin: 0.3rem 0 1rem;
+  }
+  .filters {
+    margin: 1rem 0;
+  }
+  .filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 0.4rem;
+  }
+  .filter-label {
+    color: #555;
+    font-size: 0.85rem;
+    margin-right: 0.2rem;
+    flex: 0 0 auto;
+  }
+  .chip {
+    background: #fff;
+    border: 1px solid #ccc;
+    color: #333;
+    padding: 0.2rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .chip:hover {
+    background: #f5f5f5;
+  }
+  .chip.is-active {
+    background: var(--chip-color, #333);
+    color: #fff;
+    border-color: var(--chip-color, #333);
+  }
+  .filter-count {
+    color: #666;
+    font-size: 0.85rem;
+    margin: 0.4rem 0 0;
+  }
+
+  .timeline-scroll {
+    overflow-x: auto;
+    overflow-y: visible;
+    margin-top: 0.6rem;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    background: #fafaf7;
+  }
+  .timeline {
+    min-width: 1100px;
+    display: flex;
+    flex-direction: column;
+  }
+  .timeline-header {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    display: flex;
+    background: #f5f3ec;
+    border-bottom: 1px solid #d6d3c7;
+    height: 56px;
+  }
+  .name-col-header {
+    flex: 0 0 130px;
+    padding: 0.5rem 0.7rem;
+    background: #f5f3ec;
+    border-right: 1px solid #d6d3c7;
+    font-size: 0.85rem;
+    color: #5a4a2a;
+    font-weight: 600;
+    position: sticky;
+    left: 0;
+    z-index: 4;
+  }
+  .bar-col-header {
+    flex: 1;
+    position: relative;
+    min-width: 0;
+  }
+  .year-label {
+    position: absolute;
+    top: 6px;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    color: #8a7a55;
+    font-variant-numeric: tabular-nums;
+  }
+  .event-label {
+    position: absolute;
+    bottom: 4px;
+    transform: translateX(-50%);
+    font-size: 0.65rem;
+    color: #a23b56;
+    text-align: center;
+    line-height: 1.1;
+    white-space: nowrap;
+    font-weight: 600;
+  }
+  .event-label small {
+    color: #c47898;
+    font-weight: 500;
+  }
+
+  .timeline-body {
+    position: relative;
+    display: flex;
+  }
+  .bars-area {
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .event-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(162, 59, 86, 0.25);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .bar-row {
+    display: flex;
+    align-items: center;
+    height: 22px;
+    text-decoration: none;
+    color: inherit;
+    border-bottom: 1px solid #f0ede5;
+    transition: background 120ms ease;
+  }
+  .bar-row:hover {
+    background: rgba(90, 74, 42, 0.06);
+  }
+  .bar-row:hover .bar {
+    filter: brightness(1.1);
+  }
+  .bar-row.is-hidden {
+    display: none;
+  }
+  .name-cell {
+    flex: 0 0 130px;
+    padding: 0 0.7rem;
+    font-size: 0.78rem;
+    color: #333;
+    background: #fafaf7;
+    border-right: 1px solid #e5e5e5;
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .bar-row:hover .name-cell {
+    background: rgba(90, 74, 42, 0.06);
+  }
+  .bar-track {
+    flex: 1;
+    position: relative;
+    height: 100%;
+  }
+  .bar {
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    border-radius: 3px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    min-width: 4px;
+  }
+  .bar-year-start,
+  .bar-year-end {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.6rem;
+    padding: 0 4px;
+    font-variant-numeric: tabular-nums;
+  }
+  .bar-year-start {
+    flex: 0 0 auto;
+  }
+  .bar-year-end {
+    flex: 0 0 auto;
+    text-align: right;
+  }
+  .bar[style*="width: 0"],
+  .bar[style*="width:0"] {
+    display: none;
+  }
+  /* Hide year text on very narrow bars */
+  .bar {
+    container-type: inline-size;
+  }
+  @container (max-width: 50px) {
+    .bar-year-start,
+    .bar-year-end {
+      display: none;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .timeline {
+      min-width: 900px;
+    }
+    .name-col-header,
+    .name-cell {
+      flex-basis: 96px;
+      padding: 0 0.4rem;
+      font-size: 0.7rem;
+    }
+  }
+</style>
+
+<script>
+  const chips = document.querySelectorAll<HTMLButtonElement>('.chip');
+  const rows = document.querySelectorAll<HTMLElement>('.bar-row');
+  const countEl = document.querySelector<HTMLElement>('.filter-count');
+  const totalCount = rows.length;
+
+  let currentCategory = 'all';
+  let currentEra = 'all';
+
+  function applyFilter() {
+    chips.forEach((c) => {
+      const type = c.dataset.filterType;
+      const val = c.dataset.filterValue;
+      const active =
+        (type === 'category' && val === currentCategory) ||
+        (type === 'era' && val === currentEra);
+      c.classList.toggle('is-active', active);
+      c.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+
+    let visible = 0;
+    rows.forEach((row) => {
+      const matchCat = currentCategory === 'all' || row.dataset.category === currentCategory;
+      const matchEra =
+        currentEra === 'all' || (row.dataset.eras ?? '').split(',').includes(currentEra);
+      const match = matchCat && matchEra;
+      row.classList.toggle('is-hidden', !match);
+      if (match) visible += 1;
+    });
+
+    if (countEl) {
+      const filtered = currentCategory !== 'all' || currentEra !== 'all';
+      countEl.textContent = filtered
+        ? `${visible} 名を表示中 (全 ${totalCount} 名)`
+        : `全 ${totalCount} 名`;
+    }
+  }
+
+  chips.forEach((c) => {
+    c.addEventListener('click', () => {
+      const type = c.dataset.filterType;
+      const val = c.dataset.filterValue ?? 'all';
+      if (type === 'category') currentCategory = val;
+      if (type === 'era') currentEra = val;
+      applyFilter();
+    });
+  });
+
+  applyFilter();
+</script>
