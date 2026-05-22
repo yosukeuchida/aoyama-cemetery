@@ -7,6 +7,7 @@ deathDate: "1925-05-21"
 era: [明治, 大正]
 category: 学者
 graveSection: 1種ロ8号1・14側
+hideMap: true
 shortDescription: 東京帝国大学農学部教授、日本の農業土木の父。死後10年も渋谷駅で待ち続けた愛犬ハチ公の物語で世界に知られる農学者。
 tags:
   - 農学
