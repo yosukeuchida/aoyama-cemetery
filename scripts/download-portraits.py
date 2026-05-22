@@ -54,6 +54,17 @@ PAIRS = [
     ("nishi-takeichi", "Nishi_Takeichi.jpg"),
     ("nagayo-sensai", "Nagayo_Sensai.jpg"),
     ("joseph-heco", "Joseph_Heco.JPG"),
+    # 2026-05-22 追加分その2(public domain 確認済)
+    ("koiso-kuniaki", "Kuniaki_Koiso.jpg"),
+    ("ooki-takato", "Takato_Oki.jpg"),
+    ("nozu-michitsura", "Nozu_Michitsura.jpg"),
+    ("uehara-yusaku", "Uehara_Yusaku.jpg"),
+    ("togo-shigenori", "Shigenori_Togo.jpg"),
+    ("hayashi-tadasu", "Tadasu_Hayashi.jpg"),
+    ("toyama-mitsuru", "Toyama_Mitsuru.jpg"),
+    ("saigo-itoko", "Saigō_Itoko.jpg"),
+    ("nakamura-kichiemon-i", "Kichiemon_Nakamura_I_1951.jpg"),
+    # katsu-kokichi: Wikipedia に肖像なし(没後 70 年経過済だが画像未収録)
 ]
 
 OUT_DIR = "src/assets/portraits"
