@@ -10,6 +10,7 @@ personSlugs:
   - komura-jutaro
   - kato-tomosaburo
   - kawakami-soroku
+  - tatsumi-naofumi
 url: https://ja.wikipedia.org/wiki/坂の上の雲
 ---
 

@@ -87,6 +87,19 @@ PAIRS = [
     ("saisho-atsushi", "Saisho_Atsushi.jpg"),
     # sagara-sozo: Wikipedia には墓所写真のみ、本人肖像なし
     # inumaru-tetsuzo: 1981 没で PD 未経過(2052 年に PD)
+    # 2026-05-22 追加分その5(12名追加バッチ、PD 確認済)
+    ("kagawa-keizo", "Keizo_Kagawa_01.jpg"),
+    ("wagener", "ワグネル氏肖像.png"),
+    ("tatsumi-naofumi", "Tatsumi_Naofumi.jpg"),
+    ("sawa-tarozaemon", "Sawa_Tarōzaemonn.jpg"),
+    ("ueno-eizaburo", "Hidesaburō_Ueno.jpg"),
+    ("yamaguchi-tamon", "TamonYamaguchi.jpg"),
+    ("du-bousquet", "Members_of_French_Military_Mission_to_Japan_in_1867.png"),
+    # ikeda-hayato: 1965 没で PD 未経過(2036 年)
+    # miyazawa-kiichi: 2007 没で PD 未経過(2078 年)
+    # miyawaki-shunzo: 2003 没で PD 未経過(2074 年)
+    # nagayo-shuntatsu: 1854 没、Wikipedia に肖像なし
+    # arimura-jizaemon: 1860 没・22 歳没、Wikipedia に肖像なし
 ]
 
 OUT_DIR = "src/assets/portraits"
