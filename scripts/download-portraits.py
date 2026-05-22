@@ -76,6 +76,17 @@ PAIRS = [
     ("ogata-taketora", "Taketora_Ogata.jpg"),
     # sugita-gentan: Wikipedia に肖像なし
     # watanabe-noboru: Wikipedia 単独記事なし(同名人物多数の曖昧さ回避ページのみ)
+    # 2026-05-22 追加分その4
+    ("ichikawa-danjuro-ix", "Ichikawa_Danjuro_IX.jpg"),
+    ("kimura-yoshitake", "Kaisyu_Kimura_1865.jpg"),
+    ("yoshii-tomozane", "Yoshii_Tomozane.jpg"),
+    ("kawakami-soroku", "Kawakami_Soroku.jpg"),
+    ("kaieda-nobuyoshi", "Kaieda_Nobuyoshi.jpg"),
+    ("ga-noriyuki", "Noriyuki_ga.jpg"),
+    ("shinohara-tainoshin", "Shinohara_Tainoshin.jpg"),
+    ("saisho-atsushi", "Saisho_Atsushi.jpg"),
+    # sagara-sozo: Wikipedia には墓所写真のみ、本人肖像なし
+    # inumaru-tetsuzo: 1981 没で PD 未経過(2052 年に PD)
 ]
 
 OUT_DIR = "src/assets/portraits"
