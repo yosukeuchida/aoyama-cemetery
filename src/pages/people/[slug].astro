@@ -198,8 +198,20 @@ const articleJsonLd: Record<string, unknown> = {
     <table class="meta-table">
       <tbody>
         <tr><th>生没年</th><td><time datetime={person.data.birthDate}>{person.data.birthDate}</time> 〜 <time datetime={person.data.deathDate}>{person.data.deathDate}</time></td></tr>
+        {person.data.birthPlace && <tr><th>出身地</th><td>{person.data.birthPlace}</td></tr>}
+        {person.data.deathPlace && <tr><th>死没地</th><td>{person.data.deathPlace}</td></tr>}
         <tr><th>時代</th><td>{person.data.era.join('・')}</td></tr>
-        <tr><th>分野</th><td>{person.data.category}</td></tr>
+        <tr><th>役職</th><td>{person.data.jobTitle ?? person.data.category}</td></tr>
+        {person.data.honorificSuffix && <tr><th>爵位</th><td>{person.data.honorificSuffix}</td></tr>}
+        {person.data.alumniOf && person.data.alumniOf.length > 0 && (
+          <tr><th>出身校</th><td>{person.data.alumniOf.join(' / ')}</td></tr>
+        )}
+        {person.data.memberOf && person.data.memberOf.length > 0 && (
+          <tr><th>所属</th><td>{person.data.memberOf.join(' / ')}</td></tr>
+        )}
+        {person.data.award && person.data.award.length > 0 && (
+          <tr><th>受勲</th><td>{person.data.award.join(' / ')}</td></tr>
+        )}
         {person.data.graveSection && <tr><th>墓所区画</th><td>{person.data.graveSection}</td></tr>}
         {person.data.tags && person.data.tags.length > 0 && (
           <tr><th>タグ</th><td>{person.data.tags.join(' / ')}</td></tr>
