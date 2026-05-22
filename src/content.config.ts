@@ -65,7 +65,20 @@ const routes = defineCollection({
   schema: z.object({
     title: z.string(),
     subtitle: z.string().optional(),
-    theme: z.enum(['維新', '戊辰戦争', '昭和', '文人', 'お雇い外国人', '女性とハチ公', '軍人', 'その他']),
+    theme: z.enum([
+      '維新',
+      '戊辰戦争',
+      '坂の上の雲',
+      '昭和',
+      '太平洋戦争',
+      '文人',
+      'お雇い外国人',
+      '女性とハチ公',
+      '軍人',
+      '実業家',
+      '官僚',
+      'その他',
+    ]),
     description: z.string().min(40).max(400),
     estimatedMinutes: z.number().int().positive(),
     stops: z
