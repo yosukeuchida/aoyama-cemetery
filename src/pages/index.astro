@@ -61,6 +61,42 @@ const sectionOptions: ParsedSection[] = Array.from(sectionCounts.entries())
   })
   .sort((a, b) => a.prefix - b.prefix || a.rowIdx - b.rowIdx || a.no - b.no);
 
+const PREFECTURE_ORDER = [
+  '北海道', '青森県', '岩手県', '宮城県', '秋田県', '山形県', '福島県',
+  '茨城県', '栃木県', '群馬県', '埼玉県', '千葉県', '東京都', '神奈川県',
+  '新潟県', '富山県', '石川県', '福井県', '山梨県', '長野県', '岐阜県',
+  '静岡県', '愛知県', '三重県', '滋賀県', '京都府', '大阪府', '兵庫県',
+  '奈良県', '和歌山県', '鳥取県', '島根県', '岡山県', '広島県', '山口県',
+  '徳島県', '香川県', '愛媛県', '高知県', '福岡県', '佐賀県', '長崎県',
+  '熊本県', '大分県', '宮崎県', '鹿児島県', '沖縄県',
+];
+const PREF_PATTERN = /(東京都|東京府|北海道|京都府|大阪府|[^県、)(]+?県)/;
+
+function extractPrefecture(s: string | undefined): string {
+  if (!s) return '';
+  const modernMatch = s.match(/現・(東京都|東京府|北海道|京都府|大阪府|[^県、)(]+?県)/);
+  if (modernMatch) {
+    return modernMatch[1] === '東京府' ? '東京都' : modernMatch[1];
+  }
+  const anyMatch = s.match(PREF_PATTERN);
+  if (anyMatch) {
+    return anyMatch[1] === '東京府' ? '東京都' : anyMatch[1];
+  }
+  return '';
+}
+
+const prefectureByPersonId = new Map<string, string>();
+const prefectureCounts = new Map<string, number>();
+for (const p of people) {
+  const pref = extractPrefecture(p.data.birthPlace);
+  prefectureByPersonId.set(p.id, pref);
+  if (pref) prefectureCounts.set(pref, (prefectureCounts.get(pref) ?? 0) + 1);
+}
+
+const birthPlaceOptions: { key: string; count: number }[] = PREFECTURE_ORDER
+  .filter((p) => prefectureCounts.has(p))
+  .map((p) => ({ key: p, count: prefectureCounts.get(p)! }));
+
 const title = '青山霊園 偉人録';
 const description = '東京・青山霊園に眠る偉人たちを紹介するサイト。明治維新を担った政治家、文学者、軍人、文化人の足跡をたどります。';
 
@@ -98,6 +134,7 @@ const breadcrumbJsonLd = {
     <style>
       .era-filter,
       .category-filter,
+      .birthplace-filter,
       .section-filter,
       .people-count {
         display: none;
@@ -136,6 +173,16 @@ const breadcrumbJsonLd = {
     }
   </div>
 
+  <div class="birthplace-filter">
+    <label class="filter-label" for="birthplace-select">出身地:</label>
+    <select id="birthplace-select" aria-label="出身地で絞り込み">
+      <option value="all">すべて</option>
+      {birthPlaceOptions.map((b) => (
+        <option value={b.key}>{b.key} ({b.count}名)</option>
+      ))}
+    </select>
+  </div>
+
   <div class="section-filter">
     <label class="filter-label" for="section-select">区画:</label>
     <select id="section-select" aria-label="区画で絞り込み">
@@ -159,7 +206,7 @@ const breadcrumbJsonLd = {
           </h2>
           <div class="people-grid">
             {list.map((person) => (
-              <article class="person-card" data-eras={person.data.era.join(',')} data-category={person.data.category} data-section={sectionKeyByPersonId.get(person.id) ?? ''}>
+              <article class="person-card" data-eras={person.data.era.join(',')} data-category={person.data.category} data-section={sectionKeyByPersonId.get(person.id) ?? ''} data-birthplace={prefectureByPersonId.get(person.id) ?? ''}>
                 <h3 class="person-name">
                   <a href={`/people/${person.id}/`}>{person.data.name}</a>
                 </h3>
@@ -192,14 +239,16 @@ const breadcrumbJsonLd = {
     margin-top: 0.3rem;
   }
 
-  .section-filter {
+  .section-filter,
+  .birthplace-filter {
     display: flex;
     align-items: center;
     gap: 0.4rem;
     margin: 0.3rem 0 0.5rem;
   }
 
-  .section-filter select {
+  .section-filter select,
+  .birthplace-filter select {
     background: #fff;
     border: 1px solid #ccc;
     color: #333;
@@ -348,6 +397,7 @@ const breadcrumbJsonLd = {
   const eraChips = document.querySelectorAll<HTMLButtonElement>('.era-chip');
   const catChips = document.querySelectorAll<HTMLButtonElement>('.category-chip');
   const sectionSelect = document.querySelector<HTMLSelectElement>('#section-select');
+  const birthPlaceSelect = document.querySelector<HTMLSelectElement>('#birthplace-select');
   const articles = document.querySelectorAll<HTMLElement>('.person-card');
   const categorySections = document.querySelectorAll<HTMLElement>('.category-section');
   const countEl = document.querySelector<HTMLElement>('.people-count');
@@ -359,10 +409,17 @@ const breadcrumbJsonLd = {
       if (o.value && o.value !== 'all') validSectionKeys.add(o.value);
     });
   }
+  const validBirthPlaceKeys = new Set<string>();
+  if (birthPlaceSelect) {
+    birthPlaceSelect.querySelectorAll('option').forEach((o) => {
+      if (o.value && o.value !== 'all') validBirthPlaceKeys.add(o.value);
+    });
+  }
 
   let currentEra = 'all';
   let currentCategory = 'all';
   let currentSection = 'all';
+  let currentBirthPlace = 'all';
 
   function applyFilter() {
     eraChips.forEach((chip) => {
@@ -378,6 +435,9 @@ const breadcrumbJsonLd = {
     if (sectionSelect && sectionSelect.value !== currentSection) {
       sectionSelect.value = currentSection;
     }
+    if (birthPlaceSelect && birthPlaceSelect.value !== currentBirthPlace) {
+      birthPlaceSelect.value = currentBirthPlace;
+    }
 
     let visible = 0;
     articles.forEach((article) => {
@@ -387,7 +447,9 @@ const breadcrumbJsonLd = {
       const matchCat = currentCategory === 'all' || article.dataset.category === currentCategory;
       const matchSection =
         currentSection === 'all' || article.dataset.section === currentSection;
-      const match = matchEra && matchCat && matchSection;
+      const matchBirthPlace =
+        currentBirthPlace === 'all' || article.dataset.birthplace === currentBirthPlace;
+      const match = matchEra && matchCat && matchSection && matchBirthPlace;
       article.hidden = !match;
       if (match) visible += 1;
     });
@@ -402,15 +464,18 @@ const breadcrumbJsonLd = {
 
     if (countEl) {
       const filtered =
-        currentEra !== 'all' || currentCategory !== 'all' || currentSection !== 'all';
+        currentEra !== 'all' ||
+        currentCategory !== 'all' ||
+        currentSection !== 'all' ||
+        currentBirthPlace !== 'all';
       countEl.textContent = filtered
         ? `${visible} 名を表示中 (全 ${totalCount} 名)`
         : `全 ${totalCount} 名`;
     }
   }
 
-  function parseHash(): { era: string; category: string; section: string } {
-    const result = { era: 'all', category: 'all', section: 'all' };
+  function parseHash(): { era: string; category: string; section: string; birth: string } {
+    const result = { era: 'all', category: 'all', section: 'all', birth: 'all' };
     const raw = location.hash.startsWith('#') ? location.hash.slice(1) : '';
     if (!raw) return result;
     let params: URLSearchParams;
@@ -432,6 +497,10 @@ const breadcrumbJsonLd = {
     if (category && Array.from(catChips).some((c) => c.dataset.category === category)) {
       result.category = category;
     }
+    const birth = params.get('birth');
+    if (birth && validBirthPlaceKeys.has(birth)) {
+      result.birth = birth;
+    }
     return result;
   }
 
@@ -442,6 +511,7 @@ const breadcrumbJsonLd = {
     } else {
       if (currentEra !== 'all') params.set('era', currentEra);
       if (currentCategory !== 'all') params.set('cat', currentCategory);
+      if (currentBirthPlace !== 'all') params.set('birth', currentBirthPlace);
     }
     const query = params.toString();
     const url = query
@@ -468,12 +538,22 @@ const breadcrumbJsonLd = {
     });
   });
 
+  if (birthPlaceSelect) {
+    birthPlaceSelect.addEventListener('change', () => {
+      currentBirthPlace = birthPlaceSelect.value || 'all';
+      currentSection = 'all';
+      applyFilter();
+      syncHash();
+    });
+  }
+
   if (sectionSelect) {
     sectionSelect.addEventListener('change', () => {
       currentSection = sectionSelect.value || 'all';
       if (currentSection !== 'all') {
         currentEra = 'all';
         currentCategory = 'all';
+        currentBirthPlace = 'all';
       }
       applyFilter();
       syncHash();
@@ -485,6 +565,7 @@ const breadcrumbJsonLd = {
     currentEra = parsed.era;
     currentCategory = parsed.category;
     currentSection = parsed.section;
+    currentBirthPlace = parsed.birth;
     applyFilter();
   });
 
@@ -492,5 +573,6 @@ const breadcrumbJsonLd = {
   currentEra = initial.era;
   currentCategory = initial.category;
   currentSection = initial.section;
+  currentBirthPlace = initial.birth;
   applyFilter();
 </script>
