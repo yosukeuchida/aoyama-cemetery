@@ -100,6 +100,16 @@ PAIRS = [
     # miyawaki-shunzo: 2003 没で PD 未経過(2074 年)
     # nagayo-shuntatsu: 1854 没、Wikipedia に肖像なし
     # arimura-jizaemon: 1860 没・22 歳没、Wikipedia に肖像なし
+    # 2026-05-22 追加分その6(9名追加バッチ、PD 確認済)
+    ("mori-kaku", "Tsutomu_mori.jpg"),
+    ("odachi-shigeo", "ODACHI_Shigeo.jpg"),
+    ("kimura-heitaro", "Kimura_Heitaro.jpg"),
+    ("takaki-kanehiro", "Kanehiro_Takaki.JPG"),
+    ("miura-goro", "Miura_Goro.jpg"),
+    ("takashima-tomonosuke", "Takashima_Tomonosuke.jpg"),
+    ("eastlake", "William_Clark_Eastlake_and_his_son_Frederic.jpg"),
+    # shiramine-shunme: 海援隊集合写真のみ、単独肖像なし
+    # hirai-kao: Wikipedia に肖像なし
 ]
 
 OUT_DIR = "src/assets/portraits"
