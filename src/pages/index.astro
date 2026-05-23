@@ -35,6 +35,19 @@ const peopleDatesData = people.map((p) => ({
   shortDescription: p.data.shortDescription,
 }));
 
+const eventsCollection = await getCollection('events');
+const peopleNameById = new Map(people.map((p) => [p.id, p.data.name]));
+const eventsData = eventsCollection.map((e) => ({
+  id: e.id,
+  title: e.data.title,
+  date: e.data.date,
+  summary: e.data.summary,
+  category: e.data.category,
+  personSlugs: e.data.personSlugs,
+  personNames: e.data.personSlugs.map((s) => peopleNameById.get(s) ?? s),
+  url: e.data.url ?? null,
+}));
+
 const ERA_ORDER = ['江戸', '明治', '大正', '昭和'] as const;
 const presentEras = ERA_ORDER.filter((era) => people.some((p) => p.data.era.includes(era)));
 const presentCategories = CATEGORY_ORDER.filter((cat) => groups[cat].length > 0);
@@ -172,6 +185,7 @@ const breadcrumbJsonLd = {
   </section>
 
   <script type="application/json" id="people-dates-data" set:html={JSON.stringify(peopleDatesData)}></script>
+  <script type="application/json" id="events-data" set:html={JSON.stringify(eventsData)}></script>
 
   <div class="era-filter" role="toolbar" aria-label="時代で絞り込み">
     <span class="filter-label">時代:</span>
@@ -325,6 +339,19 @@ const breadcrumbJsonLd = {
   }
   .event-badge.death {
     background: #8a4a2a;
+  }
+  .event-badge.event {
+    background: #4a5a8a;
+  }
+  .event-related {
+    color: #888;
+    font-size: 0.78rem;
+    margin-left: 0.3rem;
+    display: block;
+    padding-left: 1.85rem;
+  }
+  .event-related a {
+    color: #5a4a2a;
   }
   .event-date {
     color: #8a7a55;
@@ -525,14 +552,29 @@ const breadcrumbJsonLd = {
     shortDescription: string;
   };
 
+  type EventDataItem = {
+    id: string;
+    title: string;
+    date: string;
+    summary: string;
+    category: string;
+    personSlugs: string[];
+    personNames: string[];
+    url: string | null;
+  };
+
   const todayDateLabel = document.getElementById('today-date-label');
   const todayEventsContainer = document.getElementById('today-events');
   const todayEventsList = document.getElementById('today-events-list');
   const upcomingEventsList = document.getElementById('upcoming-events-list');
   const peopleDatesScript = document.getElementById('people-dates-data');
+  const eventsScript = document.getElementById('events-data');
 
   if (todayDateLabel && upcomingEventsList && peopleDatesScript) {
     const peopleDates: PersonDate[] = JSON.parse(peopleDatesScript.textContent || '[]');
+    const eventsRaw: EventDataItem[] = eventsScript
+      ? JSON.parse(eventsScript.textContent || '[]')
+      : [];
     const now = new Date();
     const todayMonth = now.getMonth() + 1;
     const todayDay = now.getDate();
@@ -542,23 +584,31 @@ const breadcrumbJsonLd = {
     const yearNow = now.getFullYear();
 
     function dateToDayOfYear(month: number, day: number): number {
-      // 簡易版: うるう年は考慮しない (2 月以降にずれが生じる可能性あり)
       const cumulativeDaysNonLeap = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
       return cumulativeDaysNonLeap[month - 1] + day;
     }
 
     const todayDayOfYear = dateToDayOfYear(todayMonth, todayDay);
 
-    type Event = {
-      person: PersonDate;
-      eventType: 'birth' | 'death';
-      month: number;
-      day: number;
-      year: number;
-      diff: number; // -7..7
-    };
+    type CalEvent =
+      | {
+          kind: 'birth' | 'death';
+          person: PersonDate;
+          month: number;
+          day: number;
+          year: number;
+          diff: number;
+        }
+      | {
+          kind: 'event';
+          event: EventDataItem;
+          month: number;
+          day: number;
+          year: number;
+          diff: number;
+        };
 
-    const events: Event[] = [];
+    const allEvents: CalEvent[] = [];
 
     for (const p of peopleDates) {
       for (const [type, dateStr] of [['birth', p.birthDate], ['death', p.deathDate]] as const) {
@@ -568,64 +618,92 @@ const breadcrumbJsonLd = {
         const day = parseInt(dStr, 10);
         const year = parseInt(yStr, 10);
         if (!month || !day) continue;
-        // 同年を仮定して today からの差を計算 (年またぎは ±半年を超えるので無視)
         const eventDayOfYear = dateToDayOfYear(month, day);
         let diff = eventDayOfYear - todayDayOfYear;
-        // 年またぎ補正
         if (diff > 365 / 2) diff -= 365;
         if (diff < -365 / 2) diff += 365;
         if (Math.abs(diff) <= DAYS_WINDOW) {
-          events.push({ person: p, eventType: type, month, day, year, diff });
+          allEvents.push({ kind: type, person: p, month, day, year, diff });
         }
       }
     }
 
-    // 並び替え: diff の絶対値 asc、同値なら未来優先 (diff 大きい方優先)、その後 年 asc
-    events.sort((a, b) => {
+    for (const ev of eventsRaw) {
+      const [yStr, mStr, dStr] = ev.date.split('-');
+      const month = parseInt(mStr, 10);
+      const day = parseInt(dStr, 10);
+      const year = parseInt(yStr, 10);
+      if (!month || !day) continue;
+      const eventDayOfYear = dateToDayOfYear(month, day);
+      let diff = eventDayOfYear - todayDayOfYear;
+      if (diff > 365 / 2) diff -= 365;
+      if (diff < -365 / 2) diff += 365;
+      if (Math.abs(diff) <= DAYS_WINDOW) {
+        allEvents.push({ kind: 'event', event: ev, month, day, year, diff });
+      }
+    }
+
+    allEvents.sort((a, b) => {
       const absA = Math.abs(a.diff);
       const absB = Math.abs(b.diff);
       if (absA !== absB) return absA - absB;
-      if (a.diff !== b.diff) return b.diff - a.diff; // 同距離なら未来優先
+      if (a.diff !== b.diff) return b.diff - a.diff;
       return a.year - b.year;
     });
 
-    const todayEvents = events.filter((e) => e.diff === 0);
-    const otherEvents = events.filter((e) => e.diff !== 0);
+    const todayList = allEvents.filter((e) => e.diff === 0);
+    const otherList = allEvents.filter((e) => e.diff !== 0);
 
-    function renderEvent(e: Event): string {
-      const badge = e.eventType === 'birth' ? '生' : '没';
-      const badgeClass = e.eventType === 'birth' ? 'birth' : 'death';
-      const yearsAgo = yearNow - e.year;
+    function diffLabelHtml(diff: number): string {
+      if (diff === 0) return '<span class="event-today-marker">本日</span>';
+      return `<span class="event-year">${diff > 0 ? `あと ${diff} 日` : `${-diff} 日前`}</span>`;
+    }
+
+    function renderCalEvent(e: CalEvent): string {
       const dateLabel = `${e.month}/${e.day}`;
-      const diffLabel =
-        e.diff === 0
-          ? '<span class="event-today-marker">本日</span>'
-          : e.diff > 0
-            ? `(あと ${e.diff} 日)`
-            : `(${-e.diff} 日前)`;
-      const yearLabel = `${e.year} 年`;
-      const agoLabel = e.eventType === 'death' ? `没後 ${yearsAgo} 年` : `生誕 ${yearsAgo} 年`;
+      if (e.kind === 'birth' || e.kind === 'death') {
+        const badge = e.kind === 'birth' ? '生' : '没';
+        const badgeClass = e.kind === 'birth' ? 'birth' : 'death';
+        const yearsAgo = yearNow - e.year;
+        const yearLabel = `${e.year} 年`;
+        const agoLabel = e.kind === 'death' ? `没後 ${yearsAgo} 年` : `生誕 ${yearsAgo} 年`;
+        return `
+          <li>
+            <span class="event-badge ${badgeClass}">${badge}</span>
+            <span class="event-date">${dateLabel}</span>
+            <a href="/people/${e.person.id}/">${e.person.name}</a>
+            <span class="event-year">${yearLabel} / ${agoLabel}</span>
+            ${diffLabelHtml(e.diff)}
+          </li>
+        `;
+      }
+      const ev = e.event;
+      const yearsAgo = yearNow - e.year;
+      const personLinks = ev.personSlugs
+        .map((s, i) => `<a href="/people/${s}/">${ev.personNames[i]}</a>`)
+        .join('・');
       return `
         <li>
-          <span class="event-badge ${badgeClass}">${badge}</span>
+          <span class="event-badge event">事</span>
           <span class="event-date">${dateLabel}</span>
-          <a href="/people/${e.person.id}/">${e.person.name}</a>
-          <span class="event-year">${yearLabel} / ${agoLabel}</span>
-          ${e.diff === 0 ? diffLabel : `<span class="event-year">${diffLabel}</span>`}
+          <strong>${ev.title}</strong>
+          <span class="event-year">${e.year} 年 / ${yearsAgo} 年前</span>
+          ${diffLabelHtml(e.diff)}
+          <span class="event-related">関連: ${personLinks}</span>
         </li>
       `;
     }
 
-    if (todayEvents.length > 0 && todayEventsContainer && todayEventsList) {
-      todayEventsList.innerHTML = todayEvents.map(renderEvent).join('');
+    if (todayList.length > 0 && todayEventsContainer && todayEventsList) {
+      todayEventsList.innerHTML = todayList.map(renderCalEvent).join('');
       todayEventsContainer.hidden = false;
     }
 
-    if (otherEvents.length === 0) {
+    if (otherList.length === 0) {
       upcomingEventsList.innerHTML =
-        '<li class="today-empty">前後 7 日以内には該当者がいません。</li>';
+        '<li class="today-empty">前後 7 日以内には該当する出来事がありません。</li>';
     } else {
-      upcomingEventsList.innerHTML = otherEvents.map(renderEvent).join('');
+      upcomingEventsList.innerHTML = otherList.map(renderCalEvent).join('');
     }
   }
 

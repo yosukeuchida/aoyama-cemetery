@@ -93,4 +93,16 @@ const routes = defineCollection({
   }),
 });
 
-export const collections = { people, works, routes };
+const events = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/events' }),
+  schema: z.object({
+    title: z.string(),
+    date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'YYYY-MM-DD 形式で入力'),
+    summary: z.string().min(10).max(200),
+    personSlugs: z.array(z.string()).min(1),
+    category: z.enum(['政変', '戦争', '事件', '条約', '内閣', '災害', '社会']),
+    url: z.string().url().optional(),
+  }),
+});
+
+export const collections = { people, works, routes, events };
