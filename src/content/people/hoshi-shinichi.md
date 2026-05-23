@@ -7,7 +7,9 @@ deathDate: "1997-12-30"
 era: [昭和]
 category: 文化人
 graveSection: 1種イ9号4側
-hideMap: true
+coords:
+  lat: 35.664597838075245
+  lng: 139.7221269742902
 shortDescription: ショートショートの神様と呼ばれた SF 作家。1001 編を超える掌編で日本 SF の地平を切り拓いた星製薬創業者・星一の長男。
 tags:
   - SF

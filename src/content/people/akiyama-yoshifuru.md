@@ -7,7 +7,9 @@ deathDate: "1930-11-04"
 era: [明治, 大正]
 category: 軍人
 graveSection: 1種イ19号2側
-hideMap: true
+coords:
+  lat: 35.66229291259633
+  lng: 139.72244433049164
 shortDescription: 日本騎兵の父と称される陸軍大将。日露戦争で世界最強のコサック騎兵を破った松山出身の軍人、弟は秋山真之。
 tags:
   - 日露戦争

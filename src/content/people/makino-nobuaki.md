@@ -7,7 +7,9 @@ deathDate: "1949-01-25"
 era: [大正, 昭和]
 category: 政治家
 graveSection: 1種ロ8号1・14側
-hideMap: true
+coords:
+  lat: 35.667698133638055
+  lng: 139.72297245666684
 shortDescription: 大久保利通の次男。文部・農商務・外務大臣を歴任、パリ講和会議全権・内大臣として昭和天皇の側近を務めた。
 tags:
   - 内大臣

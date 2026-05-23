@@ -7,7 +7,9 @@ deathDate: "1944-10-05"
 era: [明治, 大正]
 category: その他
 graveSection: 1種ロ8号1・14側
-hideMap: true
+coords:
+  lat: 35.667699517540115
+  lng: 139.7228230075241
 shortDescription: 玄洋社総帥。政府要職に就かず在野から明治・大正・昭和の国政に影響を持ち続け、孫文・金玉均らアジア革命家を匿った国家主義の象徴的人物。
 tags:
   - 玄洋社

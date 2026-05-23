@@ -7,7 +7,9 @@ deathDate: "1932-02-09"
 era: [大正, 昭和]
 category: 政治家
 graveSection: 1種ロ8号1・14側
-hideMap: true
+coords:
+  lat: 35.66783349895926
+  lng: 139.72263379620054
 shortDescription: 浜口・若槻内閣の蔵相として金解禁を断行した日本銀行総裁経験者。血盟団事件で暗殺された大分日田出身の財政家。
 tags:
   - 大蔵大臣
