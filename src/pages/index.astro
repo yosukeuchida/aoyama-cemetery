@@ -26,6 +26,15 @@ for (const cat of CATEGORY_ORDER) {
 
 const totalCount = people.length;
 
+const peopleDatesData = people.map((p) => ({
+  id: p.id,
+  name: p.data.name,
+  birthDate: p.data.birthDate,
+  deathDate: p.data.deathDate,
+  category: p.data.category,
+  shortDescription: p.data.shortDescription,
+}));
+
 const ERA_ORDER = ['江戸', '明治', '大正', '昭和'] as const;
 const presentEras = ERA_ORDER.filter((era) => people.some((p) => p.data.era.includes(era)));
 const presentCategories = CATEGORY_ORDER.filter((cat) => groups[cat].length > 0);
@@ -145,6 +154,25 @@ const breadcrumbJsonLd = {
   <h1>青山霊園 偉人録</h1>
   <p>東京都港区にある青山霊園は、明治以降の日本を築いた多くの偉人が眠る場所です。本サイトでは、彼らの生涯と業績を紹介します。</p>
 
+  <section class="today-widget" aria-live="polite">
+    <h2 class="today-widget-title">
+      <span class="today-icon" aria-hidden="true">🕯️</span>
+      今日の暦 — <span class="today-date" id="today-date-label">…</span>
+    </h2>
+    <div id="today-events" class="today-section" hidden>
+      <h3 class="today-section-title">本日</h3>
+      <ul class="today-list" id="today-events-list"></ul>
+    </div>
+    <div id="upcoming-events" class="today-section">
+      <h3 class="today-section-title">直近(前後 7 日)</h3>
+      <ul class="today-list" id="upcoming-events-list">
+        <li class="today-empty">読み込み中…</li>
+      </ul>
+    </div>
+  </section>
+
+  <script type="application/json" id="people-dates-data" set:html={JSON.stringify(peopleDatesData)}></script>
+
   <div class="era-filter" role="toolbar" aria-label="時代で絞り込み">
     <span class="filter-label">時代:</span>
     <button type="button" class="era-chip is-active" data-era="all" aria-pressed="true">
@@ -226,6 +254,99 @@ const breadcrumbJsonLd = {
 </BaseLayout>
 
 <style>
+  .today-widget {
+    margin: 1.2rem 0 1rem;
+    padding: 0.9rem 1rem;
+    border: 1px solid #d6d3c7;
+    border-radius: 8px;
+    background: #faf6e9;
+  }
+  .today-widget-title {
+    margin: 0 0 0.5rem;
+    font-size: 1rem;
+    color: #5a4a2a;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .today-icon {
+    font-size: 1.1rem;
+  }
+  .today-date {
+    color: #8a6a2a;
+    font-weight: 500;
+  }
+  .today-section {
+    margin-top: 0.5rem;
+  }
+  .today-section-title {
+    margin: 0 0 0.3rem;
+    font-size: 0.78rem;
+    color: #8a7a55;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+    text-transform: none;
+  }
+  .today-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .today-list li {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: #333;
+  }
+  .today-list a {
+    color: #5a4a2a;
+    text-decoration: none;
+    border-bottom: 1px dotted #a89c7d;
+  }
+  .today-list a:hover {
+    border-bottom-style: solid;
+  }
+  .event-badge {
+    display: inline-block;
+    min-width: 1.4rem;
+    padding: 0.05rem 0.35rem;
+    border-radius: 3px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-align: center;
+    margin-right: 0.35rem;
+    color: #fff;
+    vertical-align: 1px;
+  }
+  .event-badge.birth {
+    background: #6b8e23;
+  }
+  .event-badge.death {
+    background: #8a4a2a;
+  }
+  .event-date {
+    color: #8a7a55;
+    font-variant-numeric: tabular-nums;
+    margin-right: 0.4rem;
+  }
+  .event-year {
+    color: #888;
+    font-size: 0.78rem;
+    margin-left: 0.3rem;
+  }
+  .today-empty {
+    color: #888;
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+  .event-today-marker {
+    color: #a23b56;
+    font-weight: 600;
+    margin-left: 0.3rem;
+  }
+
   .era-filter,
   .category-filter {
     display: flex;
@@ -394,6 +515,120 @@ const breadcrumbJsonLd = {
 </style>
 
 <script>
+  // 今日の暦ウィジェット
+  type PersonDate = {
+    id: string;
+    name: string;
+    birthDate: string;
+    deathDate: string;
+    category: string;
+    shortDescription: string;
+  };
+
+  const todayDateLabel = document.getElementById('today-date-label');
+  const todayEventsContainer = document.getElementById('today-events');
+  const todayEventsList = document.getElementById('today-events-list');
+  const upcomingEventsList = document.getElementById('upcoming-events-list');
+  const peopleDatesScript = document.getElementById('people-dates-data');
+
+  if (todayDateLabel && upcomingEventsList && peopleDatesScript) {
+    const peopleDates: PersonDate[] = JSON.parse(peopleDatesScript.textContent || '[]');
+    const now = new Date();
+    const todayMonth = now.getMonth() + 1;
+    const todayDay = now.getDate();
+    todayDateLabel.textContent = `${todayMonth} 月 ${todayDay} 日`;
+
+    const DAYS_WINDOW = 7;
+    const yearNow = now.getFullYear();
+
+    function dateToDayOfYear(month: number, day: number): number {
+      // 簡易版: うるう年は考慮しない (2 月以降にずれが生じる可能性あり)
+      const cumulativeDaysNonLeap = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
+      return cumulativeDaysNonLeap[month - 1] + day;
+    }
+
+    const todayDayOfYear = dateToDayOfYear(todayMonth, todayDay);
+
+    type Event = {
+      person: PersonDate;
+      eventType: 'birth' | 'death';
+      month: number;
+      day: number;
+      year: number;
+      diff: number; // -7..7
+    };
+
+    const events: Event[] = [];
+
+    for (const p of peopleDates) {
+      for (const [type, dateStr] of [['birth', p.birthDate], ['death', p.deathDate]] as const) {
+        if (!dateStr) continue;
+        const [yStr, mStr, dStr] = dateStr.split('-');
+        const month = parseInt(mStr, 10);
+        const day = parseInt(dStr, 10);
+        const year = parseInt(yStr, 10);
+        if (!month || !day) continue;
+        // 同年を仮定して today からの差を計算 (年またぎは ±半年を超えるので無視)
+        const eventDayOfYear = dateToDayOfYear(month, day);
+        let diff = eventDayOfYear - todayDayOfYear;
+        // 年またぎ補正
+        if (diff > 365 / 2) diff -= 365;
+        if (diff < -365 / 2) diff += 365;
+        if (Math.abs(diff) <= DAYS_WINDOW) {
+          events.push({ person: p, eventType: type, month, day, year, diff });
+        }
+      }
+    }
+
+    // 並び替え: diff の絶対値 asc、同値なら未来優先 (diff 大きい方優先)、その後 年 asc
+    events.sort((a, b) => {
+      const absA = Math.abs(a.diff);
+      const absB = Math.abs(b.diff);
+      if (absA !== absB) return absA - absB;
+      if (a.diff !== b.diff) return b.diff - a.diff; // 同距離なら未来優先
+      return a.year - b.year;
+    });
+
+    const todayEvents = events.filter((e) => e.diff === 0);
+    const otherEvents = events.filter((e) => e.diff !== 0);
+
+    function renderEvent(e: Event): string {
+      const badge = e.eventType === 'birth' ? '生' : '没';
+      const badgeClass = e.eventType === 'birth' ? 'birth' : 'death';
+      const yearsAgo = yearNow - e.year;
+      const dateLabel = `${e.month}/${e.day}`;
+      const diffLabel =
+        e.diff === 0
+          ? '<span class="event-today-marker">本日</span>'
+          : e.diff > 0
+            ? `(あと ${e.diff} 日)`
+            : `(${-e.diff} 日前)`;
+      const yearLabel = `${e.year} 年`;
+      const agoLabel = e.eventType === 'death' ? `没後 ${yearsAgo} 年` : `生誕 ${yearsAgo} 年`;
+      return `
+        <li>
+          <span class="event-badge ${badgeClass}">${badge}</span>
+          <span class="event-date">${dateLabel}</span>
+          <a href="/people/${e.person.id}/">${e.person.name}</a>
+          <span class="event-year">${yearLabel} / ${agoLabel}</span>
+          ${e.diff === 0 ? diffLabel : `<span class="event-year">${diffLabel}</span>`}
+        </li>
+      `;
+    }
+
+    if (todayEvents.length > 0 && todayEventsContainer && todayEventsList) {
+      todayEventsList.innerHTML = todayEvents.map(renderEvent).join('');
+      todayEventsContainer.hidden = false;
+    }
+
+    if (otherEvents.length === 0) {
+      upcomingEventsList.innerHTML =
+        '<li class="today-empty">前後 7 日以内には該当者がいません。</li>';
+    } else {
+      upcomingEventsList.innerHTML = otherEvents.map(renderEvent).join('');
+    }
+  }
+
   const eraChips = document.querySelectorAll<HTMLButtonElement>('.era-chip');
   const catChips = document.querySelectorAll<HTMLButtonElement>('.category-chip');
   const sectionSelect = document.querySelector<HTMLSelectElement>('#section-select');
