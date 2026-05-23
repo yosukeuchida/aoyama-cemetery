@@ -172,34 +172,22 @@ const breadcrumbJsonLd = {
       <h2 class="today-widget-title">
         <span class="today-icon" aria-hidden="true">🕯️</span>
         今日の暦 <span class="today-date" id="today-date-label-people">…</span>
+        <span class="today-range">本日から 7 日</span>
       </h2>
-      <div id="today-people-today" class="today-section" hidden>
-        <h3 class="today-section-title">本日</h3>
-        <ul class="today-list" id="today-people-today-list"></ul>
-      </div>
-      <div id="today-people-upcoming" class="today-section">
-        <h3 class="today-section-title">直近(前後 7 日)</h3>
-        <ul class="today-list" id="today-people-upcoming-list">
-          <li class="today-empty">読み込み中…</li>
-        </ul>
-      </div>
+      <ul class="today-list" id="today-people-list">
+        <li class="today-empty">読み込み中…</li>
+      </ul>
     </section>
 
     <section class="today-widget today-widget-history" aria-live="polite">
       <h2 class="today-widget-title">
         <span class="today-icon" aria-hidden="true">📜</span>
         今日の歴史 <span class="today-date" id="today-date-label-history">…</span>
+        <span class="today-range">本日から 7 日</span>
       </h2>
-      <div id="today-history-today" class="today-section" hidden>
-        <h3 class="today-section-title">本日</h3>
-        <ul class="today-list" id="today-history-today-list"></ul>
-      </div>
-      <div id="today-history-upcoming" class="today-section">
-        <h3 class="today-section-title">直近(前後 7 日)</h3>
-        <ul class="today-list" id="today-history-upcoming-list">
-          <li class="today-empty">読み込み中…</li>
-        </ul>
-      </div>
+      <ul class="today-list" id="today-history-list">
+        <li class="today-empty">読み込み中…</li>
+      </ul>
     </section>
   </div>
 
@@ -318,16 +306,11 @@ const breadcrumbJsonLd = {
     color: #8a6a2a;
     font-weight: 500;
   }
-  .today-section {
-    margin-top: 0.5rem;
-  }
-  .today-section-title {
-    margin: 0 0 0.3rem;
-    font-size: 0.78rem;
+  .today-range {
+    font-size: 0.72rem;
     color: #8a7a55;
-    letter-spacing: 0.04em;
-    font-weight: 600;
-    text-transform: none;
+    font-weight: 400;
+    margin-left: 0.3rem;
   }
   .today-list {
     list-style: none;
@@ -602,7 +585,7 @@ const breadcrumbJsonLd = {
       if (el) el.textContent = dateText;
     }
 
-    const DAYS_WINDOW = 7;
+    const DAYS_FORWARD = 7;
     const yearNow = now.getFullYear();
 
     function dateToDayOfYear(month: number, day: number): number {
@@ -628,6 +611,13 @@ const breadcrumbJsonLd = {
       diff: number;
     };
 
+    function diffForwardOnly(month: number, day: number): number | null {
+      const eventDayOfYear = dateToDayOfYear(month, day);
+      let diff = eventDayOfYear - todayDayOfYear;
+      if (diff < 0) diff += 365;
+      return diff <= DAYS_FORWARD ? diff : null;
+    }
+
     const personEvents: PersonEvent[] = [];
     for (const p of peopleDates) {
       for (const [type, dateStr] of [['birth', p.birthDate], ['death', p.deathDate]] as const) {
@@ -637,11 +627,8 @@ const breadcrumbJsonLd = {
         const day = parseInt(dStr, 10);
         const year = parseInt(yStr, 10);
         if (!month || !day) continue;
-        const eventDayOfYear = dateToDayOfYear(month, day);
-        let diff = eventDayOfYear - todayDayOfYear;
-        if (diff > 365 / 2) diff -= 365;
-        if (diff < -365 / 2) diff += 365;
-        if (Math.abs(diff) <= DAYS_WINDOW) {
+        const diff = diffForwardOnly(month, day);
+        if (diff !== null) {
           personEvents.push({ kind: type, person: p, month, day, year, diff });
         }
       }
@@ -654,21 +641,15 @@ const breadcrumbJsonLd = {
       const day = parseInt(dStr, 10);
       const year = parseInt(yStr, 10);
       if (!month || !day) continue;
-      const eventDayOfYear = dateToDayOfYear(month, day);
-      let diff = eventDayOfYear - todayDayOfYear;
-      if (diff > 365 / 2) diff -= 365;
-      if (diff < -365 / 2) diff += 365;
-      if (Math.abs(diff) <= DAYS_WINDOW) {
+      const diff = diffForwardOnly(month, day);
+      if (diff !== null) {
         histEvents.push({ event: ev, month, day, year, diff });
       }
     }
 
     function sortByDiff<T extends { diff: number; year: number }>(arr: T[]) {
       arr.sort((a, b) => {
-        const absA = Math.abs(a.diff);
-        const absB = Math.abs(b.diff);
-        if (absA !== absB) return absA - absB;
-        if (a.diff !== b.diff) return b.diff - a.diff;
+        if (a.diff !== b.diff) return a.diff - b.diff;
         return a.year - b.year;
       });
     }
@@ -708,51 +689,33 @@ const breadcrumbJsonLd = {
       `;
     }
 
-    function fillSection<T>(
-      todayId: string,
-      todayListId: string,
-      upcomingListId: string,
+    function fillList<T>(
+      listId: string,
       items: T[],
       renderFn: (item: T) => string,
-      diffOf: (item: T) => number,
       emptyMessage: string
     ) {
-      const todayItems = items.filter((i) => diffOf(i) === 0);
-      const otherItems = items.filter((i) => diffOf(i) !== 0);
-      const todayContainer = document.getElementById(todayId);
-      const todayList = document.getElementById(todayListId);
-      const upcomingList = document.getElementById(upcomingListId);
-      if (todayItems.length > 0 && todayContainer && todayList) {
-        todayList.innerHTML = todayItems.map(renderFn).join('');
-        todayContainer.hidden = false;
-      }
-      if (upcomingList) {
-        if (otherItems.length === 0) {
-          upcomingList.innerHTML = `<li class="today-empty">${emptyMessage}</li>`;
-        } else {
-          upcomingList.innerHTML = otherItems.map(renderFn).join('');
-        }
+      const list = document.getElementById(listId);
+      if (!list) return;
+      if (items.length === 0) {
+        list.innerHTML = `<li class="today-empty">${emptyMessage}</li>`;
+      } else {
+        list.innerHTML = items.map(renderFn).join('');
       }
     }
 
-    fillSection(
-      'today-people-today',
-      'today-people-today-list',
-      'today-people-upcoming-list',
+    fillList(
+      'today-people-list',
       personEvents,
       renderPerson,
-      (e) => e.diff,
-      '前後 7 日以内に該当する偉人がいません。'
+      '今日から 7 日以内に該当する偉人がいません。'
     );
 
-    fillSection(
-      'today-history-today',
-      'today-history-today-list',
-      'today-history-upcoming-list',
+    fillList(
+      'today-history-list',
       histEvents,
       renderHist,
-      (e) => e.diff,
-      '前後 7 日以内に該当する出来事がありません。'
+      '今日から 7 日以内に該当する出来事がありません。'
     );
   }
 
