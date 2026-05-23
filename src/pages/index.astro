@@ -656,10 +656,6 @@ const breadcrumbJsonLd = {
     sortByDiff(personEvents);
     sortByDiff(histEvents);
 
-    function todayMarker(diff: number): string {
-      return diff === 0 ? ' <span class="event-today-marker">本日</span>' : '';
-    }
-
     function renderPerson(e: PersonEvent): string {
       const yearsAgo = yearNow - e.year;
       const fullDate = `${e.year}/${e.month}/${e.day}`;
@@ -668,7 +664,7 @@ const breadcrumbJsonLd = {
         <li>
           <span class="event-date">${fullDate}</span>
           <a href="/people/${e.person.id}/">${e.person.name}</a>
-          <span class="event-year">/ ${agoLabel}</span>${todayMarker(e.diff)}
+          <span class="event-year">/ ${agoLabel}</span>
         </li>
       `;
     }
@@ -683,7 +679,7 @@ const breadcrumbJsonLd = {
         <li>
           <span class="event-date">${fullDate}</span>
           <strong>${e.event.title}</strong>
-          <span class="event-year">/ ${yearsAgo} 年前</span>${todayMarker(e.diff)}
+          <span class="event-year">/ ${yearsAgo} 年前</span>
           <span class="event-related">関連: ${personLinks}</span>
         </li>
       `;
