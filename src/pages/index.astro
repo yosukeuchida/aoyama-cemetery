@@ -167,22 +167,41 @@ const breadcrumbJsonLd = {
   <h1>青山霊園 偉人録</h1>
   <p>東京都港区にある青山霊園は、明治以降の日本を築いた多くの偉人が眠る場所です。本サイトでは、彼らの生涯と業績を紹介します。</p>
 
-  <section class="today-widget" aria-live="polite">
-    <h2 class="today-widget-title">
-      <span class="today-icon" aria-hidden="true">🕯️</span>
-      今日の暦 — <span class="today-date" id="today-date-label">…</span>
-    </h2>
-    <div id="today-events" class="today-section" hidden>
-      <h3 class="today-section-title">本日</h3>
-      <ul class="today-list" id="today-events-list"></ul>
-    </div>
-    <div id="upcoming-events" class="today-section">
-      <h3 class="today-section-title">直近(前後 7 日)</h3>
-      <ul class="today-list" id="upcoming-events-list">
-        <li class="today-empty">読み込み中…</li>
-      </ul>
-    </div>
-  </section>
+  <div class="today-grid">
+    <section class="today-widget today-widget-people" aria-live="polite">
+      <h2 class="today-widget-title">
+        <span class="today-icon" aria-hidden="true">🕯️</span>
+        今日の暦 <span class="today-date" id="today-date-label-people">…</span>
+      </h2>
+      <div id="today-people-today" class="today-section" hidden>
+        <h3 class="today-section-title">本日</h3>
+        <ul class="today-list" id="today-people-today-list"></ul>
+      </div>
+      <div id="today-people-upcoming" class="today-section">
+        <h3 class="today-section-title">直近(前後 7 日)</h3>
+        <ul class="today-list" id="today-people-upcoming-list">
+          <li class="today-empty">読み込み中…</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="today-widget today-widget-history" aria-live="polite">
+      <h2 class="today-widget-title">
+        <span class="today-icon" aria-hidden="true">📜</span>
+        今日の歴史 <span class="today-date" id="today-date-label-history">…</span>
+      </h2>
+      <div id="today-history-today" class="today-section" hidden>
+        <h3 class="today-section-title">本日</h3>
+        <ul class="today-list" id="today-history-today-list"></ul>
+      </div>
+      <div id="today-history-upcoming" class="today-section">
+        <h3 class="today-section-title">直近(前後 7 日)</h3>
+        <ul class="today-list" id="today-history-upcoming-list">
+          <li class="today-empty">読み込み中…</li>
+        </ul>
+      </div>
+    </section>
+  </div>
 
   <script type="application/json" id="people-dates-data" set:html={JSON.stringify(peopleDatesData)}></script>
   <script type="application/json" id="events-data" set:html={JSON.stringify(eventsData)}></script>
@@ -268,12 +287,21 @@ const breadcrumbJsonLd = {
 </BaseLayout>
 
 <style>
-  .today-widget {
+  .today-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 0.8rem;
     margin: 1.2rem 0 1rem;
+  }
+  .today-widget {
     padding: 0.9rem 1rem;
     border: 1px solid #d6d3c7;
     border-radius: 8px;
     background: #faf6e9;
+  }
+  .today-widget-history {
+    background: #f4f3ec;
+    border-color: #c8c5b8;
   }
   .today-widget-title {
     margin: 0 0 0.5rem;
@@ -542,7 +570,7 @@ const breadcrumbJsonLd = {
 </style>
 
 <script>
-  // 今日の暦ウィジェット
+  // 今日の暦 / 今日の歴史 ウィジェット
   type PersonDate = {
     id: string;
     name: string;
@@ -563,14 +591,10 @@ const breadcrumbJsonLd = {
     url: string | null;
   };
 
-  const todayDateLabel = document.getElementById('today-date-label');
-  const todayEventsContainer = document.getElementById('today-events');
-  const todayEventsList = document.getElementById('today-events-list');
-  const upcomingEventsList = document.getElementById('upcoming-events-list');
   const peopleDatesScript = document.getElementById('people-dates-data');
   const eventsScript = document.getElementById('events-data');
 
-  if (todayDateLabel && upcomingEventsList && peopleDatesScript) {
+  if (peopleDatesScript) {
     const peopleDates: PersonDate[] = JSON.parse(peopleDatesScript.textContent || '[]');
     const eventsRaw: EventDataItem[] = eventsScript
       ? JSON.parse(eventsScript.textContent || '[]')
@@ -578,7 +602,12 @@ const breadcrumbJsonLd = {
     const now = new Date();
     const todayMonth = now.getMonth() + 1;
     const todayDay = now.getDate();
-    todayDateLabel.textContent = `${todayMonth} 月 ${todayDay} 日`;
+    const dateText = `(${todayMonth}/${todayDay})`;
+
+    for (const id of ['today-date-label-people', 'today-date-label-history']) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = dateText;
+    }
 
     const DAYS_WINDOW = 7;
     const yearNow = now.getFullYear();
@@ -590,26 +619,23 @@ const breadcrumbJsonLd = {
 
     const todayDayOfYear = dateToDayOfYear(todayMonth, todayDay);
 
-    type CalEvent =
-      | {
-          kind: 'birth' | 'death';
-          person: PersonDate;
-          month: number;
-          day: number;
-          year: number;
-          diff: number;
-        }
-      | {
-          kind: 'event';
-          event: EventDataItem;
-          month: number;
-          day: number;
-          year: number;
-          diff: number;
-        };
+    type PersonEvent = {
+      kind: 'birth' | 'death';
+      person: PersonDate;
+      month: number;
+      day: number;
+      year: number;
+      diff: number;
+    };
+    type HistEvent = {
+      event: EventDataItem;
+      month: number;
+      day: number;
+      year: number;
+      diff: number;
+    };
 
-    const allEvents: CalEvent[] = [];
-
+    const personEvents: PersonEvent[] = [];
     for (const p of peopleDates) {
       for (const [type, dateStr] of [['birth', p.birthDate], ['death', p.deathDate]] as const) {
         if (!dateStr) continue;
@@ -623,11 +649,12 @@ const breadcrumbJsonLd = {
         if (diff > 365 / 2) diff -= 365;
         if (diff < -365 / 2) diff += 365;
         if (Math.abs(diff) <= DAYS_WINDOW) {
-          allEvents.push({ kind: type, person: p, month, day, year, diff });
+          personEvents.push({ kind: type, person: p, month, day, year, diff });
         }
       }
     }
 
+    const histEvents: HistEvent[] = [];
     for (const ev of eventsRaw) {
       const [yStr, mStr, dStr] = ev.date.split('-');
       const month = parseInt(mStr, 10);
@@ -639,54 +666,55 @@ const breadcrumbJsonLd = {
       if (diff > 365 / 2) diff -= 365;
       if (diff < -365 / 2) diff += 365;
       if (Math.abs(diff) <= DAYS_WINDOW) {
-        allEvents.push({ kind: 'event', event: ev, month, day, year, diff });
+        histEvents.push({ event: ev, month, day, year, diff });
       }
     }
 
-    allEvents.sort((a, b) => {
-      const absA = Math.abs(a.diff);
-      const absB = Math.abs(b.diff);
-      if (absA !== absB) return absA - absB;
-      if (a.diff !== b.diff) return b.diff - a.diff;
-      return a.year - b.year;
-    });
-
-    const todayList = allEvents.filter((e) => e.diff === 0);
-    const otherList = allEvents.filter((e) => e.diff !== 0);
+    function sortByDiff<T extends { diff: number; year: number }>(arr: T[]) {
+      arr.sort((a, b) => {
+        const absA = Math.abs(a.diff);
+        const absB = Math.abs(b.diff);
+        if (absA !== absB) return absA - absB;
+        if (a.diff !== b.diff) return b.diff - a.diff;
+        return a.year - b.year;
+      });
+    }
+    sortByDiff(personEvents);
+    sortByDiff(histEvents);
 
     function diffLabelHtml(diff: number): string {
       if (diff === 0) return '<span class="event-today-marker">本日</span>';
       return `<span class="event-year">${diff > 0 ? `あと ${diff} 日` : `${-diff} 日前`}</span>`;
     }
 
-    function renderCalEvent(e: CalEvent): string {
-      const dateLabel = `${e.month}/${e.day}`;
-      if (e.kind === 'birth' || e.kind === 'death') {
-        const badge = e.kind === 'birth' ? '生' : '没';
-        const badgeClass = e.kind === 'birth' ? 'birth' : 'death';
-        const yearsAgo = yearNow - e.year;
-        const yearLabel = `${e.year} 年`;
-        const agoLabel = e.kind === 'death' ? `没後 ${yearsAgo} 年` : `生誕 ${yearsAgo} 年`;
-        return `
-          <li>
-            <span class="event-badge ${badgeClass}">${badge}</span>
-            <span class="event-date">${dateLabel}</span>
-            <a href="/people/${e.person.id}/">${e.person.name}</a>
-            <span class="event-year">${yearLabel} / ${agoLabel}</span>
-            ${diffLabelHtml(e.diff)}
-          </li>
-        `;
-      }
-      const ev = e.event;
+    function renderPerson(e: PersonEvent): string {
+      const badge = e.kind === 'birth' ? '生' : '没';
+      const badgeClass = e.kind === 'birth' ? 'birth' : 'death';
       const yearsAgo = yearNow - e.year;
-      const personLinks = ev.personSlugs
-        .map((s, i) => `<a href="/people/${s}/">${ev.personNames[i]}</a>`)
+      const dateLabel = `${e.month}/${e.day}`;
+      const yearLabel = `${e.year} 年`;
+      const agoLabel = e.kind === 'death' ? `没後 ${yearsAgo} 年` : `生誕 ${yearsAgo} 年`;
+      return `
+        <li>
+          <span class="event-badge ${badgeClass}">${badge}</span>
+          <span class="event-date">${dateLabel}</span>
+          <a href="/people/${e.person.id}/">${e.person.name}</a>
+          <span class="event-year">${yearLabel} / ${agoLabel}</span>
+          ${diffLabelHtml(e.diff)}
+        </li>
+      `;
+    }
+
+    function renderHist(e: HistEvent): string {
+      const dateLabel = `${e.month}/${e.day}`;
+      const yearsAgo = yearNow - e.year;
+      const personLinks = e.event.personSlugs
+        .map((s, i) => `<a href="/people/${s}/">${e.event.personNames[i]}</a>`)
         .join('・');
       return `
         <li>
-          <span class="event-badge event">事</span>
           <span class="event-date">${dateLabel}</span>
-          <strong>${ev.title}</strong>
+          <strong>${e.event.title}</strong>
           <span class="event-year">${e.year} 年 / ${yearsAgo} 年前</span>
           ${diffLabelHtml(e.diff)}
           <span class="event-related">関連: ${personLinks}</span>
@@ -694,17 +722,52 @@ const breadcrumbJsonLd = {
       `;
     }
 
-    if (todayList.length > 0 && todayEventsContainer && todayEventsList) {
-      todayEventsList.innerHTML = todayList.map(renderCalEvent).join('');
-      todayEventsContainer.hidden = false;
+    function fillSection<T>(
+      todayId: string,
+      todayListId: string,
+      upcomingListId: string,
+      items: T[],
+      renderFn: (item: T) => string,
+      diffOf: (item: T) => number,
+      emptyMessage: string
+    ) {
+      const todayItems = items.filter((i) => diffOf(i) === 0);
+      const otherItems = items.filter((i) => diffOf(i) !== 0);
+      const todayContainer = document.getElementById(todayId);
+      const todayList = document.getElementById(todayListId);
+      const upcomingList = document.getElementById(upcomingListId);
+      if (todayItems.length > 0 && todayContainer && todayList) {
+        todayList.innerHTML = todayItems.map(renderFn).join('');
+        todayContainer.hidden = false;
+      }
+      if (upcomingList) {
+        if (otherItems.length === 0) {
+          upcomingList.innerHTML = `<li class="today-empty">${emptyMessage}</li>`;
+        } else {
+          upcomingList.innerHTML = otherItems.map(renderFn).join('');
+        }
+      }
     }
 
-    if (otherList.length === 0) {
-      upcomingEventsList.innerHTML =
-        '<li class="today-empty">前後 7 日以内には該当する出来事がありません。</li>';
-    } else {
-      upcomingEventsList.innerHTML = otherList.map(renderCalEvent).join('');
-    }
+    fillSection(
+      'today-people-today',
+      'today-people-today-list',
+      'today-people-upcoming-list',
+      personEvents,
+      renderPerson,
+      (e) => e.diff,
+      '前後 7 日以内に該当する偉人がいません。'
+    );
+
+    fillSection(
+      'today-history-today',
+      'today-history-today-list',
+      'today-history-upcoming-list',
+      histEvents,
+      renderHist,
+      (e) => e.diff,
+      '前後 7 日以内に該当する出来事がありません。'
+    );
   }
 
   const eraChips = document.querySelectorAll<HTMLButtonElement>('.era-chip');
