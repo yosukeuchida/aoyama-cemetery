@@ -38,20 +38,12 @@ references:
   - title: 東京大学農学生命科学研究科「東大ハチ公物語」
     url: http://www.en.a.u-tokyo.ac.jp/hachi_ueno_hp/hp/
 relatedPeople:
-  - slug: kato-takaaki
-    relation: 同じ 1種ロ8号区画に眠る護憲三派内閣の首相
-  - slug: hamaguchi-osachi
-    relation: 同じ 1種ロ8号区画に眠るライオン宰相
-  - slug: inoue-junnosuke
-    relation: 同じ 1種ロ8号区画に眠る蔵相
   - slug: inukai-tsuyoshi
-    relation: 同じ 1種ロ8号区画に眠る五・一五事件で暗殺された首相
-  - slug: toyama-mitsuru
-    relation: 同じ 1種ロ8号区画に眠る玄洋社総帥
-  - slug: makino-nobuaki
-    relation: 同じ 1種ロ8号区画に眠る内大臣
-  - slug: yamaguchi-tamon
-    relation: 同じ 1種ロ8号区画に眠る海軍中将(ミッドウェー戦死)
+    relation: 主人と愛犬が寄り添う墓の隣に眠る戦前の宰相
+  - slug: kato-takaaki
+    relation: 上野没年に組閣した護憲三派内閣の同時代首相
+  - slug: hamaguchi-osachi
+    relation: ハチが渋谷駅で待ち続けた時代を象徴する同時代の宰相
 ---
 
 ## 渋谷駅で待ち続けた犬の飼い主 — 農業土木の父

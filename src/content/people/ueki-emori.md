@@ -41,10 +41,6 @@ relatedPeople:
     relation: 自由民権運動を共に推進した土佐立志社系の盟友
   - slug: nakae-chomin
     relation: 自由民権の思想家として共に運動を支えた同志
-  - slug: uehara-yusaku
-    relation: 同じ 1種イ11号区画に眠る陸軍元帥(民権 vs 軍の対照配置)
-  - slug: saigo-itoko
-    relation: 同じ 1種イ11号区画に眠る西郷隆盛の妻
   - slug: inukai-tsuyoshi
     relation: 第一次護憲運動で植木の遺した民権思想を継いだ政党政治家
 ---

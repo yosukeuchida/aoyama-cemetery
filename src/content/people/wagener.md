@@ -37,16 +37,12 @@ references:
   - title: 明治有田の偉人たち「ゴットフリード・ワグネル」
     url: https://www.arita.jp/greats/detail/post_1.html
 relatedPeople:
-  - slug: chiossone
-    relation: 同じ青山霊園外国人区画に眠るお雇い外国人(印刷技術)
+  - slug: sano-tsunetami
+    relation: 佐賀藩精煉方を主宰し有田焼近代化の同藩拠点を共有した同時代人
+  - slug: tanaka-hisashige
+    relation: 佐賀藩精煉方で蒸気機関を試作した同時代の工業技術者
   - slug: verbeck
-    relation: 同じ外国人区画に眠るお雇い外国人(英語教育・宣教師)
-  - slug: joseph-heco
-    relation: 同じ外国人系として明治期日本を支えた米国人(新聞)
-  - slug: du-bousquet
-    relation: 同じ外国人区画に眠るお雇い外国人(フランス軍事顧問)
-  - slug: eastlake
-    relation: 同じ外国人区画に眠るお雇い外国人(英語教育)
+    relation: 同時代に来日し明治殖産興業を共に支えたお雇い外国人
 ---
 
 ## 日本陶磁業の恩人 — お雇い外国人ワグネル

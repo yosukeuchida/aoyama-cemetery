@@ -26,7 +26,7 @@ references:
     url: https://ja.wikipedia.org/wiki/有村次左衛門
 relatedPeople:
   - slug: kaieda-nobuyoshi
-    relation: 長兄、同じ 1種ロ12号9側に眠る維新後の元老院議官・子爵
+    relation: 長兄、維新後の元老院議官・子爵となり同じ墓所に並ぶ
   - slug: okubo-toshimichi
     relation: 同じ薩摩・精忠組周辺で活動した同郷の志士
   - slug: ijichi-masaharu

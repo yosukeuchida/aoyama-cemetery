@@ -32,15 +32,13 @@ references:
     url: https://ja.wikipedia.org/wiki/広瀬武夫
 relatedPeople:
   - slug: akiyama-yoshifuru
-    relation: 日露戦争を共に戦った同時代の軍神級軍人、同じ 1種イ21号区画
+    relation: 弟・秋山真之と海軍兵学校で同期、共に日露戦争の軍神
   - slug: nogi-maresuke
     relation: 旅順攻略を陸軍で担った同時代の軍人、共に日露戦争の象徴
   - slug: yamamoto-gonbee
     relation: 同時代の海軍大将、日露戦争前の海軍を整備した先輩
-  - slug: ichikawa-danjuro-ix
-    relation: 同じ 1種イ21号区画に眠る明治の劇聖
-  - slug: soejima-taneomi
-    relation: 同じ 1種イ21号区画に眠る明治の外交家
+  - slug: kawakami-soroku
+    relation: 日露戦争前夜に海陸統帥を支えた陸軍参謀総長
 ---
 
 ## 「軍神」と讃えられた海軍中佐

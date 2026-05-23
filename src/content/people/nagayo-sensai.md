@@ -39,10 +39,6 @@ relatedPeople:
     relation: 同時代に脚気対策を主導した医療官僚の同志
   - slug: kitasato-shibasaburo
     relation: 衛生局時代に内務省下で支援した細菌学者の後輩
-  - slug: hashimoto-ryutaro
-    relation: 同区画に眠る平成の首相
-  - slug: watanabe-noboru
-    relation: 同区画に眠る自由民権運動家
   - slug: sano-tsunetami
     relation: 博愛社・赤十字創設者として医療制度の同志
 ---

@@ -33,15 +33,15 @@ references:
     url: https://kotobank.jp/word/でゆぶすけ-1093017
 relatedPeople:
   - slug: chiossone
-    relation: 同じ外国人墓地区域に眠るイタリア人版画家
+    relation: 同時代に紙幣・肖像で明治の視覚文化を作ったイタリア人お雇い
   - slug: verbeck
-    relation: 同じ外国人区画のオランダ→米国系宣教師教育者
+    relation: 明治政府の法制・教育の指南役を担ったオランダ→米国系お雇い
   - slug: wagener
-    relation: 同じ外国人区画のドイツ人化学者
+    relation: 明治政府の工業近代化を支えたドイツ人お雇い
   - slug: joseph-heco
-    relation: 同じ外国人区画の米国新聞人
+    relation: 米国市民権を得た日本人として明治メディアを開いた先達
   - slug: eastlake
-    relation: 同じ外国人区画の英語教育者
+    relation: 明治期の英語教育を担った同時代の在日米国人
 ---
 
 ## 幕末フランス軍人 — 明治日本に骨を埋めた男

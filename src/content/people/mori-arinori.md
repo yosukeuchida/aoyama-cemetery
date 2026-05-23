@@ -38,9 +38,9 @@ relatedPeople:
   - slug: kuroda-kiyotaka
     relation: 自身を文相に登用した薩摩同郷の首相
   - slug: nakae-chomin
-    relation: 同区画に眠る自由民権思想家、啓蒙の同時代人
+    relation: 自由民権思想家、明六社啓蒙運動の同時代人
   - slug: otori-keisuke
-    relation: 同区画に眠る学習院長、教育行政の同時代人
+    relation: 学習院長、教育行政の同時代人
   - slug: ooki-takato
     relation: 文部卿として学制を制定した教育行政の前任格
   - slug: nogi-maresuke

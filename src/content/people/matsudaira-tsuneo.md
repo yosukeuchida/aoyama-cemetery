@@ -36,19 +36,15 @@ references:
     url: https://ja.wikipedia.org/wiki/松平恒雄
 relatedPeople:
   - slug: makino-nobuaki
-    relation: 同区画1種ロ8号に眠る宮中重臣、外交官出身の同僚
+    relation: 宮中重臣・外交官出身の同僚
   - slug: hayashi-tadasu
-    relation: 同区画に眠る駐英大使の先輩外交官
+    relation: 駐英大使の先輩外交官
   - slug: kato-takaaki
-    relation: 同区画に眠る駐英大使経験者・元首相
+    relation: 駐英大使経験者・元首相の先達
   - slug: hamaguchi-osachi
-    relation: 同区画に眠るロンドン軍縮会議期の首相
-  - slug: inukai-tsuyoshi
-    relation: 同区画1種ロ8号に眠る首相経験者
+    relation: ロンドン軍縮会議期の首相、駐英大使時代の上司
   - slug: koiso-kuniaki
-    relation: 同区画に眠る同時代の首相経験者
-  - slug: toyama-mitsuru
-    relation: 同区画に眠る戦前期の政界黒幕、対照的な立場
+    relation: 戦中戦後の同時代首相
 ---
 
 ## 「会津」から「皇室の外戚」へ — 戦前外交と戦後宮内行政の重鎮

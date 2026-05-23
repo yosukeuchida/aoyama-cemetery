@@ -38,13 +38,11 @@ relatedPeople:
   - slug: komura-jutaro
     relation: 日英同盟交渉で本国側の外相として連携した同志
   - slug: kato-takaaki
-    relation: 同じ 1種ロ8号区画に眠る駐英公使経験の同志、後の首相
+    relation: 駐英公使経験の同志、後に首相となる対英外交の同世代
   - slug: makino-nobuaki
-    relation: 同区画に眠る外交官出身の宮中重臣
-  - slug: inukai-tsuyoshi
-    relation: 同じ 1種ロ8号区画に眠る政党政治家、暗殺された首相
+    relation: 外交官出身の宮中重臣、対英米協調外交の同志
   - slug: hamaguchi-osachi
-    relation: 同じ 1種ロ8号区画に眠る民政党系の協調外交首相
+    relation: 民政党系の協調外交首相、英米協調路線の継承者
   - slug: takashima-tomonosuke
     relation: 戊辰戦争で幕府方として共に戦った同時代の軍人
 ---

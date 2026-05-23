@@ -38,8 +38,8 @@ relatedPeople:
     relation: ベルリン留学を後押ししてくれた内務省衛生局長の恩人
   - slug: takaki-kanehiro
     relation: 明治期の公衆衛生・予防医学を共に切り拓いた医学者
-  - slug: akiyama-yoshifuru
-    relation: 同じ1種イ19号区画に眠る日露戦争陸軍将官
+  - slug: goto-shinpei
+    relation: 内務省衛生局時代の上司、医学博士出身の同時代行政官
   - slug: nagayo-shuntatsu
     relation: 蘭方医学の系譜を共有する明治医学界の先達
   - slug: shiga-naoya

@@ -41,12 +41,12 @@ relatedPeople:
     relation: 明六社を共に結成した同志、初代文相
   - slug: uehara-yusaku
     relation: 軍人勅諭の精神を継承した陸軍指導者
-  - slug: kato-takaaki
-    relation: 同区画に眠る政治家、明治啓蒙の継承者世代
-  - slug: inukai-tsuyoshi
-    relation: 同区画に眠る首相、近代政党政治の担い手
-  - slug: makino-nobuaki
-    relation: 同区画に眠る重臣、明治啓蒙思想の継承者
+  - slug: nagayo-sensai
+    relation: 適塾系の同時代人、明治の制度設計者
+  - slug: ooki-takato
+    relation: 文部卿として学制を制定した教育行政の同時代人
+  - slug: nakae-chomin
+    relation: ライデン留学組と仏蘭西留学組、明治啓蒙の双璧
 ---
 
 ## 「哲学」という言葉を作った男

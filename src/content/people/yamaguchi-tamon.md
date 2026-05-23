@@ -39,20 +39,12 @@ references:
   - title: 防衛研究所「史料のなかの軍人たち 海軍中将 山口多聞」
     url: https://www.nids.mod.go.jp/military_archives/news/2019/201906.pdf
 relatedPeople:
-  - slug: kato-takaaki
-    relation: 同じ 1種ロ8号区画に眠る護憲三派内閣の首相
-  - slug: hamaguchi-osachi
-    relation: 同じ 1種ロ8号区画に眠るライオン宰相
-  - slug: inoue-junnosuke
-    relation: 同じ 1種ロ8号区画に眠る蔵相
-  - slug: inukai-tsuyoshi
-    relation: 同じ 1種ロ8号区画に眠る五・一五事件で暗殺された首相
-  - slug: toyama-mitsuru
-    relation: 同じ 1種ロ8号区画に眠る玄洋社総帥
-  - slug: ueno-eizaburo
-    relation: 同じ 1種ロ8号区画に眠る農学者・忠犬ハチ公の飼い主
-  - slug: makino-nobuaki
-    relation: 同じ 1種ロ8号区画に眠る内大臣
+  - slug: kato-tomosaburo
+    relation: ワシントン軍縮を主導した海軍軍縮派の先輩・海軍大将
+  - slug: yamamoto-gonbee
+    relation: 近代日本海軍を作り上げた先輩世代の海軍大将・首相
+  - slug: togo-shigenori
+    relation: 太平洋戦争開戦と終戦時の外相・対米開戦の文官側当事者
 ---
 
 ## 「闘将」と呼ばれた航空戦の名指揮官

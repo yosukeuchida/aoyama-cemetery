@@ -33,15 +33,15 @@ references:
     url: https://ja.wikipedia.org/wiki/加藤友三郎
 relatedPeople:
   - slug: komura-jutaro
-    relation: 同じ 1種ロ12号区画に眠る明治外交の盟友(戦争を終わらせた外交家)
+    relation: 日露戦争を終結させた明治外交の先達、戦争を終わらせた盟友
   - slug: yamamoto-gonbee
     relation: 海軍大将・首相の先輩、薩摩系海軍と広島系海軍を結ぶ
   - slug: hirose-takeo
     relation: 同じ日本海海戦・日露戦争期の海軍同期生(殉死した海軍中佐)
-  - slug: kaieda-nobuyoshi
-    relation: 同じ 1種ロ12号区画に眠る幕末薩摩志士
-  - slug: tanaka-hisashige
-    relation: 同じ 1種ロ12号区画に眠る東芝源流の発明家(地理的隣接)
+  - slug: nogi-maresuke
+    relation: 日露戦争で陸戦を率いた陸軍大将、戦勝の同志
+  - slug: togo-shigenori
+    relation: 後年の外交官、戦争と和平の責任を負った大正昭和の外交家
 ---
 
 ## 「海軍を縮小して国を守った」海軍大将

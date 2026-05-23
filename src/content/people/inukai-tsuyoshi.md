@@ -37,13 +37,13 @@ references:
     url: https://ja.wikipedia.org/wiki/犬養毅
 relatedPeople:
   - slug: kato-takaaki
-    relation: 護憲三派内閣を共に組織した憲政会総裁、同じ 1種ロ8号に眠る
+    relation: 護憲三派内閣を共に組織した憲政会総裁、政党政治の盟友
   - slug: hamaguchi-osachi
-    relation: 同じ 1種ロ8号区画に眠る政党政治家、共に昭和初期の議会政治を担う
+    relation: 共に昭和初期の議会政治を担った同時代政党政治家
   - slug: inoue-junnosuke
-    relation: 政敵だが同じ 1種ロ8号区画でテロに倒れた金解禁の蔵相
+    relation: 政敵だが共にテロに倒れた政党政治家(血盟団 vs 五・一五)
   - slug: makino-nobuaki
-    relation: 同じ 1種ロ8号区画に眠る大正末・昭和初期の政治家
+    relation: 大正末・昭和初期の宮中重臣、政党政治の理解者
   - slug: kim-okgyun
     relation: 朝鮮開化派の指導者、大隈系の支援対象として親交があった
 ---

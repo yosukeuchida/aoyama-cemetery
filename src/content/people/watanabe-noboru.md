@@ -34,10 +34,6 @@ relatedPeople:
     relation: 警視庁を作った初代大警視・後任の警視総監制度を引き継いだ
   - slug: ueki-emori
     relation: 警視総監期に自由民権運動の取り締まり対象とした思想家
-  - slug: hashimoto-ryutaro
-    relation: 同じ 1種イ12号区画に眠る平成の宰相
-  - slug: nagayo-sensai
-    relation: 同じ 1種イ12号区画に眠る内務省衛生局長
   - slug: ijichi-masaharu
     relation: 同じ練兵館四天王として若き日に剣で交わった同志
 ---

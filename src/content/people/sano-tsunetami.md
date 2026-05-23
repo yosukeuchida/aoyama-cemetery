@@ -40,10 +40,6 @@ relatedPeople:
     relation: 佐賀の七賢人として並び称された同藩の盟友
   - slug: ooki-takato
     relation: 佐賀の七賢人として並び称された同藩の盟友
-  - slug: goto-shinpei
-    relation: 同じ 1種イ5号区画に眠る明治の制度設計者
-  - slug: sato-giryo
-    relation: 同じ 1種イ5号区画に眠る明治を作った隣人
   - slug: nagayo-sensai
     relation: 戦時救護と衛生行政で連携した明治医制の中心人物
 ---

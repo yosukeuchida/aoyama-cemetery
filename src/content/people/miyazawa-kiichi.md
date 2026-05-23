@@ -34,7 +34,7 @@ relatedPeople:
   - slug: ikeda-hayato
     relation: 大蔵省で秘書官を務めた宏池会の創設者・直接の師
   - slug: matsukata-masayoshi
-    relation: 同区画1種ロ17号に眠る明治財政の祖、宮澤の系譜の源流
+    relation: 明治財政の祖、宮澤の財政家系譜の遠い源流
   - slug: hashimoto-ryutaro
     relation: 同時代の自民党領袖、平成期の首相経験者
   - slug: ogata-taketora

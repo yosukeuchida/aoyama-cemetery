@@ -30,16 +30,14 @@ references:
   - title: Wikipedia「御木本幸吉」
     url: https://ja.wikipedia.org/wiki/御木本幸吉
 relatedPeople:
-  - slug: kuroda-kiyotaka
-    relation: 同区画1種イ1号に眠る薩摩出身の首相経験者
-  - slug: mori-arinori
-    relation: 同区画に眠る初代文部大臣、明治を作った同時代人
-  - slug: nakae-chomin
-    relation: 同区画1種イ1号に眠る自由民権思想家
-  - slug: otori-keisuke
-    relation: 同区画に眠る明治期の外交官・教育者
   - slug: tanaka-hisashige
     relation: 明治の発明家・実業家として通底する技術立国の系譜
+  - slug: inumaru-tetsuzo
+    relation: 帝国ホテルを率いた同時代の経営者、日本発の世界ブランドを担った先輩
+  - slug: morinaga-taichiro
+    relation: 森永製菓を創業した同時代の自立型実業家
+  - slug: ueno-eizaburo
+    relation: 明治期日本の事業創造を担った同時代の実業家
 ---
 
 ## 「真珠王」と呼ばれた男

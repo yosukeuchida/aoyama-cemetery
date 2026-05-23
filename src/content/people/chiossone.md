@@ -34,15 +34,15 @@ references:
     url: https://ja.wikipedia.org/wiki/エドアルド・キヨッソーネ
 relatedPeople:
   - slug: verbeck
-    relation: 同じ外国人区画に眠るオランダ→米国系お雇い外国人(宣教師教育者)
+    relation: 明治初期に来日し近代化を支えたお雇い外国人の同世代
   - slug: wagener
-    relation: 同じ外国人区画のドイツ人お雇い外国人(化学・窯業)
+    relation: ドイツ人化学者として日本の工芸・窯業近代化を支えた同時代お雇い
   - slug: du-bousquet
-    relation: 同じ外国人区画のフランス軍事顧問
+    relation: フランス軍事顧問として明治制度設計を支えた同時代お雇い
   - slug: joseph-heco
-    relation: 同じ外国人区画の米国新聞人
+    relation: 明治日本のメディア・印刷文化に関わった先達(海外新聞の父)
   - slug: eastlake
-    relation: 同じ外国人区画の英語教育者
+    relation: 明治期の英語教育を担った同時代の在日米国人
 ---
 
 ## 「明治の紙幣・切手・御真影」を作ったイタリア人版画家

@@ -38,10 +38,10 @@ relatedPeople:
     relation: 戊辰戦争で東山道軍参謀を共に務めた薩摩出身の同志
   - slug: kawaji-toshiyoshi
     relation: 同じ薩摩下加治屋町周辺の出身、明治政府で活動した同郷
-  - slug: kato-tomosaburo
-    relation: 同じ 1種ロ12号区画に眠る海軍大将・首相(地理的隣接)
-  - slug: komura-jutaro
-    relation: 同じ 1種ロ12号区画に眠る明治外交の中心人物
+  - slug: arimura-jizaemon
+    relation: 桜田門外の変に連なる薩摩志士の同志
+  - slug: yoshii-tomozane
+    relation: 同郷薩摩出身、幕末から明治政府に転じた志士
 ---
 
 ## 桜田門外の変に関与した薩摩藩士 — 元老院議官・男爵

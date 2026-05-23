@@ -30,15 +30,15 @@ references:
     url: https://ja.wikipedia.org/wiki/ジョセフ・ヒコ
 relatedPeople:
   - slug: verbeck
-    relation: 同時代の外国系お雇い・宣教師、明治日本の近代化に貢献した外国籍
+    relation: 幕末英学・宣教教育で日本近代化を支えた同時代の在日外国系
   - slug: chiossone
-    relation: 明治初期に来日した外国人技術者、青山霊園外国人区画に眠る
+    relation: 明治初期に来日し紙幣・肖像で視覚文化を作った外国人技師
   - slug: eastlake
-    relation: 同時代の英語教育者、外国人区画に眠るお雇い外国人
+    relation: 米国出身として明治英語教育を担った後輩
   - slug: wagener
-    relation: お雇い外国人として明治日本の近代化に貢献、外国人区画に眠る
+    relation: 明治政府の工業近代化を支えたドイツ人お雇い外国人
   - slug: du-bousquet
-    relation: お雇い外国人として明治日本に貢献、外国人区画に眠る
+    relation: 明治政府の法制翻訳を支えたフランス人お雇い外国人
 ---
 
 ## 米国市民権を得た「最初の日本人」、新聞の父

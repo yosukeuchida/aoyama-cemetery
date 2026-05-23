@@ -32,12 +32,12 @@ relatedPeople:
     relation: 同郷下加治屋町の盟友、警察制度を任された大久保の腹心
   - slug: ijichi-masaharu
     relation: 同郷薩摩出身、西南戦争で共に政府側に立った戊辰の名軍師
-  - slug: katsu-kokichi
-    relation: 同じ 1種イ4号区画に眠る江戸無頼の証言者(地理的隣接)
   - slug: kagawa-keizo
-    relation: 同じ 1種イ4号区画に眠る維新志士出身の宮中官僚
+    relation: 維新志士出身の同時代官僚
   - slug: mishima-michitsune
     relation: 同じ薩摩出身の内務官僚、警察と地方行政を分担した同郷
+  - slug: kawakami-soroku
+    relation: 同郷薩摩出身、明治陸軍と警察を分担した下加治屋町の縁
 ---
 
 ## 「日本警察の父」 — 初代大警視

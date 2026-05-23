@@ -43,8 +43,8 @@ relatedPeople:
     relation: 戊辰戦争で薩摩藩参謀を共に務めた先輩軍人
   - slug: nogi-maresuke
     relation: 同時代の陸軍大将、日清戦争で旅順攻略を共に指揮した
-  - slug: goto-shojiro
-    relation: 同じ 1種イ13号区画に眠る土佐藩出身の自由民権運動家
+  - slug: uehara-yusaku
+    relation: 後任世代の参謀総長、明治陸軍の戦略中枢を継いだ後輩
 ---
 
 ## 「陸軍の頭脳」 — 日清戦争を策定した参謀総長

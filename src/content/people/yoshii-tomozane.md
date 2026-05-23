@@ -42,8 +42,6 @@ relatedPeople:
     relation: 薩摩閥の同郷財政家・宮中改革期を共に支えた重鎮
   - slug: yoshihara-shigetoshi
     relation: 薩摩同郷の財政家・日本銀行初代総裁
-  - slug: morinaga-taichiro
-    relation: 同じ 1種イ6号区画に眠る森永製菓創業者
 ---
 
 ## 下加治屋町の盟友 — 西郷・大久保とともに明治を作った薩摩人

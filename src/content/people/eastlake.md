@@ -31,16 +31,16 @@ references:
   - title: Wikipedia「フレデリック・イーストレイク」
     url: https://ja.wikipedia.org/wiki/フレデリック・イーストレイク
 relatedPeople:
-  - slug: chiossone
-    relation: 同じ外国人区画に眠るイタリア人版画家
   - slug: verbeck
-    relation: 同じ外国人区画のオランダ→米国系宣教師教育者
-  - slug: wagener
-    relation: 同じ外国人区画のドイツ人化学者
-  - slug: du-bousquet
-    relation: 同じ外国人区画のフランス軍事顧問
+    relation: 長崎致遠館で英学を教えた先達、明治英語教育の源流
+  - slug: ga-noriyuki
+    relation: 同じ明治期の英学者、明六社で啓蒙運動を担った同分野の先輩
+  - slug: chiossone
+    relation: 同時代に来日した在日外国人として近代化を支えたお雇い
   - slug: joseph-heco
-    relation: 同じ外国人区画の米国新聞人
+    relation: 米国側の視点で明治日本のメディアを開いた先達
+  - slug: du-bousquet
+    relation: 明治政府を支えた同時代お雇い外国人(フランス軍事顧問)
 ---
 
 ## 23 か国語を操った「博言博士」

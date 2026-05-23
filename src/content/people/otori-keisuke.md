@@ -40,11 +40,9 @@ relatedPeople:
   - slug: nagayo-sensai
     relation: 適塾の同窓、明治の制度設計を共に担った同志
   - slug: mori-arinori
-    relation: 同区画に眠る初代文相、教育行政の同時代人
+    relation: 初代文相、教育行政の同時代人
   - slug: nakae-chomin
-    relation: 同区画に眠る自由民権思想家、啓蒙の同時代人
-  - slug: mikimoto-kokichi
-    relation: 同区画に眠る真珠王、明治の創業者世代
+    relation: 自由民権思想家、明治啓蒙運動の同時代人
   - slug: nogi-maresuke
     relation: 学習院長を引き継いだ後継者格
 ---

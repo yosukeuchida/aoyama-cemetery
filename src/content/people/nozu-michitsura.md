@@ -40,9 +40,9 @@ relatedPeople:
   - slug: kawaji-toshiyoshi
     relation: 同郷薩摩出身の警察制度創設者、少年期からの旧知
   - slug: kuroda-kiyotaka
-    relation: 同区画に眠る薩摩出身の首相
+    relation: 薩摩出身の首相、戊辰戦争を共に戦った同郷の盟友
   - slug: mori-arinori
-    relation: 同区画に眠る薩摩同郷の初代文相
+    relation: 薩摩同郷の初代文相、明治国家を支えた同郷
   - slug: nogi-maresuke
     relation: 日露戦争を共に戦った同時代の陸軍指揮官
   - slug: kawakami-soroku

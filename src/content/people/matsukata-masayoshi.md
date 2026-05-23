@@ -39,8 +39,6 @@ relatedPeople:
     relation: 金解禁を断行した昭和首相、松方財政の後継者
   - slug: kato-tomosaburo
     relation: 同時代の蔵相経験者で海軍大将出身の首相
-  - slug: miyazawa-kiichi
-    relation: 同じ1種ロ17号区画に眠る戦後の首相・蔵相
   - slug: kuroda-kiyotaka
     relation: 同郷薩摩の盟友、ともに明治政府を担った首相経験者
 ---

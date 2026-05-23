@@ -46,10 +46,6 @@ relatedPeople:
     relation: 日露戦争で並んで戦場に立った陸軍大将・同世代の名将
   - slug: akiyama-yoshifuru
     relation: 日露戦争で第八師団を率い共に黒溝台で防戦した騎兵の名将
-  - slug: okubo-toshimichi
-    relation: 同じ 1種イ1号エリアに眠る明治国家の中心人物
-  - slug: ikeda-hayato
-    relation: 同じ 1種イ1号エリアに眠る戦後の宰相
 ---
 
 ## 「東洋一の用兵家」 — 朝敵から陸軍大将へ

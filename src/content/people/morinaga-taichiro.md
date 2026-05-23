@@ -29,16 +29,14 @@ references:
   - title: Wikipedia「森永太一郎」
     url: https://ja.wikipedia.org/wiki/森永太一郎
 relatedPeople:
-  - slug: okubo-toshimichi
-    relation: 同じ1種イエリアに眠る明治の元勲、近代国家の礎
-  - slug: sano-tsunetami
-    relation: 同区画に眠る博愛社創設者、明治の制度設計者
-  - slug: ogata-taketora
-    relation: 同区画に眠る朝日新聞主筆・副総理
-  - slug: goto-shinpei
-    relation: 同区画に眠る後藤新平、明治の制度設計者
   - slug: mikimoto-kokichi
     relation: 同時代の叩き上げ実業家、明治の創業者世代を共有
+  - slug: tanaka-hisashige
+    relation: 明治の創業者世代の先達、近代日本の製造業の源流
+  - slug: ooki-takato
+    relation: 佐賀の七賢人、伊万里に近い肥前佐賀出身の先達
+  - slug: sano-tsunetami
+    relation: 佐賀出身の先達、肥前佐賀の同郷縁
 ---
 
 ## ミルクキャラメルを日本人の口に運んだ「菓子王」

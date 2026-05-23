@@ -42,10 +42,10 @@ relatedPeople:
     relation: 明六社同人として共に明治啓蒙運動を担った教育外交家
   - slug: nishi-amane
     relation: 明六社同人、西洋哲学の翻訳で同分野の啓蒙家
-  - slug: matsuoka-yosuke
-    relation: 同じ 1種イ3号区画(1側)に眠る昭和の外相、英語が繋ぐ縁
-  - slug: togo-shigenori
-    relation: 同じ 1種イ3号区画(4側)に眠る昭和の外相
+  - slug: eastlake
+    relation: 明治期英語教育の同分野で活動した米国人英学者の後輩
+  - slug: nakae-chomin
+    relation: 西洋政治学の翻訳で並ぶ明治啓蒙期の知識人
 ---
 
 ## 長崎の唐通事から、明治の英学者・啓蒙家へ

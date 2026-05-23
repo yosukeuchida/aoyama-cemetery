@@ -37,11 +37,9 @@ relatedPeople:
   - slug: shiga-naoya
     relation: 独歩の文章を出発点に自らの文学を磨いた次世代作家
   - slug: saito-mokichi
-    relation: 同じ青山霊園に眠る明治大正の歌人・文学者
-  - slug: nakamura-kichiemon-i
-    relation: 同時代の文化人として明治大正期の表現を担った
-  - slug: ichikawa-danjuro-ix
-    relation: 明治の舞台芸術を代表する文化人、同時代の表現者
+    relation: 同時代の明治大正の歌人・文学者
+  - slug: nishi-amane
+    relation: 近代日本語と内省的思考の枠組みを準備した明治啓蒙思想家
 ---
 
 ## 『武蔵野』を書き、近代文学を始めた男

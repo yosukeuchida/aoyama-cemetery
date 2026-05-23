@@ -43,8 +43,6 @@ relatedPeople:
     relation: 佐賀の七賢人として並び称された同藩の盟友、義祭同盟同志
   - slug: goto-shojiro
     relation: 民撰議院設立建白書に共に名を連ねた自由民権の盟友
-  - slug: hirose-takeo
-    relation: 同じ 1種イ21号区画に眠る明治の軍人
   - slug: okubo-toshimichi
     relation: 明治六年政変で袂を分かった新政府首脳
 ---

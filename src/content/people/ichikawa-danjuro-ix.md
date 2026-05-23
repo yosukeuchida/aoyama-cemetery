@@ -33,15 +33,11 @@ references:
     url: https://ja.wikipedia.org/wiki/市川團十郎_(9代目)
 relatedPeople:
   - slug: nakamura-kichiemon-i
-    relation: 同じ青山霊園に眠る戦前歌舞伎の双璧、立役の後継世代
-  - slug: hirose-takeo
-    relation: 同じ 1種イ21号区画に眠る日露の軍神
-  - slug: soejima-taneomi
-    relation: 同じ 1種イ21号区画(1側)に眠る明治の外交家
-  - slug: akiyama-yoshifuru
-    relation: 同じ 1種イ21号区画近隣の明治の陸軍大将
+    relation: 戦前歌舞伎の双璧、立役の後継世代
   - slug: ozaki-koyo
     relation: 演劇改良運動期に交友した同時代の文学者
+  - slug: kunikida-doppo
+    relation: 同時代の文学者、明治文壇の同世代
 ---
 
 ## 「劇聖」 — 明治歌舞伎中興の祖

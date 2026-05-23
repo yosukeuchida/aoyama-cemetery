@@ -39,15 +39,11 @@ relatedPeople:
   - slug: kawaji-toshiyoshi
     relation: 同郷薩摩出身の初代大警視、警視総監として後継した警察制度
   - slug: ijichi-masaharu
-    relation: 同区画1種イ9号に眠る薩摩出身の戊辰戦争名軍師
-  - slug: yamamoto-gonbee
-    relation: 同区画に眠る薩摩出身の海軍大将・首相
-  - slug: hoshi-shinichi
-    relation: 同区画1種イ9号に眠るSF作家(別系統の同郷縁)
+    relation: 薩摩出身の戊辰戦争名軍師、同郷薩摩閥の先達
   - slug: ueki-emori
-    relation: 同霊園に眠る自由民権運動家、三島が弾圧した側の代表
+    relation: 自由民権運動家、三島が弾圧した側の代表
   - slug: nakae-chomin
-    relation: 同霊園に眠る自由民権思想家、三島と対立した側の代表
+    relation: 自由民権思想家、三島と対立した側の代表
 ---
 
 ## 「鬼県令」 — 福島事件で自由民権を弾圧した内務官僚

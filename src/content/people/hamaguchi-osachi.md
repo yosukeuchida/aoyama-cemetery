@@ -34,15 +34,15 @@ references:
     url: https://ja.wikipedia.org/wiki/濱口雄幸
 relatedPeople:
   - slug: inoue-junnosuke
-    relation: 共に金解禁を断行した盟友蔵相、同じ 1種ロ8号区画に眠る
+    relation: 共に金解禁を断行した盟友蔵相、相次いでテロに倒れる
   - slug: inukai-tsuyoshi
-    relation: 立憲政治を共有した同時代首相、五・一五で暗殺、同区画
+    relation: 共に昭和初期政党政治を担った同時代首相、五・一五で暗殺
   - slug: kato-takaaki
-    relation: 立憲同志会以来の先輩首相、同じ 1種ロ8号区画に眠る
+    relation: 立憲同志会以来の先輩首相、民政党系の系譜上の先達
   - slug: makino-nobuaki
-    relation: 同区画に眠る昭和初期の宮中重臣、政党政治の理解者
+    relation: 昭和初期の宮中重臣、政党政治の理解者
   - slug: hayashi-tadasu
-    relation: 同じ 1種ロ8号区画に眠る対英米協調外交の先達
+    relation: 対英米協調外交の先達、日英同盟締結の主役
   - slug: kato-tomosaburo
     relation: 同時代に海軍軍縮を進めた首相、軍縮路線の先輩
 ---

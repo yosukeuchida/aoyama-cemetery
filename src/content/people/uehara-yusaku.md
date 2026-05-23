@@ -43,8 +43,6 @@ relatedPeople:
     relation: 日露戦争で第四軍司令官として麾下に置いた薩摩の上司
   - slug: kawakami-soroku
     relation: 陸軍中央で先行世代として薫陶を受けた参謀総長
-  - slug: ueki-emori
-    relation: 同じ 1種イ11号区画に眠る自由民権の急進思想家(対照配置)
   - slug: nogi-maresuke
     relation: 日露戦争を共に戦った同世代の陸軍大将
   - slug: akiyama-yoshifuru

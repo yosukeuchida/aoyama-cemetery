@@ -38,17 +38,15 @@ relatedPeople:
   - slug: okubo-toshimichi
     relation: 実父、明治維新の三傑にして初代内務卿
   - slug: kato-takaaki
-    relation: 同区画1種ロ8号に眠る、政党政治期の同志的首相
+    relation: 政党政治期の同志的首相
   - slug: hamaguchi-osachi
-    relation: 同区画に眠る昭和初期のリベラル派首相
+    relation: 昭和初期のリベラル派首相、宮中ブロックの同志
   - slug: inoue-junnosuke
-    relation: 同区画1種ロ8号に眠るテロに倒れた蔵相、リベラル派同志
+    relation: テロに倒れた蔵相、リベラル派同志
   - slug: inukai-tsuyoshi
-    relation: 同区画に眠る五・一五事件で殺害された首相
+    relation: 五・一五事件で殺害された首相
   - slug: matsudaira-tsuneo
-    relation: 同区画に眠る宮内大臣、宮中で連携した同時代人
-  - slug: koiso-kuniaki
-    relation: 同区画1種ロ8号に眠る戦時期の首相
+    relation: 宮内大臣として宮中で連携した同時代人
 ---
 
 ## 大久保利通の息子、吉田茂の岳父
