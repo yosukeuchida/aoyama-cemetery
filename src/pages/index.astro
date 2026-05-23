@@ -350,33 +350,25 @@ const breadcrumbJsonLd = {
   .today-list a:hover {
     border-bottom-style: solid;
   }
-  .event-badge {
+  .event-action {
     display: inline-block;
-    min-width: 1.4rem;
-    padding: 0.05rem 0.35rem;
-    border-radius: 3px;
-    font-size: 0.7rem;
+    padding: 0 0.3rem;
+    font-size: 0.78rem;
     font-weight: 600;
-    text-align: center;
-    margin-right: 0.35rem;
-    color: #fff;
-    vertical-align: 1px;
+    margin: 0 0.25rem 0 0.1rem;
+    border-radius: 2px;
   }
-  .event-badge.birth {
-    background: #6b8e23;
+  .event-action.birth {
+    color: #5a7a18;
   }
-  .event-badge.death {
-    background: #8a4a2a;
-  }
-  .event-badge.event {
-    background: #4a5a8a;
+  .event-action.death {
+    color: #6b3a1a;
   }
   .event-related {
     color: #888;
     font-size: 0.78rem;
-    margin-left: 0.3rem;
     display: block;
-    padding-left: 1.85rem;
+    margin-top: 0.1rem;
   }
   .event-related a {
     color: #5a4a2a;
@@ -384,7 +376,8 @@ const breadcrumbJsonLd = {
   .event-date {
     color: #8a7a55;
     font-variant-numeric: tabular-nums;
-    margin-right: 0.4rem;
+    margin-right: 0.3rem;
+    font-size: 0.85rem;
   }
   .event-year {
     color: #888;
@@ -682,41 +675,37 @@ const breadcrumbJsonLd = {
     sortByDiff(personEvents);
     sortByDiff(histEvents);
 
-    function diffLabelHtml(diff: number): string {
-      if (diff === 0) return '<span class="event-today-marker">本日</span>';
-      return `<span class="event-year">${diff > 0 ? `あと ${diff} 日` : `${-diff} 日前`}</span>`;
+    function todayMarker(diff: number): string {
+      return diff === 0 ? ' <span class="event-today-marker">本日</span>' : '';
     }
 
     function renderPerson(e: PersonEvent): string {
-      const badge = e.kind === 'birth' ? '生' : '没';
-      const badgeClass = e.kind === 'birth' ? 'birth' : 'death';
+      const action = e.kind === 'birth' ? '生誕' : '没';
+      const actionClass = e.kind === 'birth' ? 'birth' : 'death';
       const yearsAgo = yearNow - e.year;
-      const dateLabel = `${e.month}/${e.day}`;
-      const yearLabel = `${e.year} 年`;
+      const fullDate = `${e.year}/${e.month}/${e.day}`;
       const agoLabel = e.kind === 'death' ? `没後 ${yearsAgo} 年` : `生誕 ${yearsAgo} 年`;
       return `
         <li>
-          <span class="event-badge ${badgeClass}">${badge}</span>
-          <span class="event-date">${dateLabel}</span>
+          <span class="event-date">${fullDate}</span>
+          <span class="event-action ${actionClass}">${action}</span>
           <a href="/people/${e.person.id}/">${e.person.name}</a>
-          <span class="event-year">${yearLabel} / ${agoLabel}</span>
-          ${diffLabelHtml(e.diff)}
+          <span class="event-year">/ ${agoLabel}</span>${todayMarker(e.diff)}
         </li>
       `;
     }
 
     function renderHist(e: HistEvent): string {
-      const dateLabel = `${e.month}/${e.day}`;
+      const fullDate = `${e.year}/${e.month}/${e.day}`;
       const yearsAgo = yearNow - e.year;
       const personLinks = e.event.personSlugs
         .map((s, i) => `<a href="/people/${s}/">${e.event.personNames[i]}</a>`)
         .join('・');
       return `
         <li>
-          <span class="event-date">${dateLabel}</span>
+          <span class="event-date">${fullDate}</span>
           <strong>${e.event.title}</strong>
-          <span class="event-year">${e.year} 年 / ${yearsAgo} 年前</span>
-          ${diffLabelHtml(e.diff)}
+          <span class="event-year">/ ${yearsAgo} 年前</span>${todayMarker(e.diff)}
           <span class="event-related">関連: ${personLinks}</span>
         </li>
       `;
