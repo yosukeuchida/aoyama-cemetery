@@ -72,8 +72,8 @@ for (let y = 1800; y <= 2000; y += 25) {
   decadeLabels.push({ year: y, percent: ((y - TIMELINE_START) / SPAN) * 100 });
 }
 
-const title = '同時代タイムライン - 青山霊園 偉人録';
-const description = '青山霊園に眠る偉人 90 名超を生年順に並べたタイムライン。江戸末期から現代まで、明治維新・日露戦争・関東大震災・太平洋戦争などの歴史的事件と人物の生涯を一画面で俯瞰できる。';
+const title = '年表(同時代タイムライン) - 青山霊園 偉人録';
+const description = '青山霊園に眠る偉人 90 名超を生年順に並べた年表。江戸末期から現代まで、明治維新・日露戦争・関東大震災・太平洋戦争などの歴史的事件と人物の生涯を一画面で俯瞰できる同時代タイムライン。';
 
 const siteOrigin = new URL('/', Astro.site).toString();
 
@@ -82,7 +82,7 @@ const breadcrumbJsonLd = {
   '@type': 'BreadcrumbList',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'トップ', item: siteOrigin },
-    { '@type': 'ListItem', position: 2, name: '同時代タイムライン', item: new URL('/timeline/', Astro.site).toString() },
+    { '@type': 'ListItem', position: 2, name: '年表', item: new URL('/timeline/', Astro.site).toString() },
   ],
 };
 
@@ -91,8 +91,8 @@ const presentEras = ERA_ORDER.filter((era) => rows.some((r) => r.era.includes(er
 ---
 
 <BaseLayout title={title} description={description} jsonLd={breadcrumbJsonLd}>
-  <h1>同時代タイムライン</h1>
-  <p>青山霊園に眠る {rows.length} 名の偉人を生年順に並べたタイムライン。各人の生涯を 1 本の帯で表し、背景に幕末から現代までの主要な歴史的事件を縦線で重ねた。</p>
+  <h1>年表 — 同時代タイムライン</h1>
+  <p>青山霊園に眠る {rows.length} 名の偉人を生年順に並べた年表。各人の生涯を 1 本の帯で表し、背景に幕末から現代までの主要な歴史的事件を縦線で重ねた。</p>
   <p class="note">同じ時代に誰が生きていたか、明治維新・日露戦争・関東大震災・太平洋戦争を誰が共通体験したかを、一画面で俯瞰できる。各バーをクリックすると個別ページへ。</p>
 
   <div class="filters">
