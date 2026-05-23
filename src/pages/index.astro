@@ -680,15 +680,12 @@ const breadcrumbJsonLd = {
     }
 
     function renderPerson(e: PersonEvent): string {
-      const action = e.kind === 'birth' ? '生誕' : '没';
-      const actionClass = e.kind === 'birth' ? 'birth' : 'death';
       const yearsAgo = yearNow - e.year;
       const fullDate = `${e.year}/${e.month}/${e.day}`;
       const agoLabel = e.kind === 'death' ? `没後 ${yearsAgo} 年` : `生誕 ${yearsAgo} 年`;
       return `
         <li>
           <span class="event-date">${fullDate}</span>
-          <span class="event-action ${actionClass}">${action}</span>
           <a href="/people/${e.person.id}/">${e.person.name}</a>
           <span class="event-year">/ ${agoLabel}</span>${todayMarker(e.diff)}
         </li>
