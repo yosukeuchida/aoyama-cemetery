@@ -33,6 +33,19 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「高島鞆之助」
     url: https://ja.wikipedia.org/wiki/高島鞆之助
+relatedPeople:
+  - slug: matsukata-masayoshi
+    relation: 第 2 次松方内閣で陸相・拓殖務相を任せた薩摩同郷の首相
+  - slug: kawakami-soroku
+    relation: 同時代の陸軍を共に作った薩摩出身の参謀総長
+  - slug: ijichi-masaharu
+    relation: 戊辰戦争の薩摩藩参謀として共に戦った先輩
+  - slug: saigo-itoko
+    relation: 西南戦争で対峙した西郷家、薩摩同郷としての複雑な縁
+  - slug: kuroda-kiyotaka
+    relation: 北海道開拓を共に進めた薩摩出身の開拓使長官
+  - slug: yamamoto-gonbee
+    relation: 同時代の薩摩出身軍首脳、海陸軍の同郷ネットワーク
 ---
 
 ## 薩摩の陸軍大臣 — 拓殖大学の創設者

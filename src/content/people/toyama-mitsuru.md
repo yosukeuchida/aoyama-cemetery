@@ -35,6 +35,21 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「頭山満」
     url: https://ja.wikipedia.org/wiki/頭山満
+relatedPeople:
+  - slug: inukai-tsuyoshi
+    relation: 旧くからの盟友・五・一五事件で暗殺された政党政治家
+  - slug: kim-okgyun
+    relation: 甲申政変後に東京で匿い生活費を支援した朝鮮の開化派
+  - slug: hamaguchi-osachi
+    relation: 同じ 1種ロ8号区画に眠るライオン宰相
+  - slug: inoue-junnosuke
+    relation: 同じ 1種ロ8号区画に眠る蔵相(血盟団に暗殺)
+  - slug: kato-takaaki
+    relation: 同じ 1種ロ8号区画に眠る護憲三派内閣の首相
+  - slug: makino-nobuaki
+    relation: 同じ 1種ロ8号区画に眠る内大臣・元勲級重臣
+  - slug: hayashi-tadasu
+    relation: 同じ 1種ロ8号区画に眠る明治外交の重鎮
 ---
 
 ## 「在野の巨人」 — 玄洋社総帥として政界に影響

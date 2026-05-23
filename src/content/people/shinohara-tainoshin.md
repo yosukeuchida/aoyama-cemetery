@@ -30,6 +30,15 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: "Wikipedia「篠原泰之進」"
     url: https://ja.wikipedia.org/wiki/篠原泰之進
+relatedPeople:
+  - slug: kawaji-toshiyoshi
+    relation: 維新後に出仕した警視庁の初代大警視
+  - slug: okubo-toshimichi
+    relation: 御陵衛士の生き残りを庇護した薩摩主導の新政府首脳
+  - slug: yoshii-tomozane
+    relation: 御陵衛士・薩摩藩の倒幕ネットワークで関わった薩摩志士
+  - slug: ijichi-masaharu
+    relation: 戊辰戦争で新政府軍を指揮した薩摩の参謀
 ---
 
 ## 新選組から御陵衛士へ — 油小路事件を生き延びた男

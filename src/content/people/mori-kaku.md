@@ -32,6 +32,21 @@ references:
     url: https://ja.wikipedia.org/wiki/森恪
   - title: 国立国会図書館「近代日本人の肖像 森恪」
     url: https://www.ndl.go.jp/portrait/datas/568/
+relatedPeople:
+  - slug: inukai-tsuyoshi
+    relation: 政友会総裁として仕えた首相、五・一五で倒れた盟主
+  - slug: kato-takaaki
+    relation: 同区画に眠る政友会・憲政会の重鎮、対中政策の論争相手
+  - slug: hamaguchi-osachi
+    relation: 同区画に眠る民政党首相、対中強硬論の対立軸
+  - slug: inoue-junnosuke
+    relation: 同区画に眠る蔵相、政友会・民政党対立期の財政家
+  - slug: makino-nobuaki
+    relation: 同区画に眠る重臣、昭和初期外交の同時代人
+  - slug: toyama-mitsuru
+    relation: 同区画に眠る玄洋社総帥、対中強硬論の系譜を共有
+  - slug: odachi-shigeo
+    relation: 同区画に眠る内務官僚、戦時統制行政へ続く後輩
 ---
 
 ## 政友会の謀将 — 昭和初期の対中政策を動かした男

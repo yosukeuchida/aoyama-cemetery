@@ -38,6 +38,17 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「上原勇作」
     url: https://ja.wikipedia.org/wiki/上原勇作
+relatedPeople:
+  - slug: nozu-michitsura
+    relation: 日露戦争で第四軍司令官として麾下に置いた薩摩の上司
+  - slug: kawakami-soroku
+    relation: 陸軍中央で先行世代として薫陶を受けた参謀総長
+  - slug: ueki-emori
+    relation: 同じ 1種イ11号区画に眠る自由民権の急進思想家(対照配置)
+  - slug: nogi-maresuke
+    relation: 日露戦争を共に戦った同世代の陸軍大将
+  - slug: akiyama-yoshifuru
+    relation: 日露戦争で薩摩閥の枠を超え共に戦った陸軍中将
 ---
 
 ## 「2個師団増設」で内閣を倒した男 — 陸軍元帥

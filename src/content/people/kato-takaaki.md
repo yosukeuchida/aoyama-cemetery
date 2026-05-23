@@ -34,6 +34,17 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「加藤高明」
     url: https://ja.wikipedia.org/wiki/加藤高明
+relatedPeople:
+  - slug: inukai-tsuyoshi
+    relation: 護憲三派内閣を共に組織した革新倶楽部総裁、同じ 1種ロ8号
+  - slug: hamaguchi-osachi
+    relation: 民政党を率いた後継、同じ 1種ロ8号区画に眠る盟友
+  - slug: inoue-junnosuke
+    relation: 同じ 1種ロ8号区画に眠る政党政治家、加藤系民政党の蔵相
+  - slug: makino-nobuaki
+    relation: 同じ 1種ロ8号区画に眠る大正期の宮中・政界の重鎮
+  - slug: hayashi-tadasu
+    relation: 同時代の外交官、加藤と並ぶ駐英経験の外務省幹部
 ---
 
 ## 普通選挙法を成立させた首相

@@ -36,6 +36,17 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「西周」
     url: https://ja.wikipedia.org/wiki/西周_(啓蒙家)
+relatedPeople:
+  - slug: mori-arinori
+    relation: 明六社を共に結成した同志、初代文相
+  - slug: uehara-yusaku
+    relation: 軍人勅諭の精神を継承した陸軍指導者
+  - slug: kato-takaaki
+    relation: 同区画に眠る政治家、明治啓蒙の継承者世代
+  - slug: inukai-tsuyoshi
+    relation: 同区画に眠る首相、近代政党政治の担い手
+  - slug: makino-nobuaki
+    relation: 同区画に眠る重臣、明治啓蒙思想の継承者
 ---
 
 ## 「哲学」という言葉を作った男

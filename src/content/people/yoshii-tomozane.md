@@ -31,6 +31,19 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: "Wikipedia「吉井友実」"
     url: https://ja.wikipedia.org/wiki/吉井友実
+relatedPeople:
+  - slug: okubo-toshimichi
+    relation: 下加治屋町郷中で共に育った薩摩維新元勲の盟友
+  - slug: kawaji-toshiyoshi
+    relation: 下加治屋町郷中で共に育った薩摩出身の警察創設者
+  - slug: saigo-itoko
+    relation: 西郷隆盛の妻・下加治屋町時代からの縁戚同志
+  - slug: matsukata-masayoshi
+    relation: 薩摩閥の同郷財政家・宮中改革期を共に支えた重鎮
+  - slug: yoshihara-shigetoshi
+    relation: 薩摩同郷の財政家・日本銀行初代総裁
+  - slug: morinaga-taichiro
+    relation: 同じ 1種イ6号区画に眠る森永製菓創業者
 ---
 
 ## 下加治屋町の盟友 — 西郷・大久保とともに明治を作った薩摩人

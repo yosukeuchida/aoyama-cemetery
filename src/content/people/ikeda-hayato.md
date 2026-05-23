@@ -29,6 +29,17 @@ references:
     url: https://ja.wikipedia.org/wiki/池田勇人
   - title: 自由民主党「池田勇人総裁時代」
     url: https://www.jimin.jp/aboutus/history/4.html
+relatedPeople:
+  - slug: miyazawa-kiichi
+    relation: 宏池会の後輩、池田の側近として育ち後の首相に成長した経済通
+  - slug: ogata-taketora
+    relation: 同じ戦後保守政治家、池田より早く青山霊園に眠った先輩
+  - slug: hashimoto-ryutaro
+    relation: 戦後自民党首相の系譜上の後輩、青山霊園に眠る首相経験者
+  - slug: hamaguchi-osachi
+    relation: 戦前の大蔵省・蔵相の系譜上の大先輩、首相経験者
+  - slug: inoue-junnosuke
+    relation: 大蔵省・蔵相の系譜上の戦前期大先輩、井上財政の伝統を受ける
 ---
 
 ## 「所得倍増」で戦後日本を駆け抜けた宰相

@@ -29,6 +29,21 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「大久保利通」
     url: https://ja.wikipedia.org/wiki/大久保利通
+relatedPeople:
+  - slug: kawaji-toshiyoshi
+    relation: 警察制度の右腕として抜擢した薩摩出身の腹心
+  - slug: ijichi-masaharu
+    relation: 戊辰戦争の盟友、薩摩藩参謀
+  - slug: matsukata-masayoshi
+    relation: 大蔵卿として財政路線を継いだ後継者
+  - slug: mori-arinori
+    relation: 教育改革の同志、明六社にも参加
+  - slug: ooki-takato
+    relation: 司法・教育制度設計の同僚(佐賀)
+  - slug: makino-nobuaki
+    relation: 次男、後の内大臣
+  - slug: soejima-taneomi
+    relation: 明治六年政変で対立した佐賀の七賢人
 ---
 
 ## 近代日本を設計した男

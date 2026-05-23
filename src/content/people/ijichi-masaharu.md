@@ -33,6 +33,17 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「伊地知正治」
     url: https://ja.wikipedia.org/wiki/伊地知正治
+relatedPeople:
+  - slug: okubo-toshimichi
+    relation: 同郷下加治屋町の盟友、明治政府で参議として共に内政を担った
+  - slug: kawaji-toshiyoshi
+    relation: 同じ薩摩出身、西南戦争で共に政府側に立った下加治屋町の同志
+  - slug: mishima-michitsune
+    relation: 同じ薩摩出身の内務官僚、青山霊園 1種イ9号区画で隣接して眠る
+  - slug: yamamoto-gonbee
+    relation: 同じ薩摩出身の海軍大将・首相、同じ 1種イ9号区画で眠る後輩
+  - slug: hoshi-shinichi
+    relation: 同じ 1種イ9号区画に眠る SF 作家(地理的隣接)
 ---
 
 ## 戊辰戦争の名軍師 — 鳥羽伏見・会津戦を主導した薩摩藩士

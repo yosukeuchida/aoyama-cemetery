@@ -34,6 +34,19 @@ references:
     url: https://ja.wikipedia.org/wiki/大達茂雄
   - title: 国立国会図書館「近代日本人の肖像 大達茂雄」
     url: https://www.ndl.go.jp/portrait/datas/401/
+relatedPeople:
+  - slug: koiso-kuniaki
+    relation: 自身が内相として仕えた小磯内閣の首相
+  - slug: mori-kaku
+    relation: 同区画に眠る政友会の謀将、戦前内政の先輩格
+  - slug: hamaguchi-osachi
+    relation: 同区画に眠る内務官僚出身の首相、先達
+  - slug: makino-nobuaki
+    relation: 同区画に眠る内大臣、戦時宮中とのつながり
+  - slug: inukai-tsuyoshi
+    relation: 同区画に眠る首相、戦時前の政党政治の先達
+  - slug: ogata-taketora
+    relation: 戦時情報統制で連携した朝日新聞主筆・国務相
 ---
 
 ## 初代東京都長官 — 戦時下の都政を背負った男

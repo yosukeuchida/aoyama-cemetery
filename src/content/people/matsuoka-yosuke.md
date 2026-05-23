@@ -31,6 +31,17 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「松岡洋右」
     url: https://ja.wikipedia.org/wiki/松岡洋右
+relatedPeople:
+  - slug: togo-shigenori
+    relation: 同時代の外相、太平洋戦争開戦時と終戦時の外交を担当
+  - slug: koiso-kuniaki
+    relation: 同時代の戦時内閣関係者、A級戦犯として裁かれた人物
+  - slug: makino-nobuaki
+    relation: パリ講和会議で同席した先輩外交官・元老的存在
+  - slug: hayashi-tadasu
+    relation: 戦前外交の先輩、駐英大使として日英関係を築いた人物
+  - slug: komura-jutaro
+    relation: ポーツマス条約を主導した外交の大先輩
 ---
 
 ## ジュネーブから日本を去った男

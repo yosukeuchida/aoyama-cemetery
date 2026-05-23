@@ -32,6 +32,19 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「森有礼」
     url: https://ja.wikipedia.org/wiki/森有礼
+relatedPeople:
+  - slug: nishi-amane
+    relation: 明六社を共に結成し啓蒙運動を担った同志
+  - slug: kuroda-kiyotaka
+    relation: 自身を文相に登用した薩摩同郷の首相
+  - slug: nakae-chomin
+    relation: 同区画に眠る自由民権思想家、啓蒙の同時代人
+  - slug: otori-keisuke
+    relation: 同区画に眠る学習院長、教育行政の同時代人
+  - slug: ooki-takato
+    relation: 文部卿として学制を制定した教育行政の前任格
+  - slug: nogi-maresuke
+    relation: 学習院院長として皇族教育を引き継いだ後継者格
 ---
 
 ## 憲法発布の日に倒れた初代文部大臣

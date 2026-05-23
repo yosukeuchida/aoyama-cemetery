@@ -37,6 +37,17 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「斎藤茂吉」
     url: https://ja.wikipedia.org/wiki/斎藤茂吉
+relatedPeople:
+  - slug: shiga-naoya
+    relation: 同じ 1種イ2号区画に眠る同時代を生きた近代小説の盟友
+  - slug: okubo-toshimichi
+    relation: 同じ 1種イ2号15側に眠る明治維新の元勲
+  - slug: ozaki-koyo
+    relation: 前世代の明治文学を代表する青山霊園の文学先達
+  - slug: kunikida-doppo
+    relation: 同霊園に眠る明治後期の自然主義文学の同時代人
+  - slug: hoshi-shinichi
+    relation: 戦後に同霊園に眠る別系統の作家、近代日本文学の延長線
 ---
 
 ## 近代短歌を頂点に押し上げた歌人

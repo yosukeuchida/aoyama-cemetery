@@ -31,6 +31,19 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「グイド・フルベッキ」
     url: https://ja.wikipedia.org/wiki/グイド・フルベッキ
+relatedPeople:
+  - slug: soejima-taneomi
+    relation: 長崎・致遠館で英語と西洋学を教えた門下生(後の外務卿)
+  - slug: okubo-toshimichi
+    relation: 岩倉使節団派遣計画の草案(ブリーフ・スケッチ)を提示した相手
+  - slug: chiossone
+    relation: 同じ青山霊園外国人区画に眠るお雇い外国人(印刷技術)
+  - slug: wagener
+    relation: 同じ外国人区画に眠るお雇い外国人(化学・窯業)
+  - slug: joseph-heco
+    relation: 同じ外国人系として明治期日本を支えた米国人(新聞)
+  - slug: du-bousquet
+    relation: 同じ外国人区画に眠るお雇い外国人(フランス軍事顧問)
 ---
 
 ## 「明治日本の隠れた恩師」 — 数百人の志士を英語で育てた宣教師

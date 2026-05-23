@@ -30,6 +30,17 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「フレデリック・イーストレイク」
     url: https://ja.wikipedia.org/wiki/フレデリック・イーストレイク
+relatedPeople:
+  - slug: chiossone
+    relation: 同じ外国人区画に眠るイタリア人版画家
+  - slug: verbeck
+    relation: 同じ外国人区画のオランダ→米国系宣教師教育者
+  - slug: wagener
+    relation: 同じ外国人区画のドイツ人化学者
+  - slug: du-bousquet
+    relation: 同じ外国人区画のフランス軍事顧問
+  - slug: joseph-heco
+    relation: 同じ外国人区画の米国新聞人
 ---
 
 ## 23 か国語を操った「博言博士」

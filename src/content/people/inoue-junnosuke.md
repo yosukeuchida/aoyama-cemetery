@@ -36,6 +36,17 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「井上準之助」
     url: https://ja.wikipedia.org/wiki/井上準之助
+relatedPeople:
+  - slug: hamaguchi-osachi
+    relation: 浜口内閣の蔵相として金解禁を共に断行した盟友首相
+  - slug: inukai-tsuyoshi
+    relation: 政敵だが同じ 1種ロ8号区画でテロに倒れた政党政治家
+  - slug: kato-takaaki
+    relation: 同じ 1種ロ8号区画に眠る憲政会・民政党系の先輩首相
+  - slug: makino-nobuaki
+    relation: 同じ 1種ロ8号区画に眠る大正期の政治家
+  - slug: ikeda-hayato
+    relation: 大蔵省・蔵相の系譜上の戦後の後継者(高度成長期首相)
 ---
 
 ## 金解禁を断行した「井上財政」の男

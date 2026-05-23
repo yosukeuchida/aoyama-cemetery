@@ -31,6 +31,17 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「吉原重俊」
     url: https://ja.wikipedia.org/wiki/吉原重俊
+relatedPeople:
+  - slug: matsukata-masayoshi
+    relation: 大蔵卿として右腕に登用し日本銀行創設を共に主導した上司
+  - slug: kawaji-toshiyoshi
+    relation: 同じ 1種イ4号区画に眠る薩摩出身の警察制度創設者
+  - slug: katsu-kokichi
+    relation: 同じ 1種イ4号区画に眠る勝海舟の父
+  - slug: okubo-toshimichi
+    relation: 薩摩同郷の元勲・米国留学派遣を背後で支えた先輩
+  - slug: yoshii-tomozane
+    relation: 下加治屋町郷中・薩摩閥として明治国家を共に支えた同郷
 ---
 
 ## 日本銀行初代総裁 — 中央銀行の枠組みを作った財政家

@@ -32,6 +32,17 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「三浦梧楼」
     url: https://ja.wikipedia.org/wiki/三浦梧楼
+relatedPeople:
+  - slug: tatsumi-naofumi
+    relation: 戊辰戦争北越戦線で敵味方として戦った桑名藩出身の陸軍大将
+  - slug: nogi-maresuke
+    relation: 同郷長州出身の陸軍大将、奇兵隊系の同志
+  - slug: uehara-yusaku
+    relation: 明治大正の陸軍中枢を共に担った陸軍元帥
+  - slug: kawakami-soroku
+    relation: 同時代の陸軍中将、日清戦争期の参謀総長
+  - slug: toyama-mitsuru
+    relation: 大陸浪人の元締めで乙未事変の周辺人脈、政界黒幕仲間
 ---
 
 ## 長州奇兵隊から駐韓公使へ — 影と光が交錯する将軍

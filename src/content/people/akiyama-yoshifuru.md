@@ -35,6 +35,17 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「秋山好古」
     url: https://ja.wikipedia.org/wiki/秋山好古
+relatedPeople:
+  - slug: kitasato-shibasaburo
+    relation: 同じ 1種イ19号区画に眠る同時代の細菌学者
+  - slug: nogi-maresuke
+    relation: 日露戦争で旅順攻略を担った陸軍大将、共に明治陸軍の象徴
+  - slug: kawakami-soroku
+    relation: 日露戦争前夜に騎兵運用思想を支援した陸軍参謀総長
+  - slug: uehara-yusaku
+    relation: 同時代に陸軍を率いた元帥、教育総監として後輩関係
+  - slug: hirose-takeo
+    relation: 弟・秋山真之と海軍兵学校で同期の盟友、日露の軍神
 ---
 
 ## 世界最強の騎兵を破った男

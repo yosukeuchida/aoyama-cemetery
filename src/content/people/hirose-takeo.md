@@ -30,6 +30,17 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「広瀬武夫」
     url: https://ja.wikipedia.org/wiki/広瀬武夫
+relatedPeople:
+  - slug: akiyama-yoshifuru
+    relation: 日露戦争を共に戦った同時代の軍神級軍人、同じ 1種イ21号区画
+  - slug: nogi-maresuke
+    relation: 旅順攻略を陸軍で担った同時代の軍人、共に日露戦争の象徴
+  - slug: yamamoto-gonbee
+    relation: 同時代の海軍大将、日露戦争前の海軍を整備した先輩
+  - slug: ichikawa-danjuro-ix
+    relation: 同じ 1種イ21号区画に眠る明治の劇聖
+  - slug: soejima-taneomi
+    relation: 同じ 1種イ21号区画に眠る明治の外交家
 ---
 
 ## 「軍神」と讃えられた海軍中佐

@@ -30,6 +30,19 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「中江兆民」
     url: https://ja.wikipedia.org/wiki/中江兆民
+relatedPeople:
+  - slug: ueki-emori
+    relation: 自由民権運動を共に担った理論家の同志
+  - slug: goto-shojiro
+    relation: 自由民権運動の指導者として連携した土佐の先輩
+  - slug: mori-arinori
+    relation: 同区画に眠る初代文相、啓蒙運動の同時代人
+  - slug: kuroda-kiyotaka
+    relation: 同区画に眠る薩摩出身の首相、明治政府の元勲
+  - slug: otori-keisuke
+    relation: 同区画に眠る旧幕府軍指揮官・学習院長
+  - slug: mikimoto-kokichi
+    relation: 同区画に眠る真珠王、明治の創業者世代
 ---
 
 ## 「東洋のルソー」 — 自由民権運動の理論的支柱

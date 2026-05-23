@@ -34,6 +34,19 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「林董」
     url: https://ja.wikipedia.org/wiki/林董
+relatedPeople:
+  - slug: komura-jutaro
+    relation: 日英同盟交渉で本国側の外相として連携した同志
+  - slug: kato-takaaki
+    relation: 同じ 1種ロ8号区画に眠る駐英公使経験の同志、後の首相
+  - slug: makino-nobuaki
+    relation: 同区画に眠る外交官出身の宮中重臣
+  - slug: inukai-tsuyoshi
+    relation: 同じ 1種ロ8号区画に眠る政党政治家、暗殺された首相
+  - slug: hamaguchi-osachi
+    relation: 同じ 1種ロ8号区画に眠る民政党系の協調外交首相
+  - slug: takashima-tomonosuke
+    relation: 戊辰戦争で幕府方として共に戦った同時代の軍人
 ---
 
 ## 日英同盟締結の主役 — 駐英公使から外務大臣へ

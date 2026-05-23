@@ -34,6 +34,17 @@ award:
 references:
   - title: Wikipedia「星新一」
     url: https://ja.wikipedia.org/wiki/星新一
+relatedPeople:
+  - slug: goto-shinpei
+    relation: 父・星一が後藤新平と深く交友、家族ぐるみの縁
+  - slug: yamamoto-gonbee
+    relation: 同じ 1種イ9号区画に眠る海軍大将、父の時代の元勲
+  - slug: saito-mokichi
+    relation: 母の縁戚で繋がる斎藤家の歌人、北杜夫の父
+  - slug: shiga-naoya
+    relation: 同時代に活躍した文学者、戦後文壇の同世代
+  - slug: kunikida-doppo
+    relation: 同じ青山霊園に眠る近代日本文学の先達
 ---
 
 ## 「ショートショートの神様」 — 1001 編の掌編作家

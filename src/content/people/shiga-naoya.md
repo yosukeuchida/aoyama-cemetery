@@ -31,6 +31,17 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「志賀直哉」
     url: https://ja.wikipedia.org/wiki/志賀直哉
+relatedPeople:
+  - slug: saito-mokichi
+    relation: 同じ 1種イ2号区画に眠る近代短歌の同時代盟友
+  - slug: okubo-toshimichi
+    relation: 同じ 1種イ2号区画に眠る明治維新の元勲
+  - slug: ozaki-koyo
+    relation: 前世代の青山霊園に眠る近代文学の先達
+  - slug: kunikida-doppo
+    relation: 同霊園に眠る明治後期の自然主義文学の先輩
+  - slug: hoshi-shinichi
+    relation: 戦後に同霊園に眠る別系統の作家、近代文学の延長線
 ---
 
 ## 「小説の神様」と呼ばれた作家

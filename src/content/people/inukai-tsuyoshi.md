@@ -35,6 +35,17 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「犬養毅」
     url: https://ja.wikipedia.org/wiki/犬養毅
+relatedPeople:
+  - slug: kato-takaaki
+    relation: 護憲三派内閣を共に組織した憲政会総裁、同じ 1種ロ8号に眠る
+  - slug: hamaguchi-osachi
+    relation: 同じ 1種ロ8号区画に眠る政党政治家、共に昭和初期の議会政治を担う
+  - slug: inoue-junnosuke
+    relation: 政敵だが同じ 1種ロ8号区画でテロに倒れた金解禁の蔵相
+  - slug: makino-nobuaki
+    relation: 同じ 1種ロ8号区画に眠る大正末・昭和初期の政治家
+  - slug: kim-okgyun
+    relation: 朝鮮開化派の指導者、大隈系の支援対象として親交があった
 ---
 
 ## 「話せばわかる」と言って撃たれた首相

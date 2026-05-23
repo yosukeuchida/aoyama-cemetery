@@ -31,6 +31,19 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「小村壽太郎」
     url: https://ja.wikipedia.org/wiki/小村壽太郎
+relatedPeople:
+  - slug: kato-tomosaburo
+    relation: 同区画1種ロ12号に眠るワシントン会議全権・後の首相
+  - slug: hayashi-tadasu
+    relation: 日英同盟を共に締結した駐英公使、外交パートナー
+  - slug: nogi-maresuke
+    relation: 日露戦争で陸戦を率いた、ポーツマス条約の前提を作った将軍
+  - slug: kawakami-soroku
+    relation: 日清戦争期の参謀総長、大陸外交の前提を作った軍人
+  - slug: hirose-takeo
+    relation: 日露戦争旅順閉塞作戦で戦死した海軍中佐
+  - slug: makino-nobuaki
+    relation: 同時代の外交官、後年パリ講和会議で日本外交を担った
 ---
 
 ## 日露戦争を終わらせ、不平等条約を終わらせた男

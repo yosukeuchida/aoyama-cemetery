@@ -36,6 +36,13 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「西竹一」
     url: https://ja.wikipedia.org/wiki/西竹一
+relatedPeople:
+  - slug: nogi-maresuke
+    relation: 学習院創設期の院長、華族子弟教育の系譜上の先達
+  - slug: kimura-heitaro
+    relation: 同時代の陸軍将官、太平洋戦争の同世代軍人
+  - slug: koiso-kuniaki
+    relation: 同時代の陸軍将官・首相、戦時指導の同世代
 ---
 
 ## 「バロン西」 — オリンピック馬術金メダリスト、硫黄島に散る

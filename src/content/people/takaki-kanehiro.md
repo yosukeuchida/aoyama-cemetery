@@ -38,6 +38,17 @@ references:
     url: https://ja.wikipedia.org/wiki/高木兼寛
   - title: 宮崎県郷土先覚者「高木兼寛」
     url: https://www.pref.miyazaki.lg.jp/contents/org/kenmin/kokusai/senkaku/pioneer/takaki/index.html
+relatedPeople:
+  - slug: nagayo-sensai
+    relation: 明治の医制・衛生行政を作った同時代の医学行政家
+  - slug: kitasato-shibasaburo
+    relation: 細菌学を切り開いた近代医学の同時代盟友
+  - slug: sugita-gentan
+    relation: 蘭学から西洋医学への系譜を継いだ先輩医学教育者
+  - slug: yamamoto-gonbee
+    relation: 海軍を支えた薩摩出身の海相、脚気対策の組織的後援者
+  - slug: saigo-itoko
+    relation: 同郷の薩摩、戊辰戦争で薩摩藩兵として戦った時代の縁
 ---
 
 ## 脚気を食物で克服した男 — 海軍軍医の闘い

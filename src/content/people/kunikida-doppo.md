@@ -31,6 +31,17 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「国木田独歩」
     url: https://ja.wikipedia.org/wiki/国木田独歩
+relatedPeople:
+  - slug: ozaki-koyo
+    relation: 同時代の人気作家、独歩より先に逝った明治文学の中堅
+  - slug: shiga-naoya
+    relation: 独歩の文章を出発点に自らの文学を磨いた次世代作家
+  - slug: saito-mokichi
+    relation: 同じ青山霊園に眠る明治大正の歌人・文学者
+  - slug: nakamura-kichiemon-i
+    relation: 同時代の文化人として明治大正期の表現を担った
+  - slug: ichikawa-danjuro-ix
+    relation: 明治の舞台芸術を代表する文化人、同時代の表現者
 ---
 
 ## 『武蔵野』を書き、近代文学を始めた男

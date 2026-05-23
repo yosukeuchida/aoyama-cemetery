@@ -28,6 +28,17 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「西郷糸子」
     url: https://ja.wikipedia.org/wiki/西郷糸子
+relatedPeople:
+  - slug: okubo-toshimichi
+    relation: 夫・隆盛と維新を共にした幼馴染、後に対立した薩摩盟友
+  - slug: kuroda-kiyotaka
+    relation: 西郷家の名誉回復・寅太郎の侯爵授爵に尽力した薩摩同郷
+  - slug: matsukata-masayoshi
+    relation: 晩年に糸子を訪ね続けた薩摩出身の元首相
+  - slug: yoshii-tomozane
+    relation: 西郷家を支え続けた薩摩出身の旧友
+  - slug: ueki-emori
+    relation: 同じ 1種イ11号区画に眠る自由民権の闘士
 ---
 
 ## 西郷隆盛の妻 — 城山に散った夫を見送り、半世紀を生きた

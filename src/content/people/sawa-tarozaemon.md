@@ -32,6 +32,17 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「沢太郎左衛門」
     url: https://ja.wikipedia.org/wiki/沢太郎左衛門
+relatedPeople:
+  - slug: kuroda-kiyotaka
+    relation: 函館戦争後の助命嘆願で救った薩摩出身の参議
+  - slug: nishi-amane
+    relation: オランダ留学を共にした幕府派遣の同期啓蒙学者
+  - slug: otori-keisuke
+    relation: 函館戦争・蝦夷共和国を共に戦った旧幕府軍幹部
+  - slug: katsu-kokichi
+    relation: 勝海舟の父、海舟門下生としての師家の系譜
+  - slug: sugita-gentan
+    relation: 幕末蘭学・洋学の系譜を共有する旧幕臣の知識人
 ---
 
 ## 幕府海軍の最後の士官 — オランダから函館へ

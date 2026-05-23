@@ -32,6 +32,19 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「山本權兵衛」
     url: https://ja.wikipedia.org/wiki/山本權兵衛
+relatedPeople:
+  - slug: okubo-toshimichi
+    relation: 同郷薩摩出身で明治国家を共に作った先輩元勲
+  - slug: matsukata-masayoshi
+    relation: 五女の婿が松方の息子(松方家との姻戚関係)
+  - slug: goto-shinpei
+    relation: 第二次内閣で内相兼帝都復興院総裁に起用した盟友
+  - slug: kato-tomosaburo
+    relation: 海軍人脈・前任首相(関東大震災時に死去・後を継いで再登板)
+  - slug: ijichi-masaharu
+    relation: 薩摩海軍人脈の同郷重鎮
+  - slug: kawaji-toshiyoshi
+    relation: 下加治屋町・薩摩出身の同郷の警察制度創設者
 ---
 
 ## 日本海軍と東郷平八郎を作った男

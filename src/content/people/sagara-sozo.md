@@ -26,6 +26,15 @@ nationality: JP
 references:
   - title: "Wikipedia「相楽総三」"
     url: https://ja.wikipedia.org/wiki/相楽総三
+relatedPeople:
+  - slug: okubo-toshimichi
+    relation: 赤報隊を偽官軍として処断した新政府首脳
+  - slug: ijichi-masaharu
+    relation: 戊辰戦争で新政府軍を指揮した薩摩の参謀
+  - slug: yoshii-tomozane
+    relation: 薩摩藩邸を拠点とした倒幕謀略で関わった薩摩志士
+  - slug: kawaji-toshiyoshi
+    relation: 赤報隊処断の現場を担った薩摩出身の警察制度創設者
 ---
 
 ## 赤報隊隊長 — 「偽官軍」として斬首された悲劇の志士

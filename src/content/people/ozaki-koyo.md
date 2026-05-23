@@ -31,6 +31,13 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「尾崎紅葉」
     url: https://ja.wikipedia.org/wiki/尾崎紅葉
+relatedPeople:
+  - slug: kunikida-doppo
+    relation: 同年代の青山霊園に眠る明治文学盟友、共に夭折した
+  - slug: saito-mokichi
+    relation: 後続世代を代表する近代文学の同霊園隣人
+  - slug: shiga-naoya
+    relation: 紅葉門下の後続世代と並ぶ近代小説の同霊園隣人
 ---
 
 ## 『金色夜叉』を遺した明治の人気作家

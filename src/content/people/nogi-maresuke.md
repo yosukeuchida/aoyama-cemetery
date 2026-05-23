@@ -27,6 +27,19 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「乃木希典」
     url: https://ja.wikipedia.org/wiki/乃木希典
+relatedPeople:
+  - slug: kawakami-soroku
+    relation: 日清戦争の参謀次長、明治陸軍の同世代指揮官
+  - slug: nozu-michitsura
+    relation: 日露戦争を共に戦った陸軍元帥の同僚
+  - slug: akiyama-yoshifuru
+    relation: 日露戦争で騎兵を率いた同時代の陸軍指揮官
+  - slug: uehara-yusaku
+    relation: 同時代の陸軍元帥、明治末から大正の陸軍指導者
+  - slug: nishi-takeichi
+    relation: 学習院教育の系譜を継ぐ後世の華族軍人
+  - slug: takashima-tomonosuke
+    relation: 同時代の陸軍中将、日清・日露を戦った同世代
 ---
 
 ## 明治天皇に殉じた陸軍大将

@@ -28,6 +28,15 @@ references:
     url: https://ja.wikipedia.org/wiki/長与俊達
   - title: コトバンク「長与俊達」
     url: https://kotobank.jp/word/長与俊達-1098029
+relatedPeople:
+  - slug: nagayo-sensai
+    relation: 自宅で種痘を施し医家へ育て上げた孫
+  - slug: takaki-kanehiro
+    relation: 孫の世代の海軍軍医、近代医学制度を担う後継
+  - slug: kitasato-shibasaburo
+    relation: 孫の世代の細菌学者、蘭方医学の系譜を継ぐ
+  - slug: sugita-gentan
+    relation: 同時代の蘭方医、江戸蘭学の同世代
 ---
 
 ## 大村の蘭方医 — 長与専斎の祖父

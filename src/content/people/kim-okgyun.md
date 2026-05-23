@@ -29,6 +29,17 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「金玉均」
     url: https://ja.wikipedia.org/wiki/金玉均
+relatedPeople:
+  - slug: toyama-mitsuru
+    relation: 金玉均の日本亡命期に庇護した玄洋社総帥、東京で匿った最大支援者
+  - slug: goto-shojiro
+    relation: 福澤を介して金玉均を支援した明治政府要人(土佐自由民権)
+  - slug: inukai-tsuyoshi
+    relation: 大隈系・改進党系の政治家、開化派支援に共鳴した同時代人
+  - slug: hayashi-tadasu
+    relation: 同時代の外務官僚、日清戦争前夜の朝鮮問題に関与
+  - slug: komura-jutaro
+    relation: 金玉均暗殺後の対清対朝外交を担った外務省幹部
 ---
 
 ## 朝鮮開化派の指導者 — 甲申政変の失敗と上海暗殺

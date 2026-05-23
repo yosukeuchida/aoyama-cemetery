@@ -40,6 +40,14 @@ const people = defineCollection({
           })
         )
         .optional(),
+      relatedPeople: z
+        .array(
+          z.object({
+            slug: z.string(),
+            relation: z.string().min(1).max(60),
+          })
+        )
+        .optional(),
       ogImage: z.string().optional(),
       portrait: image().optional(),
       portraitCaption: z.string().optional(),

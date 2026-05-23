@@ -28,6 +28,17 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「森永太一郎」
     url: https://ja.wikipedia.org/wiki/森永太一郎
+relatedPeople:
+  - slug: okubo-toshimichi
+    relation: 同じ1種イエリアに眠る明治の元勲、近代国家の礎
+  - slug: sano-tsunetami
+    relation: 同区画に眠る博愛社創設者、明治の制度設計者
+  - slug: ogata-taketora
+    relation: 同区画に眠る朝日新聞主筆・副総理
+  - slug: goto-shinpei
+    relation: 同区画に眠る後藤新平、明治の制度設計者
+  - slug: mikimoto-kokichi
+    relation: 同時代の叩き上げ実業家、明治の創業者世代を共有
 ---
 
 ## ミルクキャラメルを日本人の口に運んだ「菓子王」

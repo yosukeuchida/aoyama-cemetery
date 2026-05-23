@@ -37,6 +37,19 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「大木喬任」
     url: https://ja.wikipedia.org/wiki/大木喬任
+relatedPeople:
+  - slug: soejima-taneomi
+    relation: 義祭同盟以来の佐賀同志、佐賀の七賢人の同志
+  - slug: sano-tsunetami
+    relation: 佐賀の七賢人の同志、同区画に眠る博愛社創設者
+  - slug: mori-arinori
+    relation: 文部行政を継いだ初代文部大臣の後任格
+  - slug: nagayo-sensai
+    relation: 同時代の制度設計者、医療行政の同志
+  - slug: goto-shinpei
+    relation: 同区画に眠る後藤新平、明治の制度設計者
+  - slug: ogata-taketora
+    relation: 同区画に眠る朝日新聞主筆・副総理
 ---
 
 ## 「佐賀の七賢人」 — 法典と学制を作った政治家

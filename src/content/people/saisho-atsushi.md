@@ -33,6 +33,17 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: "Wikipedia「税所篤」"
     url: https://ja.wikipedia.org/wiki/税所篤
+relatedPeople:
+  - slug: okubo-toshimichi
+    relation: 下加治屋町郷中で共に育った薩摩盟友
+  - slug: kawaji-toshiyoshi
+    relation: 下加治屋町郷中の薩摩同郷、警察制度を作った同志
+  - slug: yoshii-tomozane
+    relation: 下加治屋町郷中の薩摩同郷、明治政府を共に支えた
+  - slug: ijichi-masaharu
+    relation: 下加治屋町郷中の薩摩同郷、戊辰戦争の参謀
+  - slug: mishima-michitsune
+    relation: 1種イ区画に並ぶ薩摩出身の地方官僚
 ---
 
 ## 「奈良の恩人」 — 廃仏毀釈期の文化財救済を主導した薩摩人

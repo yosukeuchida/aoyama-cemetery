@@ -33,6 +33,19 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「後藤象二郎」
     url: https://ja.wikipedia.org/wiki/後藤象二郎
+relatedPeople:
+  - slug: soejima-taneomi
+    relation: 明治六年政変で共に下野した同志、民撰議院設立建白の連名者
+  - slug: ueki-emori
+    relation: 自由民権運動を共に担った土佐出身の民権理論家
+  - slug: ooki-takato
+    relation: 明六社・元老院で重なる同時代の元勲
+  - slug: hirai-kao
+    relation: 同じ土佐出身、坂本龍馬を介した幕末土佐人脈
+  - slug: shiramine-shunme
+    relation: 同じ土佐藩士・海援隊縁の幕末同世代
+  - slug: okubo-toshimichi
+    relation: 維新政府で参議として共に活動した盟友兼ライバル
 ---
 
 ## 大政奉還を演出した土佐の風雲児

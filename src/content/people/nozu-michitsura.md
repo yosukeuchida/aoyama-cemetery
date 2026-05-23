@@ -34,6 +34,21 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「野津道貫」
     url: https://ja.wikipedia.org/wiki/野津道貫
+relatedPeople:
+  - slug: okubo-toshimichi
+    relation: 同郷薩摩出身の元勲、少年期からの旧知
+  - slug: kawaji-toshiyoshi
+    relation: 同郷薩摩出身の警察制度創設者、少年期からの旧知
+  - slug: kuroda-kiyotaka
+    relation: 同区画に眠る薩摩出身の首相
+  - slug: mori-arinori
+    relation: 同区画に眠る薩摩同郷の初代文相
+  - slug: nogi-maresuke
+    relation: 日露戦争を共に戦った同時代の陸軍指揮官
+  - slug: kawakami-soroku
+    relation: 日清戦争の参謀次長、共に戦った薩摩同郷の盟友
+  - slug: kimura-yoshitake
+    relation: 同郷薩摩出身の軍人、明治陸海軍の同世代
 ---
 
 ## 「西南の役の弟」 — 日清・日露戦争を戦った陸軍元帥

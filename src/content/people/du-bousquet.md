@@ -31,6 +31,17 @@ references:
     url: https://ja.wikipedia.org/wiki/アルベール・シャルル・デュ・ブスケ
   - title: コトバンク「デュブスケ」
     url: https://kotobank.jp/word/でゆぶすけ-1093017
+relatedPeople:
+  - slug: chiossone
+    relation: 同じ外国人墓地区域に眠るイタリア人版画家
+  - slug: verbeck
+    relation: 同じ外国人区画のオランダ→米国系宣教師教育者
+  - slug: wagener
+    relation: 同じ外国人区画のドイツ人化学者
+  - slug: joseph-heco
+    relation: 同じ外国人区画の米国新聞人
+  - slug: eastlake
+    relation: 同じ外国人区画の英語教育者
 ---
 
 ## 幕末フランス軍人 — 明治日本に骨を埋めた男

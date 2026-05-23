@@ -33,6 +33,17 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「中村吉右衛門 (初代)」
     url: https://ja.wikipedia.org/wiki/中村吉右衛門_(初代)
+relatedPeople:
+  - slug: ichikawa-danjuro-ix
+    relation: 先代の歌舞伎界頂点、立役の規範を示した先達
+  - slug: kato-tomosaburo
+    relation: 同区画に眠る海軍大将・首相
+  - slug: komura-jutaro
+    relation: 同区画に眠る外相、明治外交の重鎮
+  - slug: tanaka-hisashige
+    relation: 同区画に眠る発明家、近代日本の創造者世代
+  - slug: ozaki-koyo
+    relation: 同時代の文人、明治大衆文芸の同時代人
 ---
 
 ## 「菊吉時代」 — 戦前最高峰の歌舞伎立役

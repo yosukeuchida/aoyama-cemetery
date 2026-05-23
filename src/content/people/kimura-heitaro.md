@@ -32,6 +32,17 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「木村兵太郎」
     url: https://ja.wikipedia.org/wiki/木村兵太郎
+relatedPeople:
+  - slug: koiso-kuniaki
+    relation: 同時代の陸軍大将・首相、東京裁判で A 級戦犯として裁かれた同類
+  - slug: matsuoka-yosuke
+    relation: 同時代の戦時指導者、東京裁判で A 級戦犯として起訴された外相
+  - slug: togo-shigenori
+    relation: 同時代の戦時指導者、東京裁判で A 級戦犯として裁かれた外相
+  - slug: nishi-takeichi
+    relation: 同時代の陸軍軍人、戦時末期に硫黄島で戦死した同期世代
+  - slug: kawakami-soroku
+    relation: 陸軍参謀本部の先輩、明治陸軍の制度を作った参謀総長
 ---
 
 ## ビルマ方面軍司令官 — そして A 級戦犯

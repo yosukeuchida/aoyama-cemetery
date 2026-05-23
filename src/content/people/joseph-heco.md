@@ -28,6 +28,17 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「ジョセフ・ヒコ」
     url: https://ja.wikipedia.org/wiki/ジョセフ・ヒコ
+relatedPeople:
+  - slug: verbeck
+    relation: 同時代の外国系お雇い・宣教師、明治日本の近代化に貢献した外国籍
+  - slug: chiossone
+    relation: 明治初期に来日した外国人技術者、青山霊園外国人区画に眠る
+  - slug: eastlake
+    relation: 同時代の英語教育者、外国人区画に眠るお雇い外国人
+  - slug: wagener
+    relation: お雇い外国人として明治日本の近代化に貢献、外国人区画に眠る
+  - slug: du-bousquet
+    relation: お雇い外国人として明治日本に貢献、外国人区画に眠る
 ---
 
 ## 米国市民権を得た「最初の日本人」、新聞の父

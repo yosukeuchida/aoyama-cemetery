@@ -37,6 +37,19 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「立見尚文」
     url: https://ja.wikipedia.org/wiki/立見尚文
+relatedPeople:
+  - slug: nozu-michitsura
+    relation: 日露戦争で「東洋一の用兵家」と讃えた元帥(第二軍司令官系)
+  - slug: kawakami-soroku
+    relation: 西南戦争・日清戦争で陸軍中枢を共に支えた同時代の参謀総長
+  - slug: nogi-maresuke
+    relation: 日露戦争で並んで戦場に立った陸軍大将・同世代の名将
+  - slug: akiyama-yoshifuru
+    relation: 日露戦争で第八師団を率い共に黒溝台で防戦した騎兵の名将
+  - slug: okubo-toshimichi
+    relation: 同じ 1種イ1号エリアに眠る明治国家の中心人物
+  - slug: ikeda-hayato
+    relation: 同じ 1種イ1号エリアに眠る戦後の宰相
 ---
 
 ## 「東洋一の用兵家」 — 朝敵から陸軍大将へ

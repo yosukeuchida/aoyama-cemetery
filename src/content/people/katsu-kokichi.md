@@ -27,6 +27,17 @@ nationality: JP
 references:
   - title: Wikipedia「勝小吉」
     url: https://ja.wikipedia.org/wiki/勝小吉
+relatedPeople:
+  - slug: kawaji-toshiyoshi
+    relation: 同じ 1種イ4号区画に眠る近代警察の父(江戸無頼と近代統治の対比)
+  - slug: kagawa-keizo
+    relation: 同じ 1種イ4号区画に眠る幕末志士出身の宮内省官僚
+  - slug: arimura-jizaemon
+    relation: 同時代の幕末江戸の証言者、桜田門外の変関連の浪士
+  - slug: ichikawa-danjuro-ix
+    relation: 同時代の江戸庶民文化を代表する歌舞伎役者
+  - slug: sugita-gentan
+    relation: 同時代の幕末江戸の文化人・蘭学医
 ---
 
 ## 『夢酔独言』の作者 — 旗本無頼の自伝作家

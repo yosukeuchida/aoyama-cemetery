@@ -29,6 +29,19 @@ alumniOf:
 references:
   - title: Wikipedia「杉田玄端」
     url: https://ja.wikipedia.org/wiki/杉田玄端
+relatedPeople:
+  - slug: nishi-amane
+    relation: 沼津兵学校で共に旧幕臣の知識人を結集した啓蒙学者
+  - slug: nagayo-sensai
+    relation: 明治医制を確立した同時代の医学行政の中心
+  - slug: takaki-kanehiro
+    relation: 蘭学から近代医学への橋渡しの先で活躍した後続世代
+  - slug: kuroda-kiyotaka
+    relation: 同じ 1種イ1号区画に眠る明治の元勲
+  - slug: mori-arinori
+    relation: 同じ 1種イ1号区画に眠る初代文部大臣
+  - slug: sawa-tarozaemon
+    relation: 同じ 1種イ1号区画に眠る旧幕府海軍の同期生
 ---
 
 ## 杉田玄白の蘭学伝統を継ぎ、明治医学教育の橋渡しを担った蘭方医

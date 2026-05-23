@@ -30,6 +30,19 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「松方正義」
     url: https://ja.wikipedia.org/wiki/松方正義
+relatedPeople:
+  - slug: okubo-toshimichi
+    relation: 同郷薩摩の先輩、地租改正期に松方を見出した恩人
+  - slug: inoue-junnosuke
+    relation: 松方財政路線を継いだ昭和初期の蔵相、金解禁の実務者
+  - slug: hamaguchi-osachi
+    relation: 金解禁を断行した昭和首相、松方財政の後継者
+  - slug: kato-tomosaburo
+    relation: 同時代の蔵相経験者で海軍大将出身の首相
+  - slug: miyazawa-kiichi
+    relation: 同じ1種ロ17号区画に眠る戦後の首相・蔵相
+  - slug: kuroda-kiyotaka
+    relation: 同郷薩摩の盟友、ともに明治政府を担った首相経験者
 ---
 
 ## 日本銀行を作った男

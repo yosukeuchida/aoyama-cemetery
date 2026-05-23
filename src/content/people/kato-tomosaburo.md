@@ -31,6 +31,17 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「加藤友三郎」
     url: https://ja.wikipedia.org/wiki/加藤友三郎
+relatedPeople:
+  - slug: komura-jutaro
+    relation: 同じ 1種ロ12号区画に眠る明治外交の盟友(戦争を終わらせた外交家)
+  - slug: yamamoto-gonbee
+    relation: 海軍大将・首相の先輩、薩摩系海軍と広島系海軍を結ぶ
+  - slug: hirose-takeo
+    relation: 同じ日本海海戦・日露戦争期の海軍同期生(殉死した海軍中佐)
+  - slug: kaieda-nobuyoshi
+    relation: 同じ 1種ロ12号区画に眠る幕末薩摩志士
+  - slug: tanaka-hisashige
+    relation: 同じ 1種ロ12号区画に眠る東芝源流の発明家(地理的隣接)
 ---
 
 ## 「海軍を縮小して国を守った」海軍大将

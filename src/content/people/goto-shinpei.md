@@ -31,6 +31,17 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「後藤新平」
     url: https://ja.wikipedia.org/wiki/後藤新平
+relatedPeople:
+  - slug: nogi-maresuke
+    relation: 台湾統治を共に経験した同時代の軍人、台湾総督の前任者
+  - slug: takaki-kanehiro
+    relation: 同時代の衛生・医学行政の同志、海軍軍医総監
+  - slug: nagayo-sensai
+    relation: 内務省衛生局長として後藤が継いだ衛生行政の先達
+  - slug: kitasato-shibasaburo
+    relation: 同時代に細菌学・衛生学で並走した盟友、明治の医学指導者
+  - slug: hoshi-shinichi
+    relation: 父・星一を通じて深く交流した実業家、家族ぐるみの縁
 ---
 
 ## 「大風呂敷」と呼ばれた帝都の設計者

@@ -24,6 +24,15 @@ nationality: JP
 references:
   - title: Wikipedia「有村次左衛門」
     url: https://ja.wikipedia.org/wiki/有村次左衛門
+relatedPeople:
+  - slug: kaieda-nobuyoshi
+    relation: 長兄、同じ 1種ロ12号9側に眠る維新後の元老院議官・子爵
+  - slug: okubo-toshimichi
+    relation: 同じ薩摩・精忠組周辺で活動した同郷の志士
+  - slug: ijichi-masaharu
+    relation: 同じ薩摩精忠組の同志、後の戊辰戦争の参謀
+  - slug: shinohara-tainoshin
+    relation: 同郷の薩摩志士、西南戦争で西郷方として戦死した同世代
 ---
 
 ## 桜田門外で井伊大老を斬った男

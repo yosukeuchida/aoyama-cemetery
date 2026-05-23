@@ -37,6 +37,21 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「緒方竹虎」
     url: https://ja.wikipedia.org/wiki/緒方竹虎
+relatedPeople:
+  - slug: toyama-mitsuru
+    relation: 若年から師事した玄洋社総帥、アジア主義の師
+  - slug: koiso-kuniaki
+    relation: 国務相・情報局総裁として入閣した内閣の首相
+  - slug: odachi-shigeo
+    relation: 戦時情報統制で連携した内務官僚・東京都長官
+  - slug: sano-tsunetami
+    relation: 同区画に眠る博愛社創設者、明治の制度設計者
+  - slug: goto-shinpei
+    relation: 同区画に眠る後藤新平、明治大正の制度設計者
+  - slug: ooki-takato
+    relation: 同区画に眠る佐賀出身の元勲、明治の重鎮
+  - slug: morinaga-taichiro
+    relation: 同区画に眠る森永製菓創業者
 ---
 
 ## 朝日新聞主筆から、自民党結成・副総理へ

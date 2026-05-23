@@ -27,6 +27,13 @@ references:
     url: https://ja.wikipedia.org/wiki/平井加尾
   - title: 坂本龍馬人物伝「平井加尾」
     url: https://www.ryoma-den.com/jinbutsu/hirai_kao.html
+relatedPeople:
+  - slug: goto-shojiro
+    relation: 兄・収二郎と土佐藩で同時期に活動した同郷の盟友
+  - slug: shiramine-shunme
+    relation: 龍馬の海援隊員、土佐勤王党周辺の同志
+  - slug: ueki-emori
+    relation: 同郷土佐出身、自由民権運動を担った後輩世代
 ---
 
 ## 龍馬の初恋の人 — 土佐から京都、そして青山霊園へ

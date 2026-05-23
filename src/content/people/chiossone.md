@@ -32,6 +32,17 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「エドアルド・キヨッソーネ」
     url: https://ja.wikipedia.org/wiki/エドアルド・キヨッソーネ
+relatedPeople:
+  - slug: verbeck
+    relation: 同じ外国人区画に眠るオランダ→米国系お雇い外国人(宣教師教育者)
+  - slug: wagener
+    relation: 同じ外国人区画のドイツ人お雇い外国人(化学・窯業)
+  - slug: du-bousquet
+    relation: 同じ外国人区画のフランス軍事顧問
+  - slug: joseph-heco
+    relation: 同じ外国人区画の米国新聞人
+  - slug: eastlake
+    relation: 同じ外国人区画の英語教育者
 ---
 
 ## 「明治の紙幣・切手・御真影」を作ったイタリア人版画家

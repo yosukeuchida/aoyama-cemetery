@@ -32,6 +32,17 @@ memberOf:
 references:
   - title: Wikipedia「橋本龍太郎」
     url: https://ja.wikipedia.org/wiki/橋本龍太郎
+relatedPeople:
+  - slug: ikeda-hayato
+    relation: 経世会系の源流をなす先輩首相、所得倍増の精神的継承者
+  - slug: miyazawa-kiichi
+    relation: 同時代の自民党領袖、平成宰相としての先輩
+  - slug: ogata-taketora
+    relation: 戦後保守政治の源流、自民党の理論的先達
+  - slug: matsudaira-tsuneo
+    relation: 同じ 1種イ区画に眠る昭和の宮内大臣・外交官
+  - slug: watanabe-noboru
+    relation: 同じ 1種イ12号4側区画に眠る幕末肥前出身の警視総監
 ---
 
 ## 「ポマードと弁論」 — 平成自民党を背負った宰相

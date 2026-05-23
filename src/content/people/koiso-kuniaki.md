@@ -34,6 +34,19 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「小磯国昭」
     url: https://ja.wikipedia.org/wiki/小磯国昭
+relatedPeople:
+  - slug: inukai-tsuyoshi
+    relation: 1種ロ8号区画の先輩政党政治家、暴力に倒れた首相経験者
+  - slug: hamaguchi-osachi
+    relation: 同区画に眠る昭和初期首相、テロに倒れた前任者
+  - slug: kato-takaaki
+    relation: 同区画1種ロ8号に眠る大正期の首相経験者
+  - slug: makino-nobuaki
+    relation: 同区画に眠る宮中重臣、二・二六事件で標的となった先輩
+  - slug: matsudaira-tsuneo
+    relation: 同区画に眠る戦中戦後の外交・宮内行政の同時代人
+  - slug: ogata-taketora
+    relation: 戦時報道と戦後政治を担当した同時代政治家
 ---
 
 ## 「朝鮮の虎」 — 第41代内閣総理大臣

@@ -32,6 +32,19 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「濱口雄幸」
     url: https://ja.wikipedia.org/wiki/濱口雄幸
+relatedPeople:
+  - slug: inoue-junnosuke
+    relation: 共に金解禁を断行した盟友蔵相、同じ 1種ロ8号区画に眠る
+  - slug: inukai-tsuyoshi
+    relation: 立憲政治を共有した同時代首相、五・一五で暗殺、同区画
+  - slug: kato-takaaki
+    relation: 立憲同志会以来の先輩首相、同じ 1種ロ8号区画に眠る
+  - slug: makino-nobuaki
+    relation: 同区画に眠る昭和初期の宮中重臣、政党政治の理解者
+  - slug: hayashi-tadasu
+    relation: 同じ 1種ロ8号区画に眠る対英米協調外交の先達
+  - slug: kato-tomosaburo
+    relation: 同時代に海軍軍縮を進めた首相、軍縮路線の先輩
 ---
 
 ## 「男子の本懐」と言って倒れた首相

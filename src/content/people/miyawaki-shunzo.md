@@ -33,6 +33,17 @@ award:
 references:
   - title: Wikipedia「宮脇俊三」
     url: https://ja.wikipedia.org/wiki/宮脇俊三
+relatedPeople:
+  - slug: shiga-naoya
+    relation: 戦後文学を共有した先輩文化人、私小説の伝統を継ぐ系譜
+  - slug: saito-mokichi
+    relation: 同霊園に眠る昭和文学を代表する歌人
+  - slug: hoshi-shinichi
+    relation: 同時代の戦後作家、独自ジャンルを開拓した同志
+  - slug: hashimoto-ryutaro
+    relation: 同時代の戦後政治家、昭和を共に生きた著名人
+  - slug: tanaka-hisashige
+    relation: 鉄道近代化の源流である技術者として宮脇が題材化した先達
 ---
 
 ## 鉄道紀行を文学にした男

@@ -33,6 +33,17 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「北里柴三郎」
     url: https://ja.wikipedia.org/wiki/北里柴三郎
+relatedPeople:
+  - slug: nagayo-sensai
+    relation: ベルリン留学を後押ししてくれた内務省衛生局長の恩人
+  - slug: takaki-kanehiro
+    relation: 明治期の公衆衛生・予防医学を共に切り拓いた医学者
+  - slug: akiyama-yoshifuru
+    relation: 同じ1種イ19号区画に眠る日露戦争陸軍将官
+  - slug: nagayo-shuntatsu
+    relation: 蘭方医学の系譜を共有する明治医学界の先達
+  - slug: shiga-naoya
+    relation: 同時代の文化人として大正昭和の知識人サークルで交流
 ---
 
 ## 「日本の細菌学の父」、千円札になった世界的科学者

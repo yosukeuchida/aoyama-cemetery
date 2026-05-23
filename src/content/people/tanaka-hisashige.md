@@ -29,6 +29,13 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「田中久重」
     url: https://ja.wikipedia.org/wiki/田中久重
+relatedPeople:
+  - slug: sano-tsunetami
+    relation: 佐賀藩精煉方で蒸気機関・反射炉開発を共に担った同僚
+  - slug: komura-jutaro
+    relation: 同じ 1種ロ12号区画に眠る明治外交の立役者(ポーツマス条約全権)
+  - slug: kato-tomosaburo
+    relation: 同じ 1種ロ12号区画に眠るワシントン軍縮全権・首相
 ---
 
 ## 「東洋のエジソン」、そして東芝の祖

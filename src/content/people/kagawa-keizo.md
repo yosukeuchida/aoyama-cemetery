@@ -29,6 +29,17 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「香川敬三」
     url: https://ja.wikipedia.org/wiki/香川敬三
+relatedPeople:
+  - slug: kawaji-toshiyoshi
+    relation: 同じ 1種イ4号区画に眠る維新志士出身の明治官僚
+  - slug: katsu-kokichi
+    relation: 同じ 1種イ4号区画に眠る幕末江戸の証言者
+  - slug: makino-nobuaki
+    relation: 同時代の宮中重鎮、内大臣として皇室の近代化に共に関与
+  - slug: matsudaira-tsuneo
+    relation: 同時代の宮内省官僚、宮中政治を共に支えた華族官僚
+  - slug: saigo-itoko
+    relation: 同時代の宮中女官、昭憲皇太后に近侍した宮中関係者
 ---
 
 ## 水戸の志士から宮中の重鎮へ

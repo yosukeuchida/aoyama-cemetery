@@ -27,6 +27,15 @@ references:
     url: https://ja.wikipedia.org/wiki/白峰駿馬
   - title: 蒼柴の杜「日本造船界の先駆者 白峰駿馬」
     url: http://www.aoshinomori.com/cms/history/detail/5
+relatedPeople:
+  - slug: goto-shojiro
+    relation: 海援隊・土佐藩を介して連携した倒幕期の同志
+  - slug: yoshii-tomozane
+    relation: 龍馬の海援隊を支えた薩摩藩の協力者
+  - slug: sawa-tarozaemon
+    relation: 幕末海軍・洋式造船の同時代を生きた技術者
+  - slug: katsu-kokichi
+    relation: 海援隊の師・勝海舟の父、同門の系譜の祖
 ---
 
 ## 海援隊から日本造船業の先駆へ

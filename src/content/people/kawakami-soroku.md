@@ -34,6 +34,17 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: "Wikipedia「川上操六」"
     url: https://ja.wikipedia.org/wiki/川上操六
+relatedPeople:
+  - slug: okubo-toshimichi
+    relation: 同郷薩摩の先輩、明治国家建設の先導者として川上を引き立てた
+  - slug: kawaji-toshiyoshi
+    relation: 同郷薩摩出身、明治初期の軍政・警察を分担した下加治屋町の縁
+  - slug: ijichi-masaharu
+    relation: 戊辰戦争で薩摩藩参謀を共に務めた先輩軍人
+  - slug: nogi-maresuke
+    relation: 同時代の陸軍大将、日清戦争で旅順攻略を共に指揮した
+  - slug: goto-shojiro
+    relation: 同じ 1種イ13号区画に眠る土佐藩出身の自由民権運動家
 ---
 
 ## 「陸軍の頭脳」 — 日清戦争を策定した参謀総長

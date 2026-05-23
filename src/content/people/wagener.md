@@ -36,6 +36,17 @@ references:
     url: https://ja.wikipedia.org/wiki/ゴットフリード・ワグネル
   - title: 明治有田の偉人たち「ゴットフリード・ワグネル」
     url: https://www.arita.jp/greats/detail/post_1.html
+relatedPeople:
+  - slug: chiossone
+    relation: 同じ青山霊園外国人区画に眠るお雇い外国人(印刷技術)
+  - slug: verbeck
+    relation: 同じ外国人区画に眠るお雇い外国人(英語教育・宣教師)
+  - slug: joseph-heco
+    relation: 同じ外国人系として明治期日本を支えた米国人(新聞)
+  - slug: du-bousquet
+    relation: 同じ外国人区画に眠るお雇い外国人(フランス軍事顧問)
+  - slug: eastlake
+    relation: 同じ外国人区画に眠るお雇い外国人(英語教育)
 ---
 
 ## 日本陶磁業の恩人 — お雇い外国人ワグネル

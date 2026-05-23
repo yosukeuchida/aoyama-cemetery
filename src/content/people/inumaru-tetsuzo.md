@@ -24,6 +24,17 @@ nationality: JP
 references:
   - title: "Wikipedia「犬丸徹三」"
     url: https://ja.wikipedia.org/wiki/犬丸徹三
+relatedPeople:
+  - slug: sano-tsunetami
+    relation: 同じ 1種イ5号区画に眠る博愛社(日本赤十字)創設者の大先輩
+  - slug: goto-shinpei
+    relation: 同じ 1種イ5号区画に眠る都市計画の大恩人(関東大震災復興)
+  - slug: morinaga-taichiro
+    relation: 同じ 1種イ5号区画に眠る森永製菓創業者の先輩実業家
+  - slug: sato-giryo
+    relation: 同じ 1種イ5号区画に眠る新潮社創業者の同時代出版人
+  - slug: ogata-taketora
+    relation: 同じ 1種イ5号区画に眠る同時代のジャーナリスト
 ---
 
 ## 「日本のグランドホテル」を育てた男 — 帝国ホテル中興の祖

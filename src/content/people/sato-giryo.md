@@ -29,6 +29,17 @@ portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「佐藤義亮」
     url: https://ja.wikipedia.org/wiki/佐藤義亮
+relatedPeople:
+  - slug: goto-shinpei
+    relation: 同じ 1種イ5号1側に眠る明治の制度設計者
+  - slug: sano-tsunetami
+    relation: 同じ 1種イ5号26側に眠る明治を作った隣人
+  - slug: ooki-takato
+    relation: 同じ 1種イ5号7側に眠る明治の元勲
+  - slug: shiga-naoya
+    relation: 新潮社が出版を支えた白樺派の代表的作家
+  - slug: saito-mokichi
+    relation: 新潮社で歌集刊行に関わった近代短歌の巨匠
 ---
 
 ## 新潮社を一代で築いた出版王
