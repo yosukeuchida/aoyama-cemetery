@@ -8,6 +8,7 @@ import RelatedWorks from '../../components/RelatedWorks.astro';
 import { getNearbyPeople } from '../../utils/nearby-graves';
 import { getWorksForPerson } from '../../utils/related-works';
 import { getRoutesForPerson } from '../../utils/routes-for-person';
+import { getEventsForPerson } from '../../utils/events-for-person';
 import { getGitDates } from '../../utils/git-dates';
 
 export async function getStaticPaths() {
@@ -27,6 +28,7 @@ const { Content } = await render(person);
 const { block, nearby } = await getNearbyPeople(person);
 const works = await getWorksForPerson(person.id);
 const routes = await getRoutesForPerson(person.id);
+const events = await getEventsForPerson(person.id);
 
 const title = `${person.data.name} - 青山霊園 偉人録`;
 const description = person.data.shortDescription;
@@ -261,6 +263,26 @@ const articleJsonLd: Record<string, unknown> = {
 
     {works.length > 0 && <RelatedWorks works={works} />}
 
+    {events.length > 0 && (
+      <section class="person-events">
+        <h2>関与した事件</h2>
+        <ul class="person-events-list">
+          {events.map((ev) => {
+            const [yStr, mStr, dStr] = ev.data.date.split('-');
+            return (
+              <li>
+                <a href={`/events/${ev.id}/`}>
+                  <span class="person-event-date">{yStr}/{parseInt(mStr, 10)}/{parseInt(dStr, 10)}</span>
+                  <span class="person-event-title">{ev.data.title}</span>
+                  <span class="person-event-summary">{ev.data.summary}</span>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    )}
+
     {routes.length > 0 && (
       <section class="person-routes">
         <h2>この偉人を含む散歩コース</h2>
@@ -295,6 +317,52 @@ const articleJsonLd: Record<string, unknown> = {
 </BaseLayout>
 
 <style>
+  .person-events {
+    margin-top: 2.5rem;
+  }
+  .person-events h2 {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.3rem;
+    margin-bottom: 1rem;
+  }
+  .person-events-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .person-events-list a {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.6rem 0.9rem;
+    border: 1px solid #d6d3c7;
+    border-radius: 6px;
+    background: #faf8f3;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 120ms ease;
+  }
+  .person-events-list a:hover {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  }
+  .person-event-date {
+    font-size: 0.78rem;
+    color: #8a7a55;
+    font-variant-numeric: tabular-nums;
+  }
+  .person-event-title {
+    font-size: 0.95rem;
+    color: #5a4a2a;
+    font-weight: 500;
+  }
+  .person-event-summary {
+    font-size: 0.85rem;
+    color: #444;
+    line-height: 1.5;
+  }
+
   .person-routes {
     margin-top: 2.5rem;
   }

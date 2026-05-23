@@ -678,7 +678,7 @@ const breadcrumbJsonLd = {
       return `
         <li>
           <span class="event-date">${fullDate}</span>
-          <strong>${e.event.title}</strong>
+          <strong><a href="/events/${e.event.id}/">${e.event.title}</a></strong>
           <span class="event-year">/ ${yearsAgo} 年前</span>
           <span class="event-related">関連: ${personLinks}</span>
         </li>

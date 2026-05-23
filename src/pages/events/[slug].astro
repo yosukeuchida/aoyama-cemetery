@@ -1,0 +1,245 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const events = await getCollection('events');
+  const people = await getCollection('people');
+  const peopleMap = new Map(people.map((p) => [p.id, p]));
+  return events.map((event) => ({
+    params: { slug: event.id },
+    props: { event, peopleMap },
+  }));
+}
+
+interface Props {
+  event: CollectionEntry<'events'>;
+  peopleMap: Map<string, CollectionEntry<'people'>>;
+}
+
+const { event, peopleMap } = Astro.props;
+
+const relatedPeople = event.data.personSlugs
+  .map((slug) => peopleMap.get(slug))
+  .filter((p): p is CollectionEntry<'people'> => p !== undefined);
+
+const [yearStr, monthStr, dayStr] = event.data.date.split('-');
+const yearNum = parseInt(yearStr, 10);
+const monthNum = parseInt(monthStr, 10);
+const dayNum = parseInt(dayStr, 10);
+
+function eraLabel(year: number): string {
+  if (year <= 1867) return '江戸';
+  if (year <= 1911) return '明治';
+  if (year <= 1925) return '大正';
+  if (year <= 1988) return '昭和';
+  if (year <= 2018) return '平成';
+  return '令和';
+}
+
+const CATEGORY_COLOR: Record<string, string> = {
+  政変: '#8a5a2a',
+  戦争: '#6b3a2a',
+  事件: '#a23b56',
+  条約: '#4a5a8a',
+  内閣: '#3a5a8a',
+  災害: '#6b5a2a',
+  社会: '#3a5a3a',
+};
+
+const title = `${event.data.title}(${yearNum}年) - 青山霊園 偉人録`;
+const description = event.data.summary;
+
+const siteOrigin = new URL('/', Astro.site).toString();
+
+const eventJsonLd: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'Event',
+  name: event.data.title,
+  description: event.data.summary,
+  startDate: event.data.date,
+  url: new URL(`/events/${event.id}/`, Astro.site).toString(),
+  ...(event.data.url ? { sameAs: [event.data.url] } : {}),
+  about: relatedPeople.map((p) => ({
+    '@type': 'Person',
+    name: p.data.name,
+    url: new URL(`/people/${p.id}/`, Astro.site).toString(),
+  })),
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: siteOrigin },
+    { '@type': 'ListItem', position: 2, name: '事件', item: new URL('/events/', Astro.site).toString() },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: event.data.title,
+      item: new URL(`/events/${event.id}/`, Astro.site).toString(),
+    },
+  ],
+};
+
+const themeColor = CATEGORY_COLOR[event.data.category] ?? '#777';
+---
+
+<BaseLayout title={title} description={description} jsonLd={[eventJsonLd, breadcrumbJsonLd]}>
+  <p class="back-link"><a href="/events/">← 事件一覧へ</a></p>
+
+  <article class="event-detail">
+    <header class="event-header">
+      <div class="event-meta-row">
+        <span class="event-category" style={`background:${themeColor};`}>
+          {event.data.category}
+        </span>
+        <span class="event-date-meta">
+          {eraLabel(yearNum)} {yearNum} 年 {monthNum} 月 {dayNum} 日
+        </span>
+      </div>
+      <h1>{event.data.title}</h1>
+      <p class="event-summary">{event.data.summary}</p>
+    </header>
+
+    <section class="event-related">
+      <h2>関連する偉人</h2>
+      <ul class="event-related-list">
+        {relatedPeople.map((p) => (
+          <li>
+            <a href={`/people/${p.id}/`} class="related-person-card">
+              <span class="related-person-name">{p.data.name}</span>
+              <span class="related-person-meta">
+                {p.data.birthDate.slice(0, 4)}-{p.data.deathDate.slice(0, 4)}
+                <span class="era-badge">{p.data.era.join('・')}</span>
+                <span class="category-badge">{p.data.category}</span>
+              </span>
+              <span class="related-person-desc">{p.data.shortDescription}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    {event.data.url && (
+      <section class="event-references">
+        <h2>参考資料</h2>
+        <ul>
+          <li><a href={event.data.url} target="_blank" rel="noopener">Wikipedia: {event.data.title}</a></li>
+        </ul>
+      </section>
+    )}
+
+    <p><a href="/events/">← 事件一覧に戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .back-link {
+    margin: 0 0 1rem;
+    font-size: 0.85rem;
+  }
+  .back-link a {
+    color: #8a7a55;
+    text-decoration: none;
+    border-bottom: 1px dotted #a89c7d;
+  }
+  .back-link a:hover {
+    border-bottom-style: solid;
+  }
+  .event-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e5e5e5;
+  }
+  .event-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .event-category {
+    display: inline-block;
+    padding: 0.2rem 0.7rem;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .event-date-meta {
+    color: #8a7a55;
+    font-size: 0.95rem;
+    font-variant-numeric: tabular-nums;
+  }
+  h1 {
+    margin: 0 0 0.5rem;
+  }
+  .event-summary {
+    margin: 0;
+    color: #333;
+    line-height: 1.8;
+    font-size: 1rem;
+  }
+  .event-related h2,
+  .event-references h2 {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.3rem;
+    margin: 1.5rem 0 1rem;
+  }
+  .event-related-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0.8rem;
+  }
+  .related-person-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 0.8rem 1rem;
+    border: 1px solid #d6d3c7;
+    border-radius: 6px;
+    background: #faf8f3;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 120ms ease;
+  }
+  .related-person-card:hover {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  }
+  .related-person-name {
+    font-size: 1rem;
+    color: #5a4a2a;
+    font-weight: 500;
+  }
+  .related-person-meta {
+    font-size: 0.78rem;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+  .era-badge,
+  .category-badge {
+    background: #f0f0f0;
+    color: #444;
+    padding: 0.05rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.7rem;
+  }
+  .related-person-desc {
+    font-size: 0.85rem;
+    color: #444;
+    line-height: 1.5;
+  }
+  .event-references ul {
+    padding-left: 1.2rem;
+  }
+  .event-references a {
+    color: #5a4a2a;
+  }
+</style>
