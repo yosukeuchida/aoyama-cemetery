@@ -7,7 +7,9 @@ deathDate: "1954-09-21"
 era: [明治, 大正]
 category: 実業家
 graveSection: 1種イ1号11側
-hideMap: true
+coords:
+  lat: 35.668189
+  lng: 139.720648
 shortDescription: 世界で初めて真珠の養殖に成功した実業家。「真珠王」と呼ばれ、ミキモト真珠を世界ブランドに育てた志摩鳥羽の出身。
 tags:
   - 真珠王
