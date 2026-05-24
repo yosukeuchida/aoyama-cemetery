@@ -7,7 +7,9 @@ deathDate: "1898-09-08"
 era: [江戸, 明治]
 category: 軍人
 graveSection: 1種イ1号25側
-hideMap: true
+coords:
+  lat: 35.668235
+  lng: 139.720452
 shortDescription: 幕府海軍士官。オランダ留学組として開陽丸を回航、榎本武揚とともに蝦夷地に渡って函館戦争を戦った。維新後は開拓使技師。
 tags:
   - 幕府海軍

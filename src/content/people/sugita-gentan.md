@@ -7,7 +7,9 @@ deathDate: "1889-07-19"
 era: [江戸, 明治]
 category: 学者
 graveSection: 1種イ1号22側
-hideMap: true
+coords:
+  lat: 35.668406
+  lng: 139.720372
 shortDescription: 蘭学医・蕃書調所教授・慶應義塾医学所教授。杉田玄白の蘭学伝統を継ぎ、幕末から明治の医学教育の橋渡しを担った。別名「杉田玄瑞」。
 tags:
   - 蘭学
