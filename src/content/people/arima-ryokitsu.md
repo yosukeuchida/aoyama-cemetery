@@ -6,6 +6,7 @@ birthDate: "1861-12-16"
 deathDate: "1944-05-01"
 era: [明治, 昭和]
 category: 軍人
+hideMap: true
 shortDescription: 旅順港閉塞作戦を立案・指揮した海軍大将。退役後は明治神宮宮司として 12 年務め、国民精神総動員中央連盟会長も歴任した。
 tags:
   - 日露戦争

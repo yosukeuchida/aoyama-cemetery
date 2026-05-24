@@ -21,6 +21,9 @@ knowsAbout:
   - 連合艦隊作戦
   - 軍令部
 nationality: JP
+coords:
+  lat: 35.667576
+  lng: 139.723025
 portrait: ../../assets/portraits/shimamura-hayao.jpg
 portraitCaption: 島村 速雄の肖像
 portraitCredit: Wikimedia Commons / Public Domain

@@ -6,6 +6,7 @@ birthDate: "1932-12-25"
 deathDate: "1999-07-21"
 era: [昭和]
 category: 文化人
+hideMap: true
 shortDescription: 『夏目漱石』『成熟と喪失』で戦後文芸評論を代表した保守思想家。妻の死後、自身の病苦と絶望を遺書に残し、66 歳で自ら命を絶った。
 tags:
   - 文芸評論

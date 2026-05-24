@@ -6,6 +6,7 @@ birthDate: "1854-09-09"
 deathDate: "1931-06-26"
 era: [明治, 昭和]
 category: 学者
+hideMap: true
 shortDescription: 会津白虎隊の生き残りからイェール大学を経て日本人初の物理学博士に登った教育者。東大総長を 11 年 11 か月務め、歴代最長記録を残した。
 tags:
   - 会津藩

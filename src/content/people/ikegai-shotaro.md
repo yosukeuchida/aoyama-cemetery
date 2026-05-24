@@ -6,6 +6,7 @@ birthDate: "1869-11-13"
 deathDate: "1934-07-28"
 era: [明治, 昭和]
 category: 実業家
+hideMap: true
 shortDescription: 国産初の旋盤と国産初のディーゼルエンジンを製造した池貝鉄工所の創業者。日本機械工業の祖の一人として東京工業大学教授も務めた。
 tags:
   - 機械工業

@@ -7,6 +7,7 @@ deathDate: "1961-10-29"
 era: [明治, 昭和]
 category: 文化人
 graveSection: 1イ2-2-6
+hideMap: true
 shortDescription: 白樺派の作家。長与専斎を父に、長与又郎(東大総長)を兄に持つ家系で、戯曲『項羽と劉邦』や小説『青銅の基督』を残した。
 tags:
   - 白樺派

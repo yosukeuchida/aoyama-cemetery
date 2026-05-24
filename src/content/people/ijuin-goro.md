@@ -21,6 +21,10 @@ knowsAbout:
   - 海軍兵器開発
   - 連合艦隊作戦
 nationality: JP
+mapQuery: 伊集院五郎の墓
+coords:
+  lat: 35.6663063
+  lng: 139.7227908
 portrait: ../../assets/portraits/ijuin-goro.jpg
 portraitCaption: 伊集院 五郎の肖像
 portraitCredit: Wikimedia Commons / Public Domain
