@@ -7,7 +7,9 @@ deathDate: "1908-06-23"
 era: [明治]
 category: 文化人
 graveSection: 1種ロ16号16
-hideMap: true
+coords:
+  lat: 35.663982
+  lng: 139.721504
 shortDescription: 自然主義文学の先駆として『武蔵野』『牛肉と馬鈴薯』を遺した明治の小説家。新聞記者出身、結核により36歳で早世。
 tags:
   - 自然主義

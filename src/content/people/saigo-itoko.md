@@ -7,7 +7,9 @@ deathDate: "1922-06-29"
 era: [明治, 大正]
 category: その他
 graveSection: 1種イ11号21側
-hideMap: true
+coords:
+  lat: 35.662774
+  lng: 139.722420
 shortDescription: 西郷隆盛の三度目の妻。城山に散った隆盛を遠く鹿児島で見送り、明治・大正を一族の支え手として生き抜いた薩摩の女性。本サイト初の女性偉人。
 tags:
   - 西郷隆盛の妻

@@ -7,7 +7,9 @@ deathDate: "1920-04-13"
 era: [明治, 大正]
 category: 学者
 graveSection: 1種イ10号21・22側1番甲
-hideMap: true
+coords:
+  lat: 35.663403
+  lng: 139.722188
 shortDescription: 海軍軍医総監。脚気の食物原因説を実証し、海軍から脚気をほぼ根絶。東京慈恵会医科大学の前身・成医会講習所を創設した近代日本医学の先駆者。
 tags:
   - 海軍軍医

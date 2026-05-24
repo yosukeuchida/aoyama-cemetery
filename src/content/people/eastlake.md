@@ -7,7 +7,9 @@ deathDate: "1905-02-18"
 era: [明治]
 category: 学者
 graveSection: 外国人墓地区域
-hideMap: true
+coords:
+  lat: 35.666522
+  lng: 139.721599
 shortDescription: 23 か国語を操った米国人英語教育者・お雇い外国人。慶應義塾で英文学を教え、国民英学会を創設、明治英語教育の先駆者となった「博言博士」。
 tags:
   - お雇い外国人

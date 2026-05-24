@@ -7,7 +7,9 @@ deathDate: "1886-05-23"
 era: [江戸, 明治]
 category: 軍人
 graveSection: 1種イ9号22側
-hideMap: true
+coords:
+  lat: 35.664077
+  lng: 139.722317
 shortDescription: 戊辰戦争で薩摩藩軍参謀として鳥羽伏見・会津戦を主導した名軍師。維新後は左大臣・宮内省事務総長を歴任した薩摩出身の参議、伯爵。
 tags:
   - 戊辰戦争

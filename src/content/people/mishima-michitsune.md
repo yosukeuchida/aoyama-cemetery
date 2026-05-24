@@ -7,7 +7,9 @@ deathDate: "1888-10-23"
 era: [江戸, 明治]
 category: 政治家
 graveSection: 1種イ9号12
-hideMap: true
+coords:
+  lat: 35.664452
+  lng: 139.722166
 shortDescription: 内務官僚・山形・福島・栃木県令を歴任、福島事件・加波山事件で自由民権運動を弾圧した「鬼県令」。薩摩出身、子爵。
 tags:
   - 内務官僚

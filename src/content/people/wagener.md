@@ -7,7 +7,9 @@ deathDate: "1892-11-08"
 era: [明治]
 category: 学者
 graveSection: 1種ロ7号(外国人墓地区域)
-hideMap: true
+coords:
+  lat: 35.666607
+  lng: 139.721395
 shortDescription: 明治政府お雇い外国人のドイツ人化学者。有田焼・京焼・ガラス・七宝の近代化を導き「日本陶磁業の恩人」と呼ばれた。
 tags:
   - お雇い外国人
