@@ -7,6 +7,9 @@ deathDate: "1915-03-18"
 era: [江戸, 明治]
 category: 政治家
 graveSection: 1種イ4号25側
+coords:
+  lat: 35.666570
+  lng: 139.721817
 shortDescription: 水戸藩出身の維新志士から宮内省官僚に転じ、皇后宮大夫として昭憲皇太后に40年仕えた明治宮中政治の重鎮。
 tags:
   - 水戸藩

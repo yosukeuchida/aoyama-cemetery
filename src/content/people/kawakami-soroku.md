@@ -7,6 +7,9 @@ deathDate: "1899-05-11"
 era: [江戸, 明治]
 category: 軍人
 graveSection: 1種イ13号13側
+coords:
+  lat: 35.665289
+  lng: 139.722279
 shortDescription: 陸軍大将・参謀総長。日清戦争の作戦計画を統括した「陸軍の頭脳」、桂太郎・児玉源太郎と並ぶ薩摩出身の俊英将官。
 tags:
   - 陸軍大将

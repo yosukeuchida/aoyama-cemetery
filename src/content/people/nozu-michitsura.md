@@ -7,6 +7,9 @@ deathDate: "1908-10-06"
 era: [江戸, 明治]
 category: 軍人
 graveSection: 1種イ1号26側
+coords:
+  lat: 35.668117
+  lng: 139.720452
 shortDescription: 陸軍元帥・侯爵。日清戦争で第5師団長として平壌を陥落させ、日露戦争では第4軍司令官として沙河・奉天会戦を戦った薩摩出身の名将。
 tags:
   - 陸軍元帥

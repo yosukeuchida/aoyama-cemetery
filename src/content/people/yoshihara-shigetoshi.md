@@ -7,6 +7,9 @@ deathDate: "1887-12-19"
 era: [江戸, 明治]
 category: 実業家
 graveSection: 1種イ4号4側
+coords:
+  lat: 35.667474
+  lng: 139.721503
 shortDescription: 日本銀行初代総裁。米国留学を経て大蔵省・大蔵卿松方正義の右腕として日本銀行創設を主導した薩摩出身の財政家。
 tags:
   - 日本銀行初代総裁

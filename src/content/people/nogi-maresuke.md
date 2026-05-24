@@ -7,6 +7,9 @@ deathDate: "1912-09-13"
 era: [江戸, 明治]
 category: 軍人
 graveSection: 1種ロ10号26側
+coords:
+  lat: 35.669214
+  lng: 139.723246
 shortDescription: 日露戦争で旅順を陥落させた陸軍大将。明治天皇の大喪の日に妻静子とともに自刃した。
 tags:
   - 日露戦争

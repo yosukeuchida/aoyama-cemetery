@@ -7,6 +7,9 @@ deathDate: "1903-10-30"
 era: [明治]
 category: 文化人
 graveSection: 1種ロ10号14側
+coords:
+  lat: 35.668276
+  lng: 139.723714
 shortDescription: 硯友社を結成し『金色夜叉』を遺した明治の小説家。雅俗折衷の文体で擬古典主義文学を代表した。
 tags:
   - 硯友社

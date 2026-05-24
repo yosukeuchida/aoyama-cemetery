@@ -7,6 +7,9 @@ deathDate: "1878-05-14"
 era: [江戸, 明治]
 category: 政治家
 graveSection: 1種イ2号15側
+coords:
+  lat: 35.667918
+  lng: 139.721487
 shortDescription: 明治維新三傑の一人。初代内務卿として近代日本の基礎を築いた薩摩出身の政治家。
 tags:
   - 明治維新

@@ -6,6 +6,9 @@ birthDate: "1841-12-30"
 deathDate: "1912-10-22"
 era: [明治]
 category: 文化人
+coords:
+  lat: 35.668036
+  lng: 139.720356
 shortDescription: アイルランド出身の英国砲兵将校から日本の英字紙 Japan Weekly Mail 主筆となり、河鍋暁斎に師事して浮世絵を蒐集した「弁慶」の異名を持つ親日家。
 tags:
   - お雇い外国人

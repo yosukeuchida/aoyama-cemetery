@@ -7,6 +7,9 @@ deathDate: "1860-03-24"
 era: [江戸]
 category: 軍人
 graveSection: 1種ロ12号9側
+coords:
+  lat: 35.667877
+  lng: 139.723599
 shortDescription: 桜田門外の変で井伊直弼の首を取った薩摩藩士。22歳で果て、討幕運動の引き金を引いた幕末志士。
 tags:
   - 薩摩藩

@@ -7,6 +7,9 @@ deathDate: "1904-03-27"
 era: [明治]
 category: 軍人
 graveSection: 1種イ21号9側
+coords:
+  lat: 35.663793
+  lng: 139.722898
 shortDescription: 日露戦争・旅順港閉塞作戦で部下を捜索中に戦死した海軍中佐。「軍神」と讃えられた竹田出身の海軍士官。
 tags:
   - 日露戦争

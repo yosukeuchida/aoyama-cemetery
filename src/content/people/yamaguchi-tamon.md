@@ -7,6 +7,9 @@ deathDate: "1942-06-06"
 era: [大正, 昭和]
 category: 軍人
 graveSection: 1種ロ8号1・14側
+coords:
+  lat: 35.667640
+  lng: 139.722642
 shortDescription: 海軍中将。米国通の航空戦専門家としてミッドウェー海戦で第二航空戦隊を指揮、旗艦・飛龍と運命を共にした名将。
 tags:
   - 海軍中将

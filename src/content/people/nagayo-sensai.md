@@ -7,6 +7,9 @@ deathDate: "1902-09-08"
 era: [江戸, 明治]
 category: 学者
 graveSection: 1種イ12号2側
+coords:
+  lat: 35.665505
+  lng: 139.722280
 shortDescription: 「衛生」の語を作った明治日本の医療制度の父。初代内務省衛生局長として「医制」を制定し、近代日本の公衆衛生の骨格を築いた肥前大村出身の蘭方医。
 tags:
   - 衛生

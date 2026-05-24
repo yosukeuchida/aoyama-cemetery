@@ -7,6 +7,9 @@ deathDate: "1909-04-01"
 era: [江戸, 明治]
 category: 実業家
 graveSection: 1種ロ5号8側
+coords:
+  lat: 35.668598
+  lng: 139.719416
 shortDescription: 越後長岡藩士、海援隊・太極丸船将。維新後にアメリカで造船術を学び、白峯造船所を経営した日本近代造船業の先駆者。
 tags:
   - 長岡藩

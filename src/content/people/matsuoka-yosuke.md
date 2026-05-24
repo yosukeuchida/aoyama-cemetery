@@ -7,6 +7,9 @@ deathDate: "1946-06-27"
 era: [昭和]
 category: 政治家
 graveSection: 1種イ3号1側
+coords:
+  lat: 35.667114
+  lng: 139.721423
 shortDescription: 国際連盟脱退時の首席全権、第二次近衛内閣の外相として日独伊三国同盟・日ソ中立条約を主導した山口出身の外交官。
 tags:
   - 国際連盟脱退

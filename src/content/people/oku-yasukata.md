@@ -6,6 +6,9 @@ birthDate: "1847-01-05"
 deathDate: "1930-07-19"
 era: [明治, 大正]
 category: 軍人
+coords:
+  lat: 35.664647
+  lng: 139.721771
 shortDescription: 日露戦争で第二軍を率いた陸軍元帥。皇族と薩長以外で初めて元帥府に列した寡黙な名将で、生涯自らの戦功を語らなかった。
 tags:
   - 日露戦争

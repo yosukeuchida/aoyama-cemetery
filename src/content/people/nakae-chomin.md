@@ -7,6 +7,9 @@ deathDate: "1901-12-13"
 era: [明治]
 category: 文化人
 graveSection: 1種イ1号24側
+coords:
+  lat: 35.668221
+  lng: 139.720168
 shortDescription: 「東洋のルソー」と称された自由民権運動の思想家。ルソー『社会契約論』を漢訳『民約訳解』として刊行した。
 tags:
   - 自由民権運動

@@ -7,6 +7,9 @@ deathDate: "1981-02-19"
 era: [大正, 昭和]
 category: 実業家
 graveSection: 1種イ5号8側
+coords:
+  lat: 35.666382
+  lng: 139.722365
 shortDescription: 帝国ホテル中興の祖。ライト館の運営から戦中・戦後の難局を乗り越え、半世紀にわたって日本を代表する国際ホテルを支えた支配人・社長。
 tags:
   - 帝国ホテル

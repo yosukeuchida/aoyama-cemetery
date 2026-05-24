@@ -7,6 +7,9 @@ deathDate: "1897-08-04"
 era: [江戸, 明治]
 category: 政治家
 graveSection: 1種イ13号24側
+coords:
+  lat: 35.665473
+  lng: 139.723019
 shortDescription: 大政奉還建白の主役。坂本龍馬と組んで土佐藩主・山内容堂を動かし、自由民権運動の旗手として大同団結を主導した土佐の風雲児。
 tags:
   - 大政奉還

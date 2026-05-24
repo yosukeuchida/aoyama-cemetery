@@ -7,6 +7,9 @@ deathDate: "1911-11-26"
 era: [明治]
 category: 政治家
 graveSection: 1種ロ12号1・6側
+coords:
+  lat: 35.667626
+  lng: 139.723137
 shortDescription: 日露戦争を終結させたポーツマス条約全権大使。日英同盟と関税自主権回復を主導した日向飫肥出身の外交官。
 tags:
   - 外務大臣

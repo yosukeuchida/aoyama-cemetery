@@ -7,6 +7,9 @@ deathDate: "1937-01-25"
 era: [明治, 大正]
 category: 実業家
 graveSection: 1種イ6号2側
+coords:
+  lat: 35.666218
+  lng: 139.721686
 shortDescription: 森永製菓創業者。米国で習得した西洋菓子製造技術を日本に持ち込み、ミルクキャラメルとマシュマロを国民食に押し上げた佐賀伊万里出身の菓子王。
 tags:
   - 森永製菓

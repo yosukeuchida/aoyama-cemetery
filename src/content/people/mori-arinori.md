@@ -7,6 +7,9 @@ deathDate: "1889-02-12"
 era: [江戸, 明治]
 category: 政治家
 graveSection: 1種イ1号12側
+coords:
+  lat: 35.668047
+  lng: 139.720642
 shortDescription: 初代文部大臣として近代教育制度の骨格を築いた薩摩出身の政治家・外交官。大日本帝国憲法発布の日に凶刃に倒れた。
 tags:
   - 初代文部大臣

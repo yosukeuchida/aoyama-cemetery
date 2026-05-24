@@ -7,6 +7,9 @@ deathDate: "1881-01-11"
 era: [江戸, 明治]
 category: 実業家
 graveSection: 1種ロ12号31側
+coords:
+  lat: 35.667249
+  lng: 139.723339
 shortDescription: 「からくり儀右衛門」と呼ばれた江戸末期の発明家。万年時計を完成させ、後に東芝の源流となる田中製造所を創業した。
 tags:
   - からくり儀右衛門
