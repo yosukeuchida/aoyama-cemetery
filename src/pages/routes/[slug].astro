@@ -1,6 +1,7 @@
 ---
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import RouteMap from '../../components/RouteMap.astro';
 
 export async function getStaticPaths() {
   const routes = await getCollection('routes');
@@ -33,6 +34,22 @@ if (missing.length > 0) {
     `Route ${route.id} references unknown person slug(s): ${missing.join(', ')}`
   );
 }
+
+// 散歩経路マップ用: 全 stops が coords を持っている場合のみ表示
+const mapStops = stops
+  .map(({ stop, person }) => {
+    const coords = person!.data.coords;
+    if (!coords) return null;
+    return {
+      slug: person!.id,
+      name: person!.data.name,
+      lat: coords.lat,
+      lng: coords.lng,
+    };
+  })
+  .filter((s): s is { slug: string; name: string; lat: number; lng: number } => s !== null);
+
+const showRouteMap = mapStops.length === stops.length && stops.length >= 2;
 
 const THEME_COLOR: Record<string, string> = {
   維新: '#8a5a2a',
@@ -105,6 +122,8 @@ const breadcrumbJsonLd = {
     {route.data.subtitle && <p class="route-subtitle">{route.data.subtitle}</p>}
     <p class="route-description">{route.data.description}</p>
   </header>
+
+  {showRouteMap && <RouteMap stops={mapStops} />}
 
   <article class="route-content">
     <Content />

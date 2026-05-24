@@ -7,6 +7,9 @@ deathDate: "1965-08-13"
 era: [昭和]
 category: 政治家
 graveSection: 1種イ1号26側
+coords:
+  lat: 35.668114
+  lng: 139.720275
 shortDescription: 第58-60代内閣総理大臣。所得倍増計画を掲げて高度経済成長期の日本を牽引した戦後の大宰相。
 tags:
   - 戦後政治

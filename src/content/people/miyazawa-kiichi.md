@@ -7,6 +7,9 @@ deathDate: "2007-06-28"
 era: [昭和]
 category: 政治家
 graveSection: 1種ロ17号12
+coords:
+  lat: 35.663112
+  lng: 139.721846
 shortDescription: 第78代内閣総理大臣。バブル崩壊後の日本経済を率いた宏池会の領袖、戦後屈指の知性派宰相。
 tags:
   - 戦後政治

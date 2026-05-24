@@ -1,0 +1,144 @@
+---
+interface Props {
+  stops: Array<{
+    name: string;
+    lat: number;
+    lng: number;
+    slug: string;
+  }>;
+  height?: string;
+}
+
+const { stops, height = '420px' } = Astro.props;
+const mapId = `route-map-${Math.random().toString(36).substring(2, 9)}`;
+---
+
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+  crossorigin=""
+/>
+
+<section class="route-map-section">
+  <h2>散歩経路マップ</h2>
+  <div id={mapId} class="route-map" style={`height: ${height};`}></div>
+  <p class="map-attribution">
+    <small>
+      地図データ: &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors
+    </small>
+  </p>
+</section>
+
+<script
+  is:inline
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+  crossorigin=""></script>
+
+<script define:vars={{ mapId, stops }} is:inline>
+  function initRouteMap() {
+    if (typeof L === 'undefined') {
+      setTimeout(initRouteMap, 100);
+      return;
+    }
+
+    const lats = stops.map((s) => s.lat);
+    const lngs = stops.map((s) => s.lng);
+    const bounds = [
+      [Math.min(...lats), Math.min(...lngs)],
+      [Math.max(...lats), Math.max(...lngs)],
+    ];
+
+    const map = L.map(mapId).fitBounds(bounds, { padding: [40, 40] });
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 19,
+    }).addTo(map);
+
+    // 経路ライン
+    L.polyline(
+      stops.map((s) => [s.lat, s.lng]),
+      {
+        color: '#5b8cb8',
+        weight: 4,
+        opacity: 0.85,
+        dashArray: '6, 6',
+      }
+    ).addTo(map);
+
+    // 各 stop に番号付きマーカー
+    stops.forEach((stop, i) => {
+      const icon = L.divIcon({
+        className: 'route-stop-marker',
+        html: `<div class="route-stop-pin">${i + 1}</div>`,
+        iconSize: [28, 28],
+        iconAnchor: [14, 14],
+        popupAnchor: [0, -14],
+      });
+
+      L.marker([stop.lat, stop.lng], { icon })
+        .addTo(map)
+        .bindPopup(
+          `<strong>${i + 1}. <a href="/people/${stop.slug}/" style="color:#5a4a2a;">${stop.name}</a></strong>`
+        );
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initRouteMap);
+  } else {
+    initRouteMap();
+  }
+</script>
+
+<style>
+  .route-map-section {
+    margin: 1.5rem 0;
+  }
+  .route-map-section h2 {
+    margin-bottom: 0.6rem;
+    font-size: 1.1rem;
+    color: #5a4a2a;
+  }
+  .route-map {
+    border-radius: 8px;
+    border: 1px solid #d6d3c7;
+    overflow: hidden;
+  }
+  .map-attribution {
+    margin: 0.3rem 0 0;
+    color: #8a7a55;
+    text-align: right;
+  }
+  .map-attribution a {
+    color: #8a7a55;
+  }
+</style>
+
+<style is:global>
+  .route-stop-pin {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #5a4a2a;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  }
+  .route-stop-marker {
+    background: transparent !important;
+    border: none !important;
+  }
+  .leaflet-popup-content a {
+    text-decoration: none;
+    border-bottom: 1px dotted #a89c7d;
+  }
+</style>

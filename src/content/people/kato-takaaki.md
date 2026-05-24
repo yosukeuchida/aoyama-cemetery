@@ -8,6 +8,9 @@ era: [明治, 大正]
 category: 政治家
 graveSection: 1種ロ8号1・14側
 mapQuery: 加藤高明の墓
+coords:
+  lat: 35.667735
+  lng: 139.722359
 shortDescription: 第24代内閣総理大臣。憲政会総裁として護憲三派内閣を組織し、普通選挙法を成立させた外交官出身の政党政治家。
 tags:
   - 内閣総理大臣

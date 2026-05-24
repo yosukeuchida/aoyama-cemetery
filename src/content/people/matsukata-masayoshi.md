@@ -7,6 +7,9 @@ deathDate: "1924-07-02"
 era: [明治]
 category: 政治家
 graveSection: 1種ロ17号1側
+coords:
+  lat: 35.663641
+  lng: 139.721723
 shortDescription: 第4代・第6代内閣総理大臣。日本銀行を創設し松方デフレで近代財政の基礎を築いた薩摩出身の財政家。
 tags:
   - 内閣総理大臣

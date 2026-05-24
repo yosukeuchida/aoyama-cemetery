@@ -8,6 +8,9 @@ era: [明治, 大正]
 category: 政治家
 graveSection: 1種ロ12号1・6側
 mapQuery: 加藤友三郎先生の墓
+coords:
+  lat: 35.667700
+  lng: 139.723305
 shortDescription: 第21代内閣総理大臣・海軍大将。ワシントン海軍軍縮条約を主導し、現職首相のまま在任中に死去した広島出身の軍人政治家。
 tags:
   - 内閣総理大臣

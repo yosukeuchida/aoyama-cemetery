@@ -7,6 +7,9 @@ deathDate: "1931-08-26"
 era: [大正, 昭和]
 category: 政治家
 graveSection: 1種ロ8号1・14側
+coords:
+  lat: 35.667798
+  lng: 139.722511
 shortDescription: 第27代内閣総理大臣。「ライオン宰相」と呼ばれた立憲民政党総裁。東京駅で狙撃され翌年死去した。
 tags:
   - 内閣総理大臣

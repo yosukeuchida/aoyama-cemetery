@@ -7,6 +7,9 @@ deathDate: "1932-05-15"
 era: [大正, 昭和]
 category: 政治家
 graveSection: 1種ロ8号1・14側
+coords:
+  lat: 35.667674
+  lng: 139.722918
 shortDescription: 第29代内閣総理大臣。立憲政友会総裁。五・一五事件で首相官邸にて凶弾に倒れた憲政の闘士。
 tags:
   - 内閣総理大臣

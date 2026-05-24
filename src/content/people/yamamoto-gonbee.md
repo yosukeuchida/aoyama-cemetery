@@ -7,6 +7,9 @@ deathDate: "1933-12-08"
 era: [明治, 大正]
 category: 政治家
 graveSection: 1種イ9号26側
+coords:
+  lat: 35.663995
+  lng: 139.722046
 shortDescription: 第16・22代内閣総理大臣。日本海軍の制度を一手に作り上げた薩摩出身の海軍大将。
 tags:
   - 内閣総理大臣

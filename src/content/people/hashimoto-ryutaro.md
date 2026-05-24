@@ -7,6 +7,9 @@ deathDate: "2006-07-01"
 era: [昭和]
 category: 政治家
 graveSection: 1種イ12号4側
+coords:
+  lat: 35.662598
+  lng: 139.722672
 shortDescription: 第82・83代内閣総理大臣。橋本行革と消費税 5% 引き上げ、普天間返還合意を実現した平成自民党の領袖。
 tags:
   - 内閣総理大臣
