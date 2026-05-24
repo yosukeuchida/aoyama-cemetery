@@ -46,8 +46,6 @@ relatedPeople:
     relation: 加藤系民政党の蔵相、政党政治の同志
   - slug: makino-nobuaki
     relation: 大正期の宮中・政界の重鎮、リベラル派の同志
-  - slug: hayashi-tadasu
-    relation: 同時代の外交官、加藤と並ぶ駐英経験の外務省幹部
 ---
 
 ## 普通選挙法を成立させた首相

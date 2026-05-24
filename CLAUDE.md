@@ -26,6 +26,26 @@
 6. `git commit && git push` → Cloudflare Pages が自動デプロイ
 7. **墓参り写真がある場合**: `./scripts/add-grave-photo.sh <slug> <写真ファイル...>` で自動的にリサイズ(長辺 1600px / quality 85)+ HEIC→JPEG 変換 + 規則ファイル名で配置される。frontmatter 編集不要、`src/assets/grave-photos/<slug>/YYYY-MM-DD-<caption>.jpg` に置けば自動でギャラリー表示。詳細: `docs/superpowers/specs/2026-05-21-grave-photo-gallery-design.md`
 
+## 偉人削除手順(墓じまい対応)
+
+青山霊園から墓所が撤去された(墓じまいされた)ことが判明した場合、偉人ページを削除する。単純な人物ページ削除では完結せず、複数コレクションに連鎖修正が必要(2026-05-24 に otori-keisuke / hayashi-tadasu の 2 例で確立した手順)。
+
+1. **全参照を grep で網羅検出**: `grep -rn "<slug>\|<日本語名>" src/ scripts/` と Obsidian 進捗メモにも grep をかける
+2. **完全削除**: `src/content/people/<slug>.md` + `src/assets/portraits/<slug>.jpg`
+3. **frontmatter 構造参照を削除**:
+   - 他人物の `relatedPeople` から該当 slug エントリ
+   - events の `personSlugs` から該当 slug
+   - routes の `stops` から該当 slug(該当する場合)
+4. **本文記述の判断 — 墓所言及 vs 史実言及**:
+   - 削除する: 「青山霊園に眠る」「同区画に...が並ぶ」型の墓所言及(現状と矛盾するため)
+   - 保持する: 「駐英公使として日英同盟を調印」「戊辰戦争で旧幕府軍を指揮」型の歴史的事実(史実は墓の有無と独立、周辺人物の文脈形成に必要)
+   - 中間: events の関係者紹介セクション自体は史実なので保持、ただし末尾「本霊園 ◯◯側に眠る」は「墓所は当初... 後に墓じまいされ現在は同霊園内に墓所はない」に書き換え
+5. **scripts/download-portraits.py の PAIRS エントリ削除**(再ダウンロード抑止)
+6. **Obsidian 進捗メモも修正**(`~/Desktop/Obsidian/claude-code/2026-05-24-aoyama-cemetery-pin未取得偉人リスト.md` 等)
+7. **ビルド検証**: `npm run build` で zod 検証通過 + ページ数 -1 を確認してから commit & push
+
+実例: 2026-05-24 林董(hayashi-tadasu)削除では grep 25 箇所 / 7 カテゴリ(人物ファイル・portrait・relatedPeople 7 ファイル・events 1 件・本文墓所言及 6 ファイル・routes 3 ファイル・script・Obsidian)を順に修正、178 → 177 ページ。詳細: `~/Desktop/Obsidian/claude-code/2026-05-24-aoyama-cemetery-墓じまい対応-相楽総三-林董.md`
+
 ## 地図機能
 
 地図は **デフォルト ON**。偉人ページ(`src/pages/people/[slug].astro`)で本文下に Google Maps の iframe を表示する。frontmatter で挙動を 4 通りに制御:

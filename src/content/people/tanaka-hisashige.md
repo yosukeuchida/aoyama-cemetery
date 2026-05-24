@@ -37,8 +37,6 @@ relatedPeople:
     relation: 佐賀藩精煉方で蒸気機関・反射炉開発を共に担った同僚
   - slug: wagener
     relation: 明治殖産興業を技術面から支えた同時代のお雇い外国人化学者
-  - slug: otori-keisuke
-    relation: 工部大学校で近代工業教育を整備した同時代の旧幕臣
   - slug: mikimoto-kokichi
     relation: 一代で産業を興した明治の発明的実業家(真珠養殖)
 ---

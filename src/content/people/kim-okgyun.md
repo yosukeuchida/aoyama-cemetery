@@ -38,8 +38,6 @@ relatedPeople:
     relation: 福澤を介して金玉均を支援した明治政府要人(土佐自由民権)
   - slug: inukai-tsuyoshi
     relation: 大隈系・改進党系の政治家、開化派支援に共鳴した同時代人
-  - slug: hayashi-tadasu
-    relation: 同時代の外務官僚、日清戦争前夜の朝鮮問題に関与
   - slug: komura-jutaro
     relation: 金玉均暗殺後の対清対朝外交を担った外務省幹部
 ---
