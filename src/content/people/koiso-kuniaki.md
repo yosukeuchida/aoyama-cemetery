@@ -7,7 +7,9 @@ deathDate: "1950-11-03"
 era: [明治, 昭和]
 category: 政治家
 graveSection: 1種ロ8号33側
-hideMap: true
+coords:
+  lat: 35.666901
+  lng: 139.722835
 shortDescription: 第41代内閣総理大臣・陸軍大将。「朝鮮の虎」と呼ばれた朝鮮総督。本土決戦準備内閣を率いて終戦直前に総辞職、A 級戦犯として巣鴨で病没。
 tags:
   - 内閣総理大臣

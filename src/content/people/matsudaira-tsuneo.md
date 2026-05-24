@@ -7,7 +7,9 @@ deathDate: "1949-11-14"
 era: [大正, 昭和]
 category: 政治家
 graveSection: 1種ロ8号1・14側
-hideMap: true
+coords:
+  lat: 35.667580
+  lng: 139.722290
 shortDescription: 駐英・駐米大使、宮内大臣、初代参議院議長。会津藩主松平容保の四男、娘・節子は秩父宮雍仁親王妃となった皇室外戚。
 tags:
   - 駐英大使

@@ -7,7 +7,9 @@ deathDate: "1953-02-25"
 era: [大正, 昭和]
 category: 文化人
 graveSection: 1種イ2号15側
-hideMap: true
+coords:
+  lat: 35.667775
+  lng: 139.721406
 shortDescription: アララギ派を代表する歌人・精神科医。歌集『赤光』で近代短歌に革新をもたらし、第二芸術論への反論でも知られる。
 tags:
   - アララギ派

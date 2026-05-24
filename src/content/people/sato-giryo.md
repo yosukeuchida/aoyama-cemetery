@@ -7,7 +7,9 @@ deathDate: "1951-05-12"
 era: [明治, 大正]
 category: 実業家
 graveSection: 1種イ5号22側
-hideMap: true
+coords:
+  lat: 35.666296
+  lng: 139.722686
 shortDescription: 新潮社創業者。雑誌『新潮』を 1904 年に創刊し、自然主義文学から世界文学全集まで近代日本の出版文化を半世紀にわたって牽引した秋田・角館出身の出版人。
 tags:
   - 新潮社

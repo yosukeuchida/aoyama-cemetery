@@ -7,7 +7,9 @@ deathDate: "1956-01-28"
 era: [大正, 昭和]
 category: 政治家
 graveSection: 1種イ5号17側
-hideMap: true
+coords:
+  lat: 35.666003
+  lng: 139.722365
 shortDescription: 朝日新聞主筆・副社長、戦後は吉田茂内閣の副総理。玄洋社系で頭山満に師事、自由民主党結成を主導した昭和の政治家。1956年自民党結成直後に急逝、首相候補と目された。
 tags:
   - 朝日新聞主筆
