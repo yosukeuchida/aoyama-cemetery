@@ -7,7 +7,9 @@ deathDate: "1899-06-26"
 era: [江戸, 明治]
 category: 政治家
 graveSection: 1種イ5号7側
-hideMap: true
+coords:
+  lat: 35.666506
+  lng: 139.722453
 shortDescription: 佐賀の七賢人の一人。司法卿・文部卿として近代法典の整備と教育制度の骨格を築いた肥前佐賀の政治家、伯爵。
 tags:
   - 佐賀の七賢人

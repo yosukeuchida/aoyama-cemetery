@@ -7,7 +7,9 @@ deathDate: "1923-12-02"
 era: [明治, 大正]
 category: 学者
 graveSection: 1種イ3号4側
-hideMap: true
+coords:
+  lat: 35.666957
+  lng: 139.721285
 shortDescription: 長崎の唐通事から日本初期の英学者へ。木戸孝允・伊藤博文・井上馨らに英語を教え、明六社同人として明治啓蒙運動を担った教育者・元老院議官。
 tags:
   - 唐通事

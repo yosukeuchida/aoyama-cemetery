@@ -7,7 +7,9 @@ deathDate: "1882-06-18"
 era: [江戸, 明治]
 category: 軍人
 graveSection: 1種ロ7号(外国人墓地区域)
-hideMap: true
+coords:
+  lat: 35.666673
+  lng: 139.721544
 shortDescription: 幕府フランス軍事顧問団から明治政府お雇い外国人へ。100以上の法律・軍事資料を翻訳し、明治初期の制度設計を支えたフランス人軍人。
 tags:
   - お雇い外国人

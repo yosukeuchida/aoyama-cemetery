@@ -7,7 +7,9 @@ deathDate: "1900-08-23"
 era: [江戸, 明治]
 category: 政治家
 graveSection: 1種イ1号9側
-hideMap: true
+coords:
+  lat: 35.668196
+  lng: 139.720843
 shortDescription: 第2代内閣総理大臣。戊辰戦争で五稜郭を攻略、北海道開拓使長官として開拓事業を主導した薩摩出身の政治家。
 tags:
   - 内閣総理大臣

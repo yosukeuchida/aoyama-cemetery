@@ -7,7 +7,9 @@ deathDate: "1945-03-22"
 era: [大正, 昭和]
 category: 軍人
 graveSection: 1種イ8号3側
-hideMap: true
+coords:
+  lat: 35.665116
+  lng: 139.722059
 shortDescription: ロサンゼルス五輪馬術障害飛越競技金メダリスト「バロン西」。男爵・陸軍中佐として戦車連隊を率い、硫黄島で散った国民的英雄。
 tags:
   - ロサンゼルスオリンピック

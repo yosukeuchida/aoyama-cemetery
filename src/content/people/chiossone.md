@@ -6,7 +6,9 @@ birthDate: "1833-01-21"
 deathDate: "1898-04-11"
 era: [明治]
 category: その他
-hideMap: true
+coords:
+  lat: 35.666550
+  lng: 139.721512
 shortDescription: イタリア人版画家・お雇い外国人。大蔵省紙幣局に 16 年勤務して日本初の近代紙幣・切手を製作。西郷隆盛・明治天皇の御真影など多くの肖像画も遺した。
 tags:
   - お雇い外国人

@@ -6,7 +6,9 @@ birthDate: "1837-08-21"
 deathDate: "1897-12-12"
 era: [江戸, 明治]
 category: その他
-hideMap: true
+coords:
+  lat: 35.666512
+  lng: 139.721617
 shortDescription: 米国市民権を得た最初の日本人。漂流民から商人へと変じ、日本初の日本語新聞「海外新聞」を発行した「日本新聞の父」。
 tags:
   - 米国市民権

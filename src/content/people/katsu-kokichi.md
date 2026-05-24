@@ -7,7 +7,9 @@ deathDate: "1850-09-04"
 era: [江戸]
 category: 文化人
 graveSection: 1種イ4号22側
-hideMap: true
+coords:
+  lat: 35.666856
+  lng: 139.721879
 shortDescription: 江戸幕末の無役の旗本にして、自伝『夢酔独言』の作者。勝海舟の父。賭博・喧嘩・流浪に費やした半生を率直に綴った江戸庶民文化の最良の証言者。
 tags:
   - 夢酔独言
