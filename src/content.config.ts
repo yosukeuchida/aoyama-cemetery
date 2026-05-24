@@ -97,6 +97,7 @@ const routes = defineCollection({
         })
       )
       .min(3),
+    walkOrder: z.array(z.number().int().positive()).optional(),
     order: z.number().int().default(100),
   }),
 });

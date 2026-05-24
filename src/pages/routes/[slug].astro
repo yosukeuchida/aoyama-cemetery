@@ -51,6 +51,8 @@ const mapStops = stops
 
 const showRouteMap = mapStops.length === stops.length && stops.length >= 2;
 
+const walkOrder = route.data.walkOrder;
+
 const THEME_COLOR: Record<string, string> = {
   維新: '#8a5a2a',
   戊辰戦争: '#6b3a2a',
@@ -123,7 +125,7 @@ const breadcrumbJsonLd = {
     <p class="route-description">{route.data.description}</p>
   </header>
 
-  {showRouteMap && <RouteMap stops={mapStops} />}
+  {showRouteMap && <RouteMap stops={mapStops} walkOrder={walkOrder} />}
 
   <article class="route-content">
     <Content />
