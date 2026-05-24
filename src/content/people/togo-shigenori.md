@@ -43,6 +43,8 @@ relatedPeople:
     relation: 太平洋戦争末期に終戦工作で立場が交錯した首相
   - slug: makino-nobuaki
     relation: 戦前外務省で先行世代として薫陶を受けた外交の重鎮
+  - slug: hayashi-tadasu
+    relation: 明治外交の先達として外務省の伝統を残した外相
   - slug: komura-jutaro
     relation: 明治期日本外交の象徴的先達(ポーツマス全権)
 ---

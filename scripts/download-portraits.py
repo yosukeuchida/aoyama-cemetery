@@ -59,6 +59,7 @@ PAIRS = [
     ("nozu-michitsura", "Nozu_Michitsura.jpg"),
     ("uehara-yusaku", "Uehara_Yusaku.jpg"),
     ("togo-shigenori", "Shigenori_Togo.jpg"),
+    ("hayashi-tadasu", "Tadasu_Hayashi.jpg"),
     ("toyama-mitsuru", "Toyama_Mitsuru.jpg"),
     ("saigo-itoko", "Saigō_Itoko.jpg"),
     ("nakamura-kichiemon-i", "Kichiemon_Nakamura_I_1951.jpg"),

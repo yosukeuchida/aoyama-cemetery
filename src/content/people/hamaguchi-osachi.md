@@ -44,6 +44,8 @@ relatedPeople:
     relation: 立憲同志会以来の先輩首相、民政党系の系譜上の先達
   - slug: makino-nobuaki
     relation: 昭和初期の宮中重臣、政党政治の理解者
+  - slug: hayashi-tadasu
+    relation: 対英米協調外交の先達、日英同盟締結の主役
   - slug: kato-tomosaburo
     relation: 同時代に海軍軍縮を進めた首相、軍縮路線の先輩
 ---

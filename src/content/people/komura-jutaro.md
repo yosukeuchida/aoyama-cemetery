@@ -37,6 +37,8 @@ references:
 relatedPeople:
   - slug: kato-tomosaburo
     relation: ワシントン会議全権・後の首相、戦争と平和を担った後輩
+  - slug: hayashi-tadasu
+    relation: 日英同盟を共に締結した駐英公使、外交パートナー
   - slug: nogi-maresuke
     relation: 日露戦争で陸戦を率いた、ポーツマス条約の前提を作った将軍
   - slug: kawakami-soroku
