@@ -110,6 +110,25 @@ PAIRS = [
     ("eastlake", "William_Clark_Eastlake_and_his_son_Frederic.jpg"),
     # shiramine-shunme: 海援隊集合写真のみ、単独肖像なし
     # hirai-kao: Wikipedia に肖像なし
+    # 2026-05-24 追加分(18名バッチ、PD 確認済 / PD 未経過は除外)
+    ("oku-yasukata", "Oku_Yasukata.jpg"),
+    ("nagata-tetsuzan", "Tessan_Nagata_2.jpg"),
+    ("shirakawa-yoshinori", "Yoshinori_Shirakawa_Color.jpg"),
+    ("ijuin-goro", "Ijuin_Goro.jpg"),
+    ("shimamura-hayao", "Shimamura_Hayao.jpg"),
+    ("arima-ryokitsu", "Arima_Ryokitsu.jpg"),
+    ("takarabe-takeshi", "Takeshi_takarabe.jpg"),
+    # yamanashi-katsunoshin: 1967 没で PD 未経過(2038 年に PD)
+    ("yamakawa-kenjiro", "Kenjiro_Yamakawa_2.jpg"),
+    ("nagaoka-hantaro", "Hantaro_Nagaoka.jpg"),
+    ("tsuda-sen", "Tsuda_Sen.jpg"),
+    ("oki-kibataro", "Oki_Kibataro.png"),
+    ("ikegai-shotaro", "Ikegai_Shôtarô.jpg"),
+    ("yanase-chotaro", "Yanase_Chōtarō.jpg"),
+    ("okamoto-kido", "Kido_okamoto.jpg"),
+    ("brinkley", "Captain_Francis_Brinkley.jpg"),
+    # nagayo-yoshiro: 1961 没で PD 未経過(2032 年に PD)
+    # eto-jun: 1999 没で PD 未経過(2070 年に PD)
 ]
 
 OUT_DIR = "src/assets/portraits"

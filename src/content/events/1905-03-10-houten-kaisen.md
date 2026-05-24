@@ -6,6 +6,7 @@ personSlugs:
   - nozu-michitsura
   - akiyama-yoshifuru
   - tatsumi-naofumi
+  - oku-yasukata
 category: 戦争
 url: https://ja.wikipedia.org/wiki/奉天会戦
 ---

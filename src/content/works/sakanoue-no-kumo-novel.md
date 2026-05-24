@@ -11,6 +11,12 @@ personSlugs:
   - kato-tomosaburo
   - kawakami-soroku
   - tatsumi-naofumi
+  - oku-yasukata
+  - nozu-michitsura
+  - nogi-maresuke
+  - shimamura-hayao
+  - ijuin-goro
+  - arima-ryokitsu
 url: https://ja.wikipedia.org/wiki/坂の上の雲
 ---
 
