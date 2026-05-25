@@ -6,6 +6,9 @@ personSlugs:
   - arimura-jizaemon
 category: 事件
 url: https://ja.wikipedia.org/wiki/桜田門外の変
+heroImage: ../../assets/event-images/1860-03-24-sakuradamongai.jpg
+heroImageCaption: "桜田門外之変図"
+heroImageCredit: "月岡芳年 / Wikimedia Commons / Public domain"
 ---
 
 ## 江戸幕府を揺るがした朝の襲撃

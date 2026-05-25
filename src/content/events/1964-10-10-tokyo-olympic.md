@@ -6,6 +6,9 @@ personSlugs:
   - ikeda-hayato
 category: 社会
 url: https://ja.wikipedia.org/wiki/1964年東京オリンピック
+heroImage: ../../assets/event-images/1964-10-10-tokyo-olympic.png
+heroImageCaption: "Tokyo 1964 Summer Olympics logo"
+heroImageCredit: "Yusaku Kamekura / Wikimedia Commons / Public domain"
 ---
 
 ## 国立競技場の空に響いた開会宣言

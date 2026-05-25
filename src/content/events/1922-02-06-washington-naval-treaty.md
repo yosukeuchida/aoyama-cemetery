@@ -6,6 +6,9 @@ personSlugs:
   - kato-tomosaburo
 category: 条約
 url: https://ja.wikipedia.org/wiki/ワシントン海軍軍縮条約
+heroImage: ../../assets/event-images/1922-02-06-washington-naval-treaty.jpg
+heroImageCaption: "Buy War Bonds Now Art.IWMPST10457"
+heroImageCredit: "National War Savings Committee / Wikimedia Commons / Public domain"
 ---
 
 ## 海相が自ら海軍を縮小させた条約

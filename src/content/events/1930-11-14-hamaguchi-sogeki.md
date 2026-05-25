@@ -6,6 +6,9 @@ personSlugs:
   - hamaguchi-osachi
 category: 事件
 url: https://ja.wikipedia.org/wiki/浜口雄幸
+heroImage: ../../assets/event-images/1930-11-14-hamaguchi-sogeki.png
+heroImageCaption: "東京駅で銃撃され運ばれる浜口雄幸首相"
+heroImageCredit: "Wikimedia Commons / Public domain"
 ---
 
 ## 東京駅頭の銃声 — 戦前テロの幕開け

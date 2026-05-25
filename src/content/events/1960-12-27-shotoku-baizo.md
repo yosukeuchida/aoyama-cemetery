@@ -6,6 +6,9 @@ personSlugs:
   - ikeda-hayato
 category: 内閣
 url: https://ja.wikipedia.org/wiki/国民所得倍増計画
+heroImage: ../../assets/event-images/1960-12-27-shotoku-baizo.jpg
+heroImageCaption: "国民所得倍増計画を策定した池田勇人首相(1962)"
+heroImageCredit: "Wikimedia Commons / Public domain"
 ---
 
 ## 戦後日本の繁栄を約束した宰相の宣言

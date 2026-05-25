@@ -6,6 +6,9 @@ personSlugs:
   - nagata-tetsuzan
 category: 事件
 url: https://ja.wikipedia.org/wiki/相沢事件
+heroImage: ../../assets/event-images/1935-08-12-aizawa-jiken.jpg
+heroImageCaption: "暗殺された陸軍省軍務局長・永田鉄山"
+heroImageCredit: "Wikimedia Commons / Public domain"
 ---
 
 ## 軍務局長室の白昼斬殺 ——「永田を斬る」皇道派青年将校の暴走

@@ -6,6 +6,9 @@ personSlugs:
   - komura-jutaro
 category: 条約
 url: https://ja.wikipedia.org/wiki/日米通商航海条約
+heroImage: ../../assets/event-images/1911-02-21-kanzei-jishu-ken.jpg
+heroImageCaption: "条約改正交渉を主導した外相・小村壽太郎"
+heroImageCredit: "Wikimedia Commons / Public domain"
 ---
 
 ## 幕末以来 53 年の不平等条約、ついに完全終了

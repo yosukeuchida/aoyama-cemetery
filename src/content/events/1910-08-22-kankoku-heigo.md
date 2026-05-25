@@ -6,6 +6,9 @@ personSlugs:
   - komura-jutaro
 category: 条約
 url: https://ja.wikipedia.org/wiki/韓国併合
+heroImage: ../../assets/event-images/1910-08-22-kankoku-heigo.jpg
+heroImageCaption: "Eulsa retraction"
+heroImageCredit: "Wikimedia Commons / Public domain"
 ---
 
 ## 大韓帝国の終わり、植民地統治 35 年の始まり

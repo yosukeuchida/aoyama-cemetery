@@ -6,6 +6,9 @@ personSlugs:
   - kim-okgyun
 category: 政変
 url: https://ja.wikipedia.org/wiki/甲申政変
+heroImage: ../../assets/event-images/1884-12-04-koshin-jihen.gif
+heroImageCaption: "Kim Ok-gyun"
+heroImageCredit: "Unknown authorUnknown author / Wikimedia Commons / Public domain"
 ---
 
 ## 朝鮮近代化を目指した「三日天下」

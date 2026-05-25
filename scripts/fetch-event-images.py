@@ -95,6 +95,86 @@ def get_pageimage(title):
     return None
 
 
+ICON_PATTERNS = [
+    re.compile(r"Commons[-_]logo", re.I),
+    re.compile(r"Wiki(p|m|s)edia[-_]", re.I),
+    re.compile(r"Wikisource[-_]logo", re.I),
+    re.compile(r"^Flag[-_]of[-_]", re.I),
+    re.compile(r"^[A-Za-z]{1,3}\.svg$"),  # 短い国旗 / icon
+    re.compile(r"Ambox[-_]", re.I),
+    re.compile(r"Question[-_]book", re.I),
+    re.compile(r"Stub[-_]icon", re.I),
+    re.compile(r"^OOjs[-_]", re.I),
+    re.compile(r"^Coat[-_]of[-_]arms", re.I),
+    re.compile(r"^Emblem[-_]of[-_]", re.I),
+    re.compile(r"^Disambig", re.I),
+    re.compile(r"^Symbol[-_]", re.I),
+    re.compile(r"^P[a-z]+\.svg$"),
+    re.compile(r"loudspeaker", re.I),
+    re.compile(r"^Edit[-_]", re.I),
+    re.compile(r"^Wiktionary[-_]", re.I),
+    re.compile(r"^Crystal[-_]", re.I),
+    re.compile(r"Bookend\.svg$", re.I),
+    re.compile(r"^Imperial Seal of Japan\.svg$", re.I),
+    re.compile(r"^Government Seal of Japan\.svg$", re.I),
+    re.compile(r"^Merge", re.I),
+]
+
+
+def is_likely_content_image(filename):
+    for p in ICON_PATTERNS:
+        if p.search(filename):
+            return False
+    ext = os.path.splitext(filename)[1].lower()
+    if ext not in (".jpg", ".jpeg", ".png", ".gif", ".svg", ".webp"):
+        return False
+    return True
+
+
+def get_images_list(title):
+    """prop=images: 記事内全画像のリストを取得"""
+    params = {
+        "action": "query",
+        "titles": title,
+        "prop": "images",
+        "imlimit": "100",
+        "format": "json",
+        "formatversion": "2",
+    }
+    url = "https://ja.wikipedia.org/w/api.php?" + urllib.parse.urlencode(params)
+    try:
+        data = json.loads(http_get(url).decode("utf-8"))
+    except Exception:
+        return []
+    pages = data.get("query", {}).get("pages", [])
+    if not pages:
+        return []
+    images = pages[0].get("images", [])
+    result = []
+    for img in images:
+        name = img.get("title", "")
+        # "ファイル:XXX" / "File:XXX" の prefix を除去
+        for prefix in ("ファイル:", "File:"):
+            if name.startswith(prefix):
+                name = name[len(prefix):]
+                break
+        result.append(name)
+    return result
+
+
+def get_best_image(title):
+    """pageimages 優先、ダメなら prop=images から最初の content image を選ぶ"""
+    pi = get_pageimage(title)
+    if pi:
+        return pi
+    time.sleep(0.3)
+    candidates = get_images_list(title)
+    for c in candidates:
+        if is_likely_content_image(c):
+            return c
+    return None
+
+
 def get_image_info(filename):
     """Commons imageinfo (+ ja.wikipedia local fallback)"""
     for endpoint in ("https://commons.wikimedia.org", "https://ja.wikipedia.org"):
@@ -230,11 +310,11 @@ def main():
 
         print(f"[{slug}] {title}")
         try:
-            pageimage = get_pageimage(title)
+            pageimage = get_best_image(title)
             time.sleep(0.4)
             if not pageimage:
-                print(f"  no pageimage")
-                skipped.append((slug, "no pageimage in Wikipedia"))
+                print(f"  no usable image in Wikipedia article")
+                skipped.append((slug, "no usable image"))
                 continue
 
             info = get_image_info(pageimage)
@@ -253,8 +333,11 @@ def main():
             ext = os.path.splitext(pageimage)[1].lower() or ".jpg"
             if ext == ".jpeg":
                 ext = ".jpg"
+            # SVG は thumb URL が PNG に自動レンダされるので拡張子を .png に変換
+            if ext == ".svg":
+                ext = ".png"
             # webp/png/jpg/gif すべて許容
-            if ext not in (".jpg", ".png", ".jpeg", ".webp"):
+            if ext not in (".jpg", ".png", ".gif", ".webp"):
                 print(f"  unsupported ext: {ext}")
                 skipped.append((slug, f"unsupported ext: {ext}"))
                 continue

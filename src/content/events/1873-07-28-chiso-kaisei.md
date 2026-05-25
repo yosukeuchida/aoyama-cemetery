@@ -6,6 +6,9 @@ personSlugs:
   - okubo-toshimichi
 category: 社会
 url: https://ja.wikipedia.org/wiki/地租改正
+heroImage: ../../assets/event-images/1873-07-28-chiso-kaisei.jpg
+heroImageCaption: "Chiken akita back"
+heroImageCredit: "Issued by Akita Prefecture. Photo by Mbdnoob. / Wikimedia Commons / Public domain"
 ---
 
 ## 江戸の年貢から近代税制への大転換

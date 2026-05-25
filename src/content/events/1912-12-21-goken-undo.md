@@ -6,6 +6,9 @@ personSlugs:
   - inukai-tsuyoshi
 category: 政変
 url: https://ja.wikipedia.org/wiki/第一次護憲運動
+heroImage: ../../assets/event-images/1912-12-21-goken-undo.jpg
+heroImageCaption: "「閥族打破・憲政擁護」を掲げた犬養毅"
+heroImageCredit: "Wikimedia Commons / Public domain"
 ---
 
 ## 大正政変の引き金、政党政治の幕開け

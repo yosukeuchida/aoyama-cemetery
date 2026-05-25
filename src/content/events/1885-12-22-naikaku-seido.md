@@ -7,6 +7,9 @@ personSlugs:
   - mori-arinori
 category: 内閣
 url: https://ja.wikipedia.org/wiki/内閣制度
+heroImage: ../../assets/event-images/1885-12-22-naikaku-seido.jpg
+heroImageCaption: "初代内閣総理大臣・伊藤博文"
+heroImageCredit: "Wikimedia Commons / Public domain"
 ---
 
 ## 太政官制から内閣制へ — 近代行政の出発点

@@ -9,6 +9,9 @@ personSlugs:
   - matsudaira-tsuneo
 category: 条約
 url: https://ja.wikipedia.org/wiki/ロンドン海軍軍縮条約
+heroImage: ../../assets/event-images/1930-04-22-london-naval-treaty.jpg
+heroImageCaption: "ロンドン海軍軍縮条約調印式の若槻礼次郎全権"
+heroImageCredit: "Wikimedia Commons / Public domain"
 ---
 
 ## 統帥権干犯問題と政党政治の終わりの始まり
