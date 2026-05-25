@@ -1,5 +1,6 @@
 ---
 import { getCollection, render, type CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
@@ -103,6 +104,24 @@ const themeColor = CATEGORY_COLOR[event.data.category] ?? '#777';
       <p class="lead">{event.data.summary}</p>
     </section>
 
+    {event.data.heroImage && (
+      <figure class="event-hero-image">
+        <Image
+          src={event.data.heroImage}
+          alt={event.data.heroImageCaption ?? `${event.data.title} を象徴する画像`}
+          widths={[480, 720, 1080]}
+          sizes="(max-width: 720px) 100vw, 720px"
+          quality={82}
+        />
+        {(event.data.heroImageCaption || event.data.heroImageCredit) && (
+          <figcaption>
+            {event.data.heroImageCaption && <span class="caption">{event.data.heroImageCaption}</span>}
+            {event.data.heroImageCredit && <span class="credit">{event.data.heroImageCredit}</span>}
+          </figcaption>
+        )}
+      </figure>
+    )}
+
     <dl class="meta-grid">
       <div class="meta-cell">
         <dt>日付</dt>
@@ -132,13 +151,30 @@ const themeColor = CATEGORY_COLOR[event.data.category] ?? '#777';
         {relatedPeople.map((p) => (
           <li>
             <a href={`/people/${p.id}/`} class="related-person-card">
-              <span class="related-person-name">{p.data.name}</span>
-              <span class="related-person-meta">
-                {p.data.birthDate.slice(0, 4)}-{p.data.deathDate.slice(0, 4)}
-                <span class="era-badge">{p.data.era.join('・')}</span>
-                <span class="category-badge">{p.data.category}</span>
-              </span>
-              <span class="related-person-desc">{p.data.shortDescription}</span>
+              <div class="related-person-thumb">
+                {p.data.portrait ? (
+                  <Image
+                    src={p.data.portrait}
+                    alt={`${p.data.name}の肖像`}
+                    width={120}
+                    quality={80}
+                  />
+                ) : (
+                  <div class="related-person-thumb-placeholder">
+                    <span>肖像</span>
+                    <span>未公開</span>
+                  </div>
+                )}
+              </div>
+              <div class="related-person-info">
+                <span class="related-person-name">{p.data.name}</span>
+                <span class="related-person-meta">
+                  {p.data.birthDate.slice(0, 4)}-{p.data.deathDate.slice(0, 4)}
+                  <span class="era-badge">{p.data.era.join('・')}</span>
+                  <span class="category-badge">{p.data.category}</span>
+                </span>
+                <span class="related-person-desc">{p.data.shortDescription}</span>
+              </div>
             </a>
           </li>
         ))}
@@ -256,17 +292,44 @@ const themeColor = CATEGORY_COLOR[event.data.category] ?? '#777';
     margin: 0.2rem 0;
   }
 
+  .event-hero-image {
+    margin: 0 auto 2rem;
+    max-width: 720px;
+    padding: 6px;
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    line-height: 0;
+  }
+  .event-hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .event-hero-image figcaption {
+    line-height: 1.5;
+    margin-top: 0.5rem;
+    padding: 0 0.3rem 0.3rem;
+    font-size: 0.78rem;
+    color: var(--color-text-muted);
+  }
+  .event-hero-image .caption { display: block; }
+  .event-hero-image .credit {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--color-text-faint);
+    margin-top: 0.2rem;
+  }
+
   .event-related-list {
     list-style: none;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 0.9rem;
   }
   .related-person-card {
     display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
+    gap: 0.8rem;
     padding: 1rem 1.1rem;
     background: var(--color-card);
     border-left: 2px solid var(--color-accent);
@@ -277,6 +340,43 @@ const themeColor = CATEGORY_COLOR[event.data.category] ?? '#777';
   .related-person-card:hover {
     border-left-width: 3px;
     background: #fbf7eb;
+  }
+  .related-person-thumb {
+    flex: 0 0 auto;
+    width: 60px;
+    aspect-ratio: 3 / 4;
+    padding: 3px;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    line-height: 0;
+  }
+  .related-person-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .related-person-thumb-placeholder {
+    width: 100%;
+    height: 100%;
+    background: var(--color-bg-alt);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-serif);
+    font-size: 0.6rem;
+    color: var(--color-text-faint);
+    letter-spacing: 0.1em;
+    line-height: 1.5;
+  }
+  .related-person-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
   }
   .related-person-name {
     font-family: var(--font-serif);
