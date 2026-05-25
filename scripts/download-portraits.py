@@ -135,6 +135,8 @@ PAIRS = [
     ("ushijima-mitsuru", "Mitsuru_Ushijima.jpg"),
     ("soeda-juichi", "Juichi_Soyeda.jpg"),
     ("yamashita-gentaro", "Yamashita_Gentaro.jpg"),
+    # 2026-05-25 追加分その2(渡辺昇 — 剣豪・大阪府知事)
+    ("watanabe-noboru", "Noboru_Watanabe_(Viscount)_01.jpg"),
 ]
 
 OUT_DIR = "src/assets/portraits"
