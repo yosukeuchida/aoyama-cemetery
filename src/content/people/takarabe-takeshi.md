@@ -7,7 +7,9 @@ deathDate: "1949-01-13"
 era: [明治, 昭和]
 category: 軍人
 graveSection: 1イ2-13
-hideMap: true
+coords:
+  lat: 35.6624189248774
+  lng: 139.7226696192932
 shortDescription: ロンドン海軍軍縮会議に全権として臨み「売国奴」と糾弾された海軍大将。山本権兵衛の女婿として海軍中枢を歩んだ。
 tags:
   - ロンドン海軍軍縮会議

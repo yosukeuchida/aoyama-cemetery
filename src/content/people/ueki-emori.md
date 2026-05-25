@@ -7,7 +7,9 @@ deathDate: "1892-01-23"
 era: [明治]
 category: 政治家
 graveSection: 1種イ11号12側
-hideMap: true
+coords:
+  lat: 35.66295936561638
+  lng: 139.72302367089236
 shortDescription: 自由民権運動を代表する土佐出身の思想家・政治家。私擬憲法「東洋大日本国国憲按」を起草、急進的な人民主権を唱えた。
 tags:
   - 自由民権運動
