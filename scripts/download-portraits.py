@@ -99,6 +99,8 @@ PAIRS = [
     # miyawaki-shunzo: 2003 没で PD 未経過(2074 年)
     # nagayo-shuntatsu: 1854 没、Wikipedia に肖像なし
     # arimura-jizaemon: 1860 没・22 歳没、Wikipedia に肖像なし
+    # 2026-05-25 追加
+    ("saisho-atsuko", "Saisho_Atsuko.jpg"),
     # 2026-05-22 追加分その6(9名追加バッチ、PD 確認済)
     ("mori-kaku", "Tsutomu_mori.jpg"),
     ("odachi-shigeo", "ODACHI_Shigeo.jpg"),
