@@ -7,7 +7,9 @@ deathDate: "1905-01-31"
 era: [江戸, 明治]
 category: 政治家
 graveSection: 1種イ21号1側
-hideMap: true
+coords:
+  lat: 35.66417229886839
+  lng: 139.7227074076985
 shortDescription: 佐賀の七賢人の一人。明治政府の外務卿としてマリア・ルス号事件で奴隷的契約を解放し、東洋随一と評された書の大家。
 tags:
   - 佐賀の七賢人
