@@ -7,6 +7,9 @@ personSlugs:
   - mori-arinori
 category: 社会
 url: https://ja.wikipedia.org/wiki/大日本帝国憲法
+heroImage: ../../assets/event-images/1889-02-11-meiji-kenpo.png
+heroImageCaption: "Meiji-Constitution-Empire-of-Japan"
+heroImageCredit: "Kantei / Wikimedia Commons / CC BY 4.0"
 ---
 
 ## アジア初の近代成文憲法

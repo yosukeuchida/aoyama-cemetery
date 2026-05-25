@@ -6,6 +6,9 @@ personSlugs:
   - nogi-maresuke
 category: 戦争
 url: https://ja.wikipedia.org/wiki/旅順攻囲戦
+heroImage: ../../assets/event-images/1905-01-02-ryojun-kanraku.jpg
+heroImageCaption: "203 Meter Hill"
+heroImageCredit: "Imperial Japanese Navy General Staff / Wikimedia Commons / Public domain"
 ---
 
 ## 二〇三高地と水師営 — 旅順要塞、ついに陥落

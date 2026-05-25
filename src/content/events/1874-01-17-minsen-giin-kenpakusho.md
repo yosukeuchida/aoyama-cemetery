@@ -7,6 +7,9 @@ personSlugs:
   - soejima-taneomi
 category: 政変
 url: https://ja.wikipedia.org/wiki/民撰議院設立建白書
+heroImage: ../../assets/event-images/1874-01-17-minsen-giin-kenpakusho.jpg
+heroImageCaption: "MinsenGiin"
+heroImageCredit: "Wikimedia Commons / Public domain"
 ---
 
 ## 日本初の議会開設要求 — 自由民権運動の起点

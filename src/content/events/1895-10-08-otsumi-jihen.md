@@ -6,6 +6,9 @@ personSlugs:
   - miura-goro
 category: 事件
 url: https://ja.wikipedia.org/wiki/乙未事変
+heroImage: ../../assets/event-images/1895-10-08-otsumi-jihen.jpg
+heroImageCaption: "Le Journal Illustré L`ASSASSINAT DE LA REINE CORÉE (cropped)"
+heroImageCredit: "Le Journal illustré / Wikimedia Commons / Public domain"
 ---
 
 ## 日韓近代史最大の汚点

@@ -9,6 +9,9 @@ personSlugs:
   - kawakami-soroku
 category: 戦争
 url: https://ja.wikipedia.org/wiki/西南戦争
+heroImage: ../../assets/event-images/1877-09-24-shiroyama.jpg
+heroImageCaption: "Seinansenso snou"
+heroImageCredit: "TukiokaYositoshi（1839-1892） / Wikimedia Commons / Public domain"
 ---
 
 ## 西郷自刃 — 武士の時代の終焉

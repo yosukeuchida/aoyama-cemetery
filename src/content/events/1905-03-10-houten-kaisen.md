@@ -9,6 +9,9 @@ personSlugs:
   - oku-yasukata
 category: 戦争
 url: https://ja.wikipedia.org/wiki/奉天会戦
+heroImage: ../../assets/event-images/1905-03-10-houten-kaisen.jpg
+heroImageCaption: "Brockhaus and Efron Encyclopedic Dictionary b85 218-0"
+heroImageCredit: "painter from Brockhaus and Efron Encyclopedic Dictionary / Wikimedia Commons / Public domain"
 ---
 
 ## 日露陸戦の総決算 — 60 万人が激突した史上最大規模の会戦

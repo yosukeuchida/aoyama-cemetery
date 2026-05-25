@@ -8,6 +8,9 @@ personSlugs:
   - yanase-chotaro
 category: 災害
 url: https://ja.wikipedia.org/wiki/関東大震災
+heroImage: ../../assets/event-images/1923-09-01-kanto-daishinsai.jpg
+heroImageCaption: "Kanto-daishinsai"
+heroImageCredit: "Wikimedia Commons / Public domain"
 ---
 
 ## 近代東京を一夜にして破壊した大地震

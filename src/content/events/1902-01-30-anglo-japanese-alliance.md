@@ -7,6 +7,9 @@ personSlugs:
   - komura-jutaro
 category: 条約
 url: https://ja.wikipedia.org/wiki/日英同盟
+heroImage: ../../assets/event-images/1902-01-30-anglo-japanese-alliance.jpg
+heroImageCaption: "Anglo Japanese Alliance 30 January 1902"
+heroImageCredit: "World Imaging / Wikimedia Commons / CC BY-SA 3.0"
 ---
 
 ## アジア最初の列強同盟 — 「光栄ある孤立」を捨てた英国と組んだ日本

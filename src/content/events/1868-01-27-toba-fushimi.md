@@ -9,6 +9,9 @@ personSlugs:
   - otori-keisuke
 category: 戦争
 url: https://ja.wikipedia.org/wiki/鳥羽・伏見の戦い
+heroImage: ../../assets/event-images/1868-01-27-toba-fushimi.jpg
+heroImageCaption: "Monument of Meijiishin Fushimi no senseki"
+heroImageCredit: "Photo memories 1868 / Wikimedia Commons / CC BY-SA 4.0"
 ---
 
 ## 戊辰戦争の幕を切った京都南郊の砲声

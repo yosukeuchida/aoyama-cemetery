@@ -9,6 +9,9 @@ personSlugs:
   - matsuoka-yosuke
 category: 戦争
 url: https://ja.wikipedia.org/wiki/真珠湾攻撃
+heroImage: ../../assets/event-images/1941-12-08-pearl-harbor.jpg
+heroImageCaption: "Pearl Harbor- Nakajima B5N2 over Hickam- 80G178985"
+heroImageCredit: "Unknown authorUnknown author / Wikimedia Commons / Public domain"
 ---
 
 ## ハワイ時間 12 月 7 日朝 — 太平洋戦争の始まり

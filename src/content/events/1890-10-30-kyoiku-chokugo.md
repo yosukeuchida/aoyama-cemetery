@@ -6,6 +6,9 @@ personSlugs:
   - mori-arinori
 category: 社会
 url: https://ja.wikipedia.org/wiki/教育ニ関スル勅語
+heroImage: ../../assets/event-images/1890-10-30-kyoiku-chokugo.jpg
+heroImageCaption: "A copy of the Imperial Rescript on Education distributed to various schools in Japan by the Department of Education"
+heroImageCredit: "Calligraphy: unknownText: Emperor Meiji (明治天皇, 1852 – 1912) / Wikimedia Commons / Public domain"
 ---
 
 ## 戦前日本の道徳教育の中核として

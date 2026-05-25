@@ -6,6 +6,9 @@ personSlugs:
   - makino-nobuaki
 category: 条約
 url: https://ja.wikipedia.org/wiki/パリ講和会議
+heroImage: ../../assets/event-images/1919-01-18-paris-peace.jpg
+heroImageCaption: "Ministry of Foreign and European Affairs, Paris August 2008"
+heroImageCredit: "Simdaperce / Wikimedia Commons / CC BY-SA 3.0"
 ---
 
 ## 日本が初めて世界政治の卓に着いた会議

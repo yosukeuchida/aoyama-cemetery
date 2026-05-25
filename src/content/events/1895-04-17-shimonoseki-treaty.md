@@ -6,6 +6,9 @@ personSlugs:
   - komura-jutaro
 category: 条約
 url: https://ja.wikipedia.org/wiki/下関条約
+heroImage: ../../assets/event-images/1895-04-17-shimonoseki-treaty.jpg
+heroImageCaption: "Peace Conference at Shimonoseki by Nagatochi Hideta (Meiji Memorial Picture Gallery)"
+heroImageCredit: "Nagatochi Hideta 永地秀太 (1873–1942) / Wikimedia Commons / Public domain"
 ---
 
 ## 東アジアの力学を一変させた講和条約

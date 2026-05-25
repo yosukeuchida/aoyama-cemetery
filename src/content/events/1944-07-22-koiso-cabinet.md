@@ -6,6 +6,9 @@ personSlugs:
   - koiso-kuniaki
 category: 内閣
 url: https://ja.wikipedia.org/wiki/小磯内閣
+heroImage: ../../assets/event-images/1944-07-22-koiso-cabinet.png
+heroImageCaption: "Kuniaki Koiso Cabinet 19440722"
+heroImageCredit: "Yomiuri News 23 July 1944 issue /『讀賣ニュース』昭和十九年七月二十三日號) / Wikimedia Commons / Public domain"
 ---
 
 ## サイパン陥落 — 東條退陣のあとに

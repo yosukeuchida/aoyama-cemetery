@@ -8,6 +8,9 @@ personSlugs:
   - otori-keisuke
 category: 戦争
 url: https://ja.wikipedia.org/wiki/箱館戦争
+heroImage: ../../assets/event-images/1869-06-27-hakodate-fall.png
+heroImageCaption: "Battle of Hakodate Nishiki-e by Nagashima Mosai"
+heroImageCredit: "Utagawa Yoshitora (signed as Nagashima Mosai) / Wikimedia Commons / Public domain"
 ---
 
 ## 戊辰戦争を終わらせた五稜郭の白旗

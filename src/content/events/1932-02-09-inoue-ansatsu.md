@@ -6,6 +6,9 @@ personSlugs:
   - inoue-junnosuke
 category: 事件
 url: https://ja.wikipedia.org/wiki/血盟団事件
+heroImage: ../../assets/event-images/1932-02-09-inoue-ansatsu.jpg
+heroImageCaption: "Ketsumeidan"
+heroImageCredit: "Unknown authorUnknown author / Wikimedia Commons / Public domain"
 ---
 
 ## 「一人一殺」が政財界を撃った

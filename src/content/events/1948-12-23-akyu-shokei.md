@@ -6,6 +6,9 @@ personSlugs:
   - kimura-heitaro
 category: 事件
 url: https://ja.wikipedia.org/wiki/極東国際軍事裁判
+heroImage: ../../assets/event-images/1948-12-23-akyu-shokei.jpg
+heroImageCaption: "International Military Tribunal Ichigaya Court"
+heroImageCredit: "『秘録 大東亜戦史　東京裁判篇』昭和28年11月30日発行、富士書苑 / Wikimedia Commons / Public domain"
 ---
 
 ## 巣鴨拘置所、12 月 23 日午前 0 時

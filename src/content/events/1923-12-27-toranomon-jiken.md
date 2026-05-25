@@ -6,6 +6,9 @@ personSlugs:
   - yamamoto-gonbee
 category: 事件
 url: https://ja.wikipedia.org/wiki/虎ノ門事件
+heroImage: ../../assets/event-images/1923-12-27-toranomon-jiken.jpg
+heroImageCaption: "Monument of Toranomon -01"
+heroImageCredit: "Aimaimyi / Wikimedia Commons / CC BY-SA 3.0"
 ---
 
 ## 摂政宮が虎ノ門で狙撃された日

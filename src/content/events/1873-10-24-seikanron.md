@@ -9,6 +9,9 @@ personSlugs:
   - soejima-taneomi
 category: 政変
 url: https://ja.wikipedia.org/wiki/明治六年政変
+heroImage: ../../assets/event-images/1873-10-24-seikanron.png
+heroImageCaption: "1873 Seikanron Debate Saigo Takamori Ukiyo-e by Suzuki Toshimoto"
+heroImageCredit: "Suzuki Toshimoto  (active c. 1877-1890s) / Wikimedia Commons / Public domain"
 ---
 
 ## 維新政府を二つに割った政変

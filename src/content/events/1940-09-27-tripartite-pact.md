@@ -6,6 +6,9 @@ personSlugs:
   - matsuoka-yosuke
 category: 条約
 url: https://ja.wikipedia.org/wiki/日独伊三国同盟
+heroImage: ../../assets/event-images/1940-09-27-tripartite-pact.jpg
+heroImageCaption: "Matsuoka besøger Hitler"
+heroImageCredit: "Unknown authorUnknown author / Wikimedia Commons / Public domain"
 ---
 
 ## ベルリンで結ばれた枢軸の輪

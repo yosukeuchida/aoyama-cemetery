@@ -8,6 +8,9 @@ personSlugs:
   - kawaji-toshiyoshi
 category: 戦争
 url: https://ja.wikipedia.org/wiki/日清戦争
+heroImage: ../../assets/event-images/1894-08-01-nisshin-war.jpg
+heroImageCaption: "Sino Japanese war 1894"
+heroImageCredit: "Oomoto (1894) / Wikimedia Commons / Public domain"
 ---
 
 ## 近代日本にとって最初の対外戦争

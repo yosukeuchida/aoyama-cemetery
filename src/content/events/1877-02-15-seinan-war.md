@@ -9,6 +9,9 @@ personSlugs:
   - saigo-itoko
 category: 戦争
 url: https://ja.wikipedia.org/wiki/西南戦争
+heroImage: ../../assets/event-images/1877-02-15-seinan-war.jpg
+heroImageCaption: "Seinansenso snou"
+heroImageCredit: "TukiokaYositoshi（1839-1892） / Wikimedia Commons / Public domain"
 ---
 
 ## 日本最後の士族反乱の幕開け

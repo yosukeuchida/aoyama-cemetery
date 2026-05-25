@@ -6,6 +6,9 @@ personSlugs:
   - komura-jutaro
 category: 条約
 url: https://ja.wikipedia.org/wiki/ポーツマス条約
+heroImage: ../../assets/event-images/1905-09-05-portsmouth.jpg
+heroImageCaption: "Japan Russia Treaty of Peace 5 September 1905"
+heroImageCredit: "World Imaging / Wikimedia Commons / CC BY-SA 3.0"
 ---
 
 ## 日露戦争の幕引き、そして日比谷の暴動

@@ -7,6 +7,9 @@ personSlugs:
   - arima-ryokitsu
 category: 戦争
 url: https://ja.wikipedia.org/wiki/旅順港閉塞作戦
+heroImage: ../../assets/event-images/1904-03-27-ryojun-heisoku.jpg
+heroImageCaption: "Lushunkou 01"
+heroImageCredit: "Kamakura / Wikimedia Commons / CC BY-SA 3.0"
 ---
 
 ## 「杉野はいずこ」 — 軍神誕生の夜

@@ -6,6 +6,9 @@ personSlugs:
   - nogi-maresuke
 category: 事件
 url: https://ja.wikipedia.org/wiki/乃木希典
+heroImage: ../../assets/event-images/1912-09-13-nogi-junshi.jpg
+heroImageCaption: "Maresuke Nogi, 近世名士写真 其1 - Photo only"
+heroImageCredit: "Unknown authorUnknown author - restored by User:Adam Cuerden / Wikimedia Commons / Public domain"
 ---
 
 ## 明治の終焉を象徴した殉死

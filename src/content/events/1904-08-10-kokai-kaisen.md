@@ -8,6 +8,9 @@ personSlugs:
   - arima-ryokitsu
 category: 戦争
 url: https://ja.wikipedia.org/wiki/黄海海戦_(日露戦争)
+heroImage: ../../assets/event-images/1904-08-10-kokai-kaisen.jpg
+heroImageCaption: "Tsesarevich1904Qingdao1"
+heroImageCredit: "Неизвеитен. / Wikimedia Commons / Public domain"
 ---
 
 ## 旅順艦隊脱出阻止 — 日本海海戦への布石

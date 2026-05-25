@@ -6,6 +6,9 @@ personSlugs:
   - shirakawa-yoshinori
 category: 事件
 url: https://ja.wikipedia.org/wiki/上海天長節爆弾事件
+heroImage: ../../assets/event-images/1932-04-29-shanghai-bakudan.jpg
+heroImageCaption: "윤봉길 상해 폭탄의거"
+heroImageCredit: "아라카와 보쿠단(황천) 기자 / Wikimedia Commons / Public domain"
 ---
 
 ## 虹口公園、108 か所の傷 — 戦地に倒れた陸軍大将

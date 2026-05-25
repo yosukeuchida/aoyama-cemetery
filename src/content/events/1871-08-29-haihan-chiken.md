@@ -7,6 +7,9 @@ personSlugs:
   - kuroda-kiyotaka
 category: 社会
 url: https://ja.wikipedia.org/wiki/廃藩置県
+heroImage: ../../assets/event-images/1871-08-29-haihan-chiken.jpg
+heroImageCaption: "Modern Japan prefectures map in 1872"
+heroImageCredit: "Yoshida Togo (1860-1932) et al / Wikimedia Commons / Public domain"
 ---
 
 ## 一夜にして 261 藩を消した明治政府の最大の賭け

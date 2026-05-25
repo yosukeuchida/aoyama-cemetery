@@ -8,6 +8,9 @@ personSlugs:
   - togo-shigenori
 category: 戦争
 url: https://ja.wikipedia.org/wiki/日露戦争
+heroImage: ../../assets/event-images/1904-02-10-nichiro-war.jpg
+heroImageCaption: "RUSSOJAPANESEWARIMAGE"
+heroImageCredit: "Original uploader and author was Dustandshadow at en.wikipedia / Wikimedia Commons / Public domain"
 ---
 
 ## 大国ロシアへの宣戦布告 — 「国運を賭けた」戦争の始まり

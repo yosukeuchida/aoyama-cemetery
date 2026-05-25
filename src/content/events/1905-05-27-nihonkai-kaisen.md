@@ -10,6 +10,9 @@ personSlugs:
   - arima-ryokitsu
 category: 戦争
 url: https://ja.wikipedia.org/wiki/日本海海戦
+heroImage: ../../assets/event-images/1905-05-27-nihonkai-kaisen.png
+heroImageCaption: "Mikasa-Bridge-Painting-by-Tojo-Shotaro"
+heroImageCredit: "Tōjō Shōtarō / Wikimedia Commons / Public domain"
 ---
 
 ## 日露戦争の総決算として
