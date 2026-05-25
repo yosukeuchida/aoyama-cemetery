@@ -7,7 +7,9 @@ deathDate: "1903-09-13"
 era: [江戸, 明治]
 category: 文化人
 graveSection: 1種イ21号12側
-hideMap: true
+coords:
+  lat: 35.66395111422356
+  lng: 139.723119126756
 shortDescription: 「劇聖」と称された明治歌舞伎中興の祖。江戸歌舞伎の市川宗家を継ぎ、五代目尾上菊五郎・初代市川左團次と「團菊左時代」を築いた立役の頂点。
 tags:
   - 歌舞伎

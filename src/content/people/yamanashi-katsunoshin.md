@@ -7,7 +7,9 @@ deathDate: "1967-12-17"
 era: [明治, 昭和]
 category: 軍人
 graveSection: 1種イ22号8側6番
-hideMap: true
+coords:
+  lat: 35.66359591001019
+  lng: 139.7232022752494
 shortDescription: ロンドン海軍軍縮会議妥結のために「暗殺される覚悟」で動いた条約派海軍大将。戦中は学習院長として明仁皇太子の教育を担った。
 tags:
   - ロンドン海軍軍縮会議
