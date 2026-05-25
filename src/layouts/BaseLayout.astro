@@ -20,7 +20,7 @@ const jsonLdItems = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#5a4a2a" />
+    <meta name="theme-color" content="#1f241f" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -45,6 +45,12 @@ const jsonLdItems = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
       <script type="application/ld+json" set:html={JSON.stringify(item)} />
     ))}
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&family=Noto+Serif+JP:wght@500;600&display=swap"
+    />
     <link rel="stylesheet" href="/styles/global.css" />
   </head>
   <body>
@@ -52,9 +58,12 @@ const jsonLdItems = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 
     <header class="site-header">
       <nav aria-label="メインナビゲーション">
-        <a href="/" class="site-title">青山霊園 偉人録</a>
+        <a href="/" class="site-title">
+          青山霊園 偉人録
+          <span class="site-title-sub">AOYAMA CEMETERY MEMORIAL</span>
+        </a>
         <ul class="nav-links">
-          <li><a href="/">トップ</a></li>
+          <li><a href="/">偉人</a></li>
           <li><a href="/routes/">散歩コース</a></li>
           <li><a href="/timeline/">年表</a></li>
           <li><a href="/about/">青山霊園について</a></li>
@@ -67,7 +76,8 @@ const jsonLdItems = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     </main>
 
     <footer class="site-footer">
-      <p>© 2026 aoyama-cemetery. 本サイトの偉人解説は Wikipedia 等の公開情報を元に再構成しています。</p>
+      <p class="footer-brand">青山霊園 偉人録</p>
+      <p class="footer-credit">© 2026 aoyama-cemetery. 偉人解説は Wikipedia 等の公開情報を元に再構成しています。</p>
     </footer>
   </body>
 </html>
