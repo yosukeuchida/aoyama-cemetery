@@ -7,7 +7,9 @@ deathDate: "1897-01-31"
 era: [江戸, 明治]
 category: 学者
 graveSection: 1種ロ8号19側
-hideMap: true
+coords:
+  lat: 35.66715038460682
+  lng: 139.7230153609251
 shortDescription: 「哲学」「科学」「芸術」「主観」「客観」など多数の学術用語を作り出した明治の啓蒙思想家。明六社の中心メンバー。
 tags:
   - 明六社
