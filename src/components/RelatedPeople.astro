@@ -34,41 +34,44 @@ const { items } = Astro.props;
   .related-people-list {
     list-style: none;
     padding: 0;
+    margin: 0;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 0.75rem;
   }
   .related-person-card a {
     display: block;
-    padding: 0.75rem 1rem;
-    border: 1px solid #d6d3c7;
-    border-radius: 8px;
-    background: #faf8f3;
+    padding: 0.8rem 1rem;
+    background: var(--color-card);
+    border-left: 2px solid var(--color-accent);
     color: inherit;
     text-decoration: none;
-    transition: background 0.15s, border-color 0.15s;
+    transition: border-left-width 0.15s ease, background 0.15s ease;
   }
   .related-person-card a:hover {
-    background: #f0ede4;
-    border-color: #a89c7d;
+    border-left-width: 3px;
+    background: #fbf7eb;
   }
   .related-person-name {
     display: block;
-    font-weight: 600;
+    font-family: var(--font-serif);
+    font-weight: 500;
     font-size: 1.05rem;
-    color: #5a4a2a;
+    color: var(--color-ink);
+    letter-spacing: 0.05em;
   }
   .related-person-job {
     display: block;
-    font-size: 0.78rem;
-    color: #8a7a55;
-    margin-top: 0.15rem;
+    font-size: 0.72rem;
+    color: var(--color-text-faint);
+    letter-spacing: 0.08em;
+    margin-top: 0.2rem;
   }
   .related-person-relation {
     display: block;
     font-size: 0.88rem;
-    color: #444;
-    margin-top: 0.4rem;
-    line-height: 1.5;
+    color: var(--color-text-sub);
+    margin-top: 0.45rem;
+    line-height: 1.6;
   }
 </style>

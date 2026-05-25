@@ -93,7 +93,7 @@ const mapId = `route-map-${Math.random().toString(36).substring(2, 9)}`;
       L.marker([stop.lat, stop.lng], { icon })
         .addTo(map)
         .bindPopup(
-          `<strong>${i + 1}. <a href="/people/${stop.slug}/" style="color:#5a4a2a;">${stop.name}</a></strong>`
+          `<strong>${i + 1}. <a href="/people/${stop.slug}/" style="color:#3a5448;">${stop.name}</a></strong>`
         );
     });
   }
@@ -107,30 +107,26 @@ const mapId = `route-map-${Math.random().toString(36).substring(2, 9)}`;
 
 <style>
   .route-map-section {
-    margin: 1.5rem 0;
-  }
-  .route-map-section h2 {
-    margin-bottom: 0.6rem;
-    font-size: 1.1rem;
-    color: #5a4a2a;
+    margin: 2rem 0;
   }
   .route-map {
-    border-radius: 8px;
-    border: 1px solid #d6d3c7;
+    border: 1px solid var(--color-border);
     overflow: hidden;
   }
   .map-legend {
-    margin: 0.5rem 0 0;
-    color: #6a5b3a;
-    line-height: 1.5;
+    margin: 0.6rem 0 0;
+    color: var(--color-text-sub);
+    line-height: 1.7;
+    font-size: 0.85rem;
   }
   .map-attribution {
     margin: 0.3rem 0 0;
-    color: #8a7a55;
+    color: var(--color-text-faint);
     text-align: right;
+    font-size: 0.78rem;
   }
   .map-attribution a {
-    color: #8a7a55;
+    color: var(--color-text-faint);
   }
 </style>
 
@@ -139,14 +135,15 @@ const mapId = `route-map-${Math.random().toString(36).substring(2, 9)}`;
     width: 28px;
     height: 28px;
     border-radius: 50%;
-    background: #5a4a2a;
-    color: #fff;
+    background: var(--color-ink);
+    color: var(--color-bg);
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    font-size: 0.85rem;
-    border: 2px solid #fff;
+    font-family: var(--font-serif);
+    font-size: 0.9rem;
+    border: 2px solid var(--color-bg);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
   }
   .route-stop-marker {
@@ -154,7 +151,8 @@ const mapId = `route-map-${Math.random().toString(36).substring(2, 9)}`;
     border: none !important;
   }
   .leaflet-popup-content a {
+    color: var(--color-accent);
     text-decoration: none;
-    border-bottom: 1px dotted #a89c7d;
+    border-bottom: 1px solid var(--color-accent);
   }
 </style>
