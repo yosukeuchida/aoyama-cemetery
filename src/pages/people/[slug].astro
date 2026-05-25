@@ -185,46 +185,59 @@ const articleJsonLd: Record<string, unknown> = {
     <nav class="breadcrumb" aria-label="パンくずリスト">
       <a href="/">トップ</a>
       <span aria-hidden="true">›</span>
+      <a href="/">偉人</a>
+      <span aria-hidden="true">›</span>
       <span aria-current="page">{person.data.name}</span>
     </nav>
 
-    <h1>{person.data.name}</h1>
-    <p class="kana">{person.data.nameKana}({person.data.nameRomaji})</p>
-
-    {person.data.portrait && (
-      <PersonPortrait
-        portrait={person.data.portrait}
-        name={person.data.name}
-        birthYear={person.data.birthDate.slice(0, 4)}
-        deathYear={person.data.deathDate.slice(0, 4)}
-        caption={person.data.portraitCaption}
-        credit={person.data.portraitCredit}
-      />
-    )}
-
-    <table class="meta-table">
-      <tbody>
-        <tr><th>生没年</th><td><time datetime={person.data.birthDate}>{person.data.birthDate}</time> 〜 <time datetime={person.data.deathDate}>{person.data.deathDate}</time></td></tr>
-        {person.data.birthPlace && <tr><th>出身地</th><td>{person.data.birthPlace}</td></tr>}
-        {person.data.deathPlace && <tr><th>死没地</th><td>{person.data.deathPlace}</td></tr>}
-        <tr><th>時代</th><td>{person.data.era.join('・')}</td></tr>
-        <tr><th>役職</th><td>{person.data.jobTitle ?? person.data.category}</td></tr>
-        {person.data.honorificSuffix && <tr><th>爵位</th><td>{person.data.honorificSuffix}</td></tr>}
-        {person.data.alumniOf && person.data.alumniOf.length > 0 && (
-          <tr><th>出身校</th><td>{person.data.alumniOf.join(' / ')}</td></tr>
-        )}
-        {person.data.memberOf && person.data.memberOf.length > 0 && (
-          <tr><th>所属</th><td>{person.data.memberOf.join(' / ')}</td></tr>
-        )}
-        {person.data.award && person.data.award.length > 0 && (
-          <tr><th>受勲</th><td>{person.data.award.join(' / ')}</td></tr>
-        )}
-        {person.data.graveSection && <tr><th>墓所区画</th><td>{person.data.graveSection}</td></tr>}
-        {person.data.tags && person.data.tags.length > 0 && (
-          <tr><th>タグ</th><td>{person.data.tags.join(' / ')}</td></tr>
-        )}
-      </tbody>
-    </table>
+    <div class="person-head">
+      <div class="person-head-left">
+        <PersonPortrait
+          portrait={person.data.portrait}
+          name={person.data.name}
+          birthYear={person.data.birthDate.slice(0, 4)}
+          deathYear={person.data.deathDate.slice(0, 4)}
+          caption={person.data.portraitCaption}
+          credit={person.data.portraitCredit}
+        />
+      </div>
+      <div class="person-head-right">
+        <span class="label-small">P E R S O N</span>
+        <h1 class="person-name">{person.data.name}</h1>
+        <p class="kana">{person.data.nameKana}</p>
+        <p class="romaji">{person.data.nameRomaji}</p>
+        <p class="summary">{person.data.shortDescription}</p>
+        <dl class="meta-grid">
+          <div class="meta-cell"><dt>生没年</dt><dd><time datetime={person.data.birthDate}>{person.data.birthDate.slice(0, 4)}</time> — <time datetime={person.data.deathDate}>{person.data.deathDate.slice(0, 4)}</time></dd></div>
+          {person.data.birthPlace && (
+            <div class="meta-cell"><dt>出身地</dt><dd>{person.data.birthPlace}</dd></div>
+          )}
+          {person.data.deathPlace && (
+            <div class="meta-cell"><dt>死没地</dt><dd>{person.data.deathPlace}</dd></div>
+          )}
+          <div class="meta-cell"><dt>時代</dt><dd>{person.data.era.join('・')}</dd></div>
+          <div class="meta-cell"><dt>役職</dt><dd>{person.data.jobTitle ?? person.data.category}</dd></div>
+          {person.data.honorificSuffix && (
+            <div class="meta-cell"><dt>爵位</dt><dd>{person.data.honorificSuffix}</dd></div>
+          )}
+          {person.data.alumniOf && person.data.alumniOf.length > 0 && (
+            <div class="meta-cell meta-cell-wide"><dt>出身校</dt><dd>{person.data.alumniOf.join(' / ')}</dd></div>
+          )}
+          {person.data.memberOf && person.data.memberOf.length > 0 && (
+            <div class="meta-cell meta-cell-wide"><dt>所属</dt><dd>{person.data.memberOf.join(' / ')}</dd></div>
+          )}
+          {person.data.award && person.data.award.length > 0 && (
+            <div class="meta-cell meta-cell-wide"><dt>受勲</dt><dd>{person.data.award.join(' / ')}</dd></div>
+          )}
+          {person.data.graveSection && (
+            <div class="meta-cell meta-cell-wide"><dt>区画</dt><dd>{person.data.graveSection}</dd></div>
+          )}
+          {person.data.tags && person.data.tags.length > 0 && (
+            <div class="meta-cell meta-cell-wide"><dt>タグ</dt><dd>{person.data.tags.join(' / ')}</dd></div>
+          )}
+        </dl>
+      </div>
+    </div>
 
     <Content />
 
@@ -322,6 +335,91 @@ const articleJsonLd: Record<string, unknown> = {
 </BaseLayout>
 
 <style>
+  .person-head {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 2.5rem;
+    align-items: start;
+    margin-bottom: 2rem;
+  }
+  .person-head-right .label-small {
+    display: inline-block;
+    margin-bottom: 0.6rem;
+  }
+  .person-head-right .person-name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 2.2rem;
+    letter-spacing: 0.1em;
+    color: var(--color-ink);
+    margin: 0 0 0.3rem;
+    line-height: 1.4;
+    padding: 0;
+    border: 0;
+  }
+  .person-head-right .kana {
+    color: var(--color-text-muted);
+    font-size: 0.88rem;
+    letter-spacing: 0.08em;
+    margin: 0;
+  }
+  .person-head-right .romaji {
+    color: var(--color-text-faint);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    margin: 0.25rem 0 0;
+  }
+  .person-head-right .summary {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    line-height: 1.95;
+    color: var(--color-text-sub);
+    margin: 1.3rem 0 1.4rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--color-accent);
+  }
+  .meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.45rem 1.5rem;
+    margin: 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+    font-size: 0.85rem;
+  }
+  .meta-cell {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    gap: 0.5rem;
+  }
+  .meta-cell-wide {
+    grid-column: 1 / -1;
+  }
+  .meta-cell dt {
+    color: var(--color-text-faint);
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    padding-top: 0.2rem;
+    margin: 0;
+  }
+  .meta-cell dd {
+    color: var(--color-text);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 720px) {
+    .person-head {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      justify-items: center;
+    }
+    .person-head-right { width: 100%; }
+    .person-head-right .person-name { font-size: 1.7rem; letter-spacing: 0.06em; }
+    .meta-grid { grid-template-columns: 1fr; }
+    .meta-cell, .meta-cell-wide { grid-template-columns: 80px 1fr; }
+  }
+
   .person-events {
     margin-top: 2.5rem;
   }
