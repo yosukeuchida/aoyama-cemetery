@@ -7,8 +7,8 @@ personSlugs:
 category: 政変
 url: https://ja.wikipedia.org/wiki/大政奉還
 heroImage: ../../assets/event-images/1867-11-09-taisei-hokan.jpg
-heroImageCaption: "Nijo Castle"
-heroImageCredit: "Keith Pomakis / Wikimedia Commons / CC BY-SA 2.5"
+heroImageCaption: "邨田丹陵『大政奉還』(聖徳記念絵画館壁画、慶応 3 年 10 月 14 日二条城の場面)"
+heroImageCredit: "邨田丹陵 / Wikimedia Commons / Public domain"
 ---
 
 ## 260 年余の幕府が一夜にして畳まれた日
