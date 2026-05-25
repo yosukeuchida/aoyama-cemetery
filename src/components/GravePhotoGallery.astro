@@ -26,7 +26,7 @@ function formatDate(iso: string): string {
               src={photo.image}
               alt={photo.caption ?? `${formatDate(photo.date)} の墓参り写真`}
               widths={[400, 800]}
-              sizes="(min-width: 720px) 320px, 50vw"
+              sizes="(min-width: 720px) 380px, 90vw"
               loading="lazy"
               format="webp"
             />
@@ -50,7 +50,7 @@ function formatDate(iso: string): string {
     padding: 0;
     margin: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 1rem;
   }
   .photo-item img {
