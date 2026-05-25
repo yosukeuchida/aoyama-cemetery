@@ -7,6 +7,9 @@ personSlugs:
   - nishi-amane
 category: 社会
 url: https://ja.wikipedia.org/wiki/学制
+heroImage: ../../assets/event-images/1872-09-05-gakusei-happu.jpg
+heroImageCaption: "Takato Oki 2"
+heroImageCredit: "Unknown authorUnknown author / Wikimedia Commons / Public domain"
 ---
 
 ## 国民皆学を掲げた近代教育制度の出発

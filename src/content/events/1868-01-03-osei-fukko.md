@@ -7,6 +7,9 @@ personSlugs:
   - goto-shojiro
 category: 政変
 url: https://ja.wikipedia.org/wiki/王政復古_(日本)
+heroImage: ../../assets/event-images/1868-01-03-osei-fukko.jpg
+heroImageCaption: "Kyoto-gosho Ogakumonjo-3"
+heroImageCredit: "Saigen Jiro / Wikimedia Commons / CC0"
 ---
 
 ## 御所制圧と同時に発せられた新政府樹立宣言

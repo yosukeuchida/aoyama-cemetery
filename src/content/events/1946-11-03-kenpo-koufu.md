@@ -7,6 +7,9 @@ personSlugs:
   - miyazawa-kiichi
 category: 社会
 url: https://ja.wikipedia.org/wiki/日本国憲法
+heroImage: ../../assets/event-images/1946-11-03-kenpo-koufu.jpg
+heroImageCaption: "Constitution of Japan origin signatures 20140506"
+heroImageCredit: "Ryo FUKAsawa / Wikimedia Commons / CC BY 2.0"
 ---
 
 ## 明治憲法から日本国憲法へ

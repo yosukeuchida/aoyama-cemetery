@@ -6,6 +6,9 @@ personSlugs:
   - ushijima-mitsuru
 category: 戦争
 url: https://ja.wikipedia.org/wiki/沖縄戦
+heroImage: ../../assets/event-images/1945-04-01-okinawa-sen.jpg
+heroImageCaption: "Tomori Stone Lion (18 June 1945)"
+heroImageCredit: "Unknown authorUnknown author / Wikimedia Commons / Public domain"
 ---
 
 ## 鉄の暴風が降り注いだ八十二日間

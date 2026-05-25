@@ -6,6 +6,9 @@ personSlugs:
   - matsuoka-yosuke
 category: 戦争
 url: https://ja.wikipedia.org/wiki/満州事変
+heroImage: ../../assets/event-images/1931-09-18-manshu-jihen.jpg
+heroImageCaption: "Mukden 1931 blast spot"
+heroImageCredit: "関東軍関係者？ / Wikimedia Commons / Public domain"
 ---
 
 ## 関東軍が自作自演した戦争の発端

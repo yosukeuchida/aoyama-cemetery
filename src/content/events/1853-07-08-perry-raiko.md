@@ -7,6 +7,9 @@ personSlugs:
   - yamamoto-gonbee
 category: 事件
 url: https://ja.wikipedia.org/wiki/黒船来航
+heroImage: ../../assets/event-images/1853-07-08-perry-raiko.jpg
+heroImageCaption: "UB Maastricht - Heine 1856 - Perry Commissionarissen"
+heroImageCredit: "Wilhelm Heine / Wikimedia Commons / Public domain"
 ---
 
 ## 二百余年の鎖国を破った四隻の黒船

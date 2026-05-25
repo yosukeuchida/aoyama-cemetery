@@ -6,6 +6,9 @@ personSlugs:
   - miura-goro
 category: 事件
 url: https://ja.wikipedia.org/wiki/壬午事変
+heroImage: ../../assets/event-images/1882-07-23-jingo-jihen.jpg
+heroImageCaption: "Miura Goro"
+heroImageCredit: "Unknown authorUnknown author / Wikimedia Commons / Public domain"
 ---
 
 ## 漢城で日本公使館が焼かれた日

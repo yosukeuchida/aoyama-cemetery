@@ -7,6 +7,9 @@ personSlugs:
   - sagara-sozo
 category: 事件
 url: https://ja.wikipedia.org/wiki/禁門の変
+heroImage: ../../assets/event-images/1864-08-20-kinmon-no-hen.jpg
+heroImageCaption: "Hamaguri rebellion"
+heroImageCredit: "Yūzan Mori / Wikimedia Commons / Public domain"
 ---
 
 ## 御所に銃声が響いた日

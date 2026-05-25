@@ -6,6 +6,9 @@ personSlugs:
   - arimura-jizaemon
 category: 事件
 url: https://ja.wikipedia.org/wiki/安政の大獄
+heroImage: ../../assets/event-images/1858-09-14-ansei-no-taigoku.jpg
+heroImageCaption: "Ii Naosuke"
+heroImageCredit: "京狩野家第9代　狩野永岳 (Kanō Eigaku (1790～1867)) / Wikimedia Commons / Public domain"
 ---
 
 ## 大老の独裁が招いた百名超の弾圧

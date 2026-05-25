@@ -6,6 +6,9 @@ personSlugs:
   - kato-takaaki
 category: 社会
 url: https://ja.wikipedia.org/wiki/治安維持法
+heroImage: ../../assets/event-images/1925-04-22-chian-iji-ho.png
+heroImageCaption: "Go-shichi no kiri crest 2"
+heroImageCredit: "Sakurambo / Wikimedia Commons / CC BY-SA 3.0"
 ---
 
 ## 普選法と表裏一体で公布された思想弾圧法

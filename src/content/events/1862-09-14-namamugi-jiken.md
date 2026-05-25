@@ -7,6 +7,9 @@ personSlugs:
   - okubo-toshimichi
 category: 事件
 url: https://ja.wikipedia.org/wiki/生麦事件
+heroImage: ../../assets/event-images/1862-09-14-namamugi-jiken.jpg
+heroImageCaption: "The Killing at Namamugi (生麦之發殺  Namamugi no hassatsu)"
+heroImageCredit: "Hayakawa Shōzan / Wikimedia Commons / Public domain"
 ---
 
 ## 行列を横切った英国人を斬った薩摩武士

@@ -7,6 +7,9 @@ personSlugs:
   - ogata-taketora
 category: 戦争
 url: https://ja.wikipedia.org/wiki/朝鮮戦争
+heroImage: ../../assets/event-images/1950-06-25-chosen-senso.png
+heroImageCaption: "Korean War Montage 2"
+heroImageCredit: "All photographs are works of the United States federal government. / Wikimedia Commons / Public domain"
 ---
 
 ## 三十八度線を越えた北朝鮮軍

@@ -7,6 +7,9 @@ personSlugs:
   - matsuoka-yosuke
 category: 戦争
 url: https://ja.wikipedia.org/wiki/盧溝橋事件
+heroImage: ../../assets/event-images/1937-07-07-rokokyo-jiken.jpg
+heroImageCaption: "盧溝橋付近"
+heroImageCredit: "みや東亜 / Wikimedia Commons / CC BY-SA 3.0"
 ---
 
 ## 夜の演習中に響いた銃声から始まった戦争

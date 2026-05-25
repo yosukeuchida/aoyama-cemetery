@@ -6,6 +6,9 @@ personSlugs:
   - okubo-toshimichi
 category: 政変
 url: https://ja.wikipedia.org/wiki/版籍奉還
+heroImage: ../../assets/event-images/1869-07-25-hanseki-hokan.jpg
+heroImageCaption: "Takayoshi Kido suit"
+heroImageCredit: "Unknown authorUnknown author / Wikimedia Commons / Public domain"
 ---
 
 ## 大名が領地・領民を朝廷へ返上した日

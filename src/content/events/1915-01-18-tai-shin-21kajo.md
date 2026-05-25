@@ -6,6 +6,9 @@ personSlugs:
   - kato-takaaki
 category: 条約
 url: https://ja.wikipedia.org/wiki/対華21カ条要求
+heroImage: ../../assets/event-images/1915-01-18-tai-shin-21kajo.jpg
+heroImageCaption: "Takaaki Kato suit"
+heroImageCredit: "Unknown authorUnknown author / Wikimedia Commons / Public domain"
 ---
 
 ## 大戦の隙を突いた二十一箇条の要求

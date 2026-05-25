@@ -8,6 +8,9 @@ personSlugs:
   - matsukata-masayoshi
 category: 社会
 url: https://ja.wikipedia.org/wiki/明治天皇
+heroImage: ../../assets/event-images/1912-07-30-meiji-hogyo.jpg
+heroImageCaption: "Emperor Meiji in 1873"
+heroImageCredit: "Uchida Kuichi / Wikimedia Commons / Public domain"
 ---
 
 ## 維新を担った帝の崩御と時代の終焉

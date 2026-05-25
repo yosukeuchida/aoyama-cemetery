@@ -7,6 +7,9 @@ personSlugs:
   - hayashi-tadasu
 category: 事件
 url: https://ja.wikipedia.org/wiki/三国干渉
+heroImage: ../../assets/event-images/1895-04-23-sangoku-kansho.jpg
+heroImageCaption: "Convention of retrocession of the Liatung Peninsula 8 November 1895"
+heroImageCredit: "World Imaging / Wikimedia Commons / CC BY-SA 3.0"
 ---
 
 ## 戦勝六日後に届いた三国共同の返還勧告

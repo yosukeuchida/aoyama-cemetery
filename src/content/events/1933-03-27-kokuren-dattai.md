@@ -6,6 +6,9 @@ personSlugs:
   - matsuoka-yosuke
 category: 条約
 url: https://ja.wikipedia.org/wiki/国際連盟#日本の脱退
+heroImage: ../../assets/event-images/1933-03-27-kokuren-dattai.jpg
+heroImageCaption: "Yohsuke matsuoka1932"
+heroImageCredit: "犬養内閣編纂所 / Wikimedia Commons / Public domain"
 ---
 
 ## 議場から退場した松岡洋右
