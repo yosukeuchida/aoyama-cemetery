@@ -7,7 +7,9 @@ deathDate: "1901-12-15"
 era: [江戸, 明治]
 category: 軍人
 graveSection: 1種イ20号4側
-hideMap: true
+coords:
+  lat: 35.664747593995294
+  lng: 139.72279055614692
 shortDescription: 幕府軍艦奉行・摂津守。咸臨丸の正使艦長として勝海舟・福澤諭吉らと万延元年(1860)に渡米、日米修好通商条約批准の海路を率いた旗本。
 tags:
   - 咸臨丸
