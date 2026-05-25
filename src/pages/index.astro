@@ -164,8 +164,16 @@ const breadcrumbJsonLd = {
     </style>
   </noscript>
 
-  <h1>青山霊園 偉人録</h1>
-  <p>東京都港区にある青山霊園は、明治以降の日本を築いた多くの偉人が眠る場所です。本サイトでは、彼らの生涯と業績を紹介します。</p>
+  <section class="hero">
+    <h1>青山霊園に眠る<br />偉人たち</h1>
+    <hr class="hairline" />
+    <p class="lead">
+      港区南青山。<br />
+      近代日本を駆け抜けた政治家、軍人、文豪、学者たちが<br />
+      静かに眠る都心の杜を、人物とともに歩く。
+    </p>
+    <p class="count"><strong>{totalCount}</strong>人の物語</p>
+  </section>
 
   <div class="today-grid">
     <section class="today-widget today-widget-people" aria-live="polite">
@@ -250,9 +258,10 @@ const breadcrumbJsonLd = {
       if (list.length === 0) return null;
       return (
         <section class="category-section" data-category={cat}>
-          <h2>
-            {cat} <span class="section-count">({list.length})</span>
-          </h2>
+          <header class="section-title">
+            <span class="label-small">P E O P L E</span>
+            <h2>{cat} <span class="section-count">({list.length})</span></h2>
+          </header>
           <div class="people-grid">
             {list.map((person) => (
               <article class="person-card" data-eras={person.data.era.join(',')} data-category={person.data.category} data-section={sectionKeyByPersonId.get(person.id) ?? ''} data-birthplace={prefectureByPersonId.get(person.id) ?? ''}>
@@ -275,42 +284,90 @@ const breadcrumbJsonLd = {
 </BaseLayout>
 
 <style>
+  /* === Hero === */
+  .hero {
+    text-align: center;
+    padding: 4rem 0 3.5rem;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 2.5rem;
+  }
+  .hero h1 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 2.4rem;
+    line-height: 1.55;
+    letter-spacing: 0.12em;
+    color: var(--color-ink);
+    margin: 0 0 1.5rem;
+    padding: 0;
+    border: 0;
+  }
+  .hero .hairline {
+    margin: 0 auto 1.5rem;
+  }
+  .hero .lead {
+    font-family: var(--font-serif);
+    font-size: 0.98rem;
+    line-height: 2.1;
+    letter-spacing: 0.06em;
+    color: var(--color-text-sub);
+    max-width: var(--max-width-narrow);
+    margin: 0 auto;
+  }
+  .hero .count {
+    margin: 2.2rem 0 0;
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    color: var(--color-text-faint);
+  }
+  .hero .count strong {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 1.5rem;
+    color: var(--color-accent);
+    letter-spacing: 0.05em;
+    margin: 0 0.3em;
+  }
+  @media (max-width: 720px) {
+    .hero { padding: 2.5rem 0 2.2rem; margin-bottom: 1.8rem; }
+    .hero h1 { font-size: 1.8rem; letter-spacing: 0.06em; }
+  }
+
+  /* === Today widgets === */
   .today-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 0.8rem;
-    margin: 1.2rem 0 1rem;
+    margin: 0 0 2rem;
   }
   .today-widget {
-    padding: 0.9rem 1rem;
-    border: 1px solid #d6d3c7;
-    border-radius: 8px;
-    background: #faf6e9;
+    padding: 1rem 1.1rem;
+    background: var(--color-card);
+    border-left: 2px solid var(--color-accent);
   }
   .today-widget-history {
-    background: #f4f3ec;
-    border-color: #c8c5b8;
+    border-left-color: var(--color-accent-gold);
   }
   .today-widget-title {
+    font-family: var(--font-serif);
+    font-weight: 500;
     margin: 0 0 0.5rem;
     font-size: 1rem;
-    color: #5a4a2a;
+    color: var(--color-ink);
+    letter-spacing: 0.06em;
     display: flex;
     align-items: center;
     gap: 0.4rem;
+    padding: 0;
+    border: 0;
   }
-  .today-icon {
-    font-size: 1.1rem;
-  }
-  .today-date {
-    color: #8a6a2a;
-    font-weight: 500;
-  }
+  .today-icon { font-size: 1.05rem; }
+  .today-date { color: var(--color-accent-gold); font-weight: 500; }
   .today-range {
-    font-size: 0.72rem;
-    color: #8a7a55;
-    font-weight: 400;
-    margin-left: 0.3rem;
+    font-size: 0.7rem;
+    color: var(--color-text-faint);
+    letter-spacing: 0.1em;
+    margin-left: 0.4rem;
   }
   .today-list {
     list-style: none;
@@ -318,57 +375,49 @@ const breadcrumbJsonLd = {
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.2rem;
+    gap: 0.3rem;
   }
   .today-list li {
     font-size: 0.88rem;
-    line-height: 1.5;
-    color: #333;
+    line-height: 1.6;
+    color: var(--color-text);
   }
   .today-list a {
-    color: #5a4a2a;
+    color: var(--color-accent);
     text-decoration: none;
-    border-bottom: 1px dotted #a89c7d;
+    border-bottom: 1px solid var(--color-border);
   }
-  .today-list a:hover {
-    border-bottom-style: solid;
-  }
+  .today-list a:hover { color: var(--color-accent-gold); border-bottom-color: var(--color-accent-gold); }
+
   .event-action {
     display: inline-block;
     padding: 0 0.3rem;
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     font-weight: 600;
     margin: 0 0.25rem 0 0.1rem;
-    border-radius: 2px;
   }
-  .event-action.birth {
-    color: #5a7a18;
-  }
-  .event-action.death {
-    color: #6b3a1a;
-  }
+  .event-action.birth { color: #5a7a18; }
+  .event-action.death { color: #6b3a1a; }
   .event-related {
-    color: #888;
+    color: var(--color-text-muted);
     font-size: 0.78rem;
     display: block;
-    margin-top: 0.1rem;
+    margin-top: 0.15rem;
   }
-  .event-related a {
-    color: #5a4a2a;
-  }
+  .event-related a { color: var(--color-accent); }
   .event-date {
-    color: #8a7a55;
+    color: var(--color-text-faint);
     font-variant-numeric: tabular-nums;
     margin-right: 0.3rem;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
   }
   .event-year {
-    color: #888;
+    color: var(--color-text-faint);
     font-size: 0.78rem;
     margin-left: 0.3rem;
   }
   .today-empty {
-    color: #888;
+    color: var(--color-text-muted);
     font-size: 0.85rem;
     font-style: italic;
   }
@@ -378,6 +427,7 @@ const breadcrumbJsonLd = {
     margin-left: 0.3rem;
   }
 
+  /* === Filters === */
   .era-filter,
   .category-filter {
     display: flex;
@@ -386,11 +436,7 @@ const breadcrumbJsonLd = {
     gap: 0.4rem;
     margin: 1rem 0 0.5rem;
   }
-
-  .category-filter {
-    margin-top: 0.3rem;
-  }
-
+  .category-filter { margin-top: 0.3rem; }
   .section-filter,
   .birthplace-filter {
     display: flex;
@@ -398,150 +444,153 @@ const breadcrumbJsonLd = {
     gap: 0.4rem;
     margin: 0.3rem 0 0.5rem;
   }
-
+  .filter-label {
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    margin-right: 0.2rem;
+  }
+  .era-chip,
+  .category-chip {
+    background: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    padding: 0.3rem 0.85rem;
+    font-size: 0.82rem;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: 0.05em;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  .era-chip:hover,
+  .category-chip:hover {
+    background: var(--color-bg-alt);
+    border-color: var(--color-accent-gold);
+  }
+  .era-chip.is-active,
+  .category-chip.is-active {
+    background: var(--color-ink);
+    color: var(--color-bg);
+    border-color: var(--color-ink);
+  }
   .section-filter select,
   .birthplace-filter select {
     background: #fff;
-    border: 1px solid #ccc;
-    color: #333;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    padding: 0.3rem 0.6rem;
     font-size: 0.85rem;
     font-family: inherit;
     cursor: pointer;
-  }
-
-  .filter-label {
-    color: #555;
-    font-size: 0.9rem;
-    margin-right: 0.2rem;
-  }
-
-  .era-chip,
-  .category-chip {
-    background: #fff;
-    border: 1px solid #ccc;
-    color: #333;
-    padding: 0.25rem 0.75rem;
-    border-radius: 999px;
-    font-size: 0.85rem;
-    cursor: pointer;
-    font-family: inherit;
-  }
-
-  .era-chip:hover,
-  .category-chip:hover {
-    background: #f5f5f5;
-  }
-
-  .era-chip.is-active,
-  .category-chip.is-active {
-    background: #333;
-    color: #fff;
-    border-color: #333;
   }
 
   .people-count {
-    color: #666;
-    font-size: 0.9rem;
-    margin: 0.5rem 0 1.5rem;
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    margin: 0.7rem 0 1.8rem;
   }
 
+  /* === Section title === */
   .category-section {
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem;
   }
-
-  .category-section h2 {
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 0.3rem;
-    margin-bottom: 1rem;
+  .section-title {
+    text-align: left;
+    margin: 0 0 1rem;
   }
-
+  .section-title .label-small {
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+  .section-title h2 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 1.3rem;
+    color: var(--color-ink);
+    letter-spacing: 0.1em;
+    margin: 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
   .section-count {
-    color: #888;
+    color: var(--color-text-faint);
     font-size: 0.85rem;
     font-weight: normal;
+    letter-spacing: 0.05em;
+    margin-left: 0.3em;
   }
 
+  /* === People grid === */
   .people-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.7rem;
+  }
+  @media (max-width: 720px) {
+    .people-grid { grid-template-columns: 1fr; }
   }
 
   .person-card {
-    border: 1px solid #e5e5e5;
-    border-radius: 6px;
-    padding: 1rem;
-    transition: box-shadow 120ms ease, transform 120ms ease;
+    background: var(--color-card);
+    border-left: 2px solid var(--color-accent);
+    padding: 1.1rem 1.2rem;
+    transition: border-left-width 0.15s ease, background 0.15s ease;
   }
-
   .person-card:hover {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    transform: translateY(-1px);
+    border-left-width: 3px;
+    background: #fbf7eb;
   }
-
   .person-name {
     margin: 0 0 0.2rem;
-    font-size: 1.1rem;
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 1.15rem;
+    color: var(--color-ink);
+    letter-spacing: 0.05em;
+    padding: 0;
+    border: 0;
   }
-
   .person-name a {
     color: inherit;
     text-decoration: none;
   }
-
-  .person-name a:hover {
-    text-decoration: underline;
-  }
-
+  .person-name a:hover { color: var(--color-accent-gold); }
   .person-kana {
     margin: 0 0 0.4rem;
-    color: #888;
-    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
   }
-
   .person-meta {
     margin: 0 0 0.5rem;
-    color: #555;
-    font-size: 0.85rem;
+    color: var(--color-text-faint);
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
     display: flex;
     align-items: center;
     gap: 0.5rem;
   }
-
   .era-badge {
-    background: #f0f0f0;
-    color: #444;
-    padding: 0.1rem 0.5rem;
-    border-radius: 3px;
-    font-size: 0.75rem;
+    background: var(--color-ink);
+    color: var(--color-bg);
+    padding: 0.15rem 0.55rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
   }
-
   .person-desc {
     margin: 0;
-    font-size: 0.9rem;
-    line-height: 1.5;
-    color: #333;
+    font-size: 0.85rem;
+    line-height: 1.75;
+    color: var(--color-text-sub);
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
 
-  @media (max-width: 640px) {
-    .people-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
   @media (prefers-reduced-motion: reduce) {
-    .person-card {
-      transition: none;
-    }
-    .person-card:hover {
-      transform: none;
-    }
+    .person-card { transition: none; }
   }
 </style>
 
