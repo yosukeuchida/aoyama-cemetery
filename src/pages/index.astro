@@ -724,12 +724,15 @@ const breadcrumbJsonLd = {
       const personLinks = e.event.personSlugs
         .map((s, i) => `<a href="/people/${s}/">${e.event.personNames[i]}</a>`)
         .join('・');
+      const relatedHtml = personLinks
+        ? `<span class="event-related">関連: ${personLinks}</span>`
+        : '';
       return `
         <li>
           <span class="event-date">${fullDate}</span>
           <strong><a href="/events/${e.event.id}/">${e.event.title}</a></strong>
           <span class="event-year">/ ${yearsAgo} 年前</span>
-          <span class="event-related">関連: ${personLinks}</span>
+          ${relatedHtml}
         </li>
       `;
     }

@@ -67,7 +67,9 @@ const breadcrumbJsonLd = {
             </div>
             <h2 class="event-card-title">{event.data.title}</h2>
             <p class="event-card-summary">{event.data.summary}</p>
-            <p class="event-card-related">関連: {personNames.join('・')}</p>
+            {personNames.length > 0 && (
+              <p class="event-card-related">関連: {personNames.join('・')}</p>
+            )}
           </a>
         </li>
       );

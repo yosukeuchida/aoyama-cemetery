@@ -62,11 +62,13 @@ const eventJsonLd: Record<string, unknown> = {
   startDate: event.data.date,
   url: new URL(`/events/${event.id}/`, Astro.site).toString(),
   ...(event.data.url ? { sameAs: [event.data.url] } : {}),
-  about: relatedPeople.map((p) => ({
-    '@type': 'Person',
-    name: p.data.name,
-    url: new URL(`/people/${p.id}/`, Astro.site).toString(),
-  })),
+  ...(relatedPeople.length > 0 ? {
+    about: relatedPeople.map((p) => ({
+      '@type': 'Person',
+      name: p.data.name,
+      url: new URL(`/people/${p.id}/`, Astro.site).toString(),
+    })),
+  } : {}),
 };
 
 const breadcrumbJsonLd = {
@@ -145,6 +147,7 @@ const themeColor = CATEGORY_COLOR[event.data.category] ?? '#777';
       <Content />
     </article>
 
+    {relatedPeople.length > 0 && (
     <section class="event-related">
       <h2>関連する偉人</h2>
       <ul class="event-related-list">
@@ -180,6 +183,7 @@ const themeColor = CATEGORY_COLOR[event.data.category] ?? '#777';
         ))}
       </ul>
     </section>
+    )}
 
     {event.data.url && (
       <section class="event-references">
