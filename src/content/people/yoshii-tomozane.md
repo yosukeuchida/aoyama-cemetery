@@ -7,7 +7,9 @@ deathDate: "1891-04-22"
 era: [江戸, 明治]
 category: 政治家
 graveSection: 1種イ6号4側
-hideMap: true
+coords:
+  lat: 35.66625461292062
+  lng: 139.72142845641045
 shortDescription: 薩摩出身の維新元勲。下加治屋町郷中で西郷・大久保と幼馴染、明治天皇の側近・宮内省顧問・日本鉄道社長を歴任した伯爵。
 tags:
   - 薩摩藩
