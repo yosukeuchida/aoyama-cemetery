@@ -2,11 +2,9 @@
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import GravePhotoGallery from '../../components/GravePhotoGallery.astro';
-import NearbyGraves from '../../components/NearbyGraves.astro';
 import PersonPortrait from '../../components/PersonPortrait.astro';
 import RelatedPeople from '../../components/RelatedPeople.astro';
 import RelatedWorks from '../../components/RelatedWorks.astro';
-import { getNearbyPeople } from '../../utils/nearby-graves';
 import { getRelatedPeopleFor } from '../../utils/related-people';
 import { getWorksForPerson } from '../../utils/related-works';
 import { getRoutesForPerson } from '../../utils/routes-for-person';
@@ -27,7 +25,6 @@ interface Props {
 
 const { person } = Astro.props;
 const { Content } = await render(person);
-const { block, nearby } = await getNearbyPeople(person);
 const works = await getWorksForPerson(person.id);
 const routes = await getRoutesForPerson(person.id);
 const events = await getEventsForPerson(person.id);
@@ -271,8 +268,6 @@ const articleJsonLd: Record<string, unknown> = {
         </section>
       );
     })()}
-
-    {block && nearby.length > 0 && <NearbyGraves block={block} nearby={nearby} />}
 
     {works.length > 0 && <RelatedWorks works={works} />}
 
