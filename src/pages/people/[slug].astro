@@ -418,17 +418,37 @@ const articleJsonLd: Record<string, unknown> = {
     .meta-cell, .meta-cell-wide { grid-template-columns: 80px 1fr; }
   }
 
-  .person-events {
+  .grave-map {
     margin-top: 2.5rem;
   }
-  .person-events h2 {
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 0.3rem;
-    margin-bottom: 1rem;
+  .grave-map iframe {
+    width: 100%;
+    border: 1px solid var(--color-border);
+    background: var(--color-card);
+  }
+  .grave-map .map-link {
+    margin: 0.6rem 0 0;
+    text-align: right;
+    font-size: 0.85rem;
+  }
+  .grave-map .map-link a {
+    color: var(--color-accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-accent);
+    padding-bottom: 1px;
+  }
+  .grave-map .map-link a:hover {
+    color: var(--color-accent-gold);
+    border-bottom-color: var(--color-accent-gold);
+  }
+
+  .person-events {
+    margin-top: 2.5rem;
   }
   .person-events-list {
     list-style: none;
     padding: 0;
+    margin: 0;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -437,44 +457,43 @@ const articleJsonLd: Record<string, unknown> = {
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
-    padding: 0.6rem 0.9rem;
-    border: 1px solid #d6d3c7;
-    border-radius: 6px;
-    background: #faf8f3;
+    padding: 0.75rem 1rem;
+    background: var(--color-card);
+    border-left: 2px solid var(--color-accent);
     text-decoration: none;
     color: inherit;
-    transition: box-shadow 120ms ease;
+    transition: border-left-width 0.15s ease, background 0.15s ease;
   }
   .person-events-list a:hover {
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    border-left-width: 3px;
+    background: #fbf7eb;
   }
   .person-event-date {
-    font-size: 0.78rem;
-    color: #8a7a55;
+    font-size: 0.72rem;
+    color: var(--color-text-faint);
+    letter-spacing: 0.08em;
     font-variant-numeric: tabular-nums;
   }
   .person-event-title {
-    font-size: 0.95rem;
-    color: #5a4a2a;
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--color-ink);
     font-weight: 500;
+    letter-spacing: 0.05em;
   }
   .person-event-summary {
     font-size: 0.85rem;
-    color: #444;
-    line-height: 1.5;
+    color: var(--color-text-sub);
+    line-height: 1.7;
   }
 
   .person-routes {
     margin-top: 2.5rem;
   }
-  .person-routes h2 {
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 0.3rem;
-    margin-bottom: 1rem;
-  }
   .person-routes-list {
     list-style: none;
     padding: 0;
+    margin: 0;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 0.6rem;
@@ -483,24 +502,55 @@ const articleJsonLd: Record<string, unknown> = {
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
-    padding: 0.7rem 0.9rem;
-    border: 1px solid #d6d3c7;
-    border-radius: 6px;
-    background: #faf8f3;
+    padding: 0.8rem 1rem;
+    background: var(--color-card);
+    border-left: 2px solid var(--color-accent);
     text-decoration: none;
     color: inherit;
-    transition: box-shadow 120ms ease;
+    transition: border-left-width 0.15s ease, background 0.15s ease;
   }
   .person-routes-list a:hover {
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    border-left-width: 3px;
+    background: #fbf7eb;
   }
   .person-route-title {
-    font-size: 0.95rem;
-    color: #5a4a2a;
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--color-ink);
     font-weight: 500;
+    letter-spacing: 0.05em;
   }
   .person-route-meta {
-    font-size: 0.78rem;
-    color: #8a7a55;
+    font-size: 0.72rem;
+    color: var(--color-text-faint);
+    letter-spacing: 0.08em;
+  }
+
+  .references {
+    margin-top: 2.5rem;
+  }
+  .references ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid var(--color-border-faint);
+  }
+  .references li {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--color-border-faint);
+    font-size: 0.88rem;
+  }
+  .references a {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+  .references a:hover {
+    color: var(--color-accent-gold);
+    text-decoration: underline;
+  }
+  .references a::after {
+    content: " ↗";
+    color: var(--color-text-faint);
+    font-size: 0.85em;
   }
 </style>
