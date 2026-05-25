@@ -7,7 +7,9 @@ deathDate: "2003-02-26"
 era: [昭和]
 category: 文化人
 graveSection: 1種ロ7号15側
-hideMap: true
+coords:
+  lat: 35.66761361086234
+  lng: 139.72021124339918
 shortDescription: 鉄道紀行作家。元中央公論社編集者。『時刻表2万キロ』で鉄道紀行を文学のジャンルに昇格させた戦後の名随筆家。
 tags:
   - 鉄道紀行
