@@ -1,8 +1,11 @@
 ---
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const people = await getCollection('people');
+const allEvents = await getCollection('events');
+const peopleMap = new Map(people.map((p) => [p.id, p.data.name]));
 
 const TIMELINE_START = 1795;
 const TIMELINE_END = 2010;
@@ -90,6 +93,67 @@ const breadcrumbJsonLd = {
 
 const presentCategories = CATEGORY_ORDER.filter((cat) => rows.some((r) => r.category === cat));
 const presentEras = ERA_ORDER.filter((era) => rows.some((r) => r.era.includes(era)));
+
+const EVENT_CATEGORY_ORDER = ['政変', '戦争', '事件', '条約', '内閣', '災害', '社会'] as const;
+const EVENT_CATEGORY_COLOR: Record<string, string> = {
+  政変: '#a04030',
+  戦争: '#6b2a20',
+  事件: '#6b5a4a',
+  条約: '#3a5a7b',
+  内閣: '#8a6a2a',
+  災害: '#c87030',
+  社会: '#4a6a3a',
+};
+
+type EventRow = {
+  id: string;
+  title: string;
+  date: string;
+  year: number;
+  monthDay: string;
+  summary: string;
+  category: string;
+  heroImage?: NonNullable<(typeof allEvents)[number]['data']['heroImage']>;
+  heroImageCaption?: string;
+  personNames: string[];
+};
+
+const eventRows: EventRow[] = allEvents
+  .map((e) => {
+    const date = e.data.date;
+    const year = parseInt(date.slice(0, 4), 10);
+    const monthDay = `${date.slice(5, 7)}/${date.slice(8, 10)}`;
+    const personNames = e.data.personSlugs
+      .map((slug) => peopleMap.get(slug))
+      .filter((n): n is string => Boolean(n));
+    return {
+      id: e.id,
+      title: e.data.title,
+      date,
+      year,
+      monthDay,
+      summary: e.data.summary,
+      category: e.data.category,
+      heroImage: e.data.heroImage,
+      heroImageCaption: e.data.heroImageCaption,
+      personNames,
+    };
+  })
+  .sort((a, b) => a.date.localeCompare(b.date));
+
+const eventsByYear: { year: number; events: EventRow[] }[] = [];
+for (const ev of eventRows) {
+  const last = eventsByYear[eventsByYear.length - 1];
+  if (last && last.year === ev.year) {
+    last.events.push(ev);
+  } else {
+    eventsByYear.push({ year: ev.year, events: [ev] });
+  }
+}
+
+const presentEventCategories = EVENT_CATEGORY_ORDER.filter((c) =>
+  eventRows.some((e) => e.category === c),
+);
 ---
 
 <BaseLayout title={title} description={description} jsonLd={breadcrumbJsonLd}>
@@ -192,6 +256,76 @@ const presentEras = ERA_ORDER.filter((era) => rows.some((r) => r.era.includes(er
       ))}
     </div>
   </div>
+
+  <section class="events-timeline">
+    <header class="events-header">
+      <span class="label-small">E V E N T S</span>
+      <h2>出来事年表 — {eventRows.length} 件</h2>
+      <hr class="hairline" />
+      <p class="events-note">青山霊園に眠る偉人たちが関わった、または共通体験した歴史的事件・条約・政変。各イベントをクリックで詳細ページへ。</p>
+    </header>
+
+    <div class="event-filters">
+      <div class="filter-row" role="toolbar" aria-label="カテゴリで絞り込み">
+        <span class="filter-label">カテゴリ:</span>
+        <button type="button" class="chip event-chip is-active" data-event-filter="all" aria-pressed="true">すべて</button>
+        {presentEventCategories.map((cat) => (
+          <button
+            type="button"
+            class="chip event-chip"
+            data-event-filter={cat}
+            aria-pressed="false"
+            style={`--chip-color:${EVENT_CATEGORY_COLOR[cat]};`}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+      <p class="filter-count event-filter-count" aria-live="polite">全 {eventRows.length} 件</p>
+    </div>
+
+    <ol class="event-year-groups">
+      {eventsByYear.map((group) => (
+        <li class="event-year-group" data-event-year={group.year}>
+          <h3 class="event-year">{group.year}</h3>
+          <ul class="event-list">
+            {group.events.map((ev) => (
+              <li class="event-item" data-event-category={ev.category}>
+                <a class="event-card" href={`/events/${ev.id}/`}>
+                  {ev.heroImage ? (
+                    <Image
+                      src={ev.heroImage}
+                      alt={ev.heroImageCaption ?? `${ev.title} を象徴する画像`}
+                      widths={[160, 240]}
+                      sizes="80px"
+                      quality={80}
+                      class="event-thumb"
+                    />
+                  ) : (
+                    <div class="event-thumb event-thumb-empty" aria-hidden="true"></div>
+                  )}
+                  <div class="event-body">
+                    <div class="event-head">
+                      <time class="event-date" datetime={ev.date}>{ev.monthDay}</time>
+                      <span class="event-cat-chip" style={`background:${EVENT_CATEGORY_COLOR[ev.category]};`}>{ev.category}</span>
+                      <span class="event-title">{ev.title}</span>
+                    </div>
+                    <p class="event-summary">{ev.summary}</p>
+                    {ev.personNames.length > 0 && (
+                      <p class="event-people">
+                        関係: {ev.personNames.slice(0, 3).join(', ')}
+                        {ev.personNames.length > 3 ? ` 他 ${ev.personNames.length - 3} 名` : ''}
+                      </p>
+                    )}
+                  </div>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </ol>
+  </section>
 </BaseLayout>
 
 <style>
@@ -446,6 +580,146 @@ const presentEras = ERA_ORDER.filter((era) => rows.some((r) => r.era.includes(er
       font-size: 0.7rem;
     }
   }
+
+  /* === Events timeline section === */
+  .events-timeline {
+    margin: 4rem auto 2rem;
+    max-width: var(--max-width-narrow);
+  }
+  .events-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  .events-header .label-small { display: block; margin-bottom: 0.5rem; }
+  .events-header h2 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 1.5rem;
+    letter-spacing: 0.12em;
+    color: var(--color-ink);
+    margin: 0 0 1rem;
+    padding: 0;
+    border: 0;
+  }
+  .events-header .hairline { margin: 0 auto 1rem; }
+  .events-note {
+    color: var(--color-text-sub);
+    font-size: 0.85rem;
+    max-width: 620px;
+    margin: 0.5rem auto 0;
+    line-height: 1.8;
+  }
+  .event-filters {
+    margin: 1.5rem 0 1.2rem;
+  }
+  .event-year-groups {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .event-year-group {
+    position: relative;
+    padding-left: 1.4rem;
+    border-left: 2px solid var(--color-accent-gold);
+    margin-bottom: 1.8rem;
+  }
+  .event-year-group.is-hidden { display: none; }
+  .event-year {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--color-ink);
+    margin: 0 0 0.7rem;
+    padding: 0;
+    border: 0;
+  }
+  .event-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .event-item.is-hidden { display: none; }
+  .event-card {
+    display: flex;
+    gap: 0.9rem;
+    padding: 0.7rem 0.8rem;
+    background: var(--color-card);
+    border: 1px solid var(--color-border-faint);
+    border-radius: 3px;
+    text-decoration: none;
+    color: inherit;
+    transition: background 120ms ease, border-color 120ms ease;
+  }
+  .event-card:hover {
+    background: var(--color-bg-alt);
+    border-color: var(--color-border);
+  }
+  .event-thumb {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 2px;
+    flex: 0 0 auto;
+  }
+  .event-thumb-empty {
+    background: repeating-linear-gradient(45deg, var(--color-bg-alt) 0 6px, transparent 6px 12px);
+    border: 1px dashed var(--color-border-faint);
+  }
+  .event-body {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .event-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 0.3rem;
+  }
+  .event-date {
+    font-variant-numeric: tabular-nums;
+    font-size: 0.8rem;
+    color: var(--color-text-sub);
+    flex: 0 0 auto;
+  }
+  .event-cat-chip {
+    font-size: 0.65rem;
+    color: var(--color-bg);
+    padding: 0.12rem 0.55rem;
+    border-radius: 999px;
+    letter-spacing: 0.04em;
+    flex: 0 0 auto;
+    line-height: 1.4;
+  }
+  .event-title {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--color-ink);
+    font-weight: 500;
+  }
+  .event-summary {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: var(--color-text);
+    margin: 0.2rem 0 0.3rem;
+  }
+  .event-people {
+    font-size: 0.75rem;
+    color: var(--color-text-faint);
+    margin: 0;
+  }
+
+  @media (max-width: 720px) {
+    .events-timeline { padding: 0 0.4rem; }
+    .event-thumb { width: 56px; height: 56px; }
+    .event-card { padding: 0.5rem 0.6rem; gap: 0.6rem; }
+    .event-title { font-size: 0.9rem; }
+    .event-summary { font-size: 0.8rem; }
+  }
 </style>
 
 <script>
@@ -500,4 +774,47 @@ const presentEras = ERA_ORDER.filter((era) => rows.some((r) => r.era.includes(er
   });
 
   applyFilter();
+
+  // === Events timeline filter ===
+  const eventChips = document.querySelectorAll<HTMLButtonElement>('.event-chip');
+  const eventItems = document.querySelectorAll<HTMLElement>('.event-item');
+  const eventGroups = document.querySelectorAll<HTMLElement>('.event-year-group');
+  const eventCountEl = document.querySelector<HTMLElement>('.event-filter-count');
+  const totalEventCount = eventItems.length;
+  let currentEventCategory = 'all';
+
+  function applyEventFilter() {
+    eventChips.forEach((c) => {
+      const val = c.dataset.eventFilter ?? 'all';
+      const active = val === currentEventCategory;
+      c.classList.toggle('is-active', active);
+      c.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+    let visible = 0;
+    eventItems.forEach((item) => {
+      const cat = item.dataset.eventCategory ?? '';
+      const match = currentEventCategory === 'all' || cat === currentEventCategory;
+      item.classList.toggle('is-hidden', !match);
+      if (match) visible += 1;
+    });
+    eventGroups.forEach((group) => {
+      const visibleInGroup = group.querySelectorAll('.event-item:not(.is-hidden)').length;
+      group.classList.toggle('is-hidden', visibleInGroup === 0);
+    });
+    if (eventCountEl) {
+      eventCountEl.textContent =
+        currentEventCategory === 'all'
+          ? `全 ${totalEventCount} 件`
+          : `${visible} 件を表示中 (全 ${totalEventCount} 件)`;
+    }
+  }
+
+  eventChips.forEach((c) => {
+    c.addEventListener('click', () => {
+      currentEventCategory = c.dataset.eventFilter ?? 'all';
+      applyEventFilter();
+    });
+  });
+
+  applyEventFilter();
 </script>
