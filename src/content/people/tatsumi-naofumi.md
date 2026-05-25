@@ -6,7 +6,7 @@ birthDate: "1845-08-21"
 deathDate: "1907-03-06"
 era: [江戸, 明治]
 category: 軍人
-graveSection: 1種イ1号3側
+graveSection: 1種イ1号3側(立山墓地)
 coords:
   lat: 35.6637157614497
   lng: 139.71884164706705
