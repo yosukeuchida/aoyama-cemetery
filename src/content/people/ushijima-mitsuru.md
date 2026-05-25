@@ -25,6 +25,9 @@ alumniOf:
   - 陸軍幼年学校
   - 陸軍士官学校
   - 陸軍大学校
+portrait: ../../assets/portraits/ushijima-mitsuru.jpg
+portraitCaption: 牛島 満の肖像
+portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「牛島満」
     url: https://ja.wikipedia.org/wiki/牛島満

@@ -25,6 +25,9 @@ alumniOf:
   - 海軍兵学校
   - 海軍大学校
 honorificSuffix: "男爵"
+portrait: ../../assets/portraits/yamashita-gentaro.jpg
+portraitCaption: 山下 源太郎の肖像
+portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「山下源太郎」
     url: https://ja.wikipedia.org/wiki/山下源太郎

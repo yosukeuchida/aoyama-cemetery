@@ -131,6 +131,10 @@ PAIRS = [
     ("brinkley", "Captain_Francis_Brinkley.jpg"),
     # nagayo-yoshiro: 1961 没で PD 未経過(2032 年に PD)
     # eto-jun: 1999 没で PD 未経過(2070 年に PD)
+    # 2026-05-25 追加分(3名、PD 確認済)
+    ("ushijima-mitsuru", "Mitsuru_Ushijima.jpg"),
+    ("soeda-juichi", "Juichi_Soyeda.jpg"),
+    ("yamashita-gentaro", "Yamashita_Gentaro.jpg"),
 ]
 
 OUT_DIR = "src/assets/portraits"

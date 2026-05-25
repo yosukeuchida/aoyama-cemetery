@@ -26,6 +26,9 @@ alumniOf:
   - 東京大学
   - ケンブリッジ大学
 honorificSuffix: "法学博士"
+portrait: ../../assets/portraits/soeda-juichi.jpg
+portraitCaption: 添田 寿一の肖像(1913 年)
+portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「添田寿一」
     url: https://ja.wikipedia.org/wiki/添田寿一
