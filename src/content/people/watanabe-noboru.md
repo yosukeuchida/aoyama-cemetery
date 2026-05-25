@@ -7,7 +7,9 @@ deathDate: "1913-11-10"
 era: [江戸, 明治]
 category: 政治家
 graveSection: 1種イ12号4側
-hideMap: true
+coords:
+  lat: 35.66252461619504
+  lng: 139.72269912358945
 shortDescription: 神道無念流の達人で「練兵館四天王」の一人。肥前大村藩出身、薩長同盟締結の橋渡しを担い、明治政府で警視総監・元老院議官を歴任、子爵。
 tags:
   - 神道無念流
@@ -26,6 +28,9 @@ knowsAbout:
   - 幕末外交
 nationality: JP
 honorificSuffix: "子爵"
+portrait: ../../assets/portraits/watanabe-noboru.jpg
+portraitCaption: 渡辺 昇の肖像
+portraitCredit: Wikimedia Commons / Public Domain
 references:
   - title: Wikipedia「渡辺昇」
     url: https://ja.wikipedia.org/wiki/渡辺昇
