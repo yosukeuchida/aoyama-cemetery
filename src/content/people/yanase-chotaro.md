@@ -7,7 +7,9 @@ deathDate: "1956-06-11"
 era: [明治, 昭和]
 category: 実業家
 graveSection: 1種ロ12号7側
-hideMap: true
+coords:
+  lat: 35.66771656414004
+  lng: 139.7235061891271
 shortDescription: ヤナセ(梁瀬自動車)の創業者。関東大震災後に GM 車 2,000 台を一括発注した決断で会社を救い、日本の輸入車市場の祖となった。
 tags:
   - ヤナセ
