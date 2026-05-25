@@ -7,7 +7,9 @@ deathDate: "1955-09-25"
 era: [大正, 昭和]
 category: 政治家
 graveSection: 1種ロ8号1・14側
-hideMap: true
+coords:
+  lat: 35.667428
+  lng: 139.722307
 shortDescription: 内務官僚から政治家へ。初代東京都長官として戦時下の都政を担い、上野動物園の猛獣処分を命じた人物としても知られる。
 tags:
   - 内務省

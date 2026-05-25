@@ -7,7 +7,9 @@ deathDate: "1913-07-10"
 era: [明治]
 category: 政治家
 graveSection: 1種ロ8号1・14側
-hideMap: true
+coords:
+  lat: 35.668751
+  lng: 139.723709
 shortDescription: 日英同盟締結の主役。駐英公使として 1902 年に同盟を成立させた外務官僚。佐倉藩医・佐藤泰然の五男、伯爵。
 tags:
   - 外務大臣
