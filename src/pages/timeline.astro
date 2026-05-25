@@ -93,8 +93,15 @@ const presentEras = ERA_ORDER.filter((era) => rows.some((r) => r.era.includes(er
 ---
 
 <BaseLayout title={title} description={description} jsonLd={breadcrumbJsonLd}>
-  <h1>年表 — 同時代タイムライン</h1>
-  <p>青山霊園に眠る {rows.length} 名の偉人を生年順に並べた年表。各人の生涯を 1 本の帯で表し、背景に幕末から現代までの主要な歴史的事件を縦線で重ねた。</p>
+  <section class="hero">
+    <span class="label-small">T I M E L I N E</span>
+    <h1>年表 — 同時代タイムライン</h1>
+    <hr class="hairline" />
+    <p class="lead">
+      青山霊園に眠る {rows.length} 名の偉人を生年順に並べた年表。<br />
+      各人の生涯を 1 本の帯で表し、背景に幕末から現代までの主要な歴史的事件を縦線で重ねた。
+    </p>
+  </section>
   <p class="note">同じ時代に誰が生きていたか、明治維新・日露戦争・関東大震災・太平洋戦争を誰が共通体験したかを、一画面で俯瞰できる。各バーをクリックすると個別ページへ。</p>
 
   <div class="filters">
@@ -188,11 +195,35 @@ const presentEras = ERA_ORDER.filter((era) => rows.some((r) => r.era.includes(er
 </BaseLayout>
 
 <style>
-  h1 {
-    margin-bottom: 0.5rem;
+  .hero {
+    text-align: center;
+    padding: 3rem 0 2.5rem;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 2rem;
+  }
+  .hero .label-small { display: block; margin-bottom: 0.6rem; }
+  .hero h1 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 2rem;
+    letter-spacing: 0.12em;
+    color: var(--color-ink);
+    margin: 0 0 1.3rem;
+    padding: 0;
+    border: 0;
+  }
+  .hero .hairline { margin: 0 auto 1.3rem; }
+  .hero .lead {
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    line-height: 2.0;
+    letter-spacing: 0.06em;
+    color: var(--color-text-sub);
+    max-width: var(--max-width-narrow);
+    margin: 0 auto;
   }
   .note {
-    color: #777;
+    color: var(--color-text-faint);
     font-size: 0.85rem;
     margin: 0.3rem 0 1rem;
   }
@@ -207,15 +238,15 @@ const presentEras = ERA_ORDER.filter((era) => rows.some((r) => r.era.includes(er
     margin-bottom: 0.4rem;
   }
   .filter-label {
-    color: #555;
+    color: var(--color-text-sub);
     font-size: 0.85rem;
     margin-right: 0.2rem;
     flex: 0 0 auto;
   }
   .chip {
-    background: #fff;
-    border: 1px solid #ccc;
-    color: #333;
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
     padding: 0.2rem 0.7rem;
     border-radius: 999px;
     font-size: 0.8rem;
@@ -223,15 +254,15 @@ const presentEras = ERA_ORDER.filter((era) => rows.some((r) => r.era.includes(er
     font-family: inherit;
   }
   .chip:hover {
-    background: #f5f5f5;
+    background: var(--color-bg-alt);
   }
   .chip.is-active {
-    background: var(--chip-color, #333);
-    color: #fff;
-    border-color: var(--chip-color, #333);
+    background: var(--chip-color, var(--color-accent));
+    color: var(--color-bg);
+    border-color: var(--chip-color, var(--color-accent));
   }
   .filter-count {
-    color: #666;
+    color: var(--color-text-muted);
     font-size: 0.85rem;
     margin: 0.4rem 0 0;
   }
@@ -240,9 +271,10 @@ const presentEras = ERA_ORDER.filter((era) => rows.some((r) => r.era.includes(er
     overflow: auto;
     max-height: 80vh;
     margin-top: 0.6rem;
-    border: 1px solid #e5e5e5;
-    border-radius: 6px;
-    background: #fafaf7;
+    border: 1px solid var(--color-border);
+    border-left: 2px solid var(--color-accent-gold);
+    border-radius: 2px;
+    background: var(--color-card);
   }
   .timeline-grid {
     display: grid;
@@ -259,13 +291,15 @@ const presentEras = ERA_ORDER.filter((era) => rows.some((r) => r.era.includes(er
     top: 0;
     left: 0;
     z-index: 5;
-    background: #f5f3ec;
-    border-right: 1px solid #d6d3c7;
-    border-bottom: 1px solid #d6d3c7;
+    background: var(--color-bg-alt);
+    border-right: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
     padding: 0.5rem 0.7rem;
+    font-family: var(--font-serif);
     font-size: 0.85rem;
-    color: #5a4a2a;
-    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--color-ink);
+    font-weight: 500;
     display: flex;
     align-items: center;
   }
@@ -275,8 +309,8 @@ const presentEras = ERA_ORDER.filter((era) => rows.some((r) => r.era.includes(er
     position: sticky;
     top: 0;
     z-index: 4;
-    background: #f5f3ec;
-    border-bottom: 1px solid #d6d3c7;
+    background: var(--color-bg-alt);
+    border-bottom: 1px solid var(--color-border);
     overflow: hidden;
   }
   .year-label {
@@ -284,7 +318,7 @@ const presentEras = ERA_ORDER.filter((era) => rows.some((r) => r.era.includes(er
     top: 6px;
     transform: translateX(-50%);
     font-size: 0.7rem;
-    color: #8a7a55;
+    color: var(--color-text-faint);
     font-variant-numeric: tabular-nums;
     pointer-events: none;
   }
@@ -293,7 +327,7 @@ const presentEras = ERA_ORDER.filter((era) => rows.some((r) => r.era.includes(er
     bottom: 4px;
     transform: translateX(-50%);
     font-size: 0.65rem;
-    color: #a23b56;
+    color: var(--color-accent-gold);
     text-align: center;
     line-height: 1.1;
     white-space: nowrap;
@@ -304,7 +338,7 @@ const presentEras = ERA_ORDER.filter((era) => rows.some((r) => r.era.includes(er
     pointer-events: auto;
   }
   .event-label-year {
-    color: #c47898;
+    color: var(--color-text-faint);
     font-weight: 500;
     font-size: 0.6rem;
   }
@@ -322,7 +356,7 @@ const presentEras = ERA_ORDER.filter((era) => rows.some((r) => r.era.includes(er
     top: 0;
     bottom: 0;
     width: 1px;
-    background: rgba(162, 59, 86, 0.25);
+    background: rgba(138, 122, 74, 0.3);
   }
 
   /* Person rows */
@@ -331,12 +365,12 @@ const presentEras = ERA_ORDER.filter((era) => rows.some((r) => r.era.includes(er
     position: sticky;
     left: 0;
     z-index: 3;
-    background: #fafaf7;
-    border-right: 1px solid #e5e5e5;
-    border-bottom: 1px solid #f0ede5;
+    background: var(--color-card);
+    border-right: 1px solid var(--color-border-faint);
+    border-bottom: 1px solid var(--color-border-faint);
     padding: 0 0.7rem;
     font-size: 0.78rem;
-    color: #333;
+    color: var(--color-text);
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -346,18 +380,19 @@ const presentEras = ERA_ORDER.filter((era) => rows.some((r) => r.era.includes(er
     transition: background 120ms ease;
   }
   .row-name:hover {
-    background: rgba(90, 74, 42, 0.1);
+    background: var(--color-bg-alt);
+    color: var(--color-accent);
   }
   .row-bar {
     grid-column: 2;
     position: relative;
-    border-bottom: 1px solid #f0ede5;
+    border-bottom: 1px solid var(--color-border-faint);
     text-decoration: none;
     color: inherit;
     transition: background 120ms ease;
   }
   .row-bar:hover {
-    background: rgba(90, 74, 42, 0.06);
+    background: var(--color-bg-alt);
   }
   .row-bar:hover .bar,
   .row-name:hover + .row-bar .bar,
@@ -373,7 +408,7 @@ const presentEras = ERA_ORDER.filter((era) => rows.some((r) => r.era.includes(er
     position: absolute;
     top: 4px;
     bottom: 4px;
-    border-radius: 3px;
+    border-radius: 2px;
     z-index: 2;
     display: flex;
     align-items: center;

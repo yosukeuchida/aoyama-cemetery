@@ -87,21 +87,40 @@ const themeColor = CATEGORY_COLOR[event.data.category] ?? '#777';
 ---
 
 <BaseLayout title={title} description={description} jsonLd={[eventJsonLd, breadcrumbJsonLd]}>
-  <p class="back-link"><a href="/events/">← 事件一覧へ</a></p>
+  <nav class="breadcrumb" aria-label="パンくず">
+    <a href="/">トップ</a>
+    <span aria-hidden="true">/</span>
+    <a href="/events/">事件</a>
+    <span aria-hidden="true">/</span>
+    <span aria-current="page">{event.data.title}</span>
+  </nav>
 
   <article class="event-detail">
-    <header class="event-header">
-      <div class="event-meta-row">
-        <span class="event-category" style={`background:${themeColor};`}>
-          {event.data.category}
-        </span>
-        <span class="event-date-meta">
-          {eraLabel(yearNum)} {yearNum} 年 {monthNum} 月 {dayNum} 日
-        </span>
-      </div>
+    <section class="hero">
+      <span class="label-small">E V E N T</span>
       <h1>{event.data.title}</h1>
-      <p class="event-summary">{event.data.summary}</p>
-    </header>
+      <hr class="hairline" />
+      <p class="lead">{event.data.summary}</p>
+    </section>
+
+    <dl class="meta-grid">
+      <div class="meta-cell">
+        <dt>日付</dt>
+        <dd>
+          <time datetime={event.data.date}>
+            {eraLabel(yearNum)} {yearNum} 年 {monthNum} 月 {dayNum} 日
+          </time>
+        </dd>
+      </div>
+      <div class="meta-cell">
+        <dt>カテゴリ</dt>
+        <dd>
+          <span class="event-category" style={`--cat-color:${themeColor};`}>
+            {event.data.category}
+          </span>
+        </dd>
+      </div>
+    </dl>
 
     <article class="event-body">
       <Content />
@@ -135,74 +154,97 @@ const themeColor = CATEGORY_COLOR[event.data.category] ?? '#777';
       </section>
     )}
 
-    <p><a href="/events/">← 事件一覧に戻る</a></p>
+    <p class="back-foot"><a href="/events/">← 事件一覧に戻る</a></p>
   </article>
 </BaseLayout>
 
 <style>
-  .back-link {
-    margin: 0 0 1rem;
-    font-size: 0.85rem;
+  .breadcrumb {
+    font-size: 0.72rem;
+    color: var(--color-text-faint);
+    letter-spacing: 0.1em;
+    margin-bottom: 1.6rem;
   }
-  .back-link a {
-    color: #8a7a55;
+  .breadcrumb a {
+    color: var(--color-text-faint);
     text-decoration: none;
-    border-bottom: 1px dotted #a89c7d;
   }
-  .back-link a:hover {
-    border-bottom-style: solid;
-  }
-  .event-header {
+  .breadcrumb a:hover { color: var(--color-accent-gold); }
+  .breadcrumb span[aria-hidden] { margin: 0 0.4em; color: var(--color-border); }
+
+  .hero {
+    text-align: center;
+    padding: 3rem 0 2.5rem;
+    border-bottom: 1px solid var(--color-border);
     margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid #e5e5e5;
   }
-  .event-meta-row {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    margin-bottom: 0.5rem;
-    flex-wrap: wrap;
+  .hero .label-small { display: block; margin-bottom: 0.6rem; }
+  .hero h1 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 2rem;
+    letter-spacing: 0.1em;
+    color: var(--color-ink);
+    margin: 0 0 1rem;
+    padding: 0;
+    border: 0;
   }
-  .event-category {
-    display: inline-block;
-    padding: 0.2rem 0.7rem;
-    border-radius: 3px;
-    color: #fff;
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
+  .hero .hairline { margin: 0 auto 1.3rem; }
+  .hero .lead {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    line-height: 2.0;
+    letter-spacing: 0.06em;
+    color: var(--color-text-sub);
+    max-width: var(--max-width-narrow);
+    margin: 0 auto;
   }
-  .event-date-meta {
-    color: #8a7a55;
-    font-size: 0.95rem;
+
+  .meta-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.45rem;
+    margin: 0 auto 2.5rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--color-border);
+    max-width: var(--max-width-narrow);
+    font-size: 0.88rem;
+  }
+  .meta-cell {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 0.5rem;
+  }
+  .meta-cell dt {
+    color: var(--color-text-faint);
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    padding-top: 0.2rem;
+    margin: 0;
+  }
+  .meta-cell dd {
+    color: var(--color-text);
+    margin: 0;
+    line-height: 1.6;
     font-variant-numeric: tabular-nums;
   }
-  h1 {
-    margin: 0 0 0.5rem;
+
+  .event-category {
+    display: inline-block;
+    padding: 0.15rem 0.7rem;
+    border-radius: 2px;
+    background: var(--cat-color, var(--color-accent));
+    color: var(--color-bg);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    font-variant-numeric: normal;
   }
-  .event-summary {
-    margin: 0;
-    color: #333;
-    line-height: 1.8;
-    font-size: 1rem;
-  }
+
   .event-body {
     margin-bottom: 2rem;
-    line-height: 1.85;
-    color: #333;
-  }
-  .event-body :global(h2) {
-    font-size: 1.15rem;
-    margin: 1.8rem 0 0.6rem;
-    color: #5a4a2a;
-    padding-bottom: 0.3rem;
-    border-bottom: 1px solid #e5e5e5;
-  }
-  .event-body :global(h3) {
-    font-size: 1rem;
-    margin: 1.2rem 0 0.5rem;
-    color: #5a4a2a;
+    line-height: 1.95;
+    color: var(--color-text);
   }
   .event-body :global(p) {
     margin: 0.6rem 0 0.8rem;
@@ -213,72 +255,79 @@ const themeColor = CATEGORY_COLOR[event.data.category] ?? '#777';
   .event-body :global(li) {
     margin: 0.2rem 0;
   }
-  .event-body :global(a) {
-    color: #5a4a2a;
-    border-bottom: 1px dotted #a89c7d;
-    text-decoration: none;
-  }
-  .event-body :global(a:hover) {
-    border-bottom-style: solid;
-  }
-  .event-related h2,
-  .event-references h2 {
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 0.3rem;
-    margin: 1.5rem 0 1rem;
-  }
+
   .event-related-list {
     list-style: none;
     padding: 0;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 0.8rem;
+    gap: 0.9rem;
   }
   .related-person-card {
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
-    padding: 0.8rem 1rem;
-    border: 1px solid #d6d3c7;
-    border-radius: 6px;
-    background: #faf8f3;
+    padding: 1rem 1.1rem;
+    background: var(--color-card);
+    border-left: 2px solid var(--color-accent);
     text-decoration: none;
     color: inherit;
-    transition: box-shadow 120ms ease;
+    transition: border-left-width 0.15s ease, background 0.15s ease;
   }
   .related-person-card:hover {
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    border-left-width: 3px;
+    background: #fbf7eb;
   }
   .related-person-name {
+    font-family: var(--font-serif);
     font-size: 1rem;
-    color: #5a4a2a;
+    color: var(--color-ink);
     font-weight: 500;
+    letter-spacing: 0.04em;
   }
   .related-person-meta {
     font-size: 0.78rem;
-    color: #555;
+    color: var(--color-text-sub);
     display: flex;
     align-items: center;
     gap: 0.4rem;
     flex-wrap: wrap;
+    font-variant-numeric: tabular-nums;
   }
   .era-badge,
   .category-badge {
-    background: #f0f0f0;
-    color: #444;
+    background: var(--color-bg-alt);
+    color: var(--color-text-sub);
     padding: 0.05rem 0.4rem;
-    border-radius: 3px;
+    border-radius: 2px;
     font-size: 0.7rem;
+    letter-spacing: 0.04em;
   }
   .related-person-desc {
     font-size: 0.85rem;
-    color: #444;
-    line-height: 1.5;
+    color: var(--color-text);
+    line-height: 1.6;
   }
+
   .event-references ul {
     padding-left: 1.2rem;
   }
   .event-references a {
-    color: #5a4a2a;
+    color: var(--color-accent);
+  }
+  .event-references a:hover { color: var(--color-accent-gold); }
+
+  .back-foot {
+    margin-top: 2.5rem;
+    font-size: 0.85rem;
+  }
+  .back-foot a {
+    color: var(--color-accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .back-foot a:hover {
+    color: var(--color-accent-gold);
+    border-bottom-color: var(--color-accent-gold);
   }
 </style>
