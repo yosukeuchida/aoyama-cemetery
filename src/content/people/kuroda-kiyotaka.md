@@ -38,6 +38,8 @@ relatedPeople:
     relation: 黒田内閣の初代文相、憲法発布日に暗殺された同僚閣僚
   - slug: nakae-chomin
     relation: 黒田の薩摩閥政府が対峙した自由民権思想家
+  - slug: otori-keisuke
+    relation: 戊辰戦争で旧幕府側として戦った敵将
   - slug: saigo-itoko
     relation: 同郷薩摩出身の女性、西郷従道の妻として明治社交界の中心
 ---

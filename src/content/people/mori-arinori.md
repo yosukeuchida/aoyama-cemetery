@@ -42,6 +42,8 @@ relatedPeople:
     relation: 自身を文相に登用した薩摩同郷の首相
   - slug: nakae-chomin
     relation: 自由民権思想家、明六社啓蒙運動の同時代人
+  - slug: otori-keisuke
+    relation: 学習院長、教育行政の同時代人
   - slug: ooki-takato
     relation: 文部卿として学制を制定した教育行政の前任格
   - slug: nogi-maresuke

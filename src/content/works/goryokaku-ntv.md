@@ -6,6 +6,7 @@ year: 1988
 publisher: 日本テレビ
 personSlugs:
   - kuroda-kiyotaka
+  - otori-keisuke
 url: https://ja.wikipedia.org/wiki/五稜郭_(テレビドラマ)
 ---
 

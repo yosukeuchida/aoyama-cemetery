@@ -37,6 +37,7 @@ PAIRS = [
     ("nakae-chomin", "Nakae_Chomin_2.JPG"),
     ("nishi-amane", "Nishi_Amane,_supervisor_of_the_Tokyo_Normal_School.jpg"),
     ("nogi-maresuke", "Maresuke_Nogi,_近世名士写真_其1_-_Photo_only.jpg"),
+    ("otori-keisuke", "Otori_Keisuke.jpg"),
     ("ozaki-koyo", "Koyo_Ozaki.jpg"),
     ("saito-mokichi", "Mokichi_Saito.1892.jpg"),
     ("sano-tsunetami", "Sano_Tsunetami.jpg"),

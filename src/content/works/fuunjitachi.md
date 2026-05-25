@@ -8,6 +8,7 @@ personSlugs:
   - okubo-toshimichi
   - mori-arinori
   - kuroda-kiyotaka
+  - otori-keisuke
   - tanaka-hisashige
 url: https://ja.wikipedia.org/wiki/風雲児たち
 ---

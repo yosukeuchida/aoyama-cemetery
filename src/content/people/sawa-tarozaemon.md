@@ -39,6 +39,8 @@ relatedPeople:
     relation: 函館戦争後の助命嘆願で救った薩摩出身の参議
   - slug: nishi-amane
     relation: オランダ留学を共にした幕府派遣の同期啓蒙学者
+  - slug: otori-keisuke
+    relation: 函館戦争・蝦夷共和国を共に戦った旧幕府軍幹部
   - slug: katsu-kokichi
     relation: 勝海舟の父、海舟門下生としての師家の系譜
   - slug: sugita-gentan

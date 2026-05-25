@@ -6,6 +6,7 @@ personSlugs:
   - tatsumi-naofumi
   - sawa-tarozaemon
   - kimura-yoshitake
+  - otori-keisuke
 category: 戦争
 url: https://ja.wikipedia.org/wiki/鳥羽・伏見の戦い
 ---

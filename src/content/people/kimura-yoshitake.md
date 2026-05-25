@@ -38,6 +38,8 @@ relatedPeople:
     relation: 咸臨丸副艦長・勝海舟の父
   - slug: joseph-heco
     relation: 万延元年遣米使節と同時期に日米橋渡しを担った海外帰国者
+  - slug: otori-keisuke
+    relation: 幕府海軍出身で戊辰戦争後に新政府へ転じた旧幕同志
   - slug: takashima-tomonosuke
     relation: 同時代の幕末期軍人で幕府海軍と関わった人物
 ---
