@@ -7,7 +7,9 @@ deathDate: "1854-09-04"
 era: [江戸]
 category: 学者
 graveSection: 1種イ13号2側
-hideMap: true
+coords:
+  lat: 35.665517114225196
+  lng: 139.72234004392587
 shortDescription: 大村藩の侍医。シーボルトに学び『解体新書』に触発されて蘭方医学を導入、孫の長与専斎に種痘を施した蘭学医の先駆者。
 tags:
   - 大村藩
