@@ -7,7 +7,9 @@ deathDate: "1907-03-06"
 era: [江戸, 明治]
 category: 軍人
 graveSection: 1種イ1号3側
-hideMap: true
+coords:
+  lat: 35.6637157614497
+  lng: 139.71884164706705
 shortDescription: 桑名藩士から陸軍大将へ。戊辰戦争・北越戦線で雷神隊を率いて勇名を馳せ、日露戦争では「東洋一の用兵家」と讃えられた将軍。
 tags:
   - 桑名藩

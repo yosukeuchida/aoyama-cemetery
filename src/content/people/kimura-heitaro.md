@@ -7,7 +7,9 @@ deathDate: "1948-12-23"
 era: [大正, 昭和]
 category: 軍人
 graveSection: 1種イ4号1側(立山墓地)
-hideMap: true
+coords:
+  lat: 35.66326807432169
+  lng: 139.71921612524386
 shortDescription: 太平洋戦争末期のビルマ方面軍司令官。陸軍次官・関東軍参謀長を歴任、東京裁判で A 級戦犯として死刑判決を受けた陸軍大将。
 tags:
   - 陸軍大将

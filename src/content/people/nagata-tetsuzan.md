@@ -7,7 +7,9 @@ deathDate: "1935-08-12"
 era: [明治, 昭和]
 category: 軍人
 graveSection: 青山霊園附属立山墓地
-hideMap: true
+coords:
+  lat: 35.6635327110881
+  lng: 139.71894357099953
 shortDescription: 「永田の前に永田なく、永田の後に永田なし」と評された統制派の中心。陸軍省軍務局長室で相沢三郎中佐に斬殺された。
 tags:
   - 統制派

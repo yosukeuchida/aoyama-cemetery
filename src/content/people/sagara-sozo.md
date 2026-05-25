@@ -7,7 +7,9 @@ deathDate: "1868-04-26"
 era: [江戸]
 category: その他
 graveSection: 青山霊園附属立山墓地
-hideMap: true
+coords:
+  lat: 35.6634518092322
+  lng: 139.71868607892472
 shortDescription: 戊辰戦争で赤報隊隊長として「年貢半減」を宣伝しながら東山道を進軍、新政府の方針転換で「偽官軍」とされ処刑された悲劇の志士。享年 30。
 tags:
   - 赤報隊
