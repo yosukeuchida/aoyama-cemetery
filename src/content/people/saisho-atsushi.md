@@ -7,7 +7,9 @@ deathDate: "1910-02-26"
 era: [江戸, 明治]
 category: 政治家
 graveSection: 1種イ16号12側
-hideMap: true
+coords:
+  lat: 35.66492579187357
+  lng: 139.72137753494968
 shortDescription: 薩摩出身。堺県知事として廃仏毀釈期に正倉院・東大寺・興福寺など奈良の文化財救済を主導した「奈良の恩人」、伯爵。
 tags:
   - 薩摩藩
