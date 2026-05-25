@@ -22,3 +22,6 @@ pnpm-debug.log*
 .vscode/*
 !.vscode/extensions.json
 .idea/
+
+# Superpowers brainstorming session artifacts
+.superpowers/
