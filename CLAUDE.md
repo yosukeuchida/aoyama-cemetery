@@ -30,6 +30,8 @@
 
 青山霊園から墓所が撤去された(墓じまいされた)ことが判明した場合、偉人ページを削除する。単純な人物ページ削除では完結せず、複数コレクションに連鎖修正が必要(2026-05-24 に otori-keisuke / hayashi-tadasu の 2 例で確立した手順)。
 
+0. **削除前に一次資料で墓じまいを確認する(必須)**: 「埋葬確認ファースト」ルールは追加時だけでなく削除時にも適用する。Wikipedia の脚注や伝聞情報だけで削除しないこと。確認の優先順位は (1) ユーザー現地確認(写真・座標)→ (2) 青山霊園管理事務所の公式情報 → (3) ユーザー提供 `~/Desktop/青山霊園.pptx` → (4) 複数の独立した二次資料(Wikipedia 本人記事 + 別ソース、両方が「墓じまい」を明記)。1 ソースのみの情報では削除しない。**2026-05-24 に大鳥圭介(otori-keisuke)・林董(hayashi-tadasu)を未検証の墓じまい情報で削除したが、翌日ユーザー現地確認で 2 名とも墓所現存が判明し復活させた**(commit `d218251` 等)。
+
 1. **全参照を grep で網羅検出**: `grep -rn "<slug>\|<日本語名>" src/ scripts/` と Obsidian 進捗メモにも grep をかける
 2. **完全削除**: `src/content/people/<slug>.md` + `src/assets/portraits/<slug>.jpg`
 3. **frontmatter 構造参照を削除**:
@@ -128,12 +130,15 @@ walkOrder: [2, 3, 1]   # マーカー番号は 1=a, 2=b, 3=c のまま、線は 
 
 既存ルート(`src/content/routes/<route>.md`)に新規偉人を追加する場合、5 箇所の連動更新が定型化されている(2026-05-25 林董を sakanoue-no-kumo と boshin-hokuetsu に追加した際に確立)。
 
+0. **追加偉人の coords が設定済か確認(必須)**: 追加する偉人の `src/content/people/<slug>.md` に `coords` が設定されていることを確認する。coords も `hideMap: true` も未設定の偉人を stops に含めると、`src/pages/routes/[slug].astro` の `showRouteMap` 条件で **ルート全体の経路マップが非表示になる**。2026-05-25 に山下源太郎・牛島満を coords 未取得状態で stops に追加して、それぞれ sakanoue-no-kumo・taiheiyo-senso のマップが消えた事例あり(commit `37ef39f` / `dbe7c44` で除外して復旧)。coords を先に取得するか、hideMap を設定するか、stops に追加しないかのいずれかを選ぶ。
+
 1. **frontmatter `stops` に追加**: 適切な位置(時系列順か物語順か、ルートの編集方針に従う)に slug + note を挿入
 2. **frontmatter `estimatedMinutes` を更新**: 1 名追加で 10-15 分加算が目安(墓所間距離・参拝込み)
 3. **frontmatter `description` を更新**: 「N 名」のカウントや、偉人カテゴリ列挙を含む文を再構成(例: 「会津・幕府海軍・海援隊出身者 3 名」→「会津・幕府海軍・五稜郭籠城・海援隊出身者 4 名」)
 4. **本文「## このコースの楽しみ方」(または相当セクション)を更新**: ルート概要・経路順リスト・対比的な説明文中の人数や偉人カテゴリを反映
 5. **本文「Google Maps で散歩経路を開く」セクションの URL を再生成**: 追加偉人の coords を waypoints に含めた新しい徒歩経路 URL を生成(`https://www.google.com/maps/dir/?api=1&origin=...&destination=...&waypoints=...&travelmode=walking` 形式、waypoints はパイプ `%7C` 区切り)
-6. **(該当する場合)`walkOrder` を再生成**: stops を追加すると既存 walkOrder のインデックスがずれる(上記「散歩ルートマップの walkOrder」参照)。一時無効化(コメントアウト)で stops 順 fallback でも build は通るが、意図的な歩行順を保ちたい場合は新しい walkOrder を作る
+6. **`walkOrder` を自動再生成**: stops を追加すると既存 walkOrder のインデックスがずれる(上記「散歩ルートマップの walkOrder」参照)。`python3 scripts/generate-walk-order.py` を実行すれば、全ルートの walkOrder を NN-TSP + 2-opt で自動計算して frontmatter に書き戻す。特定ルートだけ確認したい場合は `--dry-run` で書き込みなしプレビュー可能(2026-05-25 commit `e3f82c2` で全 11 ルート分自動生成)。手動 walkOrder を保持したいルートでは事前に bypass フラグを検討する必要があるが、現状そういうルートは無い。
+7. **estimatedMinutes・本文の総距離/所要時間を再計算**: stops 数や walkOrder が変わると総距離も変わるため、`estimatedMinutes`(frontmatter)と本文「総距離 約 X km、墓所間 Y 分(参拝込み Z 分)」を更新。公式は **実距離 = 直線距離(walkOrder順) × 1.4(曲がり道補正)/ walk 15 分/km + visit 7 分/人 / 5 分単位 round**(2026-05-25 確立)。
 
 ビルド検証: `npm run build` で zod 通過 + ページ内容を dev server で目視確認。
 
