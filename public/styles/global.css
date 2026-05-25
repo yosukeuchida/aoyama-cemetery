@@ -15,7 +15,7 @@
   --color-header-bg:    #1f241f;
   --color-header-fg:    #d6cfae;
   --color-header-nav:   #c8c2a6;
-  --color-header-sub:   #8a8a72;
+  --color-header-sub:   #a09e85;
 
   /* === Typography === */
   --font-serif: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
@@ -229,3 +229,25 @@ p { margin: 0 0 1rem; }
 }
 .person-detail .breadcrumb a:hover { color: var(--color-accent-gold); }
 .person-detail .breadcrumb span[aria-hidden] { margin: 0 0.4em; color: var(--color-border); }
+
+/* === Card-internal headings — neutralize global h2/h3 chrome ===
+   These class names are used as headings INSIDE cards on existing pages.
+   Subsequent tasks (5-8) will redefine these in scoped styles with the new
+   tokens. This block keeps the site visually stable in the intermediate
+   commits between Task 1 and those tasks.
+
+   When all the listed class names have been removed from the codebase OR
+   restyled with explicit padding/border in their own scoped styles, this
+   safety block can be deleted. */
+.route-title,
+.event-card-title,
+.today-widget-title,
+.person-name,
+.work-title,
+.stop-name {
+  margin-top: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+  border: 0;
+}
