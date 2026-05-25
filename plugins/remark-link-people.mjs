@@ -34,6 +34,8 @@ function buildPeopleIndex() {
 
 const INDEX = buildPeopleIndex();
 
+const KANJI_RE = /[一-鿿㐀-䶿豈-﫿]/;
+
 function findMatches(text, currentSlug) {
   const taken = [];
   for (const { name, slug } of INDEX) {
@@ -43,6 +45,13 @@ function findMatches(text, currentSlug) {
       const found = text.indexOf(name, pos);
       if (found < 0) break;
       const end = found + name.length;
+      // 後続文字が CJK 統合漢字なら、より長い人名の途中の可能性が高いので skip
+      // (例: 「税所篤」が「税所篤之」「税所篤胤」等の前半にマッチするのを防ぐ)
+      const after = text.charAt(end);
+      if (after && KANJI_RE.test(after)) {
+        pos = end;
+        continue;
+      }
       const overlaps = taken.some((t) => !(end <= t.start || found >= t.end));
       if (!overlaps) taken.push({ start: found, end, name, slug });
       pos = end;
