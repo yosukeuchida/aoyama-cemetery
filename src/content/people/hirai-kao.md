@@ -7,7 +7,9 @@ deathDate: "1909-12-31"
 era: [江戸, 明治]
 category: その他
 graveSection: 1種ロ14号9側
-hideMap: true
+coords:
+  lat: 35.66573493294994
+  lng: 139.72093828496978
 shortDescription: 土佐藩・平井家の娘。坂本龍馬の幼馴染で初恋の人とも伝えられる。山内豊範の妹・友姫の御付役として上洛、維新後は西山志澄に嫁いだ。
 tags:
   - 土佐藩
