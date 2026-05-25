@@ -36,9 +36,16 @@ const breadcrumbJsonLd = {
 ---
 
 <BaseLayout title={title} description={description} jsonLd={breadcrumbJsonLd}>
-  <h1>散歩コース</h1>
-  <p>青山霊園に眠る偉人を、テーマ別に巡る散歩コースです。明治維新・戊辰戦争・昭和の宰相・文人・お雇い外国人・女性とハチ公・軍人 — 興味と所要時間に合わせて選んでください。</p>
-  <p class="note">各コースの stops は物語の流れで並べています。実際の散策では、各人物ページに記載した区画番号(graveSection)を確認して動線を組むのがおすすめです。</p>
+  <section class="hero">
+    <h1>散歩コース</h1>
+    <hr class="hairline" />
+    <p class="lead">
+      青山霊園に眠る偉人を、テーマ別に巡る散歩コースです。<br />
+      明治維新・戊辰戦争・昭和の宰相・文人・お雇い外国人・女性とハチ公・軍人 ──<br />
+      興味と所要時間に合わせて選んでください。
+    </p>
+    <p class="note">各コースの stops は物語の流れで並べています。実際の散策では、各人物ページに記載した区画番号(graveSection)を確認して動線を組むのがおすすめです。</p>
+  </section>
 
   <ul class="routes-grid">
     {routes.map((route) => (
@@ -63,33 +70,60 @@ const breadcrumbJsonLd = {
 </BaseLayout>
 
 <style>
-  h1 {
-    margin-bottom: 0.5rem;
+  .hero {
+    text-align: center;
+    padding: 3rem 0 2.5rem;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 2.5rem;
   }
-  .note {
-    color: #777;
-    font-size: 0.85rem;
-    margin: 0.5rem 0 1.5rem;
+  .hero h1 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 2rem;
+    letter-spacing: 0.12em;
+    color: var(--color-ink);
+    margin: 0 0 1.3rem;
+    padding: 0;
+    border: 0;
   }
+  .hero .hairline { margin: 0 auto 1.3rem; }
+  .hero .lead {
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    line-height: 2.0;
+    letter-spacing: 0.06em;
+    color: var(--color-text-sub);
+    max-width: var(--max-width-narrow);
+    margin: 0 auto 1rem;
+  }
+  .hero .note {
+    color: var(--color-text-faint);
+    font-size: 0.78rem;
+    line-height: 1.7;
+    max-width: var(--max-width-narrow);
+    margin: 0 auto;
+    letter-spacing: 0.04em;
+  }
+
   .routes-grid {
     list-style: none;
     padding: 0;
+    margin: 0;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 1rem;
   }
   .route-card {
-    padding: 1rem 1.1rem 1.1rem;
-    border: 1px solid #d6d3c7;
-    border-radius: 8px;
-    background: #faf8f3;
+    padding: 1.1rem 1.2rem 1.2rem;
+    background: var(--color-card);
+    border-left: 2px solid var(--color-accent);
     display: flex;
     flex-direction: column;
-    transition: box-shadow 120ms ease, transform 120ms ease;
+    transition: border-left-width 0.15s ease, background 0.15s ease;
   }
   .route-card:hover {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    transform: translateY(-1px);
+    border-left-width: 3px;
+    background: #fbf7eb;
   }
   .route-header {
     display: flex;
@@ -100,49 +134,46 @@ const breadcrumbJsonLd = {
   }
   .route-theme {
     display: inline-block;
-    padding: 0.15rem 0.55rem;
-    border-radius: 3px;
+    padding: 0.15rem 0.6rem;
     color: #fff;
     font-size: 0.7rem;
     font-weight: 600;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.08em;
   }
   .route-meta {
-    color: #8a7a55;
-    font-size: 0.78rem;
+    color: var(--color-text-faint);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
   }
   .route-title {
+    font-family: var(--font-serif);
+    font-weight: 500;
     font-size: 1.15rem;
     margin: 0 0 0.3rem;
-    color: #5a4a2a;
-    line-height: 1.35;
+    color: var(--color-ink);
+    line-height: 1.5;
+    letter-spacing: 0.05em;
+    padding: 0;
+    border: 0;
   }
   .route-title a {
     color: inherit;
     text-decoration: none;
-    border-bottom: 1px dotted #a89c7d;
   }
-  .route-title a:hover {
-    border-bottom-style: solid;
-  }
+  .route-title a:hover { color: var(--color-accent-gold); }
   .route-subtitle {
     margin: 0 0 0.5rem;
-    color: #8a7a55;
+    color: var(--color-text-muted);
     font-size: 0.85rem;
     font-style: italic;
   }
   .route-description {
     margin: 0;
-    font-size: 0.9rem;
-    line-height: 1.6;
-    color: #444;
+    font-size: 0.88rem;
+    line-height: 1.75;
+    color: var(--color-text-sub);
   }
   @media (prefers-reduced-motion: reduce) {
-    .route-card {
-      transition: none;
-    }
-    .route-card:hover {
-      transform: none;
-    }
+    .route-card { transition: none; }
   }
 </style>
