@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const CATEGORY_ORDER = ['政治家', '軍人', '実業家', '学者', '文化人', 'その他'] as const;
@@ -265,15 +266,33 @@ const breadcrumbJsonLd = {
           <div class="people-grid">
             {list.map((person) => (
               <article class="person-card" data-eras={person.data.era.join(',')} data-category={person.data.category} data-section={sectionKeyByPersonId.get(person.id) ?? ''} data-birthplace={prefectureByPersonId.get(person.id) ?? ''}>
-                <h3 class="person-name">
-                  <a href={`/people/${person.id}/`}>{person.data.name}</a>
-                </h3>
-                <p class="person-kana">{person.data.nameKana}</p>
-                <p class="person-meta">
-                  {person.data.birthDate.slice(0, 4)} - {person.data.deathDate.slice(0, 4)}
-                  <span class="era-badge">{person.data.era.join('・')}</span>
-                </p>
-                <p class="person-desc">{person.data.shortDescription}</p>
+                <a class="person-card-thumb" href={`/people/${person.id}/`} aria-hidden="true" tabindex="-1">
+                  {person.data.portrait ? (
+                    <Image
+                      src={person.data.portrait}
+                      alt=""
+                      widths={[180, 240]}
+                      sizes="90px"
+                      quality={80}
+                    />
+                  ) : (
+                    <span class="person-card-thumb-placeholder">
+                      <span>肖像</span>
+                      <span>未公開</span>
+                    </span>
+                  )}
+                </a>
+                <div class="person-card-body">
+                  <h3 class="person-name">
+                    <a href={`/people/${person.id}/`}>{person.data.name}</a>
+                  </h3>
+                  <p class="person-kana">{person.data.nameKana}</p>
+                  <p class="person-meta">
+                    {person.data.birthDate.slice(0, 4)} - {person.data.deathDate.slice(0, 4)}
+                    <span class="era-badge">{person.data.era.join('・')}</span>
+                  </p>
+                  <p class="person-desc">{person.data.shortDescription}</p>
+                </div>
               </article>
             ))}
           </div>
@@ -529,6 +548,8 @@ const breadcrumbJsonLd = {
   }
   @media (max-width: 720px) {
     .people-grid { grid-template-columns: 1fr; }
+    .person-card { padding: 0.8rem 0.9rem; gap: 0.7rem; }
+    .person-card-thumb { flex: 0 0 72px; width: 72px; height: 72px; }
   }
 
   .person-card {
@@ -536,10 +557,49 @@ const breadcrumbJsonLd = {
     border-left: 2px solid var(--color-accent);
     padding: 1.1rem 1.2rem;
     transition: border-left-width 0.15s ease, background 0.15s ease;
+    display: flex;
+    gap: 0.9rem;
+    align-items: flex-start;
   }
   .person-card:hover {
     border-left-width: 3px;
     background: #fbf7eb;
+  }
+  .person-card-thumb {
+    flex: 0 0 90px;
+    width: 90px;
+    height: 90px;
+    overflow: hidden;
+    border-radius: 2px;
+    background: var(--color-bg-alt);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+  .person-card-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .person-card-thumb-placeholder {
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(45deg, var(--color-bg-alt) 0 6px, transparent 6px 12px);
+    border: 1px dashed var(--color-border-faint);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-faint);
+    font-size: 0.65rem;
+    letter-spacing: 0.05em;
+    line-height: 1.3;
+  }
+  .person-card-body {
+    flex: 1 1 auto;
+    min-width: 0;
   }
   .person-name {
     margin: 0 0 0.2rem;
