@@ -7,7 +7,9 @@ deathDate: "1900-02-04"
 era: [江戸, 明治]
 category: 文化人
 graveSection: 1種イ20号20側
-mapQuery: "税所敦子の墓"
+coords:
+  lat: 35.6644415
+  lng: 139.7230653
 shortDescription: 「明治の紫式部」と称された女流歌人。明治天皇皇后の女官「楓内侍」として宮中で文学指導を担い、明治六歌仙の一人に数えられた。
 tags:
   - 女流歌人
