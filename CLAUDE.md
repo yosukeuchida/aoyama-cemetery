@@ -96,6 +96,45 @@ python3 scripts/verify-map-pois.py
 3. 該当位置を右クリック → 緯度経度をコピー
 4. frontmatter に追加: `coords:\n  lat: 35.66xx\n  lng: 139.71xx`(範囲外だと zod が build を弾く)
 
+### 散歩ルートマップの walkOrder(マーカー番号 ≠ 歩行順)
+
+各 route の `RouteMap.astro` は Leaflet で経路 polyline を描画する。デフォルトは stops 配列順(=物語順・時系列順)で結ぶが、物理的に効率の良い歩行順とは別のことが多い。`walkOrder` フィールドで polyline 描画順を上書きできる。
+
+| frontmatter | polyline の結ばれ方 |
+|---|---|
+| `walkOrder` 未指定(デフォルト) | stops 配列順(=マーカー番号順、=物語順)で結ぶ |
+| `walkOrder: [3, 1, 2, 5, 4]` 等の 1-indexed 配列 | 指定された順番で stops を結ぶ。マーカー番号は stops 順のままで変化なし(物語順)、線だけが効率順 |
+
+```yaml
+# routes/*.md の frontmatter 例
+stops:
+  - slug: a
+  - slug: b
+  - slug: c
+walkOrder: [2, 3, 1]   # マーカー番号は 1=a, 2=b, 3=c のまま、線は b→c→a の順で結ぶ
+```
+
+凡例(地図直下)で「マーカー番号 = 人物紹介の順番、経路ライン = 効率よく歩ける順番」を自動表示。
+
+**重要: stops 変更時は walkOrder を必ず再生成すること**。walkOrder は 1-indexed の絶対インデックスなので、stops に追加・削除があるとインデックスがずれる。
+- stops の長さ ≠ walkOrder の長さ なら RouteMap は自動的に stops 順 fallback(zod は通る)
+- stops を増やしたまま walkOrder を更新しないと「12 要素の walkOrder で 13 要素の stops を結ぼうとして fallback」となる。一時的に動くが意図と違う表示になる
+- 一時無効化したい場合は frontmatter で `# walkOrder: [...]` とコメントアウト(YAML として未設定扱い)
+- 実例: 2026-05-25 sakanoue-no-kumo に林董を 3 番目に追加した際、旧 walkOrder `[7,4,2,3,5,1,10,9,12,11,6,8]` を一時無効化 → 新 walkOrder `[8,5,2,4,6,1,11,10,13,12,3,7,9]` に再生成
+
+## 散歩ルートに偉人を追加する手順
+
+既存ルート(`src/content/routes/<route>.md`)に新規偉人を追加する場合、5 箇所の連動更新が定型化されている(2026-05-25 林董を sakanoue-no-kumo と boshin-hokuetsu に追加した際に確立)。
+
+1. **frontmatter `stops` に追加**: 適切な位置(時系列順か物語順か、ルートの編集方針に従う)に slug + note を挿入
+2. **frontmatter `estimatedMinutes` を更新**: 1 名追加で 10-15 分加算が目安(墓所間距離・参拝込み)
+3. **frontmatter `description` を更新**: 「N 名」のカウントや、偉人カテゴリ列挙を含む文を再構成(例: 「会津・幕府海軍・海援隊出身者 3 名」→「会津・幕府海軍・五稜郭籠城・海援隊出身者 4 名」)
+4. **本文「## このコースの楽しみ方」(または相当セクション)を更新**: ルート概要・経路順リスト・対比的な説明文中の人数や偉人カテゴリを反映
+5. **本文「Google Maps で散歩経路を開く」セクションの URL を再生成**: 追加偉人の coords を waypoints に含めた新しい徒歩経路 URL を生成(`https://www.google.com/maps/dir/?api=1&origin=...&destination=...&waypoints=...&travelmode=walking` 形式、waypoints はパイプ `%7C` 区切り)
+6. **(該当する場合)`walkOrder` を再生成**: stops を追加すると既存 walkOrder のインデックスがずれる(上記「散歩ルートマップの walkOrder」参照)。一時無効化(コメントアウト)で stops 順 fallback でも build は通るが、意図的な歩行順を保ちたい場合は新しい walkOrder を作る
+
+ビルド検証: `npm run build` で zod 通過 + ページ内容を dev server で目視確認。
+
 ## コンテンツ方針
 
 - 出典: Wikipedia(CC BY-SA)等の公開情報をベースに Claude が要約・再構成
