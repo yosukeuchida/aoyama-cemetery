@@ -6,6 +6,9 @@ personSlugs:
   - yamamoto-gonbee
   - komura-jutaro
   - togo-shigenori
+  - hasegawa-yoshimichi
+  - fukushima-yasumasa
+  - hayashi-gonsuke
 category: 戦争
 url: https://ja.wikipedia.org/wiki/日露戦争
 heroImage: ../../assets/event-images/1904-02-10-nichiro-war.jpg

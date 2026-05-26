@@ -6,6 +6,8 @@ personSlugs:
   - kawakami-soroku
   - yamamoto-gonbee
   - kawaji-toshiyoshi
+  - hasegawa-yoshimichi
+  - fukushima-yasumasa
 category: 戦争
 url: https://ja.wikipedia.org/wiki/日清戦争
 heroImage: ../../assets/event-images/1894-08-01-nisshin-war.jpg

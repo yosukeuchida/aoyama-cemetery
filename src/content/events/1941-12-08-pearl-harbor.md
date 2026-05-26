@@ -7,6 +7,7 @@ personSlugs:
   - kimura-heitaro
   - yamaguchi-tamon
   - matsuoka-yosuke
+  - kurusu-saburo
 category: 戦争
 url: https://ja.wikipedia.org/wiki/真珠湾攻撃
 heroImage: ../../assets/event-images/1941-12-08-pearl-harbor.jpg

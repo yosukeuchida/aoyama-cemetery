@@ -4,6 +4,7 @@ date: "1925-04-22"
 summary: 加藤高明内閣が「国体ヲ変革シ又ハ私有財産制度ヲ否認スル」結社の組織と参加を禁じる治安維持法を公布。同年五月の普通選挙法と表裏一体で制定され、共産主義・無政府主義運動を取り締まる根拠法として、戦前期の思想弾圧の中核法となった。
 personSlugs:
   - kato-takaaki
+  - miyamoto-yuriko
 category: 社会
 url: https://ja.wikipedia.org/wiki/治安維持法
 heroImage: ../../assets/event-images/1925-04-22-chian-iji-ho.png
