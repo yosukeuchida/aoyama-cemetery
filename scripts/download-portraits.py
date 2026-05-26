@@ -137,6 +137,22 @@ PAIRS = [
     ("yamashita-gentaro", "Yamashita_Gentaro.jpg"),
     # 2026-05-25 追加分その2(渡辺昇 — 剣豪・大阪府知事)
     ("watanabe-noboru", "Noboru_Watanabe_(Viscount)_01.jpg"),
+    # 2026-05-26 追加分(A+B グループ 15 名、PD 確認済 / hosoi-wakizo は Wikipedia 肖像なし)
+    ("takamine-jokichi", "Jokichi_Takamine.jpg"),
+    ("katayama-tokuma", "Katayama-Tokuma.jpg"),
+    ("honda-seiroku", "Honda_Seiroku.jpg"),
+    ("kawaguchi-ekai", "Ekai_Kawaguchi_by_Zaida_Ben-Yusuf.jpg"),
+    ("fukushima-yasumasa", "Fukushima_Yasumasa.jpg"),
+    ("matsukata-kojiro", "Kojiro_Matsukata.jpg"),
+    ("saito-takao", "SaitoTakao_2.jpg"),
+    ("miyamoto-yuriko", "Yuriko-Miyamoto-1.png"),
+    ("miyake-setsurei", "Miyake_Setsurei,_1900.jpg"),
+    ("kurusu-saburo", "Saburo-Kurusu-in-Washington-7-Dec-1941.png"),
+    ("yamamoto-tatsuo", "Tatsuo_yamamoto.jpg"),
+    ("hasegawa-yoshimichi", "Hasegawa_Yoshimichi.jpg"),
+    ("hayashi-gonsuke", "Hayashi_gonsuke.jpg"),
+    ("yamaji-aizan", "Yamaji-Aizan.jpg"),
+    # hosoi-wakizo: 細井和喜蔵 1925没・28歳没、Wikipedia に肖像なし
 ]
 
 OUT_DIR = "src/assets/portraits"
