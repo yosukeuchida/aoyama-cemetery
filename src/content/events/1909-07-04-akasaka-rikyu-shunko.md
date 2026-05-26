@@ -6,6 +6,9 @@ personSlugs:
   - katayama-tokuma
 category: 社会
 url: https://ja.wikipedia.org/wiki/迎賓館
+heroImage: ../../assets/event-images/1909-07-04-akasaka-rikyu-shunko.jpg
+heroImageCaption: "迎賓館赤坂離宮(旧東宮御所)の外観"
+heroImageCredit: "Kakidai / Wikimedia Commons / CC BY-SA 4.0"
 ---
 
 ## 明治建築の到達点

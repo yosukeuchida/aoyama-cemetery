@@ -6,6 +6,9 @@ personSlugs:
   - kawaguchi-ekai
 category: 事件
 url: https://ja.wikipedia.org/wiki/河口慧海
+heroImage: ../../assets/event-images/1900-07-04-kawaguchi-ekai-tibet.jpg
+heroImageCaption: "河口慧海の肖像(Zaida Ben-Yusuf 撮影)"
+heroImageCredit: "Zaida Ben-Yusuf / Wikimedia Commons / Public domain"
 ---
 
 ## 日本人初のチベット入境

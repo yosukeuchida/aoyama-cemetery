@@ -6,6 +6,9 @@ personSlugs:
   - saito-takao
 category: 事件
 url: https://ja.wikipedia.org/wiki/反軍演説
+heroImage: ../../assets/event-images/1940-02-02-saito-takao-hangun-enzetsu.jpg
+heroImageCaption: "立憲民政党代議士・齋藤隆夫の肖像"
+heroImageCredit: "Unknown author / Wikimedia Commons / Public domain"
 ---
 
 ## 戦時下議会で響いた孤高の批判演説

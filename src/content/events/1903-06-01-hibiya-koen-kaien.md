@@ -6,6 +6,9 @@ personSlugs:
   - honda-seiroku
 category: 社会
 url: https://ja.wikipedia.org/wiki/日比谷公園
+heroImage: ../../assets/event-images/1903-06-01-hibiya-koen-kaien.jpg
+heroImageCaption: "現在の日比谷公園"
+heroImageCredit: "Kakidai / Wikimedia Commons / CC BY-SA 4.0"
 ---
 
 ## 日本初の洋風近代公園

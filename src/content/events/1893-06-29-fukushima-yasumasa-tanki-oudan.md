@@ -6,6 +6,9 @@ personSlugs:
   - fukushima-yasumasa
 category: 事件
 url: https://ja.wikipedia.org/wiki/福島安正
+heroImage: ../../assets/event-images/1893-06-29-fukushima-yasumasa-tanki-oudan.jpg
+heroImageCaption: "陸軍少佐・福島安正の肖像"
+heroImageCredit: "Unknown author / Wikimedia Commons / Public domain"
 ---
 
 ## ベルリンから日本へ、馬一頭で踏破したユーラシア

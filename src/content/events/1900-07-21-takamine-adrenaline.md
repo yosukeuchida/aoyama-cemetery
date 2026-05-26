@@ -6,6 +6,9 @@ personSlugs:
   - takamine-jokichi
 category: 社会
 url: https://ja.wikipedia.org/wiki/アドレナリン
+heroImage: ../../assets/event-images/1900-07-21-takamine-adrenaline.png
+heroImageCaption: "アドレナリン(エピネフリン)の化学構造式"
+heroImageCredit: "Roland Mattern / Wikimedia Commons / Public domain"
 ---
 
 ## 日本人初の世界的医学化学発見

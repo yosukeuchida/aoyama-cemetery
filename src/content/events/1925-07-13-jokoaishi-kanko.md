@@ -6,6 +6,9 @@ personSlugs:
   - hosoi-wakizo
 category: 社会
 url: https://ja.wikipedia.org/wiki/女工哀史
+heroImage: ../../assets/event-images/1925-07-13-jokoaishi-kanko.jpg
+heroImageCaption: "細井和喜蔵『女工哀史』初版(改造社、1925 年)"
+heroImageCredit: "Uraniwa / Wikimedia Commons / Public domain"
 ---
 
 ## 内側から書かれた労働ルポルタージュ

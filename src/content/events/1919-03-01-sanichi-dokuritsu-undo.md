@@ -6,6 +6,9 @@ personSlugs:
   - hasegawa-yoshimichi
 category: 事件
 url: https://ja.wikipedia.org/wiki/三・一独立運動
+heroImage: ../../assets/event-images/1919-03-01-sanichi-dokuritsu-undo.jpg
+heroImageCaption: "1919 年 3 月 1 日、京城・パゴダ公園での独立宣言朗読"
+heroImageCredit: "ja:User:Cinnamon (his own work) / Wikimedia Commons / CC BY-SA 3.0"
 ---
 
 ## パゴダ公園から全土へ広がった独立宣言
