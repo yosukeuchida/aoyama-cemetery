@@ -7,7 +7,9 @@ deathDate: "1950-06-24"
 era: [明治, 昭和]
 category: 実業家
 graveSection: 1種イ17号1側
-hideMap: true
+coords:
+  lat: 35.66364304985428
+  lng: 139.72167931382253
 shortDescription: 川崎造船所社長として大正期の海運業を牽引。欧州で約一万点の西洋美術を収集し、国立西洋美術館の母体「松方コレクション」を遺した。
 tags:
   - 川崎造船所

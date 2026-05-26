@@ -7,7 +7,9 @@ deathDate: "1925-08-18"
 era: [大正]
 category: 文化人
 graveSection: 1種ロ12号14側
-hideMap: true
+coords:
+  lat: 35.667864815413786
+  lng: 139.7239471128201
 shortDescription: 紡績工場の労働実態を内側から記録した『女工哀史』の著者。刊行わずか 1 ヶ月後に 28 歳で急逝した若き労働者作家。
 tags:
   - 女工哀史

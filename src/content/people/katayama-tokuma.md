@@ -7,7 +7,9 @@ deathDate: "1917-10-24"
 era: [明治, 大正]
 category: 学者
 graveSection: 1種ロ12号18側
-hideMap: true
+coords:
+  lat: 35.668019528186164
+  lng: 139.7238190373331
 shortDescription: ネオ・バロックの粋を尽くした赤坂離宮(現・迎賓館)を設計した宮内省内匠寮の建築家。コンドル門下の第1期生。
 tags:
   - 建築

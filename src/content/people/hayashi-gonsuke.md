@@ -7,7 +7,9 @@ deathDate: "1939-06-27"
 era: [明治, 大正]
 category: 政治家
 graveSection: 1種ロ8号1〜14側
-hideMap: true
+coords:
+  lat: 35.667517657979815
+  lng: 139.7224358930429
 shortDescription: 日露戦争前後の対韓外交を実務面で支えた駐韓公使。会津戦争で家族離散の悲劇を経験した会津藩士の長男。
 tags:
   - 外交官

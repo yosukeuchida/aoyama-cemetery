@@ -7,7 +7,9 @@ deathDate: "1917-03-15"
 era: [明治, 大正]
 category: 文化人
 graveSection: 1種イ12号7側
-hideMap: true
+coords:
+  lat: 35.662722067689806
+  lng: 139.72287160601113
 shortDescription: 明治後半を代表する史論家・評論家。徳富蘇峰の民友社に拠り、北村透谷との「人生相渉論争」で近代文学史に名を刻んだ。
 tags:
   - 史論
