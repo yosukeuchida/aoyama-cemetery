@@ -47,6 +47,8 @@ relatedPeople:
     relation: 民政党系の協調外交首相、英米協調路線の継承者
   - slug: takashima-tomonosuke
     relation: 戊辰戦争で幕府方として共に戦った同時代の軍人
+  - slug: hayashi-gonsuke
+    relation: 同姓の同時代外交官、林董は駐英、林権助は駐韓を担った
 ---
 
 ## 日英同盟締結の主役 — 駐英公使から外務大臣へ

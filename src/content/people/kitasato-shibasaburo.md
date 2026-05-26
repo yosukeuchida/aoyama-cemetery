@@ -47,6 +47,8 @@ relatedPeople:
     relation: 蘭方医学の系譜を共有する明治医学界の先達
   - slug: shiga-naoya
     relation: 同時代の文化人として大正昭和の知識人サークルで交流
+  - slug: takamine-jokichi
+    relation: 同時代の医学・薬学のパイオニア、アドレナリン単離者
 ---
 
 ## 「日本の細菌学の父」、千円札になった世界的科学者

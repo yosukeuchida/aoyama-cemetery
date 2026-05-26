@@ -48,6 +48,10 @@ relatedPeople:
     relation: 同時代の陸軍大将、日清戦争で旅順攻略を共に指揮した
   - slug: uehara-yusaku
     relation: 後任世代の参謀総長、明治陸軍の戦略中枢を継いだ後輩
+  - slug: hasegawa-yoshimichi
+    relation: 参謀本部時代の部下、日清戦争で平壌攻略を担った旅団長
+  - slug: fukushima-yasumasa
+    relation: 参謀本部の情報将校、シベリア単騎横断で名を馳せた
 ---
 
 ## 「陸軍の頭脳」 — 日清戦争を策定した参謀総長

@@ -47,6 +47,8 @@ relatedPeople:
     relation: 日露戦争旅順閉塞作戦で戦死した海軍中佐
   - slug: makino-nobuaki
     relation: 同時代の外交官、後年パリ講和会議で日本外交を担った
+  - slug: hayashi-gonsuke
+    relation: 対韓政策で連携した駐韓特命全権公使、日韓協約交渉の実務責任者
 ---
 
 ## 日露戦争を終わらせ、不平等条約を終わらせた男

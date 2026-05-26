@@ -44,6 +44,8 @@ relatedPeople:
     relation: 同時代の蔵相経験者で海軍大将出身の首相
   - slug: kuroda-kiyotaka
     relation: 同郷薩摩の盟友、ともに明治政府を担った首相経験者
+  - slug: matsukata-kojiro
+    relation: 実の三男、川崎造船所社長・松方コレクション収集者
 ---
 
 ## 日本銀行を作った男

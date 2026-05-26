@@ -42,6 +42,10 @@ relatedPeople:
     relation: 初代文相、明六社啓蒙運動の同時代人
   - slug: kuroda-kiyotaka
     relation: 薩摩出身の首相、明治政府の元勲として対峙した側
+  - slug: miyake-setsurei
+    relation: 同時代の思想家、政教社・国粋主義の論壇代表
+  - slug: yamaji-aizan
+    relation: 民友社を経て活動した史論家、自由民権期以後の思想史の系譜
 ---
 
 ## 「東洋のルソー」 — 自由民権運動の理論的支柱

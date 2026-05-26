@@ -47,6 +47,8 @@ relatedPeople:
     relation: 明治外交の先達として外務省の伝統を残した外相
   - slug: komura-jutaro
     relation: 明治期日本外交の象徴的先達(ポーツマス全権)
+  - slug: kurusu-saburo
+    relation: 開戦時の外相と対米交渉特派大使、共に最後の交渉を担った
 ---
 
 ## 開戦と終戦、二度の外相 — ポツダム受諾の中心人物

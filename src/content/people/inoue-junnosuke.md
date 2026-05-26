@@ -47,6 +47,8 @@ relatedPeople:
     relation: 昭和初期の宮中重臣、政党政治の理解者
   - slug: ikeda-hayato
     relation: 大蔵省・蔵相の系譜上の戦後の後継者(高度成長期首相)
+  - slug: yamamoto-tatsuo
+    relation: 先輩の日本銀行総裁、明治末-大正期の金融政策の重鎮
 ---
 
 ## 金解禁を断行した「井上財政」の男

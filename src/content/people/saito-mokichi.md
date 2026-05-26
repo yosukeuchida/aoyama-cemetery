@@ -48,6 +48,8 @@ relatedPeople:
     relation: 明治後期の自然主義文学の同時代人
   - slug: hoshi-shinichi
     relation: 戦後の作家、近代日本文学の延長線
+  - slug: miyamoto-yuriko
+    relation: 同時代を生きた女性プロレタリア作家
 ---
 
 ## 近代短歌を頂点に押し上げた歌人

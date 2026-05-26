@@ -46,6 +46,8 @@ relatedPeople:
     relation: 弟・秋山真之と海軍兵学校で同期の盟友、日露の軍神
   - slug: nozu-michitsura
     relation: 日露戦争で第四軍を率いた元帥、満州での同戦線の先輩将帥
+  - slug: fukushima-yasumasa
+    relation: 同時代の陸軍情報将校、シベリア単騎横断の英雄
 ---
 
 ## 世界最強の騎兵を破った男

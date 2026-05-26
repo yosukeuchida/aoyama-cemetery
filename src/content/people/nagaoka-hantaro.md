@@ -40,6 +40,8 @@ relatedPeople:
     relation: 同時代の医学者、明治期の科学界を共に作った同世代
   - slug: tsuda-sen
     relation: 明治期キリスト教系教育者、青山学院の周辺で接点
+  - slug: takamine-jokichi
+    relation: 同時代の応用科学者、アドレナリンを世界初で単離した化学者
 ---
 
 ## 土星型原子モデル ——ラザフォードに先駆けた日本の物理学者

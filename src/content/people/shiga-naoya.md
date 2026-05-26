@@ -43,6 +43,8 @@ relatedPeople:
     relation: 明治後期の自然主義文学を切り拓いた先輩世代
   - slug: sato-giryo
     relation: 白樺派の作品を世に送り出した新潮社の創業者
+  - slug: miyamoto-yuriko
+    relation: 同時代の小説家、白樺派とは対極のプロレタリア文学の旗手
 ---
 
 ## 「小説の神様」と呼ばれた作家

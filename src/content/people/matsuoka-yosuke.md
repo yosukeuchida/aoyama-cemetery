@@ -45,6 +45,8 @@ relatedPeople:
     relation: 戦前外交の先輩、駐英大使として日英関係を築いた人物
   - slug: komura-jutaro
     relation: ポーツマス条約を主導した外交の大先輩
+  - slug: kurusu-saburo
+    relation: 三国同盟調印で対をなす駐独大使、共に同盟締結に関与
 ---
 
 ## ジュネーブから日本を去った男

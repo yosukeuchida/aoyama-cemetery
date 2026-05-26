@@ -43,6 +43,8 @@ relatedPeople:
     relation: 学習院教育の系譜を継ぐ後世の華族軍人
   - slug: takashima-tomonosuke
     relation: 同時代の陸軍中将、日清・日露を戦った同世代
+  - slug: hasegawa-yoshimichi
+    relation: 日露戦争で並んで戦った元帥陸軍大将、後に朝鮮総督
 ---
 
 ## 明治天皇に殉じた陸軍大将

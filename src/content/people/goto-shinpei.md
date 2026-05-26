@@ -42,6 +42,8 @@ relatedPeople:
     relation: 同時代に細菌学・衛生学で並走した盟友、明治の医学指導者
   - slug: hoshi-shinichi
     relation: 父・星一を通じて深く交流した実業家、家族ぐるみの縁
+  - slug: honda-seiroku
+    relation: 関東大震災後の帝都復興期に公園緑地計画で連携した林学博士
 ---
 
 ## 「大風呂敷」と呼ばれた帝都の設計者
