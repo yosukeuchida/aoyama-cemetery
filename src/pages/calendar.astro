@@ -144,6 +144,7 @@ const breadcrumbJsonLd = {
               d.dow === 0 && 'cal-day-sun',
               d.dow === 6 && 'cal-day-sat',
             ]}
+            data-day={d.day}
           >
             <div class="cal-day-head">
               <span class="cal-day-num">{d.day}</span><span class="cal-day-weekday">（{d.weekday}）</span>
@@ -178,7 +179,17 @@ const breadcrumbJsonLd = {
     (function () {
       var sections = document.querySelectorAll('.cal-month');
       var select = document.querySelector('[data-cal-select]');
-      var current = new Date().getMonth() + 1;
+      var now = new Date();
+      var todayMonth = now.getMonth() + 1;
+      var todayDay = now.getDate();
+      var current = todayMonth;
+
+      sections.forEach(function (s) {
+        if (parseInt(s.dataset.month, 10) === todayMonth) {
+          var cell = s.querySelector('.cal-day[data-day="' + todayDay + '"]');
+          if (cell) cell.classList.add('cal-day-today');
+        }
+      });
 
       function show(m) {
         sections.forEach(function (s) {
@@ -277,6 +288,8 @@ const breadcrumbJsonLd = {
   }
   .cal-day:first-child { border-top: none; }
   .cal-day-empty { background: #f5f3ec; }
+  .cal-day-today { background: #f5ecd3; box-shadow: inset 3px 0 0 #c2a14a; }
+  .cal-day-today.cal-day-empty { background: #f5ecd3; }
   .cal-day-empty .cal-day-num { color: #b8b1a1; }
   .cal-day-empty .cal-day-weekday { color: #b8b1a1; }
   .cal-day-empty .cal-day-blank { color: #c8c1b1; font-size: 0.85rem; padding-top: 0.15rem; }
