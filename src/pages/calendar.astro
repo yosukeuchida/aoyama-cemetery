@@ -1,0 +1,366 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const people = await getCollection('people');
+const events = await getCollection('events');
+
+const CATEGORY_COLOR: Record<string, string> = {
+  政変: '#8a5a2a',
+  戦争: '#6b3a2a',
+  事件: '#a23b56',
+  条約: '#4a5a8a',
+  内閣: '#3a5a8a',
+  災害: '#6b5a2a',
+  社会: '#3a5a3a',
+};
+
+type EntryType = 'birth' | 'death' | 'event';
+interface Entry {
+  type: EntryType;
+  name: string;
+  href: string;
+  year: number;
+  category?: string;
+  color?: string;
+}
+
+const entriesByKey = new Map<string, Entry[]>();
+function push(month: number, day: number, e: Entry) {
+  const key = `${month}-${day}`;
+  if (!entriesByKey.has(key)) entriesByKey.set(key, []);
+  entriesByKey.get(key)!.push(e);
+}
+
+for (const person of people) {
+  const [by, bm, bd] = person.data.birthDate.split('-');
+  const [dy, dm, dd] = person.data.deathDate.split('-');
+  const href = `/people/${person.id}/`;
+  push(parseInt(bm, 10), parseInt(bd, 10), {
+    type: 'birth', name: person.data.name, href, year: parseInt(by, 10),
+  });
+  push(parseInt(dm, 10), parseInt(dd, 10), {
+    type: 'death', name: person.data.name, href, year: parseInt(dy, 10),
+  });
+}
+
+for (const event of events) {
+  const [ey, em, ed] = event.data.date.split('-');
+  push(parseInt(em, 10), parseInt(ed, 10), {
+    type: 'event',
+    name: event.data.title,
+    href: `/events/${event.id}/`,
+    year: parseInt(ey, 10),
+    category: event.data.category,
+    color: CATEGORY_COLOR[event.data.category] ?? '#777',
+  });
+}
+
+const TYPE_ORDER: Record<EntryType, number> = { event: 0, death: 1, birth: 2 };
+for (const arr of entriesByKey.values()) {
+  arr.sort((a, b) => {
+    if (TYPE_ORDER[a.type] !== TYPE_ORDER[b.type]) return TYPE_ORDER[a.type] - TYPE_ORDER[b.type];
+    return a.name.localeCompare(b.name, 'ja');
+  });
+}
+
+const MONTH_NAMES = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
+const WEEKDAYS = ['日', '月', '火', '水', '木', '金', '土'];
+
+const buildYear = new Date().getFullYear();
+const buildMonth = new Date().getMonth() + 1;
+
+function daysInMonth(year: number, month: number): number {
+  return new Date(year, month, 0).getDate();
+}
+
+const monthsData = Array.from({ length: 12 }, (_, i) => {
+  const month = i + 1;
+  const dim = daysInMonth(buildYear, month);
+  const days = Array.from({ length: dim }, (_, j) => {
+    const day = j + 1;
+    const dow = new Date(buildYear, month - 1, day).getDay();
+    return {
+      day,
+      weekday: WEEKDAYS[dow],
+      dow,
+      entries: entriesByKey.get(`${month}-${day}`) ?? [],
+    };
+  });
+  return { month, name: MONTH_NAMES[i], days };
+});
+
+const totalEntries = Array.from(entriesByKey.values()).reduce((s, a) => s + a.length, 0);
+
+const title = '歳時記カレンダー - 青山霊園 偉人録';
+const description = `青山霊園に眠る ${people.length} 名の偉人の誕生日・命日と ${events.length} 件の歴史的事件を月日カレンダーに集約。毎日この日に何が起き、誰が生まれ没したかを辿れます。`;
+
+const siteOrigin = new URL('/', Astro.site).toString();
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: siteOrigin },
+    { '@type': 'ListItem', position: 2, name: '歳時記カレンダー', item: new URL('/calendar/', Astro.site).toString() },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description} jsonLd={breadcrumbJsonLd}>
+  <h1>歳時記カレンダー</h1>
+  <p>
+    本サイトに登録された偉人 {people.length} 名の誕生日・命日と、関わる歴史的事件 {events.length} 件 — 合計 {totalEntries} 件を月日(MM/DD)ベースで集約しました。
+    日付は西暦を持たず、毎年同じ日に同じ偉人・事件が現れる「歳時記」型の暦です。
+  </p>
+
+  <nav class="cal-nav" aria-label="月の切替">
+    <button type="button" data-cal-prev aria-label="前の月">◀ 前月</button>
+    <select data-cal-select aria-label="月を選択">
+      {MONTH_NAMES.map((n, i) => (<option value={i + 1}>{n}</option>))}
+    </select>
+    <button type="button" data-cal-next aria-label="次の月">次月 ▶</button>
+    <button type="button" data-cal-today class="today-btn" aria-label="今日の月へ">今日</button>
+  </nav>
+
+  <div class="cal-legend">
+    <span class="legend-item"><span class="legend-badge legend-birth">生</span>誕生</span>
+    <span class="legend-item"><span class="legend-badge legend-death">没</span>命日</span>
+    <span class="legend-item"><span class="legend-badge legend-event">事件</span>歴史的事件 (色はカテゴリ)</span>
+  </div>
+
+  {monthsData.map((m) => (
+    <section
+      class:list={['cal-month', m.month === buildMonth && 'cal-month-active']}
+      data-month={m.month}
+      aria-label={m.name}
+    >
+      <h2 class="cal-month-title">{m.name}</h2>
+      <ol class="cal-day-list">
+        {m.days.map((d) => (
+          <li
+            class:list={[
+              'cal-day',
+              d.entries.length === 0 && 'cal-day-empty',
+              d.dow === 0 && 'cal-day-sun',
+              d.dow === 6 && 'cal-day-sat',
+            ]}
+          >
+            <div class="cal-day-head">
+              <span class="cal-day-num">{d.day}</span><span class="cal-day-weekday">（{d.weekday}）</span>
+            </div>
+            {d.entries.length > 0 ? (
+              <ul class="cal-entries">
+                {d.entries.map((e) => (
+                  <li>
+                    <a href={e.href}>
+                      <span
+                        class:list={['cal-entry-badge', `cal-entry-${e.type}`]}
+                        style={e.type === 'event' ? `background:${e.color};` : undefined}
+                      >
+                        {e.type === 'birth' ? '生' : e.type === 'death' ? '没' : (e.category ?? '事')}
+                      </span>
+                      <span class="cal-entry-name">{e.name}</span>
+                      <span class="cal-entry-meta">/ {e.year}年（{buildYear - e.year}年前）</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <span class="cal-day-blank" aria-hidden="true">—</span>
+            )}
+          </li>
+        ))}
+      </ol>
+    </section>
+  ))}
+
+  <script is:inline>
+    (function () {
+      var sections = document.querySelectorAll('.cal-month');
+      var select = document.querySelector('[data-cal-select]');
+      var current = new Date().getMonth() + 1;
+
+      function show(m) {
+        sections.forEach(function (s) {
+          var match = parseInt(s.dataset.month, 10) === m;
+          s.classList.toggle('cal-month-active', match);
+        });
+        if (select) select.value = String(m);
+        current = m;
+        if (typeof window !== 'undefined' && window.scrollTo) window.scrollTo({ top: 0, behavior: 'auto' });
+      }
+
+      show(current);
+
+      var prev = document.querySelector('[data-cal-prev]');
+      var next = document.querySelector('[data-cal-next]');
+      var today = document.querySelector('[data-cal-today]');
+      if (prev) prev.addEventListener('click', function () { show(current === 1 ? 12 : current - 1); });
+      if (next) next.addEventListener('click', function () { show(current === 12 ? 1 : current + 1); });
+      if (today) today.addEventListener('click', function () { show(new Date().getMonth() + 1); });
+      if (select) select.addEventListener('change', function (e) { show(parseInt(e.target.value, 10)); });
+    })();
+  </script>
+</BaseLayout>
+
+<style>
+  .cal-nav {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin: 1.5rem 0 1rem;
+    flex-wrap: wrap;
+  }
+  .cal-nav button,
+  .cal-nav select {
+    padding: 0.4rem 0.8rem;
+    border: 1px solid #d6d3c7;
+    background: #faf8f3;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: #333;
+    font-family: inherit;
+  }
+  .cal-nav button { cursor: pointer; }
+  .cal-nav button:hover { background: #f0ede0; }
+  .cal-nav .today-btn { margin-left: auto; }
+
+  .cal-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.8rem;
+    color: #555;
+  }
+  .legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .legend-badge {
+    display: inline-block;
+    padding: 0.05rem 0.4rem;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+  .legend-birth { background: #4a7a4a; }
+  .legend-death { background: #6a4a6a; }
+  .legend-event { background: #a23b56; }
+
+  .cal-month { display: none; }
+  .cal-month-active { display: block; }
+
+  .cal-month-title {
+    font-size: 1.3rem;
+    margin: 0 0 0.5rem;
+    color: #5a4a2a;
+  }
+
+  .cal-day-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #d6d3c7;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #faf8f3;
+  }
+  .cal-day {
+    display: flex;
+    gap: 0.8rem;
+    padding: 0.55rem 0.8rem;
+    border-top: 1px solid #ece9dd;
+    align-items: flex-start;
+  }
+  .cal-day:first-child { border-top: none; }
+  .cal-day-empty { background: #f5f3ec; }
+  .cal-day-empty .cal-day-num { color: #b8b1a1; }
+  .cal-day-empty .cal-day-weekday { color: #b8b1a1; }
+  .cal-day-empty .cal-day-blank { color: #c8c1b1; font-size: 0.85rem; padding-top: 0.15rem; }
+
+  .cal-day-head {
+    display: inline-flex;
+    align-items: baseline;
+    min-width: 4.2rem;
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+    padding-top: 0.1rem;
+    white-space: nowrap;
+  }
+  .cal-day-num {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #5a4a2a;
+    line-height: 1.1;
+  }
+  .cal-day-weekday {
+    font-size: 0.8rem;
+    color: #888;
+    margin-left: 0.05rem;
+  }
+  .cal-day-sun .cal-day-num,
+  .cal-day-sun .cal-day-weekday { color: #a85050; }
+  .cal-day-sat .cal-day-num,
+  .cal-day-sat .cal-day-weekday { color: #4a6aa0; }
+  .cal-day-sun.cal-day-empty .cal-day-num,
+  .cal-day-sun.cal-day-empty .cal-day-weekday { color: #cba0a0; }
+  .cal-day-sat.cal-day-empty .cal-day-num,
+  .cal-day-sat.cal-day-empty .cal-day-weekday { color: #a0b0d0; }
+
+  .cal-entries {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    flex: 1;
+    min-width: 0;
+  }
+  .cal-entries li a {
+    display: flex;
+    align-items: baseline;
+    gap: 0.45rem;
+    text-decoration: none;
+    color: #333;
+    line-height: 1.45;
+    font-size: 0.9rem;
+  }
+  .cal-entries li a:hover .cal-entry-name { text-decoration: underline; }
+  .cal-entry-badge {
+    display: inline-block;
+    padding: 0.05rem 0.45rem;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 600;
+    flex-shrink: 0;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    align-self: center;
+  }
+  .cal-entry-birth { background: #4a7a4a; }
+  .cal-entry-death { background: #6a4a6a; }
+  .cal-entry-name {
+    word-break: break-word;
+  }
+  .cal-entry-meta {
+    color: #8a7a55;
+    font-size: 0.78rem;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 600px) {
+    .cal-day { padding: 0.45rem 0.6rem; gap: 0.6rem; }
+    .cal-day-head { min-width: 3.6rem; }
+    .cal-day-num { font-size: 0.95rem; }
+    .cal-day-weekday { font-size: 0.72rem; }
+    .cal-entries li a { font-size: 0.82rem; }
+    .cal-entry-badge { font-size: 0.65rem; padding: 0.05rem 0.35rem; }
+  }
+</style>
