@@ -31,6 +31,49 @@ function buildPeopleIndex() {
   return seen;
 }
 
+// 事件タイトル末尾の動詞・名詞をストリップして本体名を抽出するパターン
+// (例: 「廃藩置県」「王政復古の大号令」→「王政復古」)
+const EVENT_SUFFIX_PATTERNS = [
+  /^(.+?)の大号令$/,
+  /^(.+?)条例公布$/,
+  /^(.+?)条約調印$/,
+  /^(.+?)閣議決定$/,
+  /^(.+?)の戦い$/,
+  /^(.+?)の変$/,
+  /^(.+?)発布$/,
+  /^(.+?)公布$/,
+  /^(.+?)発足$/,
+  /^(.+?)発効$/,
+  /^(.+?)開戦$/,
+  /^(.+?)終結$/,
+  /^(.+?)勃発$/,
+  /^(.+?)締結$/,
+  /^(.+?)調印$/,
+  /^(.+?)通告$/,
+  /^(.+?)回復$/,
+  /^(.+?)崩御$/,
+  /^(.+?)殉死$/,
+  /^(.+?)開幕$/,
+  /^(.+?)開園$/,
+  /^(.+?)開会$/,
+  /^(.+?)成立$/,
+  /^(.+?)陥落$/,
+  /^(.+?)完了$/,
+  /^(.+?)刊行$/,
+  /^(.+?)執行$/,
+  /^(.+?)会戦$/,
+];
+
+function addStrippedVariants(variants, raw) {
+  if (!raw) return;
+  for (const pattern of EVENT_SUFFIX_PATTERNS) {
+    const m = raw.match(pattern);
+    if (m && m[1] && m[1].length >= 3) {
+      variants.add(m[1]);
+    }
+  }
+}
+
 function buildEventsIndex() {
   const files = readdirSync(EVENTS_DIR).filter((f) => f.endsWith('.md'));
   const seen = new Map();
@@ -42,19 +85,34 @@ function buildEventsIndex() {
     const variants = new Set([title]);
     // 「○○○(△△△)」型: 括弧前後の両方を別名としてリンク可能にする
     const parenMatch = title.match(/^([^((]+)[((](.+?)[))]/);
+    let prefix = null;
+    let inside = null;
     if (parenMatch) {
-      const prefix = parenMatch[1].trim();
-      const inside = parenMatch[2].trim();
+      prefix = parenMatch[1].trim();
+      inside = parenMatch[2].trim();
       if (prefix.length >= 3) variants.add(prefix);
       if (inside.length >= 3) variants.add(inside);
     }
     // 「○○○・△△△」型: 中点分割した各パートも別名としてリンク可能に
+    const nakatenParts = [];
     if (title.includes('・')) {
       for (const part of title.split('・')) {
         const trimmed = part.replace(/[((].*?[))]/g, '').trim();
-        if (trimmed.length >= 3) variants.add(trimmed);
+        if (trimmed.length >= 3) {
+          variants.add(trimmed);
+          nakatenParts.push(trimmed);
+        }
       }
     }
+    // 末尾の動詞・名詞をストリップして本体名も別名として登録
+    // (例: 「廃藩置県」exact / 「地租改正条例公布」→「地租改正」 / 「奉天会戦終結」→「奉天会戦」→「奉天」)
+    addStrippedVariants(variants, title);
+    if (prefix) addStrippedVariants(variants, prefix);
+    if (inside) addStrippedVariants(variants, inside);
+    for (const part of nakatenParts) addStrippedVariants(variants, part);
+    // 二段階ストリップ(例: 「奉天会戦終結」→「奉天会戦」→ さらに → 「奉天」)
+    const passOne = new Set(variants);
+    for (const v of passOne) addStrippedVariants(variants, v);
     for (const v of variants) {
       if (v.length < 3) continue;
       if (!seen.has(v)) seen.set(v, { slug, kind: 'events' });
@@ -89,13 +147,30 @@ function findMatches(text, currentKind, currentSlug) {
       const found = text.indexOf(name, pos);
       if (found < 0) break;
       const end = found + name.length;
-      // 後続文字が CJK 統合漢字なら、より長い候補の途中の可能性が高いので skip
-      // (人名: 「税所篤」が「税所篤之」「税所篤胤」の前半にマッチするのを防ぐ)
-      // (事件名: 「桜田門外の変」が「桜田門外の変子」のような偽続にマッチするのを防ぐ)
       const after = text.charAt(end);
       if (after && KANJI_RE.test(after)) {
-        pos = end;
-        continue;
+        // 後続が漢字の場合、(name + 後続漢字) で始まる長い候補がインデックスにあるなら
+        // その長い候補にマッチさせるべきなので skip
+        const extended = name + after;
+        let hasLonger = false;
+        for (const e of INDEX) {
+          if (e.name.length > name.length && e.name.startsWith(extended)) {
+            hasLonger = true;
+            break;
+          }
+        }
+        if (hasLonger) {
+          pos = end;
+          continue;
+        }
+        // people の場合は保守的: 後続漢字がインデックス未収録の長い人名の可能性があるので skip
+        // (例: 「税所篤」+「之」で「税所篤之」がインデックスになくても、未登録人物の可能性)
+        if (kind === 'people') {
+          pos = end;
+          continue;
+        }
+        // events の場合は緩く許可: 後続漢字(例:「廃藩置県」+「後」、「王政復古」+「の」が
+        // 偶然 hiragana じゃなく漢字続きでも)安全にリンクしてよい
       }
       const overlaps = taken.some((t) => !(end <= t.start || found >= t.end));
       if (!overlaps) taken.push({ start: found, end, name, slug, kind });
