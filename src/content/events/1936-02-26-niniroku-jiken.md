@@ -6,6 +6,9 @@ personSlugs:
   - makino-nobuaki
 category: 事件
 url: https://ja.wikipedia.org/wiki/二・二六事件
+heroImage: ../../assets/event-images/1936-02-26-niniroku-jiken.jpg
+heroImageCaption: "二・二六事件で蜂起した青年将校と決起部隊"
+heroImageCredit: "Wikimedia Commons / Public domain"
 ---
 
 ## 1936 年 2 月 26 日 ——「君側の奸を斬る」皇道派青年将校のクーデター
