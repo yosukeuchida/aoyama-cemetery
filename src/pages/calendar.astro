@@ -15,15 +15,33 @@ const CATEGORY_COLOR: Record<string, string> = {
   社会: '#3a5a3a',
 };
 
-type EntryType = 'birth' | 'death' | 'event';
+type EntryType = 'birth' | 'death' | 'event' | 'season';
 interface Entry {
   type: EntryType;
   name: string;
-  href: string;
-  year: number;
+  href?: string;
+  year?: number;
   category?: string;
   color?: string;
+  approximate?: boolean;
 }
+
+const SEASONS: { month: number; day: number; name: string; approximate?: boolean }[] = [
+  { month: 1, day: 1, name: '元日' },
+  { month: 2, day: 3, name: '節分' },
+  { month: 3, day: 3, name: '桃の節句' },
+  { month: 3, day: 20, name: '春分', approximate: true },
+  { month: 5, day: 5, name: '端午の節句' },
+  { month: 6, day: 21, name: '夏至', approximate: true },
+  { month: 7, day: 7, name: '七夕' },
+  { month: 8, day: 13, name: '盆の入り' },
+  { month: 8, day: 16, name: '盆の明け' },
+  { month: 9, day: 15, name: '中秋の名月', approximate: true },
+  { month: 9, day: 23, name: '秋分', approximate: true },
+  { month: 11, day: 7, name: '立冬', approximate: true },
+  { month: 12, day: 22, name: '冬至', approximate: true },
+  { month: 12, day: 31, name: '大晦日' },
+];
 
 const entriesByKey = new Map<string, Entry[]>();
 function push(month: number, day: number, e: Entry) {
@@ -56,7 +74,15 @@ for (const event of events) {
   });
 }
 
-const TYPE_ORDER: Record<EntryType, number> = { event: 0, death: 1, birth: 2 };
+for (const s of SEASONS) {
+  push(s.month, s.day, {
+    type: 'season',
+    name: s.name,
+    approximate: s.approximate,
+  });
+}
+
+const TYPE_ORDER: Record<EntryType, number> = { season: 0, event: 1, death: 2, birth: 3 };
 for (const arr of entriesByKey.values()) {
   arr.sort((a, b) => {
     if (TYPE_ORDER[a.type] !== TYPE_ORDER[b.type]) return TYPE_ORDER[a.type] - TYPE_ORDER[b.type];
@@ -93,7 +119,7 @@ const monthsData = Array.from({ length: 12 }, (_, i) => {
 const totalEntries = Array.from(entriesByKey.values()).reduce((s, a) => s + a.length, 0);
 
 const title = '歳時記カレンダー - 青山霊園 偉人録';
-const description = `青山霊園に眠る ${people.length} 名の偉人の誕生日・命日と ${events.length} 件の歴史的事件を月日カレンダーに集約。毎日この日に何が起き、誰が生まれ没したかを辿れます。`;
+const description = `青山霊園に眠る ${people.length} 名の偉人の誕生日・命日、${events.length} 件の歴史的事件、節句・二十四節気など ${SEASONS.length} 項の日本の季節を月日カレンダーに集約。毎日この日に何が起き、誰が生まれ没したかを辿れます。`;
 
 const siteOrigin = new URL('/', Astro.site).toString();
 const breadcrumbJsonLd = {
@@ -109,8 +135,11 @@ const breadcrumbJsonLd = {
 <BaseLayout title={title} description={description} jsonLd={breadcrumbJsonLd}>
   <h1>歳時記カレンダー</h1>
   <p>
-    本サイトに登録された偉人 {people.length} 名の誕生日・命日と、関わる歴史的事件 {events.length} 件 — 合計 {totalEntries} 件を月日(MM/DD)ベースで集約しました。
+    本サイトに登録された偉人 {people.length} 名の誕生日・命日、関わる歴史的事件 {events.length} 件、節句・二十四節気・お盆など日本の季節 {SEASONS.length} 項 — 合計 {totalEntries} 件を月日(MM/DD)ベースで集約しました。
     日付は西暦を持たず、毎年同じ日に同じ偉人・事件が現れる「歳時記」型の暦です。
+  </p>
+  <p class="cal-note">
+    ※春分・夏至・秋分・冬至・立冬・中秋の名月は年により実日付が ±1〜2 日変動します。本カレンダーは目安日(おおむね多くの年に当たる日)で固定表示しています。
   </p>
 
   <nav class="cal-nav" aria-label="月の切替">
@@ -123,6 +152,7 @@ const breadcrumbJsonLd = {
   </nav>
 
   <div class="cal-legend">
+    <span class="legend-item"><span class="legend-badge legend-season">節</span>季節・節句</span>
     <span class="legend-item"><span class="legend-badge legend-birth">生</span>誕生</span>
     <span class="legend-item"><span class="legend-badge legend-death">没</span>命日</span>
     <span class="legend-item"><span class="legend-badge legend-event">事件</span>歴史的事件 (色はカテゴリ)</span>
@@ -151,20 +181,34 @@ const breadcrumbJsonLd = {
             </div>
             {d.entries.length > 0 ? (
               <ul class="cal-entries">
-                {d.entries.map((e) => (
-                  <li>
-                    <a href={e.href}>
-                      <span
-                        class:list={['cal-entry-badge', `cal-entry-${e.type}`]}
-                        style={e.type === 'event' ? `background:${e.color};` : undefined}
-                      >
-                        {e.type === 'birth' ? '生' : e.type === 'death' ? '没' : (e.category ?? '事')}
-                      </span>
-                      <span class="cal-entry-name">{e.name}</span>
-                      <span class="cal-entry-meta">/ {e.year}年（{buildYear - e.year}年前）</span>
-                    </a>
-                  </li>
-                ))}
+                {d.entries.map((e) => {
+                  const badge = (
+                    <span
+                      class:list={['cal-entry-badge', `cal-entry-${e.type}`]}
+                      style={e.type === 'event' ? `background:${e.color};` : undefined}
+                    >
+                      {e.type === 'birth' ? '生'
+                        : e.type === 'death' ? '没'
+                        : e.type === 'season' ? '節'
+                        : (e.category ?? '事')}
+                    </span>
+                  );
+                  const name = <span class="cal-entry-name">{e.name}</span>;
+                  const meta = (e.type !== 'season' && e.year !== undefined)
+                    ? <span class="cal-entry-meta">/ {e.year}年（{buildYear - e.year}年前）</span>
+                    : (e.type === 'season' && e.approximate)
+                      ? <span class="cal-entry-meta">/ 目安日</span>
+                      : null;
+                  return (
+                    <li>
+                      {e.href ? (
+                        <a href={e.href}>{badge}{name}{meta}</a>
+                      ) : (
+                        <span class="cal-entry-static">{badge}{name}{meta}</span>
+                      )}
+                    </li>
+                  );
+                })}
               </ul>
             ) : (
               <span class="cal-day-blank" aria-hidden="true">—</span>
@@ -260,6 +304,14 @@ const breadcrumbJsonLd = {
   .legend-birth { background: #4a7a4a; }
   .legend-death { background: #6a4a6a; }
   .legend-event { background: #a23b56; }
+  .legend-season { background: #c2873a; }
+
+  .cal-note {
+    font-size: 0.78rem;
+    color: #8a7a55;
+    margin: 0.3rem 0 1rem;
+    line-height: 1.5;
+  }
 
   .cal-month { display: none; }
   .cal-month-active { display: block; }
@@ -357,6 +409,17 @@ const breadcrumbJsonLd = {
   }
   .cal-entry-birth { background: #4a7a4a; }
   .cal-entry-death { background: #6a4a6a; }
+  .cal-entry-season { background: #c2873a; }
+
+  .cal-entry-static {
+    display: flex;
+    align-items: baseline;
+    gap: 0.45rem;
+    line-height: 1.45;
+    font-size: 0.9rem;
+    color: #5a4a2a;
+    font-weight: 500;
+  }
   .cal-entry-name {
     word-break: break-word;
   }
