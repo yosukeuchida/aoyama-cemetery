@@ -7,6 +7,7 @@ deathDate: "1929-07-04"
 era: [明治, 大正]
 category: 学者
 graveSection: 1種イ10号12側
+hideMap: true
 shortDescription: ケンブリッジ大学に学んだ最初期の日本人留学生、大蔵省主税局長・台湾銀行頭取・日本勧業銀行総裁を歴任した財政学者。
 tags:
   - 大蔵省

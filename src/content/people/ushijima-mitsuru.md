@@ -7,6 +7,7 @@ deathDate: "1945-06-22"
 era: [大正, 昭和]
 category: 軍人
 graveSection: 1種イ1号25側
+hideMap: true
 shortDescription: 沖縄戦で第32軍司令官として戦い、摩文仁の司令部壕で自決した陸軍大将。鹿児島出身、陸軍士官学校長を歴任した武人。
 tags:
   - 沖縄戦
