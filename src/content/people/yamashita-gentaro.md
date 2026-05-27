@@ -7,7 +7,9 @@ deathDate: "1931-02-18"
 era: [明治, 大正]
 category: 軍人
 graveSection: 1種イ2号1側(立山墓地)
-hideMap: true
+coords:
+  lat: 35.663606507441905
+  lng: 139.71947653530844
 shortDescription: 連合艦隊司令長官・軍令部長を歴任した海軍大将。米沢藩出身、海軍兵学校 5 期、日露戦争では第一艦隊参謀として日本海海戦に参加した。
 tags:
   - 海軍大将

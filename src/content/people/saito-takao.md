@@ -7,7 +7,9 @@ deathDate: "1949-10-07"
 era: [大正, 昭和]
 category: 政治家
 graveSection: 1種イ3号2側
-hideMap: true
+coords:
+  lat: 35.66683423523593
+  lng: 139.72135389900834
 shortDescription: 立憲民政党の代議士。1936 年「粛軍演説」、1940 年「反軍演説」で軍部を批判し、衆議院議員を除名された自由主義政治家。
 tags:
   - 立憲民政党

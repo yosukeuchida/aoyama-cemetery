@@ -7,7 +7,9 @@ deathDate: "1947-11-10"
 era: [明治, 昭和]
 category: 政治家
 graveSection: 1種ロ12号1〜6側
-hideMap: true
+coords:
+  lat: 35.66765235913144
+  lng: 139.72322752322427
 shortDescription: 日本銀行第 5 代総裁。金本位制定着期の中央銀行運営者として知られ、政友会・民政党の大蔵・内務・農林大臣を歴任した男爵。
 tags:
   - 日本銀行総裁

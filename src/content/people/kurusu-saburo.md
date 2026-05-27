@@ -7,7 +7,9 @@ deathDate: "1954-04-07"
 era: [明治, 昭和]
 category: 政治家
 graveSection: 1種イ4号30側
-hideMap: true
+coords:
+  lat: 35.66666704526967
+  lng: 139.722059986384
 shortDescription: 日米開戦直前のワシントンで野村吉三郎と最後の交渉に臨んだ特派大使。日独伊三国同盟に署名した外交官でもある。
 tags:
   - 外交官

@@ -7,7 +7,9 @@ deathDate: "1945-02-24"
 era: [明治, 大正]
 category: 文化人
 graveSection: 1種ロ15号5・6側
-hideMap: true
+coords:
+  lat: 35.66491271837459
+  lng: 139.72153684713783
 shortDescription: 日本人として初めてチベットに入境した黄檗宗の僧侶・探検家。『西蔵旅行記』で近代日本のチベット学・密教研究の礎を築いた。
 tags:
   - チベット

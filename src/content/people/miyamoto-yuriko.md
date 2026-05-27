@@ -7,7 +7,9 @@ deathDate: "1951-01-21"
 era: [大正, 昭和]
 category: 文化人
 graveSection: 1種ロ8号33側
-hideMap: true
+coords:
+  lat: 35.66683027668804
+  lng: 139.72275265859147
 shortDescription: 17 歳で『貧しき人々の群』を発表しデビュー。投獄を繰り返しながら創作を続けた戦前最大の女性プロレタリア作家。代表作『伸子』『道標』。
 tags:
   - プロレタリア文学

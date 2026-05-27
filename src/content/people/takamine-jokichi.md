@@ -7,7 +7,9 @@ deathDate: "1922-07-22"
 era: [明治, 大正]
 category: 学者
 graveSection: 1種イ15号3側
-hideMap: true
+coords:
+  lat: 35.66503360655066
+  lng: 139.72137522790706
 shortDescription: タカジアスターゼを発明し、世界で初めてアドレナリンの結晶単離に成功した応用化学者。近代日本の製薬産業の祖。
 tags:
   - 応用化学

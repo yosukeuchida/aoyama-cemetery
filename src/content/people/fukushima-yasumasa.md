@@ -7,7 +7,9 @@ deathDate: "1919-02-19"
 era: [明治, 大正]
 category: 軍人
 graveSection: 1種イ16号4側
-hideMap: true
+coords:
+  lat: 35.664369240755086
+  lng: 139.72153548990272
 shortDescription: ベルリンからウラジオストクまで馬一頭で 488 日間・約 14000 km を単騎横断した陸軍情報将校。日清・日露の情報戦を統括した参謀本部第二部長。
 tags:
   - 陸軍大将

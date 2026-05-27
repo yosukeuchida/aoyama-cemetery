@@ -7,7 +7,9 @@ deathDate: "1952-01-29"
 era: [明治, 昭和]
 category: 学者
 graveSection: 1種イ16号30側
-hideMap: true
+coords:
+  lat: 35.66451197499394
+  lng: 139.72106342111215
 shortDescription: 日本初の林学博士。日比谷公園・明治神宮の森を設計し、「月給4分の1天引き貯金」で巨額の資産を築き全額寄付した実践派学者。
 tags:
   - 林学

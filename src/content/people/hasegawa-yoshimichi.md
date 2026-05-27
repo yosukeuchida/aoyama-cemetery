@@ -7,6 +7,9 @@ deathDate: "1924-01-27"
 era: [明治, 大正]
 category: 軍人
 graveSection: 1種イ20号4側
+coords:
+  lat: 35.6662867847686
+  lng: 139.72309792362836
 shortDescription: 元帥陸軍大将。日清・日露戦争で活躍し、第二代朝鮮総督を務めるも三・一独立運動の責任で更迭された。
 tags:
   - 元帥陸軍大将

@@ -7,7 +7,9 @@ deathDate: "1945-11-26"
 era: [明治, 昭和]
 category: 文化人
 graveSection: 1種イ8号16・17側
-hideMap: true
+coords:
+  lat: 35.667499552327925
+  lng: 139.72298612440665
 shortDescription: 明治期を代表する哲学者・評論家。政教社を結成し雑誌『日本人』を創刊、国粋主義を掲げて欧化主義に対峙した論壇の長老。
 tags:
   - 政教社
