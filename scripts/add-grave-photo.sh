@@ -48,10 +48,18 @@ FILES=()
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --date)
+      if [[ $# -lt 2 ]]; then
+        echo "❌ --date には値が必要です (YYYY-MM-DD)" >&2
+        exit 1
+      fi
       CLI_DATE="$2"
       shift 2
       ;;
     --caption)
+      if [[ $# -lt 2 ]]; then
+        echo "❌ --caption には値が必要です" >&2
+        exit 1
+      fi
       CLI_CAPTION="$2"
       shift 2
       ;;

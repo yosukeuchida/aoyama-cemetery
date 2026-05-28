@@ -74,4 +74,29 @@ fi
 echo "✅ 対話モード OK: $EXPECTED2"
 
 echo ""
+echo "=== Test 3: 不正な日付は非対話モードで rejection ==="
+if ./scripts/add-grave-photo.sh "$TEST_SLUG" "$TEST_IMAGE" \
+     --date "2026-5-1" --caption "bad-date-format" 2>/dev/null; then
+  echo "❌ 不正日付がエラーにならなかった(exit 0 で抜けた)" >&2
+  exit 1
+fi
+echo "✅ R3 不正日付の rejection OK"
+
+echo ""
+echo "=== Test 4: 非対話モードで既存ファイル衝突は skip(上書きしない) ==="
+# 1 回目は Test 1 で配置済(${TEST_DATE}-test-noninteractive.jpg)
+# その mtime を記録 → 2 回目同じ引数で叩く → mtime 変わらないことを確認
+FIRST_MTIME=$(stat -f %m "$EXPECTED")
+sleep 1
+./scripts/add-grave-photo.sh "$TEST_SLUG" "$TEST_IMAGE" \
+  --date "$TEST_DATE" --caption "test-noninteractive" \
+  >/dev/null 2>&1 || true
+SECOND_MTIME=$(stat -f %m "$EXPECTED")
+if [[ "$FIRST_MTIME" != "$SECOND_MTIME" ]]; then
+  echo "❌ R4 上書き skip が動かず、mtime が変わった" >&2
+  exit 1
+fi
+echo "✅ R4 非対話モードでの overwrite skip OK"
+
+echo ""
 echo "🎉 全テストパス"
