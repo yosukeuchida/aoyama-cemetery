@@ -7,6 +7,9 @@ deathDate: "1933-11-08"
 era: [明治, 大正]
 category: 軍人
 graveSection: 1種イ11号19側
+coords:
+  lat: 35.662868
+  lng: 139.722562
 shortDescription: 陸軍元帥・子爵。2個師団増設問題で陸相を単独辞職し第2次西園寺内閣を倒した「大正政変」の発端人物。日向都城出身、大山巌の娘婿。
 tags:
   - 陸軍元帥
