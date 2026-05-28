@@ -51,6 +51,8 @@ relatedPeople:
     relation: 海軍を支えた薩摩出身の海相、脚気対策の組織的後援者
   - slug: saigo-itoko
     relation: 同郷の薩摩、戊辰戦争で薩摩藩兵として戦った時代の縁
+  - slug: nagayo-mataro
+    relation: 同志 長与専斎の三男、病理学者・東京帝国大学第12代総長
 ---
 
 ## 脚気を食物で克服した男 — 海軍軍医の闘い

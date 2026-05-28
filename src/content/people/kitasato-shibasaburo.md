@@ -49,6 +49,8 @@ relatedPeople:
     relation: 同時代の文化人として大正昭和の知識人サークルで交流
   - slug: takamine-jokichi
     relation: 同時代の医学・薬学のパイオニア、アドレナリン単離者
+  - slug: nagayo-mataro
+    relation: 恩人 長与専斎の三男、病理学者・東京帝国大学第12代総長
 ---
 
 ## 「日本の細菌学の父」、千円札になった世界的科学者

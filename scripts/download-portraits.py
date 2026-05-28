@@ -153,6 +153,15 @@ PAIRS = [
     ("hayashi-gonsuke", "Hayashi_gonsuke.jpg"),
     ("yamaji-aizan", "Yamaji-Aizan.jpg"),
     # hosoi-wakizo: 細井和喜蔵 1925没・28歳没、Wikipedia に肖像なし
+    # 2026-05-28 追加分(Tier S 8名のうち PD 経過済 6 名、PD 確認済)
+    ("fujishima-takeji", "Fujishima_Takeji.jpg"),
+    ("okada-saburosuke", "Okada_Saburosuke.jpg"),
+    ("kozai-yoshinao", "Kozai_Yoshinao,_president_of_the_Imperial_University_of_Tokyo.jpg"),
+    ("nagayo-mataro", "Mataro_Nagayo.jpg"),
+    ("uzawa-fusaaki", "Fusaaki_Uzawa1.jpg"),
+    ("yashiro-rokuro", "Vice_Adm._Rokuro_Yashiro.jpg"),
+    # haniya-yutaka: 1997 没で PD 未経過(2068 年に PD)
+    # nakamura-utaemon-vi: 2001 没で PD 未経過(2072 年に PD)
 ]
 
 OUT_DIR = "src/assets/portraits"

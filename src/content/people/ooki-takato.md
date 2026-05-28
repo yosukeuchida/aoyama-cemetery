@@ -50,6 +50,8 @@ relatedPeople:
     relation: 同時代の制度設計者、医療行政の同志
   - slug: goto-shinpei
     relation: 後藤新平、明治大正の制度設計者の系譜
+  - slug: okada-saburosuke
+    relation: 同郷佐賀出身の後輩世代、第一回文化勲章を受章した洋画家
 ---
 
 ## 「佐賀の七賢人」 — 法典と学制を作った政治家

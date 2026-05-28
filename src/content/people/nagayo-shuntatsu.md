@@ -39,6 +39,8 @@ relatedPeople:
     relation: 孫の世代の細菌学者、蘭方医学の系譜を継ぐ
   - slug: sugita-gentan
     relation: 同時代の蘭方医、江戸蘭学の同世代
+  - slug: nagayo-mataro
+    relation: 曽孫、東京帝国大学第12代総長で日本癌学会の創立者
 ---
 
 ## 大村の蘭方医 — 長与専斎の祖父

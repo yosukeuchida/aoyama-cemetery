@@ -42,6 +42,8 @@ relatedPeople:
     relation: 佐賀の七賢人として並び称された同藩の盟友
   - slug: nagayo-sensai
     relation: 戦時救護と衛生行政で連携した明治医制の中心人物
+  - slug: okada-saburosuke
+    relation: 同郷佐賀出身の後輩世代、第一回文化勲章を受章した洋画家
 ---
 
 ## 日本赤十字社を作った男

@@ -36,6 +36,8 @@ relatedPeople:
     relation: 曽祖父、佐倉順天堂で蘭学を学んだ蘭医
   - slug: ozaki-koyo
     relation: 明治末期の文学界の先輩世代、青山霊園で隣り合う
+  - slug: nagayo-mataro
+    relation: 兄、病理学者・東京帝国大学第12代総長
 ---
 
 ## 白樺派の作家、長与専斎の三男

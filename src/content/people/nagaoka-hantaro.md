@@ -42,6 +42,8 @@ relatedPeople:
     relation: 明治期キリスト教系教育者、青山学院の周辺で接点
   - slug: takamine-jokichi
     relation: 同時代の応用科学者、アドレナリンを世界初で単離した化学者
+  - slug: kozai-yoshinao
+    relation: 同時代の東京帝国大学教授・農芸化学者、第10代総長
 ---
 
 ## 土星型原子モデル ——ラザフォードに先駆けた日本の物理学者

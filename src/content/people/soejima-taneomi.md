@@ -47,6 +47,8 @@ relatedPeople:
     relation: 民撰議院設立建白書に共に名を連ねた自由民権の盟友
   - slug: okubo-toshimichi
     relation: 明治六年政変で袂を分かった新政府首脳
+  - slug: okada-saburosuke
+    relation: 同郷佐賀出身の後輩世代、第一回文化勲章を受章した洋画家
 ---
 
 ## 「佐賀の七賢人」 — 明治政府の外務卿、東洋随一の書家

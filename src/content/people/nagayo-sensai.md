@@ -44,6 +44,8 @@ relatedPeople:
     relation: 衛生局時代に内務省下で支援した細菌学者の後輩
   - slug: sano-tsunetami
     relation: 博愛社・赤十字創設者として医療制度の同志
+  - slug: nagayo-mataro
+    relation: 三男、東京帝国大学第12代総長・癌研究の世界的権威
 ---
 
 ## 「衛生」という言葉を作った男

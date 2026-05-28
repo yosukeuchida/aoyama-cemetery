@@ -40,6 +40,10 @@ relatedPeople:
     relation: 東大物理学科の弟子筋、日本物理学を共に育てた同世代
   - slug: tsuda-sen
     relation: キリスト教系教育の同時代人、青山学院・津田塾の周辺で重なる
+  - slug: kozai-yoshinao
+    relation: 後輩世代の東京帝国大学総長(第10代)、農芸化学者で足尾鉱毒究明者
+  - slug: nagayo-mataro
+    relation: 後輩世代の東京帝国大学総長(第12代)、病理学者
 ---
 
 ## 白虎隊の生き残りから日本人初の物理学博士へ
