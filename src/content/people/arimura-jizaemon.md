@@ -16,7 +16,6 @@ tags:
   - 桜田門外の変
   - 井伊直弼
   - 幕末志士
-  - 水戸藩浪士
 birthPlace: "薩摩国鹿児島"
 deathPlace: "江戸・桜田門外"
 jobTitle: 薩摩藩士
