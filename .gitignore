@@ -25,3 +25,10 @@ pnpm-debug.log*
 
 # Superpowers brainstorming session artifacts
 .superpowers/
+
+# Streamlit admin (local-only tool)
+admin/.venv/
+admin/admin.log
+admin/__pycache__/
+admin/**/__pycache__/
+admin/.pytest_cache/

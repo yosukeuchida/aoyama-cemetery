@@ -1,0 +1,5 @@
+streamlit>=1.32
+streamlit-folium>=0.18
+folium>=0.16
+ruamel.yaml>=0.18
+pytest>=8.0
