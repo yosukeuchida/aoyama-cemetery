@@ -1,12 +1,11 @@
 """個人詳細編集画面。coords タブ + 写真タブ。"""
 from __future__ import annotations
 
+import re
 import sys
 from pathlib import Path
 
-import folium
 import streamlit as st
-from streamlit_folium import st_folium
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 if str(PROJECT_ROOT) not in sys.path:
@@ -17,8 +16,34 @@ from admin.lib import audit_log  # noqa: E402
 
 PEOPLE_DIR = PROJECT_ROOT / "src/content/people"
 
-# 青山霊園中心(本園)
-CEMETERY_CENTER = (35.6685, 139.7220)
+# 入力テキストから lat/lng を抽出するパターン
+# 1) "35.667, 139.722" / "35.667 139.722" (区切りはカンマまたは空白)
+# 2) Google Maps URL の "@<lat>,<lng>,<zoom>z" (右クリック→ここは何?)
+# 3) Google Maps URL の "?q=<lat>,<lng>" / "&q=<lat>,<lng>" (共有リンク)
+_COORDS_PATTERNS = [
+    re.compile(r"@(-?\d+\.\d+),\s*(-?\d+\.\d+)"),       # @lat,lng (URL内)
+    re.compile(r"[?&]q=(-?\d+\.\d+),\s*(-?\d+\.\d+)"),  # ?q=lat,lng
+    re.compile(r"^\s*(-?\d+\.?\d*)[,\s]+(-?\d+\.?\d*)\s*$"),  # bare lat,lng
+]
+
+
+def parse_coords_input(text: str) -> tuple[float, float] | None:
+    """入力文字列から (lat, lng) を抽出する。
+
+    対応形式:
+        - "35.667123, 139.722456"
+        - "35.667123 139.722456"
+        - "https://www.google.com/maps/@35.667,139.722,18z/..."
+        - "https://www.google.com/maps?q=35.667,139.722"
+    """
+    if not text:
+        return None
+    text = text.strip()
+    for pat in _COORDS_PATTERNS:
+        m = pat.search(text)
+        if m:
+            return float(m.group(1)), float(m.group(2))
+    return None
 
 st.set_page_config(page_title="Person Edit", layout="wide")
 
@@ -62,60 +87,39 @@ with tab_coords:
     current = fm.get("coords")
     if current:
         st.success(f"現在値: lat={current['lat']}, lng={current['lng']}")
-        if st.button("🗑️ coords をクリア", type="secondary"):
+        col_link, col_clear = st.columns([3, 1])
+        col_link.markdown(
+            f"[現在値を Google Maps で開く](https://www.google.com/maps?q={current['lat']},{current['lng']})"
+        )
+        if col_clear.button("🗑️ coords をクリア", type="secondary"):
             content_io.clear_coords(data)
             content_io.save(md_path, data)
             audit_log.log(op="clear_coords", slug=slug)
             st.success("クリアしました")
             st.rerun()
-    else:
-        st.info("coords 未設定。下の地図をクリックして座標を選んでください。")
+        st.divider()
 
-    # 地図
-    initial_lat = current["lat"] if current else CEMETERY_CENTER[0]
-    initial_lng = current["lng"] if current else CEMETERY_CENTER[1]
-    fmap = folium.Map(
-        location=[initial_lat, initial_lng],
-        zoom_start=19,
-        tiles="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-        attr="Esri World Imagery",
-        max_zoom=21,
+    st.subheader("座標を入力")
+    st.caption(
+        "Google Maps で右クリック→「ここは何?」で表示される URL をそのまま貼るか、"
+        "`lat, lng` 形式で直接入力してください。"
     )
-    # 現在値の赤ピン
-    if current:
-        folium.Marker(
-            [current["lat"], current["lng"]],
-            tooltip="現在の coords",
-            icon=folium.Icon(color="red"),
-        ).add_to(fmap)
-    # 他の偉人のピン(参考用、灰色)
-    for other_md in PEOPLE_DIR.glob("*.md"):
-        if other_md.stem == slug:
-            continue
-        try:
-            other = content_io.load(other_md)
-            oc = other.frontmatter.get("coords")
-            if oc:
-                folium.CircleMarker(
-                    [oc["lat"], oc["lng"]],
-                    radius=3,
-                    color="gray",
-                    fill=True,
-                    tooltip=other.frontmatter.get("name", other_md.stem),
-                ).add_to(fmap)
-        except Exception:
-            pass
 
-    map_result = st_folium(fmap, height=500, width=None, key=f"map_{slug}")
+    raw = st.text_input(
+        "lat, lng または Google Maps URL",
+        value="",
+        key=f"coords_input_{slug}",
+        placeholder="例: 35.667123, 139.722456",
+    )
 
-    # クリック座標
-    clicked = map_result.get("last_clicked")
-    if clicked:
-        new_lat = round(clicked["lat"], 6)
-        new_lng = round(clicked["lng"], 6)
-        st.info(f"📍 クリック位置: lat={new_lat}, lng={new_lng}")
-        col_a, col_b = st.columns(2)
-        if col_a.button("✅ この座標で保存", type="primary"):
+    parsed = parse_coords_input(raw)
+    if raw and parsed is None:
+        st.error("入力から lat/lng を抽出できませんでした。形式を確認してください。")
+    elif parsed:
+        new_lat, new_lng = round(parsed[0], 6), round(parsed[1], 6)
+        st.info(f"📍 解析結果: lat={new_lat}, lng={new_lng}")
+        col_save, col_preview = st.columns([1, 3])
+        if col_save.button("✅ この座標で保存", type="primary", key=f"save_{slug}"):
             try:
                 content_io.set_coords(data, lat=new_lat, lng=new_lng)
                 content_io.save(md_path, data)
@@ -128,8 +132,8 @@ with tab_coords:
                 st.rerun()
             except ValueError as e:
                 st.error(f"保存失敗: {e}")
-        col_b.markdown(
-            f"[Google Maps で確認](https://www.google.com/maps?q={new_lat},{new_lng})"
+        col_preview.markdown(
+            f"[Google Maps で位置を確認](https://www.google.com/maps?q={new_lat},{new_lng})"
         )
 
 
