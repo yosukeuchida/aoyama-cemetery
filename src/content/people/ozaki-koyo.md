@@ -41,6 +41,8 @@ relatedPeople:
     relation: 後続世代を代表する近代文学の同霊園隣人
   - slug: shiga-naoya
     relation: 紅葉門下の後続世代と並ぶ近代小説の同霊園隣人
+  - slug: owada-tateki
+    relation: 同時代の明治文壇、鉄道唱歌で国民に愛された詩人・国文学者
 ---
 
 ## 『金色夜叉』を遺した明治の人気作家

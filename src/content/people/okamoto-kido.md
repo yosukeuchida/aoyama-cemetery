@@ -40,6 +40,8 @@ relatedPeople:
     relation: 同時代の作家・新聞記者、明治末期の文学青年世代
   - slug: shiga-naoya
     relation: 大正期の文学界で並んだ同時代作家
+  - slug: owada-tateki
+    relation: 同時代の明治文人、鉄道唱歌で国民に歌を届けた一回り上の世代
 ---
 
 ## 「半七」と『修禅寺物語』 ——二つの仕事を一身で残した劇作家

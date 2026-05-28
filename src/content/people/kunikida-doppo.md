@@ -42,6 +42,8 @@ relatedPeople:
     relation: 同時代の明治大正の歌人・文学者
   - slug: nishi-amane
     relation: 近代日本語と内省的思考の枠組みを準備した明治啓蒙思想家
+  - slug: owada-tateki
+    relation: 同時代の明治文人、鉄道唱歌の作詞者で国文学者として日本語を磨いた一回り上の世代
 ---
 
 ## 『武蔵野』を書き、近代文学を始めた男

@@ -162,6 +162,8 @@ PAIRS = [
     ("yashiro-rokuro", "Vice_Adm._Rokuro_Yashiro.jpg"),
     # haniya-yutaka: 1997 没で PD 未経過(2068 年に PD)
     # nakamura-utaemon-vi: 2001 没で PD 未経過(2072 年に PD)
+    # 2026-05-28 追加分(鉄道唱歌の作詞者)
+    ("owada-tateki", "Ōwada_tateki.jpg"),
 ]
 
 OUT_DIR = "src/assets/portraits"
