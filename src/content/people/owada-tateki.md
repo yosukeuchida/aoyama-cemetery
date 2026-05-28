@@ -7,6 +7,9 @@ deathDate: "1910-10-01"
 era: [明治]
 category: 文化人
 graveSection: 1種ロ18号7側
+coords:
+  lat: 35.662652
+  lng: 139.721818
 shortDescription: 「汽笛一声新橋を」で始まる『鉄道唱歌』を作詞し、明治の国民に旅情と汽車の風景を歌い継がせた詩人・国文学者。
 tags:
   - 鉄道唱歌
