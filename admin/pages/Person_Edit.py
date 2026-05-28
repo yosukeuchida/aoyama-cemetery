@@ -115,10 +115,19 @@ for ok, msg in banner:
     (st.success if ok else st.error)(msg)
 
 # ---- タブ ----
-tab_coords, tab_photos, tab_fm = st.tabs(["📍 coords", "📸 写真", "📝 frontmatter"])
+# st.tabs は rerun をまたいでアクティブタブを保持しない(ファイル選択や保存で
+# rerun が走ると先頭タブに戻る)。session_state に紐づく segmented_control で代替する。
+_TABS = ["📍 coords", "📸 写真", "📝 frontmatter"]
+_tab_key = f"active_tab_{slug}"
+st.session_state.setdefault(_tab_key, _TABS[0])
+_active_tab = st.segmented_control(
+    "セクション", _TABS, key=_tab_key, label_visibility="collapsed"
+)
+if _active_tab is None:  # 選択中をクリックして解除されたときのフォールバック
+    _active_tab = _TABS[0]
 
 # ---- coords タブ ----
-with tab_coords:
+if _active_tab == "📍 coords":
     if content_io.is_hidemap(data):
         st.warning("この偉人は `hideMap: true` 設定済のため coords は使われません。")
         st.stop()
@@ -188,7 +197,7 @@ with tab_coords:
 
 
 # ---- 写真タブ ----
-with tab_photos:
+elif _active_tab == "📸 写真":
     photos = photo_ops.list_photos(slug)
     st.subheader(f"既存写真: {len(photos)} 枚")
 
@@ -291,7 +300,7 @@ with tab_photos:
 
 
 # ---- frontmatter タブ ----
-with tab_fm:
+elif _active_tab == "📝 frontmatter":
     st.subheader("frontmatter を YAML で編集")
     st.caption(
         "ファイル全体の frontmatter(--- で囲まれた YAML 部分)を直接編集できます。"
