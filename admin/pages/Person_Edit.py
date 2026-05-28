@@ -138,13 +138,20 @@ with tab_coords:
     )
 
     parsed = parse_coords_input(raw)
+    new_lat = new_lng = None
     if raw and parsed is None:
         st.error("入力から lat/lng を抽出できませんでした。形式を確認してください。")
     elif parsed:
         new_lat, new_lng = round(parsed[0], 6), round(parsed[1], 6)
         st.info(f"📍 解析結果: lat={new_lat}, lng={new_lng}")
-        col_save, col_preview = st.columns([1, 3])
-        if col_save.button("✅ この座標で保存", type="primary", key=f"save_{slug}"):
+        st.markdown(
+            f"[Google Maps で位置を確認](https://www.google.com/maps?q={new_lat},{new_lng})"
+        )
+
+    if st.button("💾 保存する", type="primary", key=f"save_{slug}"):
+        if new_lat is None or new_lng is None:
+            st.error("有効な lat, lng を入力してから保存してください。")
+        else:
             try:
                 content_io.set_coords(data, lat=new_lat, lng=new_lng)
                 content_io.save(md_path, data)
@@ -158,9 +165,6 @@ with tab_coords:
                 st.rerun()
             except ValueError as e:
                 st.error(f"保存失敗: {e}")
-        col_preview.markdown(
-            f"[Google Maps で位置を確認](https://www.google.com/maps?q={new_lat},{new_lng})"
-        )
 
 
 # ---- 写真タブ ----
