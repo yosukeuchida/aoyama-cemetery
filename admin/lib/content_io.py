@@ -5,6 +5,7 @@ ruamel.yaml の CommentedMap で順序とコメントを保持する。
 from __future__ import annotations
 
 import io
+import os
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -55,13 +56,18 @@ def save(path: Path, data: PersonMD) -> None:
     buf = io.StringIO()
     _yaml().dump(data.frontmatter, buf)
     new_text = "---\n" + buf.getvalue() + "---" + data.body
-    tmp = path.with_suffix(path.suffix + ".tmp")
+    tmp = path.with_suffix(f"{path.suffix}.{os.getpid()}.tmp")
     tmp.write_text(new_text, encoding="utf-8")
     tmp.replace(path)
 
 
 def set_coords(data: PersonMD, *, lat: float, lng: float) -> None:
     """coords を設定 / 更新。graveSection の直後に挿入する。"""
+    try:
+        lat = float(lat)
+        lng = float(lng)
+    except (TypeError, ValueError) as e:
+        raise ValueError(f"lat/lng は数値である必要があります: lat={lat!r}, lng={lng!r}") from e
     if not (LAT_MIN <= lat <= LAT_MAX):
         raise ValueError(f"lat が範囲外({LAT_MIN}-{LAT_MAX}): {lat}")
     if not (LNG_MIN <= lng <= LNG_MAX):
@@ -71,8 +77,8 @@ def set_coords(data: PersonMD, *, lat: float, lng: float) -> None:
 
     fm = data.frontmatter
     coords_map = CommentedMap()
-    coords_map["lat"] = round(float(lat), 6)
-    coords_map["lng"] = round(float(lng), 6)
+    coords_map["lat"] = round(lat, 6)
+    coords_map["lng"] = round(lng, 6)
 
     if "coords" in fm:
         fm["coords"] = coords_map

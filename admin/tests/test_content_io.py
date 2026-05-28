@@ -106,3 +106,48 @@ def test_load_invalid_yaml_raises(tmp_path):
     path.write_text("---\nname: [unclosed\n---\nbody", encoding="utf-8")
     with pytest.raises(ValueError, match="YAML"):
         content_io.load(path)
+
+
+def test_set_coords_inserts_before_shortdescription_when_no_grave_section(tmp_path):
+    """graveSection 不在時は shortDescription の前に挿入"""
+    path = tmp_path / "no_grave.md"
+    path.write_text(
+        '---\n'
+        'name: テスト 四郎\n'
+        'nameKana: てすと しろう\n'
+        'nameRomaji: Test Shiro\n'
+        'birthDate: "1850-01-01"\n'
+        'deathDate: "1900-12-31"\n'
+        'era: [明治]\n'
+        'category: 政治家\n'
+        'shortDescription: graveSection 無しのテスト用人物。\n'
+        '---\n\n## 本文\n',
+        encoding="utf-8",
+    )
+    data = content_io.load(path)
+    content_io.set_coords(data, lat=35.667, lng=139.722)
+    content_io.save(path, data)
+    text = path.read_text(encoding="utf-8")
+    coords_idx = text.index("coords:")
+    desc_idx = text.index("shortDescription:")
+    assert coords_idx < desc_idx
+
+
+def test_clear_coords_is_noop_when_absent(tmp_md):
+    """coords 不在時の clear_coords は no-op で例外を出さない"""
+    path = tmp_md("sample_person_no_coords.md")
+    data = content_io.load(path)
+    content_io.clear_coords(data)  # 例外が出ないことを確認
+    assert not content_io.has_coords(data)
+
+
+def test_set_coords_accepts_string_input(tmp_md):
+    """Streamlit フォーム由来の文字列入力でも ValueError 互換動作"""
+    path = tmp_md("sample_person_no_coords.md")
+    data = content_io.load(path)
+    # 数値文字列は OK
+    content_io.set_coords(data, lat="35.667", lng="139.722")
+    assert data.frontmatter["coords"]["lat"] == 35.667
+    # 非数値文字列は ValueError(TypeError ではない)
+    with pytest.raises(ValueError, match="数値"):
+        content_io.set_coords(data, lat="abc", lng="139.722")
