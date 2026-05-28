@@ -6,7 +6,7 @@ birthDate: "1886-03-24"
 deathDate: "1954-09-05"
 era: [大正, 昭和]
 category: 文化人
-graveSection: 1種ロ12号7〜10側
+graveSection: 1種ロ12号7側
 coords:
   lat: 35.667786
   lng: 139.723543
