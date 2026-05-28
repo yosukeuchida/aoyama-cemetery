@@ -7,6 +7,9 @@ deathDate: "1932-12-11"
 era: [明治, 昭和]
 category: 政治家
 graveSection: 1種ロ8号1・14側
+coords:
+  lat: 35.667599
+  lng: 139.72266
 shortDescription: 政友会の謀将。三井物産の中国通商人から政界入りし、田中義一内閣の外務政務次官として山東出兵・東方会議を主導した昭和初期の対中政策のキーマン。
 tags:
   - 政友会
