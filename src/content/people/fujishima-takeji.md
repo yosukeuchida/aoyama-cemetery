@@ -7,6 +7,9 @@ deathDate: "1943-03-19"
 era: [明治, 昭和]
 category: 文化人
 graveSection: 1種イ1号31側
+coords:
+  lat: 35.667847
+  lng: 139.720306
 shortDescription: 明治末から昭和期にかけて日本洋画壇を率いた指導的画家。ロマン主義的作風で『天平の面影』『黒扇』『蝶』を残し、第一回文化勲章受章者の一人。
 tags:
   - 洋画
