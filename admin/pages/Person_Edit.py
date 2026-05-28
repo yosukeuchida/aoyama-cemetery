@@ -12,7 +12,21 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from admin.lib import content_io, photo_ops  # noqa: E402
-from admin.lib import audit_log  # noqa: E402
+from admin.lib import audit_log, publish  # noqa: E402
+
+
+def _publish(file_path: Path, message: str) -> None:
+    """保存後の自動 push を実行して結果を UI に表示する共通ヘルパー。
+
+    st.rerun() で画面が即再描画されても結果が見えるよう、永続するメッセージは
+    session_state に積んでヘッダ直後で表示する。
+    """
+    result = publish.publish(file_path, message)
+    icon = "✅" if result.ok else "❌"
+    st.toast(f"{icon} {result.message}", icon=icon)
+    # rerun を生き残らせるためにバナー用 session_state にも積む
+    banner = st.session_state.setdefault("publish_banner", [])
+    banner.append((result.ok, result.message))
 
 PEOPLE_DIR = PROJECT_ROOT / "src/content/people"
 
@@ -75,6 +89,11 @@ with col_h2:
     if st.button("← ダッシュボード"):
         st.switch_page("Dashboard.py")
 
+# 直前の publish 結果(rerun を超えて表示するためのバナー)
+banner = st.session_state.pop("publish_banner", [])
+for ok, msg in banner:
+    (st.success if ok else st.error)(msg)
+
 # ---- タブ ----
 tab_coords, tab_photos, tab_fm = st.tabs(["📍 coords", "📸 写真", "📝 frontmatter"])
 
@@ -96,6 +115,7 @@ with tab_coords:
             content_io.save(md_path, data)
             audit_log.log(op="clear_coords", slug=slug)
             st.success("クリアしました")
+            _publish(md_path, f"feat(people): {slug} coords 削除")
             st.rerun()
         st.divider()
 
@@ -133,6 +153,7 @@ with tab_coords:
                     details={"lat": new_lat, "lng": new_lng},
                 )
                 st.success(f"保存しました: lat={new_lat}, lng={new_lng}")
+                _publish(md_path, f"feat(people): {slug} coords 更新 ({new_lat}, {new_lng})")
                 st.cache_data.clear()
                 st.rerun()
             except ValueError as e:
@@ -163,10 +184,12 @@ with tab_photos:
                     st.warning(f"{photo.name} を削除しますか?")
                     cc1, cc2 = st.columns(2)
                     if cc1.button("削除実行", key=f"do_del_{photo.name}", type="primary"):
+                        deleted_path = photo  # publish 用に path を保存
                         photo_ops.delete_photo(photo)
                         audit_log.log(op="delete_photo", slug=slug, details={"file": photo.name})
                         del st.session_state[f"confirm_del_{photo.name}"]
                         st.success(f"削除しました: {photo.name}")
+                        _publish(deleted_path, f"feat(people): {slug} 墓写真削除 ({deleted_path.name})")
                         st.cache_data.clear()
                         st.rerun()
                     if cc2.button("キャンセル", key=f"cancel_del_{photo.name}"):
@@ -232,6 +255,9 @@ with tab_photos:
             for name, msg in errors:
                 with st.expander(f"❌ {name}"):
                     st.code(msg)
+        # 成功した写真を 1 枚ずつ commit + push
+        for placed in results:
+            _publish(placed, f"feat(people): {slug} 墓写真追加 ({placed.name})")
         if results and not errors:
             st.cache_data.clear()
             st.rerun()
@@ -266,7 +292,8 @@ with tab_fm:
                 content_io.replace_frontmatter(data, edited_yaml)
                 content_io.save(md_path, data)
                 audit_log.log(op="replace_frontmatter", slug=slug)
-                st.success("保存しました。npm run build で zod 整合を確認してください。")
+                st.success("保存しました。")
+                _publish(md_path, f"feat(people): {slug} frontmatter 更新")
                 st.cache_data.clear()
                 st.rerun()
             except ValueError as e:
