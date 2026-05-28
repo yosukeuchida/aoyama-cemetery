@@ -60,6 +60,16 @@ def publish(file_path: Path | str, message: str) -> PublishResult:
     if not _has_uncommitted_change(rel):
         return PublishResult(True, "変更なし(既に commit 済 or 未変更)")
 
+    # 新規(未追跡)ファイルは stage しないと commit -- <path> が
+    # "did not match any file(s) known to git" で失敗する。
+    # add は新規・変更・削除のいずれも stage できる。
+    add_proc = _run_git("add", "--", rel)
+    if add_proc.returncode != 0:
+        return PublishResult(
+            False,
+            f"add 失敗:\n{add_proc.stderr or add_proc.stdout}",
+        )
+
     commit_proc = _run_git("commit", "-m", message, "--", rel)
     if commit_proc.returncode != 0:
         return PublishResult(

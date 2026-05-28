@@ -48,6 +48,7 @@ def test_publish_happy_path():
             _proc(returncode=1),  # diff (has change)
             _proc(returncode=0),  # diff --cached
             _proc(stdout=" M README.md\n"),  # status
+            _proc(returncode=0),  # add
             _proc(returncode=0),  # commit
             _proc(stdout="abc1234\n"),  # rev-parse
             _proc(returncode=0),  # push
@@ -66,6 +67,7 @@ def test_publish_push_failure_keeps_commit():
             _proc(returncode=1),
             _proc(returncode=0),
             _proc(stdout=" M README.md\n"),
+            _proc(returncode=0),  # add
             _proc(returncode=0),  # commit OK
             _proc(stdout="abc1234\n"),
             _proc(returncode=1, stderr="rejected (non-fast-forward)"),  # push fail
@@ -77,6 +79,28 @@ def test_publish_push_failure_keeps_commit():
     assert "non-fast-forward" in result.message
 
 
+def test_publish_stages_new_untracked_file():
+    """新規(未追跡)ファイルは add で stage してから commit する"""
+    with patch("admin.lib.publish._run_git") as m:
+        m.side_effect = [
+            _proc(stdout="main\n"),  # current_branch
+            _proc(returncode=0),  # diff (untracked → no diff)
+            _proc(returncode=0),  # diff --cached
+            _proc(stdout="?? src/assets/grave-photos/x/photo.jpg\n"),  # status: untracked
+            _proc(returncode=0),  # add
+            _proc(returncode=0),  # commit
+            _proc(stdout="abc1234\n"),  # rev-parse
+            _proc(returncode=0),  # push
+        ]
+        result = publish.publish(
+            publish.PROJECT_ROOT / "src/assets/grave-photos/x/photo.jpg", "feat: photo"
+        )
+    assert result.ok is True
+    # add が commit より前に呼ばれている
+    called = [c.args[0] for c in m.call_args_list]
+    assert called.index("add") < called.index("commit")
+
+
 def test_publish_commit_failure():
     """commit が失敗(hook 失敗等)した場合 ok=False"""
     with patch("admin.lib.publish._run_git") as m:
@@ -85,6 +109,7 @@ def test_publish_commit_failure():
             _proc(returncode=1),
             _proc(returncode=0),
             _proc(stdout=" M README.md\n"),
+            _proc(returncode=0),  # add
             _proc(returncode=1, stderr="pre-commit hook failed"),
         ]
         result = publish.publish(publish.PROJECT_ROOT / "README.md", "feat: x")
