@@ -105,6 +105,11 @@ with tab_coords:
         "`lat, lng` 形式で直接入力してください。"
     )
 
+    st.link_button(
+        "🛰️ 青山霊園を Google Maps で開く(別タブ・航空写真)",
+        "https://www.google.com/maps/place/%E9%9D%92%E5%B1%B1%E9%9C%8A%E5%9C%92/@35.6685,139.7220,18z/data=!3m1!1e3",
+    )
+
     raw = st.text_input(
         "lat, lng または Google Maps URL",
         value="",
