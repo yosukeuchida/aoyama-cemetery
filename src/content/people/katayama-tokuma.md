@@ -5,7 +5,7 @@ nameRomaji: Katayama Tokuma
 birthDate: "1854-12-20"
 deathDate: "1917-10-24"
 era: [明治, 大正]
-category: 学者
+category: 文化人
 graveSection: 1種ロ12号18側
 coords:
   lat: 35.668019528186164
