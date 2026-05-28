@@ -48,6 +48,67 @@
 
 実例: 2026-05-24 林董(hayashi-tadasu)削除では grep 25 箇所 / 7 カテゴリ(人物ファイル・portrait・relatedPeople 7 ファイル・events 1 件・本文墓所言及 6 ファイル・routes 3 ファイル・script・Obsidian)を順に修正、178 → 177 ページ。詳細: `~/Desktop/Obsidian/claude-code/2026-05-24-aoyama-cemetery-墓じまい対応-相楽総三-林董.md`
 
+## 管理画面(`admin/`、2026-05-28 新規)
+
+既存偉人の coords / 墓写真 / frontmatter 編集はローカル Streamlit 管理画面から行う(都度 vim + git の手作業を置換)。新規偉人追加は引き続き `/add-person` スラッシュコマンド。
+
+### 起動
+
+```bash
+aoyama-ui  # ~/.zshrc alias、内部で arch -arm64 admin/.venv/bin/streamlit run
+           # 初回は arm64 venv を自動構築(数分)、以降は数秒で起動
+           # 終了は Ctrl+C
+```
+
+ブラウザで http://localhost:8501 を開く。フル形は `~/workspace/personal/aoyama-cemetery/admin/run.sh`。
+
+### 画面構成
+
+- **Dashboard**(`admin/Dashboard.py`): 全 136 偉人の進捗一覧。coords 状態(✅ / ❌ / hideMap)、墓写真枚数、最終 commit 日時を表示。名前 / slug 部分一致 + 状態フィルタで絞り込み、行クリックで個人詳細へ。
+- **Person_Edit**(`admin/pages/Person_Edit.py`): 3 タブ構成。
+  - 📍 **coords**: lat/lng 直接入力 or Google Maps URL ペースト(`@lat,lng` / `?q=lat,lng` 自動抽出)。「青山霊園を別タブで開く」ボタンで航空写真表示。
+  - 📸 **写真**: 既存写真サムネ + 削除、新規アップロード(複数選択可、`scripts/add-grave-photo.sh` に subprocess 委譲)。
+  - 📝 **frontmatter**: raw YAML editor。zod 整合は admin では検証せず保存後の `npm run build` 任せ(過剰検証回避)。
+
+### 自動 commit + push(重要)
+
+保存操作ごとに **対象ファイルだけ単独 commit して `origin/main` に自動 push** する。Cloudflare Pages が自動 build/deploy(~2 分)で本番反映される。
+
+- 撤回した旧設計: 「admin は working tree 更新のみ、commit/push は手動」(spec §3)→ 単一ユーザー運用で摩擦過大、自動化に変更
+- 影響: admin で保存 = 本番に出る。typo や誤入力に注意。zod 検証で build が落ちれば旧版が残る(Cloudflare は失敗ビルドを切り替えない)
+- commit message は操作種別から自動生成(例: `feat(people): okubo-toshimichi coords 更新 (35.667, 139.722)`)
+- main ブランチ以外では abort、push 失敗は UI にエラー表示
+
+### ディレクトリ構成
+
+```
+admin/
+├ Dashboard.py            # 進捗一覧 + フィルタ
+├ pages/Person_Edit.py    # 3 タブ
+├ lib/
+│   ├ content_io.py       # frontmatter round-trip (ruamel.yaml、PID 付き tmp で race 防止)
+│   ├ photo_ops.py        # add-grave-photo.sh subprocess wrapper
+│   ├ git_ops.py          # read-only: last_commit_date / uncommitted_count
+│   ├ audit_log.py        # JSONL 操作ログ
+│   └ publish.py          # 自動 commit + push(main ブランチ限定)
+├ tests/                  # pytest 33 件
+├ requirements.txt
+└ run.sh                  # arch -arm64 venv 起動ラッパー
+```
+
+### 設計書 / 実装計画
+
+- spec: `docs/superpowers/specs/2026-05-28-grave-admin-design.md`
+- plan: `docs/superpowers/plans/2026-05-28-grave-admin.md`
+- 構築セッションログ: `~/Desktop/Obsidian/claude-code/2026-05-28-aoyama-admin-streamlit-build.md`
+
+### admin 改修時の注意
+
+- `admin/lib/content_io.py` の ruamel.yaml round-trip は 136 件全件で byte 一致テスト済。PyYAML には差し戻さない(コメント・順序破壊する)
+- `admin/lib/photo_ops.py` のパス包含チェックは `Path.relative_to` を使う(`str.startswith` は sibling ディレクトリ漏れバグあり、code review で検出済)
+- `@st.cache_resource` は **module-level 関数のみ** 適用(L1 アンチパターン)
+- pytest は `arch -arm64 admin/.venv/bin/pytest admin/tests/`
+
 ## events の personSlugs 記載基準(直接関与ファースト)
 
 events 追加・更新時、`personSlugs` に人物を記載する基準は「**その事件に直接関与した青山霊園埋葬者**」のみに限定する。
