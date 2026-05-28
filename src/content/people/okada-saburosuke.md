@@ -6,7 +6,7 @@ birthDate: "1869-02-22"
 deathDate: "1939-09-23"
 era: [明治, 昭和]
 category: 文化人
-graveSection: 1種イ34・35号3番丙
+graveSection: 1種イ1号35側
 shortDescription: 「日本の洋画に最も美しい女性像を描いた画家」として知られる明治・大正・昭和の洋画家。第一回文化勲章受章。藤島武二と本郷洋画研究所を共同設立。
 tags:
   - 洋画
