@@ -112,3 +112,30 @@ def test_delete_photo(test_image, cleanup_artifacts):
     assert placed.exists()
     photo_ops.delete_photo(placed)
     assert not placed.exists()
+
+
+def test_delete_photo_rejects_outside_grave_photos(tmp_path):
+    """grave-photos 外のパスは ValueError(誤削除防止)"""
+    outside = tmp_path / "outside.jpg"
+    outside.write_bytes(b"x")
+    with pytest.raises(ValueError, match="grave-photos"):
+        photo_ops.delete_photo(outside)
+    # ファイルは消えていない
+    assert outside.exists()
+
+
+def test_delete_photo_rejects_sibling_directory_prefix(tmp_path, monkeypatch):
+    """旧 startswith 実装で漏れていた sibling ディレクトリ名のケースを明示的に防ぐ。
+    GRAVE_PHOTOS_DIR と同名 prefix のディレクトリは別物として拒否する。
+    """
+    # /tmp/xxx/grave-photos と /tmp/xxx/grave-photos-evil の関係を再現
+    legit = tmp_path / "grave-photos"
+    legit.mkdir()
+    evil = tmp_path / "grave-photos-evil"
+    evil.mkdir()
+    bad_file = evil / "x.jpg"
+    bad_file.write_bytes(b"x")
+    monkeypatch.setattr(photo_ops, "GRAVE_PHOTOS_DIR", legit)
+    with pytest.raises(ValueError, match="grave-photos"):
+        photo_ops.delete_photo(bad_file)
+    assert bad_file.exists()

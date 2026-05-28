@@ -46,7 +46,12 @@ def add_photo(
         "--date", date,
         "--caption", caption,
     ]
-    proc = subprocess.run(cmd, capture_output=True, text=True)
+    try:
+        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
+    except subprocess.TimeoutExpired as e:
+        raise RuntimeError(
+            f"add-grave-photo.sh が 120 秒以内に完了しませんでした(sips ハング疑い): {e}"
+        ) from e
     if proc.returncode != 0:
         raise RuntimeError(
             f"add-grave-photo.sh failed (exit {proc.returncode}):\n"
@@ -74,7 +79,9 @@ def list_photos(slug: str) -> list[Path]:
 
 def delete_photo(path: Path) -> None:
     """指定写真を削除。安全のため grave-photos 配下のファイルのみ受け付ける。"""
-    resolved = path.resolve()
-    if not str(resolved).startswith(str(GRAVE_PHOTOS_DIR.resolve())):
-        raise ValueError(f"grave-photos 配下のファイルのみ削除可: {path}")
+    resolved = Path(path).resolve()
+    try:
+        resolved.relative_to(GRAVE_PHOTOS_DIR.resolve())
+    except ValueError as e:
+        raise ValueError(f"grave-photos 配下のファイルのみ削除可: {path}") from e
     resolved.unlink()
