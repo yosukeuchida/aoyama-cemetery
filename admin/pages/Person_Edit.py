@@ -125,3 +125,93 @@ with tab_coords:
         col_b.markdown(
             f"[Google Maps で確認](https://www.google.com/maps?q={new_lat},{new_lng})"
         )
+
+
+# ---- 写真タブ ----
+with tab_photos:
+    photos = photo_ops.list_photos(slug)
+    st.subheader(f"既存写真: {len(photos)} 枚")
+
+    if photos:
+        for photo in photos:
+            cols = st.columns([1, 2, 1])
+            with cols[0]:
+                st.image(str(photo), width=150)
+            with cols[1]:
+                st.text(photo.name)
+                stat = photo.stat()
+                st.caption(f"{stat.st_size // 1024} KB")
+            with cols[2]:
+                if st.button("🗑️ 削除", key=f"del_{photo.name}"):
+                    st.session_state[f"confirm_del_{photo.name}"] = True
+                if st.session_state.get(f"confirm_del_{photo.name}"):
+                    st.warning(f"{photo.name} を削除しますか?")
+                    cc1, cc2 = st.columns(2)
+                    if cc1.button("削除実行", key=f"do_del_{photo.name}", type="primary"):
+                        photo_ops.delete_photo(photo)
+                        del st.session_state[f"confirm_del_{photo.name}"]
+                        st.success(f"削除しました: {photo.name}")
+                        st.cache_data.clear()
+                        st.rerun()
+                    if cc2.button("キャンセル", key=f"cancel_del_{photo.name}"):
+                        del st.session_state[f"confirm_del_{photo.name}"]
+                        st.rerun()
+            st.divider()
+
+    st.subheader("新規追加")
+    from datetime import date as _date_cls
+    import tempfile
+
+    uploaded = st.file_uploader(
+        "写真ファイル(複数選択可)",
+        type=["jpg", "jpeg", "png", "heic"],
+        accept_multiple_files=True,
+        key=f"upload_{slug}",
+    )
+    upload_date = st.date_input("撮影日", value=_date_cls.today(), key=f"date_{slug}")
+    upload_caption = st.text_input(
+        "caption(ファイル名に使う、空欄なら『墓所』連番自動)",
+        value="",
+        key=f"caption_{slug}",
+    )
+
+    if uploaded and st.button("⬆️ アップロード", type="primary", key=f"do_upload_{slug}"):
+        date_str = upload_date.strftime("%Y-%m-%d")
+        # caption が空なら自動採番
+        if not upload_caption.strip():
+            existing_count = len(photo_ops.list_photos(slug))
+            captions = [f"墓所-{existing_count + i + 1}" for i in range(len(uploaded))]
+        else:
+            base = upload_caption.strip().replace(" ", "-")
+            captions = [base] if len(uploaded) == 1 else [f"{base}-{i + 1}" for i in range(len(uploaded))]
+
+        results = []
+        errors = []
+        for upload_file, caption in zip(uploaded, captions):
+            try:
+                suffix = Path(upload_file.name).suffix.lower() or ".jpg"
+                with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp:
+                    tmp.write(upload_file.getbuffer())
+                    tmp_path = Path(tmp.name)
+                try:
+                    placed = photo_ops.add_photo(
+                        slug=slug, src=tmp_path,
+                        date=date_str, caption=caption,
+                    )
+                    results.append(placed)
+                finally:
+                    tmp_path.unlink(missing_ok=True)
+            except Exception as e:
+                errors.append((upload_file.name, str(e)))
+
+        if results:
+            st.success(f"{len(results)} 枚アップロードしました")
+            for p in results:
+                st.text(str(p.relative_to(PROJECT_ROOT)))
+        if errors:
+            for name, msg in errors:
+                with st.expander(f"❌ {name}"):
+                    st.code(msg)
+        if results and not errors:
+            st.cache_data.clear()
+            st.rerun()
