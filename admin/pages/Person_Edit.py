@@ -28,6 +28,26 @@ def _publish(file_path: Path, message: str) -> None:
     banner = st.session_state.setdefault("publish_banner", [])
     banner.append((result.ok, result.message))
 
+
+def _thumb_data_uri(path: Path, max_px: int = 300) -> str:
+    """ローカル画像を縮小して base64 data URI 化する。
+
+    st.image にローカルパスを渡すと Streamlit の media file 配信経由になり、
+    環境によってサムネイルが表示されないことがあるため、HTML img に直接埋め込む。
+    """
+    from io import BytesIO
+    import base64
+    from PIL import Image, ImageOps
+
+    img = Image.open(path)
+    # iPhone 等の EXIF orientation を適用(ブラウザ/Astro は尊重するが PIL は無視するため)
+    img = ImageOps.exif_transpose(img)
+    img.thumbnail((max_px, max_px))
+    buf = BytesIO()
+    img.convert("RGB").save(buf, format="JPEG", quality=80)
+    return "data:image/jpeg;base64," + base64.b64encode(buf.getvalue()).decode()
+
+
 PEOPLE_DIR = PROJECT_ROOT / "src/content/people"
 
 # 入力テキストから lat/lng を抽出するパターン
@@ -176,7 +196,10 @@ with tab_photos:
         for photo in photos:
             cols = st.columns([1, 2, 1])
             with cols[0]:
-                st.image(str(photo), width=150)
+                st.markdown(
+                    f'<img src="{_thumb_data_uri(photo)}" width="150" style="border-radius:4px;">',
+                    unsafe_allow_html=True,
+                )
             with cols[1]:
                 st.text(photo.name)
                 stat = photo.stat()
