@@ -6,7 +6,7 @@ birthDate: "1917-01-20"
 deathDate: "2001-03-31"
 era: [大正, 昭和]
 category: 文化人
-graveSection: 1種イ11号16-17番
+graveSection: 1種イ1号10側
 shortDescription: 戦後歌舞伎を代表する女形の最高峰。生涯を真女形として過ごし、人間国宝・文化勲章を受章。初代中村吉右衛門に薫陶を受け、戦後歌舞伎の伝統を昭和末まで担い続けた。
 tags:
   - 歌舞伎
