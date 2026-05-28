@@ -39,7 +39,39 @@ fi
 
 SLUG="$1"
 shift
-FILES=("$@")
+
+# オプション引数(--date YYYY-MM-DD / --caption "...")を抽出
+# Streamlit admin 等から非対話で呼び出すための拡張(両方与えられた時のみ非対話モード)
+CLI_DATE=""
+CLI_CAPTION=""
+FILES=()
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --date)
+      CLI_DATE="$2"
+      shift 2
+      ;;
+    --caption)
+      CLI_CAPTION="$2"
+      shift 2
+      ;;
+    *)
+      FILES+=("$1")
+      shift
+      ;;
+  esac
+done
+
+# 非対話モード判定: --date と --caption 両方与えられた時のみ
+NONINTERACTIVE=false
+if [[ -n "$CLI_DATE" && -n "$CLI_CAPTION" ]]; then
+  NONINTERACTIVE=true
+  # 非対話モードは引数の日付バリデーションも厳格に
+  if [[ ! "$CLI_DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+    echo "❌ --date は YYYY-MM-DD 形式で指定してください: $CLI_DATE" >&2
+    exit 1
+  fi
+fi
 
 # slug 検証
 PERSON_MD="src/content/people/${SLUG}.md"
@@ -84,17 +116,20 @@ for SRC in "${FILES[@]}"; do
   echo "─── $(basename "$SRC") ───"
 
   # 撮影日入力
-  while true; do
-    read -r -p "  撮影日 (YYYY-MM-DD, Enter で今日 ${TODAY}): " DATE
-    DATE=${DATE:-$TODAY}
-    if [[ "$DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
-      break
-    fi
-    echo "  ⚠️  日付は YYYY-MM-DD 形式で入力してください(ゼロ埋め必要)"
-  done
-
-  # キャプション入力
-  read -r -p "  キャプション (省略可): " CAPTION
+  if [[ "$NONINTERACTIVE" == "true" ]]; then
+    DATE="$CLI_DATE"
+    CAPTION="$CLI_CAPTION"
+  else
+    while true; do
+      read -r -p "  撮影日 (YYYY-MM-DD, Enter で今日 ${TODAY}): " DATE
+      DATE=${DATE:-$TODAY}
+      if [[ "$DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+        break
+      fi
+      echo "  ⚠️  日付は YYYY-MM-DD 形式で入力してください(ゼロ埋め必要)"
+    done
+    read -r -p "  キャプション (省略可): " CAPTION
+  fi
 
   # ファイル名構築(空白 → ハイフン、ファイル名禁止文字を除外)
   if [[ -n "$CAPTION" ]]; then
@@ -107,6 +142,11 @@ for SRC in "${FILES[@]}"; do
 
   # 上書き確認
   if [[ -e "$DEST_PATH" ]]; then
+    if [[ "$NONINTERACTIVE" == "true" ]]; then
+      # 非対話モードでは上書きしない(明示削除してから呼ぶこと)
+      echo "  ⚠️  ${FILENAME} は既に存在します(非対話モードのため skip)" >&2
+      continue
+    fi
     read -r -p "  ⚠️  ${FILENAME} は既に存在します。上書きしますか? [y/N]: " CONFIRM
     if [[ ! "$CONFIRM" =~ ^[yY]$ ]]; then
       echo "  → スキップ"
