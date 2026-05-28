@@ -8,6 +8,9 @@ personSlugs:
   - takarabe-takeshi
 category: 事件
 url: https://ja.wikipedia.org/wiki/シーメンス事件
+heroImage: ../../assets/event-images/1914-01-23-siemens-jiken.jpg
+heroImageCaption: "飯田義一(三井物産重役、シーメンス事件と並行して摘発されたヴィッカース社収賄事件で有罪)"
+heroImageCredit: "日本工業倶楽部 / Wikimedia Commons / Public domain"
 ---
 
 ## 大正 3 年 1 月、ベルリンからの暴露
