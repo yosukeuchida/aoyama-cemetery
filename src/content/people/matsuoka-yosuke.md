@@ -47,6 +47,8 @@ relatedPeople:
     relation: ポーツマス条約を主導した外交の大先輩
   - slug: kurusu-saburo
     relation: 三国同盟調印で対をなす駐独大使、共に同盟締結に関与
+  - slug: uzawa-fusaaki
+    relation: 東京裁判の日本側弁護団長、判決前に病死した自身を擁護した法曹界の重鎮
 ---
 
 ## ジュネーブから日本を去った男

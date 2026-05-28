@@ -45,6 +45,8 @@ relatedPeople:
     relation: 同時代の陸軍軍人、戦時末期に硫黄島で戦死した同期世代
   - slug: kawakami-soroku
     relation: 陸軍参謀本部の先輩、明治陸軍の制度を作った参謀総長
+  - slug: uzawa-fusaaki
+    relation: 東京裁判の日本側弁護団長、自身を含む被告を擁護した法曹界の重鎮
 ---
 
 ## ビルマ方面軍司令官 — そして A 級戦犯

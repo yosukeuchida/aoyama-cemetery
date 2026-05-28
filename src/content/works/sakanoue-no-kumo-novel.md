@@ -17,6 +17,7 @@ personSlugs:
   - shimamura-hayao
   - ijuin-goro
   - arima-ryokitsu
+  - yashiro-rokuro
 url: https://ja.wikipedia.org/wiki/坂の上の雲
 ---
 

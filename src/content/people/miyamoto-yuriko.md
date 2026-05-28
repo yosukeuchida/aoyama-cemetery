@@ -44,6 +44,8 @@ relatedPeople:
     relation: 戦後文壇で百合子文学を批評的に位置づけた次世代の評論家
   - slug: okamoto-kido
     relation: 大正昭和の文壇を共有した先行世代
+  - slug: haniya-yutaka
+    relation: 戦後文学の巨匠、戦前プロレタリア文学から戦後派へと文学を継承した後輩世代
 ---
 
 ## 戦前最大の女性プロレタリア作家

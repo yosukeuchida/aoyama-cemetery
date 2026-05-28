@@ -42,6 +42,8 @@ relatedPeople:
     relation: 大正昭和を生きた近代文学の同時代人
   - slug: saito-mokichi
     relation: 大正昭和の歌人、近代文芸の同時代人
+  - slug: nakamura-utaemon-vi
+    relation: 戦時末期に大役を抜擢して育てた女形の弟子、戦後歌舞伎の女形最高峰
 ---
 
 ## 「菊吉時代」 — 戦前最高峰の歌舞伎立役

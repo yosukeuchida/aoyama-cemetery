@@ -45,6 +45,8 @@ relatedPeople:
     relation: 日露戦争で陸戦を率いた陸軍大将、戦勝の同志
   - slug: togo-shigenori
     relation: 後年の外交官、戦争と和平の責任を負った大正昭和の外交家
+  - slug: yashiro-rokuro
+    relation: 同時代の海軍大将・海相、シーメンス事件後の海軍刷新を担った先輩
 ---
 
 ## 「海軍を縮小して国を守った」海軍大将

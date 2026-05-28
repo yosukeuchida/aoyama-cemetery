@@ -42,6 +42,8 @@ relatedPeople:
     relation: 浜口内閣の首相、財部はロンドン軍縮会議全権として浜口を支えた
   - slug: inoue-junnosuke
     relation: 浜口内閣の蔵相、軍縮路線と緊縮財政で立場が重なった
+  - slug: yashiro-rokuro
+    relation: シーメンス事件後の後任海相、自身を予備役編入した海軍刷新の責任者
 ---
 
 ## ロンドン海軍軍縮会議の全権 ——「売国奴」と書かれた檄文を浴びた海軍大将

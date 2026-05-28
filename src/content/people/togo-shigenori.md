@@ -49,6 +49,8 @@ relatedPeople:
     relation: 明治期日本外交の象徴的先達(ポーツマス全権)
   - slug: kurusu-saburo
     relation: 開戦時の外相と対米交渉特派大使、共に最後の交渉を担った
+  - slug: uzawa-fusaaki
+    relation: 東京裁判の日本側弁護団長、自身を含む被告を擁護した法曹界の重鎮
 ---
 
 ## 開戦と終戦、二度の外相 — ポツダム受諾の中心人物

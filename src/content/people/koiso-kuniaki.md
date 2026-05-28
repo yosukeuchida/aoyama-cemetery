@@ -47,6 +47,8 @@ relatedPeople:
     relation: 戦中戦後の外交・宮内行政の同時代人
   - slug: ogata-taketora
     relation: 戦時報道と戦後政治を担当した同時代政治家
+  - slug: uzawa-fusaaki
+    relation: 東京裁判の日本側弁護団長、自身を含む被告を擁護した法曹界の重鎮
 ---
 
 ## 「朝鮮の虎」 — 第41代内閣総理大臣

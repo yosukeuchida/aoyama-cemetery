@@ -42,6 +42,8 @@ relatedPeople:
     relation: 海軍大臣・首相、薩摩出身の海軍先輩
   - slug: takarabe-takeshi
     relation: 同時代の海軍大将、後の海軍大臣
+  - slug: yashiro-rokuro
+    relation: 同時代の海軍大将・海相、日露戦争を共に戦った同輩
 ---
 
 ## 日本海海戦の影の立役者 ——「伊集院信管」を生んだ薩摩の海軍士官

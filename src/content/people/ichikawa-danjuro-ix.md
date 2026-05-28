@@ -40,6 +40,8 @@ relatedPeople:
     relation: 演劇改良運動期に交友した同時代の文学者
   - slug: kunikida-doppo
     relation: 同時代の文学者、明治文壇の同世代
+  - slug: nakamura-utaemon-vi
+    relation: 戦後昭和の歌舞伎を率いた女形最高峰、近代歌舞伎の継承者
 ---
 
 ## 「劇聖」 — 明治歌舞伎中興の祖

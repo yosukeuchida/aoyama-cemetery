@@ -37,6 +37,8 @@ relatedPeople:
     relation: 明治末期の作家、江藤の近代文学史論で論じられた
   - slug: nagayo-yoshiro
     relation: 同じ青山霊園に眠る昭和の文学者
+  - slug: haniya-yutaka
+    relation: 戦後文学の巨匠、文芸評論で対峙し続けた先輩世代の作家
 ---
 
 ## 戦後文芸評論を代表した保守思想家

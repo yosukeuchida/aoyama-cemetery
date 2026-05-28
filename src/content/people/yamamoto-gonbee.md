@@ -48,6 +48,8 @@ relatedPeople:
     relation: 薩摩海軍人脈の同郷重鎮
   - slug: kawaji-toshiyoshi
     relation: 下加治屋町・薩摩出身の同郷の警察制度創設者
+  - slug: yashiro-rokuro
+    relation: シーメンス事件後の後任海相、自身の薩摩系海軍人事を予備役編入で刷新した
 ---
 
 ## 日本海軍と東郷平八郎を作った男

@@ -42,6 +42,8 @@ relatedPeople:
     relation: 海軍大臣・首相、同時代の海軍指導者
   - slug: yamamoto-gonbee
     relation: 海軍大臣・首相、明治海軍の大先輩
+  - slug: yashiro-rokuro
+    relation: 同時代の海軍大将・海相、日露戦争を共に戦った同輩
 ---
 
 ## 旅順港閉塞作戦の立案者 ——「死を覚悟する作戦」を組み立てた人

@@ -11,6 +11,7 @@ personSlugs:
   - kato-tomosaburo
   - kawakami-soroku
   - tatsumi-naofumi
+  - yashiro-rokuro
 url: https://ja.wikipedia.org/wiki/坂の上の雲_(テレビドラマ)
 ---
 
