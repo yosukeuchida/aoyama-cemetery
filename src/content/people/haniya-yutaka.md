@@ -7,6 +7,9 @@ deathDate: "1997-02-19"
 era: [昭和]
 category: 文化人
 graveSection: 1種イ4号6番甲
+coords:
+  lat: 35.665672
+  lng: 139.721744
 shortDescription: 戦後文学の巨匠。長編『死霊』で形而上学的小説の到達点を示し、戦後思想に深い影響を残した。本名は般若豊(はんにゃ ゆたか)、植民地下台湾の生まれ。
 tags:
   - 戦後文学
