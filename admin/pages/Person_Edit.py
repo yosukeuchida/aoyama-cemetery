@@ -13,6 +13,7 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from admin.lib import content_io, photo_ops  # noqa: E402
+from admin.lib import audit_log  # noqa: E402
 
 PEOPLE_DIR = PROJECT_ROOT / "src/content/people"
 
@@ -64,6 +65,7 @@ with tab_coords:
         if st.button("🗑️ coords をクリア", type="secondary"):
             content_io.clear_coords(data)
             content_io.save(md_path, data)
+            audit_log.log(op="clear_coords", slug=slug)
             st.success("クリアしました")
             st.rerun()
     else:
@@ -117,6 +119,10 @@ with tab_coords:
             try:
                 content_io.set_coords(data, lat=new_lat, lng=new_lng)
                 content_io.save(md_path, data)
+                audit_log.log(
+                    op="set_coords", slug=slug,
+                    details={"lat": new_lat, "lng": new_lng},
+                )
                 st.success(f"保存しました: lat={new_lat}, lng={new_lng}")
                 st.cache_data.clear()
                 st.rerun()
@@ -149,6 +155,7 @@ with tab_photos:
                     cc1, cc2 = st.columns(2)
                     if cc1.button("削除実行", key=f"do_del_{photo.name}", type="primary"):
                         photo_ops.delete_photo(photo)
+                        audit_log.log(op="delete_photo", slug=slug, details={"file": photo.name})
                         del st.session_state[f"confirm_del_{photo.name}"]
                         st.success(f"削除しました: {photo.name}")
                         st.cache_data.clear()
@@ -197,6 +204,10 @@ with tab_photos:
                     placed = photo_ops.add_photo(
                         slug=slug, src=tmp_path,
                         date=date_str, caption=caption,
+                    )
+                    audit_log.log(
+                        op="add_photo", slug=slug,
+                        details={"file": placed.name},
                     )
                     results.append(placed)
                 finally:
