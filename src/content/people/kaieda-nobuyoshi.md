@@ -7,6 +7,9 @@ deathDate: "1906-10-27"
 era: [江戸, 明治]
 category: 政治家
 graveSection: 1種ロ12号9側
+coords:
+  lat: 35.662645
+  lng: 139.721831
 shortDescription: 薩摩藩士。安政の大獄期に活動、桜田門外の変(1860)に薩摩側から関与、戊辰戦争で参謀、明治政府で元老院議官・貴族院議員・男爵。
 tags:
   - 薩摩藩
