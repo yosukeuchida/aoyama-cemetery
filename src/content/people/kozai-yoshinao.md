@@ -7,6 +7,9 @@ deathDate: "1934-06-18"
 era: [明治, 昭和]
 category: 学者
 graveSection: 1種ロ40号5番
+coords:
+  lat: 35.666042
+  lng: 139.723828
 shortDescription: 足尾鉱毒事件で被害農民の依頼により銅を鉱毒原因と科学的に特定した農芸化学者。東京帝大第10代総長として関東大震災後の大学復興を主導。
 tags:
   - 農芸化学
