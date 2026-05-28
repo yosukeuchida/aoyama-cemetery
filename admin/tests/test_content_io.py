@@ -151,3 +151,37 @@ def test_set_coords_accepts_string_input(tmp_md):
     # 非数値文字列は ValueError(TypeError ではない)
     with pytest.raises(ValueError, match="数値"):
         content_io.set_coords(data, lat="abc", lng="139.722")
+
+
+def test_dump_and_replace_frontmatter_round_trip(tmp_md):
+    """dump → 編集 → replace で frontmatter 全体差し替えが round-trip する"""
+    path = tmp_md("sample_person_with_coords.md")
+    data = content_io.load(path)
+    yaml_text = content_io.dump_frontmatter(data)
+    # 編集模倣: name を書き換える
+    edited = yaml_text.replace("テスト 次郎", "テスト 改名")
+    content_io.replace_frontmatter(data, edited)
+    content_io.save(path, data)
+    after = content_io.load(path)
+    assert after.frontmatter["name"] == "テスト 改名"
+    # 他のキーは保持される
+    assert after.frontmatter["graveSection"] == "1種イ99号99側"
+    assert after.frontmatter["coords"]["lat"] == 35.667
+
+
+def test_replace_frontmatter_rejects_invalid_yaml(tmp_md):
+    """壊れた YAML は ValueError"""
+    path = tmp_md("sample_person_with_coords.md")
+    data = content_io.load(path)
+    with pytest.raises(ValueError, match="YAML"):
+        content_io.replace_frontmatter(data, "name: [unclosed\n")
+
+
+def test_replace_frontmatter_rejects_non_map(tmp_md):
+    """frontmatter がマップでない(リストや空)場合 ValueError"""
+    path = tmp_md("sample_person_with_coords.md")
+    data = content_io.load(path)
+    with pytest.raises(ValueError, match="マップ"):
+        content_io.replace_frontmatter(data, "- a\n- b\n")
+    with pytest.raises(ValueError, match="空"):
+        content_io.replace_frontmatter(data, "")

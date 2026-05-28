@@ -76,7 +76,7 @@ with col_h2:
         st.switch_page("Dashboard.py")
 
 # ---- タブ ----
-tab_coords, tab_photos = st.tabs(["📍 coords", "📸 写真"])
+tab_coords, tab_photos, tab_fm = st.tabs(["📍 coords", "📸 写真", "📝 frontmatter"])
 
 # ---- coords タブ ----
 with tab_coords:
@@ -235,3 +235,41 @@ with tab_photos:
         if results and not errors:
             st.cache_data.clear()
             st.rerun()
+
+
+# ---- frontmatter タブ ----
+with tab_fm:
+    st.subheader("frontmatter を YAML で編集")
+    st.caption(
+        "ファイル全体の frontmatter(--- で囲まれた YAML 部分)を直接編集できます。"
+        "本文は変更されません。保存後は `npm run build` で zod schema 整合を確認してください。"
+    )
+    st.warning(
+        "⚠️ raw YAML 編集です。インデント・引用符・コロンに気をつけて。"
+        "壊れた YAML を保存しようとすると拒否されます。"
+    )
+
+    current_yaml = content_io.dump_frontmatter(data)
+    edited_yaml = st.text_area(
+        "frontmatter (YAML)",
+        value=current_yaml,
+        height=600,
+        key=f"fm_text_{slug}",
+    )
+
+    col_save_fm, col_reset = st.columns([1, 3])
+    if col_save_fm.button("✅ frontmatter を保存", type="primary", key=f"save_fm_{slug}"):
+        if edited_yaml == current_yaml:
+            st.info("変更がありません。")
+        else:
+            try:
+                content_io.replace_frontmatter(data, edited_yaml)
+                content_io.save(md_path, data)
+                audit_log.log(op="replace_frontmatter", slug=slug)
+                st.success("保存しました。npm run build で zod 整合を確認してください。")
+                st.cache_data.clear()
+                st.rerun()
+            except ValueError as e:
+                st.error(f"保存失敗: {e}")
+    if col_reset.button("🔄 現在の内容に戻す", key=f"reset_fm_{slug}"):
+        st.rerun()

@@ -107,3 +107,27 @@ def has_coords(data: PersonMD) -> bool:
 
 def is_hidemap(data: PersonMD) -> bool:
     return data.frontmatter.get("hideMap") is True
+
+
+def dump_frontmatter(data: PersonMD) -> str:
+    """frontmatter を YAML 文字列にシリアライズして返す(編集 UI のプレロード用)。"""
+    buf = io.StringIO()
+    _yaml().dump(data.frontmatter, buf)
+    return buf.getvalue()
+
+
+def replace_frontmatter(data: PersonMD, new_yaml_text: str) -> None:
+    """frontmatter 全体を新しい YAML テキストで置換する。
+
+    Raises:
+        ValueError: YAML パース失敗 or マップ以外を渡された場合。
+    """
+    try:
+        new_fm = _yaml().load(new_yaml_text)
+    except Exception as e:
+        raise ValueError(f"YAML パース失敗: {e}") from e
+    if new_fm is None:
+        raise ValueError("frontmatter が空です")
+    if not isinstance(new_fm, CommentedMap):
+        raise ValueError("frontmatter はマップ(キー: 値の集合)である必要があります")
+    data.frontmatter = new_fm
