@@ -7,6 +7,9 @@ deathDate: "1954-09-05"
 era: [大正, 昭和]
 category: 文化人
 graveSection: 1種ロ12号7〜10側
+coords:
+  lat: 35.667786
+  lng: 139.723543
 shortDescription: 戦前最高峰の歌舞伎立役。六代目尾上菊五郎とともに「菊吉時代」を築き、時代物の名優として一時代を画した東京の歌舞伎役者。
 tags:
   - 歌舞伎
