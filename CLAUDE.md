@@ -107,6 +107,7 @@ admin/
 - `admin/lib/content_io.py` の ruamel.yaml round-trip は 136 件全件で byte 一致テスト済。PyYAML には差し戻さない(コメント・順序破壊する)
 - `admin/lib/photo_ops.py` のパス包含チェックは `Path.relative_to` を使う(`str.startswith` は sibling ディレクトリ漏れバグあり、code review で検出済)
 - `@st.cache_resource` は **module-level 関数のみ** 適用(L1 アンチパターン)
+- 墓写真サムネイルなどスマホ写真を PIL で処理する箇所は `ImageOps.exif_transpose` を必ず通す。iPhone 写真は EXIF orientation(例: 6=90°回転)付きでピクセルは横のまま保存されるため、PIL は無視して横向きになる(ブラウザ・Astro/sharp は EXIF を尊重するので「本番は正しいのに admin だけ横向き」という非対称が起きる)。2026-05-29 に Person_Edit.py の data URI サムネイルで顕在化
 - pytest は `arch -arm64 admin/.venv/bin/pytest admin/tests/`
 
 ## events の personSlugs 記載基準(直接関与ファースト)
