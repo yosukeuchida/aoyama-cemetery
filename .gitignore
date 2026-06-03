@@ -32,3 +32,9 @@ admin/admin.log
 admin/__pycache__/
 admin/**/__pycache__/
 admin/.pytest_cache/
+
+# Bluesky auto-post (local-only runner)
+scripts/daily_bluesky_post/.venv/
+scripts/daily_bluesky_post/__pycache__/
+scripts/daily_bluesky_post/**/__pycache__/
+scripts/daily_bluesky_post/.pytest_cache/
