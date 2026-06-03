@@ -110,6 +110,41 @@ admin/
 - 墓写真サムネイルなどスマホ写真を PIL で処理する箇所は `ImageOps.exif_transpose` を必ず通す。iPhone 写真は EXIF orientation(例: 6=90°回転)付きでピクセルは横のまま保存されるため、PIL は無視して横向きになる(ブラウザ・Astro/sharp は EXIF を尊重するので「本番は正しいのに admin だけ横向き」という非対称が起きる)。2026-05-29 に Person_Edit.py の data URI サムネイルで顕在化
 - pytest は `arch -arm64 admin/.venv/bin/pytest admin/tests/`
 
+## Bluesky 自動投稿(`scripts/daily_bluesky_post/`、2026-06-03 新規)
+
+毎朝 8:05 JST に本日が命日の偉人 / 該当日 events を Bluesky に自動投稿する仕組み。launchd + `claude -p` Max plan 経路 + subagent 2 段(post-writer / fact-checker)構成。
+
+### 起動 / セットアップ
+
+1. シークレット配置(`~/.config/aoyama-cemetery/bluesky.env` と `discord.env`)。フォーマットは `scripts/daily_bluesky_post/README.md` 参照
+2. dry-run: `scripts/daily_bluesky_post/run.sh --dry-run --today 2026-05-14`
+3. launchd 登録: `infra/launchd/README.md` 手順に従う
+
+### アーキテクチャ
+
+````
+launchd 08:05 JST → run.sh → orchestrator.py
+  → match.py で本日が命日の人物 + 該当日 events を集約(personSlugs 空除外、上限 5)
+  → post_log で既投稿チェック
+  → claude_runner が claude -p で post-writer → fact-checker subagent をループ
+  → bluesky_client(atproto SDK)で external link card 付き投稿
+  → logs/posted.jsonl 追記 + git commit
+  → 失敗時は notifier で Discord webhook
+````
+
+詳細:
+- spec: `docs/superpowers/specs/2026-06-03-bluesky-auto-post-design.md`
+- plan: `docs/superpowers/plans/2026-06-03-bluesky-auto-post.md`
+
+### 注意事項
+
+- 子プロセスから `ANTHROPIC_API_KEY` / `ANTHROPIC_AUTH_TOKEN` を必ず strip(`claude_runner._child_env` 参照、L0 知見)
+- `--allowed-tools` は `-p` より前に置く(L0 知見、`claude_runner.generate_post` の cmd 構築参照)
+- subagent 定義(`.claude/agents/aoyama-post-writer.md` / `aoyama-fact-checker.md`)は frontmatter のみを根拠にする厳格ルールを保つこと。本文に「ハッシュタグ禁止」「絵文字禁止」を勝手に外さない(サイト全体の重厚トーンと一致させるため)
+- `logs/posted.jsonl` は git commit する(idempotency + 履歴保存)。push は別運用
+- 投稿失敗の事後対応: Discord 通知の生成文を参考に、本物の Bluesky 画面から手動投稿 or skip 判断
+- pytest: `PYTHONPATH=scripts arch -arm64 scripts/daily_bluesky_post/.venv/bin/pytest scripts/daily_bluesky_post/tests/`
+
 ## events の personSlugs 記載基準(直接関与ファースト)
 
 events 追加・更新時、`personSlugs` に人物を記載する基準は「**その事件に直接関与した青山霊園埋葬者**」のみに限定する。
