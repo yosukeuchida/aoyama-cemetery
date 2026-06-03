@@ -129,6 +129,22 @@ def test_extract_json_returns_error_on_no_json(monkeypatch):
     assert "JSON not found" in result.error
 
 
+def test_generate_post_includes_body_in_prompt(monkeypatch):
+    """body 引数が prompt に組み込まれて claude に渡る"""
+    captured_prompts = []
+
+    def fake_run(cmd, *a, **kw):
+        captured_prompts.append(cmd[-1])  # 最後の引数が prompt(--allowed-tools Agent -p <prompt>)
+        return _run_result(json.dumps({"status": "ok", "post_text": "x", "attempts": 1}))
+
+    monkeypatch.setattr("subprocess.run", fake_run)
+    claude_runner.generate_post(
+        kind="person", url="https://x/y", anniversary_year=0, frontmatter={"name": "X"},
+        body="本文の特徴的なフレーズ ABCDEF12345",
+    )
+    assert "ABCDEF12345" in captured_prompts[0]
+
+
 def test_extract_json_returns_error_on_unknown_status(monkeypatch):
     """旧形式互換削除: status='maybe' のような未知値は error"""
     fake_output = '{"status": "maybe", "post_text": "x"}'

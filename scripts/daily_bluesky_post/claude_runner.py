@@ -34,8 +34,10 @@ def _claude_bin() -> str:
     return shutil.which("claude") or "claude"
 
 
-def _build_prompt(*, kind: str, url: str, anniversary_year: int, frontmatter: Dict[str, Any]) -> str:
+def _build_prompt(*, kind: str, url: str, anniversary_year: int, frontmatter: Dict[str, Any], body: str) -> str:
     fm_yaml = yaml.safe_dump(frontmatter, allow_unicode=True, sort_keys=False)
+    # body は literal block scalar として安全に埋め込み(各行 2 スペースインデント)
+    body_indented = "\n".join("  " + line for line in body.splitlines()) if body else "  (なし)"
     return f"""次の Match を Bluesky に投稿する文を作って、最後に必ず JSON だけを出力してください。
 
 ## 入力
@@ -44,10 +46,12 @@ url: {url}
 anniversary_year: {anniversary_year}
 frontmatter:
 {fm_yaml}
+body: |
+{body_indented}
 
 ## 手順
 1. aoyama-post-writer subagent に上記を渡して投稿文を生成する
-2. aoyama-fact-checker subagent に生成文と frontmatter を渡して critique する
+2. aoyama-fact-checker subagent に生成文と frontmatter + body を渡して critique する
 3. critique が fail なら、violations を post-writer に渡して再生成 → 再 critique(リトライは 1 回まで)
 4. 2 回目も fail なら status="failed" として終了
 
@@ -74,10 +78,11 @@ def generate_post(
     url: str,
     anniversary_year: int,
     frontmatter: Dict[str, Any],
+    body: str = "",
     timeout_sec: int = 180,
 ) -> GenerateResult:
     prompt = _build_prompt(
-        kind=kind, url=url, anniversary_year=anniversary_year, frontmatter=frontmatter,
+        kind=kind, url=url, anniversary_year=anniversary_year, frontmatter=frontmatter, body=body,
     )
 
     # L0 知見: --allowed-tools は -p より前(variadic flag が prompt を吸う問題)

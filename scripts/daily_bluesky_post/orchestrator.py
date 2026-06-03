@@ -51,6 +51,7 @@ def run(*, today: date, dry_run: bool = False) -> int:
             url=m.url,
             anniversary_year=m.anniversary_year,
             frontmatter=m.frontmatter,
+            body=m.body,
         )
         if result.status != "ok":
             _notify_generation_failure(secrets.discord_webhook_url, m, result)

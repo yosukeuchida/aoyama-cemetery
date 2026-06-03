@@ -49,13 +49,16 @@ def test_no_match_returns_empty(content_dirs):
     assert matches == []
 
 
-def test_match_includes_url_and_frontmatter(content_dirs):
+def test_match_includes_url_frontmatter_body(content_dirs):
     people, events = content_dirs
     matches = match.match_today(date(2026, 5, 14), people, events)
     m = matches[0]
     assert m.kind == "person"
     assert m.url == "https://aoyama-cemetery.pages.dev/people/okubo-toshimichi"
     assert m.frontmatter["name"] == "大久保 利通"
+    assert isinstance(m.body, str)
+    assert "本文" in m.body
+    assert m.body != ""
 
 
 def test_match_caps_to_max_per_day(content_dirs, tmp_path):

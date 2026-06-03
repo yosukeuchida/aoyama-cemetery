@@ -11,7 +11,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import date
 from pathlib import Path
-from typing import Any, Dict, List, Literal, Optional
+from typing import Any, Dict, List, Literal, Optional, Tuple
 
 import yaml
 
@@ -25,19 +25,22 @@ class Match:
     kind: Kind
     slug: str
     frontmatter: Dict[str, Any]
+    body: str
     url: str
     anniversary_year: int  # 周年数(today.year - origin_year)
 
 
-def _parse_frontmatter(path: Path) -> Optional[Dict[str, Any]]:
-    """`---` で囲まれた YAML frontmatter を返す。なければ None。"""
+def _parse_md(path: Path) -> Optional[Tuple[Dict[str, Any], str]]:
+    """`---` で囲まれた YAML frontmatter と本文を返す。なければ None。"""
     text = path.read_text(encoding="utf-8")
     if not text.startswith("---"):
         return None
     parts = text.split("---", 2)
     if len(parts) < 3:
         return None
-    return yaml.safe_load(parts[1])
+    fm = yaml.safe_load(parts[1])
+    body = parts[2].lstrip("\n")
+    return fm, body
 
 
 def _to_date(value: Any) -> Optional[date]:
@@ -56,7 +59,10 @@ def match_today(today: date, people_dir: Path, events_dir: Path) -> List[Match]:
 
     # 人物: deathDate 月日一致
     for path in sorted(people_dir.glob("*.md")):
-        fm = _parse_frontmatter(path)
+        parsed = _parse_md(path)
+        if not parsed:
+            continue
+        fm, body = parsed
         if not fm:
             continue
         d = _to_date(fm.get("deathDate"))
@@ -65,13 +71,17 @@ def match_today(today: date, people_dir: Path, events_dir: Path) -> List[Match]:
                 kind="person",
                 slug=path.stem,
                 frontmatter=fm,
+                body=body,
                 url=f"{SITE_URL}/people/{path.stem}",
                 anniversary_year=today.year - d.year,
             ))
 
     # events: date 月日一致 + personSlugs 非空
     for path in sorted(events_dir.glob("*.md")):
-        fm = _parse_frontmatter(path)
+        parsed = _parse_md(path)
+        if not parsed:
+            continue
+        fm, body = parsed
         if not fm:
             continue
         if not fm.get("personSlugs"):
@@ -82,6 +92,7 @@ def match_today(today: date, people_dir: Path, events_dir: Path) -> List[Match]:
                 kind="event",
                 slug=path.stem,
                 frontmatter=fm,
+                body=body,
                 url=f"{SITE_URL}/events/{path.stem}",
                 anniversary_year=today.year - d.year,
             ))

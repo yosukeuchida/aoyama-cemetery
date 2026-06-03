@@ -15,6 +15,7 @@ def _ok_match(slug="okubo-toshimichi", kind="person"):
         kind=kind,
         slug=slug,
         frontmatter={"name": "x"},
+        body="",
         url=f"https://aoyama-cemetery.pages.dev/{plural}/{slug}",
         anniversary_year=148,
     )
