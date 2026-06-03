@@ -28,7 +28,6 @@ JST = timezone(timedelta(hours=9))
 
 
 def run(*, today: date, dry_run: bool = False) -> int:
-    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
     secrets = config.load_secrets()
 
     matches = match.match_today(today, config.PEOPLE_DIR, config.EVENTS_DIR)
@@ -119,6 +118,7 @@ def _notify_generation_failure(webhook, m: match.Match, result: claude_runner.Ge
 
 
 def main(argv=None) -> int:
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
     p = argparse.ArgumentParser()
     p.add_argument("--today", help="YYYY-MM-DD(未指定なら JST 今日)")
     p.add_argument("--dry-run", action="store_true")

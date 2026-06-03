@@ -122,9 +122,10 @@ def test_critique_failed_notifies_and_skips_post(monkeypatch, mocked):
 
 def test_dry_run_does_not_post_or_log(monkeypatch, mocked, capsys):
     _set_match(monkeypatch, [_ok_match()])
+    gen_mock = MagicMock(return_value=GenerateResult(status="ok", post_text="DRY", attempts=1))
     monkeypatch.setattr(
         "daily_bluesky_post.orchestrator.claude_runner.generate_post",
-        lambda **kw: GenerateResult(status="ok", post_text="DRY", attempts=1),
+        gen_mock,
     )
     monkeypatch.setattr(
         "daily_bluesky_post.orchestrator.ogp_fetcher.fetch",
@@ -138,6 +139,7 @@ def test_dry_run_does_not_post_or_log(monkeypatch, mocked, capsys):
     assert "DRY" in capsys.readouterr().out
     assert mocked["log_path"].read_text() == ""
     mocked["commit"].assert_not_called()
+    gen_mock.assert_called_once()  # dry-run でも生成は走る(プレビュー目的)
 
 
 def test_bluesky_auth_error_notifies_and_stops_remaining(monkeypatch, mocked):
@@ -161,3 +163,30 @@ def test_bluesky_auth_error_notifies_and_stops_remaining(monkeypatch, mocked):
     assert posted.call_count == 1
     # 認証失敗通知が少なくとも 1 回
     assert mocked["notify"].call_count >= 1
+    # AuthError の通知本文に actionable な指示が含まれること(回帰防止)
+    notify_body = mocked["notify"].call_args.kwargs["body"]
+    assert "App Password" in notify_body
+
+
+def test_multiple_matches_all_succeed(monkeypatch, mocked):
+    """2 件マッチ → 2 件とも投稿 + ログに 2 行 + commit 2 回"""
+    _set_match(monkeypatch, [_ok_match("a"), _ok_match("b")])
+    monkeypatch.setattr(
+        "daily_bluesky_post.orchestrator.claude_runner.generate_post",
+        lambda **kw: GenerateResult(status="ok", post_text="...", attempts=1),
+    )
+    monkeypatch.setattr(
+        "daily_bluesky_post.orchestrator.ogp_fetcher.fetch",
+        lambda url: OGP("T", "D", None),
+    )
+    posted = MagicMock(side_effect=["at://a", "at://b"])
+    monkeypatch.setattr("daily_bluesky_post.orchestrator.bluesky_client.post", posted)
+
+    rc = orchestrator.run(today=date(2026, 5, 14), dry_run=False)
+    assert rc == 0
+    assert posted.call_count == 2
+    log_content = mocked["log_path"].read_text()
+    assert log_content.count("\n") == 2  # 2 行
+    assert '"slug": "a"' in log_content
+    assert '"slug": "b"' in log_content
+    assert mocked["commit"].call_count == 2
