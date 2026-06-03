@@ -89,7 +89,7 @@ const breadcrumbJsonLd = {
 const themeColor = CATEGORY_COLOR[event.data.category] ?? '#777';
 ---
 
-<BaseLayout title={title} description={description} jsonLd={[eventJsonLd, breadcrumbJsonLd]}>
+<BaseLayout title={title} description={description} ogImage={event.data.heroImage?.src} jsonLd={[eventJsonLd, breadcrumbJsonLd]}>
   <nav class="breadcrumb" aria-label="パンくず">
     <a href="/">トップ</a>
     <span aria-hidden="true">/</span>
