@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import time
 
+import httpx
 from atproto import Client, models
 from atproto_client.exceptions import NetworkError, UnauthorizedError
 
@@ -34,7 +35,9 @@ def post(*, handle: str, password: str, text: str, link_url: str, ogp: OGP) -> s
     try:
         client.login(handle, password)
     except UnauthorizedError as e:
-        raise AuthError(f"Bluesky 認証失敗: {e}") from e
+        raise AuthError(
+            f"Bluesky 認証失敗 (handle={handle}): App Password が無効か期限切れ"
+        ) from e
 
     embed = _build_external_embed(client, link_url, ogp)
 
@@ -59,8 +62,9 @@ def _build_external_embed(client: Client, link_url: str, ogp: OGP):
             data, _mime = ogp_fetcher.download_image(ogp.image_url)
             uploaded = client.upload_blob(data)
             thumb = uploaded.blob
-        except Exception:
-            # 画像取得失敗時は thumb なしで投稿継続
+        except (httpx.HTTPError, NetworkError) as e:
+            # 画像取得・upload 失敗時は thumb なしで投稿継続(理由をログに残す)
+            print(f"[bluesky_client] thumb fallback due to {type(e).__name__}: {e}")
             thumb = None
 
     external = models.AppBskyEmbedExternal.External(

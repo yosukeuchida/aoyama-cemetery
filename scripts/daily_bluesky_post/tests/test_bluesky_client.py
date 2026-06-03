@@ -70,7 +70,7 @@ def test_post_retries_once_on_network_error(monkeypatch):
     post_record = MagicMock(uri="at://retry")
     fake.send_post.side_effect = [NetworkError(), post_record]
     monkeypatch.setattr(bluesky_client, "_make_client", lambda: fake)
-    monkeypatch.setattr("time.sleep", lambda s: None)
+    monkeypatch.setattr(bluesky_client.time, "sleep", lambda s: None)
 
     ogp = OGP(None, None, None)
     uri = bluesky_client.post(
@@ -78,6 +78,29 @@ def test_post_retries_once_on_network_error(monkeypatch):
     )
     assert uri == "at://retry"
     assert fake.send_post.call_count == 2
+
+
+def test_post_falls_back_to_no_thumb_on_image_download_error(monkeypatch):
+    """画像取得が HTTPError で失敗しても thumb=None で投稿継続できる"""
+    import httpx
+    fake, _ = _fake_atproto_client()
+    monkeypatch.setattr(bluesky_client, "_make_client", lambda: fake)
+
+    def boom(url):
+        raise httpx.HTTPError("download failed")
+
+    monkeypatch.setattr(
+        "daily_bluesky_post.bluesky_client.ogp_fetcher.download_image", boom
+    )
+    ogp = OGP(title="t", description="d", image_url="https://x/y.jpg")
+    bluesky_client.post(
+        handle="a", password="x", text="t", link_url="https://x", ogp=ogp,
+    )
+    fake.upload_blob.assert_not_called()
+    fake.send_post.assert_called_once()
+    external = fake.send_post.call_args.kwargs["embed"].external
+    assert external.thumb is None
+    assert external.title == "t"
 
 
 def test_post_raises_auth_error_on_login_401(monkeypatch):
