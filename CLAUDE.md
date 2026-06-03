@@ -143,6 +143,8 @@ launchd 08:05 JST → run.sh → orchestrator.py
 - subagent 定義(`.claude/agents/aoyama-post-writer.md` / `aoyama-fact-checker.md`)は frontmatter のみを根拠にする厳格ルールを保つこと。本文に「ハッシュタグ禁止」「絵文字禁止」を勝手に外さない(サイト全体の重厚トーンと一致させるため)
 - `logs/posted.jsonl` は git commit する(idempotency + 履歴保存)。push は別運用
 - 投稿失敗の事後対応: Discord 通知の生成文を参考に、本物の Bluesky 画面から手動投稿 or skip 判断
+- Bluesky **facet の index は UTF-8 byte offset** で計算する(grapheme/char ではない)。本文 URL を clickable にする際、日本語が混在すると 1 文字 = 3 byte になるため、`text.encode("utf-8").rfind(url.encode("utf-8"))` で byte 位置を計算しないと facet が誤位置に貼られてリンクが効かなかったり別文字を巻き込んだりする(2026-06-03 facet 実装時に確立、`bluesky_client._build_url_facets` 参照)。将来 atproto 互換の AT Protocol サービス(Mastodon の AT 移行版や類似 SNS)に展開する際も同じ前提
+- atproto SDK の embed.external.thumb は **pydantic strict validation**、テストで MagicMock を blob として渡すと `ValidationError` で弾かれる。テスト fixture には本物の `BlobRef(mimeType=..., size=..., ref=b"...")` インスタンスを用意する(2026-06-03 Task 6 で顕在化、`test_bluesky_client.py` の `_fake_atproto_client` 参照)
 - pytest: `PYTHONPATH=scripts arch -arm64 scripts/daily_bluesky_post/.venv/bin/pytest scripts/daily_bluesky_post/tests/`
 
 ## events の personSlugs 記載基準(直接関与ファースト)
