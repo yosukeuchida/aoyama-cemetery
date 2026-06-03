@@ -169,6 +169,63 @@ def test_bluesky_auth_error_notifies_and_stops_remaining(monkeypatch, mocked):
     assert "App Password" in notify_body
 
 
+def test_long_post_triggers_regenerate(monkeypatch, mocked):
+    """1 回目 350 chars → regenerate で 250 chars → 投稿"""
+    _set_match(monkeypatch, [_ok_match()])
+    long_text = "x" * 350
+    short_text = "y" * 250
+    gen_mock = MagicMock(return_value=GenerateResult(status="ok", post_text=long_text, attempts=1))
+    regen_mock = MagicMock(return_value=GenerateResult(status="ok", post_text=short_text, attempts=1))
+    monkeypatch.setattr(
+        "daily_bluesky_post.orchestrator.claude_runner.generate_post", gen_mock,
+    )
+    monkeypatch.setattr(
+        "daily_bluesky_post.orchestrator.claude_runner.regenerate_shorter", regen_mock,
+    )
+    monkeypatch.setattr(
+        "daily_bluesky_post.orchestrator.ogp_fetcher.fetch",
+        lambda url: OGP("T", "D", None),
+    )
+    posted = MagicMock(return_value="at://x/y")
+    monkeypatch.setattr("daily_bluesky_post.orchestrator.bluesky_client.post", posted)
+
+    rc = orchestrator.run(today=date(2026, 5, 14), dry_run=False)
+    assert rc == 0
+    gen_mock.assert_called_once()
+    regen_mock.assert_called_once()
+    posted.assert_called_once()
+    assert posted.call_args.kwargs["text"] == short_text
+    # regenerate に previous_text と previous_length が渡されたか
+    regen_kwargs = regen_mock.call_args.kwargs
+    assert regen_kwargs["previous_text"] == long_text
+    assert regen_kwargs["previous_length"] == 350
+
+
+def test_long_post_still_too_long_notifies_and_skips(monkeypatch, mocked):
+    """1 回目 350 → regenerate 320(まだ超過)→ Discord 通知 + skip"""
+    _set_match(monkeypatch, [_ok_match()])
+    long1 = "x" * 350
+    long2 = "y" * 320
+    monkeypatch.setattr(
+        "daily_bluesky_post.orchestrator.claude_runner.generate_post",
+        MagicMock(return_value=GenerateResult(status="ok", post_text=long1, attempts=1)),
+    )
+    monkeypatch.setattr(
+        "daily_bluesky_post.orchestrator.claude_runner.regenerate_shorter",
+        MagicMock(return_value=GenerateResult(status="ok", post_text=long2, attempts=1)),
+    )
+    posted = MagicMock()
+    monkeypatch.setattr("daily_bluesky_post.orchestrator.bluesky_client.post", posted)
+
+    rc = orchestrator.run(today=date(2026, 5, 14), dry_run=False)
+    assert rc == 0
+    posted.assert_not_called()
+    mocked["notify"].assert_called_once()
+    call_kwargs = mocked["notify"].call_args.kwargs
+    title = call_kwargs.get("title", "")
+    assert "文字数" in title or "オーバー" in title
+
+
 def test_multiple_matches_all_succeed(monkeypatch, mocked):
     """2 件マッチ → 2 件とも投稿 + ログに 2 行 + commit 2 回"""
     _set_match(monkeypatch, [_ok_match("a"), _ok_match("b")])

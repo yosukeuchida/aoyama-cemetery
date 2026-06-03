@@ -72,19 +72,49 @@ def _child_env() -> Dict[str, str]:
     return env
 
 
-def generate_post(
+def _build_regenerate_prompt(
     *,
     kind: str,
     url: str,
     anniversary_year: int,
     frontmatter: Dict[str, Any],
-    body: str = "",
-    timeout_sec: int = 180,
-) -> GenerateResult:
-    prompt = _build_prompt(
-        kind=kind, url=url, anniversary_year=anniversary_year, frontmatter=frontmatter, body=body,
-    )
+    body: str,
+    previous_text: str,
+    previous_length: int,
+    target_length: int,
+) -> str:
+    fm_yaml = yaml.safe_dump(frontmatter, allow_unicode=True, sort_keys=False)
+    body_indented = "\n".join("  " + line for line in body.splitlines()) if body else "  (なし)"
+    return f"""前回生成した投稿文が {previous_length} graphemes と長すぎた(目標は {target_length} grapheme 以内、Bluesky 300 制限の安全マージン)。
+本文を圧縮して再生成してほしい。事実は frontmatter と body の範囲内のみ、トーンは aoyama-post-writer subagent の指示書通り(常体・ストーリー性・現代接続)。
 
+## 前回生成した文(長すぎたもの)
+{previous_text}
+
+## 入力
+kind: {kind}
+url: {url}
+anniversary_year: {anniversary_year}
+frontmatter:
+{fm_yaml}
+body: |
+{body_indented}
+
+## 手順
+1. aoyama-post-writer subagent に上記情報 + 「{target_length} grapheme 以内に圧縮」指示で再生成
+2. aoyama-fact-checker subagent で critique
+3. critique fail → 再生成 1 回まで
+4. それでも fail → status="failed"
+
+## 出力
+{{"status": "ok", "post_text": "<再生成された投稿本文>", "attempts": <1または2>}}
+または
+{{"status": "failed", "attempts": 2, "violations": ["..."], "last_text": "<最後の生成文>"}}
+"""
+
+
+def _run_claude(prompt: str, timeout_sec: int) -> GenerateResult:
+    """claude -p subprocess 実行 + JSON 抽出。generate_post / regenerate_shorter 共通。"""
     # L0 知見: --allowed-tools は -p より前(variadic flag が prompt を吸う問題)
     cmd = [
         _claude_bin(),
@@ -129,6 +159,47 @@ def generate_post(
         violations=payload.get("violations", []),
         last_text=payload.get("last_text", ""),
     )
+
+
+def generate_post(
+    *,
+    kind: str,
+    url: str,
+    anniversary_year: int,
+    frontmatter: Dict[str, Any],
+    body: str = "",
+    timeout_sec: int = 180,
+) -> GenerateResult:
+    prompt = _build_prompt(
+        kind=kind, url=url, anniversary_year=anniversary_year, frontmatter=frontmatter, body=body,
+    )
+    return _run_claude(prompt, timeout_sec=timeout_sec)
+
+
+def regenerate_shorter(
+    *,
+    kind: str,
+    url: str,
+    anniversary_year: int,
+    frontmatter: Dict[str, Any],
+    body: str,
+    previous_text: str,
+    previous_length: int,
+    target_length: int = 280,
+    timeout_sec: int = 180,
+) -> GenerateResult:
+    """previous_text が長すぎたので短く再生成。
+
+    previous_text と previous_length を post-writer に feedback して、
+    target_length 以内で再生成させる。
+    """
+    prompt = _build_regenerate_prompt(
+        kind=kind, url=url, anniversary_year=anniversary_year,
+        frontmatter=frontmatter, body=body,
+        previous_text=previous_text, previous_length=previous_length,
+        target_length=target_length,
+    )
+    return _run_claude(prompt, timeout_sec=timeout_sec)
 
 
 def _extract_json(text: str) -> Optional[Dict[str, Any]]:

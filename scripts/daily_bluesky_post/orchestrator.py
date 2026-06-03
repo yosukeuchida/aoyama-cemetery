@@ -57,8 +57,43 @@ def run(*, today: date, dry_run: bool = False) -> int:
             _notify_generation_failure(secrets.discord_webhook_url, m, result)
             continue
 
+        # 文字数ガード(Bluesky 300 制限の安全マージン 290)
+        BLUESKY_LIMIT = 300
+        TARGET_LIMIT = 290
+        text_len = len(result.post_text)
+        if text_len > BLUESKY_LIMIT:
+            logger.info(
+                "post too long (%d/%d), regenerating shorter for %s",
+                text_len, BLUESKY_LIMIT, m.slug,
+            )
+            result = claude_runner.regenerate_shorter(
+                kind=m.kind,
+                url=m.url,
+                anniversary_year=m.anniversary_year,
+                frontmatter=m.frontmatter,
+                body=m.body,
+                previous_text=result.post_text,
+                previous_length=text_len,
+                target_length=TARGET_LIMIT,
+            )
+            if result.status != "ok":
+                _notify_generation_failure(secrets.discord_webhook_url, m, result)
+                continue
+            text_len = len(result.post_text)
+            if text_len > BLUESKY_LIMIT:
+                notifier.notify(
+                    webhook_url=secrets.discord_webhook_url,
+                    title="投稿文の文字数オーバー(再生成後も)",
+                    body=(
+                        f"slug={m.slug} ({m.kind})\n"
+                        f"長さ: {text_len}/{BLUESKY_LIMIT}\n"
+                        f"text:\n{result.post_text}"
+                    ),
+                )
+                continue
+
         if dry_run:
-            print(f"--- DRY RUN: {m.slug} ---")
+            print(f"--- DRY RUN: {m.slug} ({text_len} chars) ---")
             print(result.post_text)
             print()
             continue

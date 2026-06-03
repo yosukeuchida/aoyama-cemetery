@@ -145,6 +145,33 @@ def test_generate_post_includes_body_in_prompt(monkeypatch):
     assert "ABCDEF12345" in captured_prompts[0]
 
 
+def test_regenerate_shorter_passes_previous_text_in_prompt(monkeypatch):
+    """regenerate_shorter は previous_text と target_length を prompt に組み込んで claude に渡す"""
+    captured_prompts = []
+
+    def fake_run(cmd, *a, **kw):
+        captured_prompts.append(cmd[-1])
+        return _run_result(json.dumps({"status": "ok", "post_text": "短縮版", "attempts": 1}))
+
+    monkeypatch.setattr("subprocess.run", fake_run)
+    result = claude_runner.regenerate_shorter(
+        kind="person",
+        url="https://x/y",
+        anniversary_year=148,
+        frontmatter={"name": "X"},
+        body="本文",
+        previous_text="UNIQUE_PREVIOUS_PHRASE_98765",
+        previous_length=350,
+        target_length=285,
+    )
+    assert result.status == "ok"
+    assert result.post_text == "短縮版"
+    prompt = captured_prompts[0]
+    assert "UNIQUE_PREVIOUS_PHRASE_98765" in prompt
+    assert "350" in prompt
+    assert "285" in prompt
+
+
 def test_extract_json_returns_error_on_unknown_status(monkeypatch):
     """旧形式互換削除: status='maybe' のような未知値は error"""
     fake_output = '{"status": "maybe", "post_text": "x"}'
