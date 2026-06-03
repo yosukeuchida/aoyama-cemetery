@@ -86,7 +86,13 @@ def _build_regenerate_prompt(
     fm_yaml = yaml.safe_dump(frontmatter, allow_unicode=True, sort_keys=False)
     body_indented = "\n".join("  " + line for line in body.splitlines()) if body else "  (なし)"
     return f"""前回生成した投稿文が {previous_length} graphemes と長すぎた(目標は {target_length} grapheme 以内、Bluesky 300 制限の安全マージン)。
-本文を圧縮して再生成してほしい。事実は frontmatter と body の範囲内のみ、トーンは aoyama-post-writer subagent の指示書通り(常体・ストーリー性・現代接続)。
+**構成は維持したまま本文を圧縮して再生成**してほしい。
+
+維持すべき構成(削除禁止):
+- 1 行目のタイトル行(「【今日この日】◯◯(西暦)」または「【本日の命日】◯◯(西暦-西暦)」)
+- 最終行の URL
+
+圧縮対象は本文段落のみ。事実は frontmatter と body の範囲内のみ、トーンは aoyama-post-writer subagent の指示書通り(常体・ストーリー性・現代接続)。
 
 ## 前回生成した文(長すぎたもの)
 {previous_text}
@@ -168,7 +174,7 @@ def generate_post(
     anniversary_year: int,
     frontmatter: Dict[str, Any],
     body: str = "",
-    timeout_sec: int = 180,
+    timeout_sec: int = 300,
 ) -> GenerateResult:
     prompt = _build_prompt(
         kind=kind, url=url, anniversary_year=anniversary_year, frontmatter=frontmatter, body=body,
@@ -186,7 +192,7 @@ def regenerate_shorter(
     previous_text: str,
     previous_length: int,
     target_length: int = 280,
-    timeout_sec: int = 180,
+    timeout_sec: int = 300,
 ) -> GenerateResult:
     """previous_text が長すぎたので短く再生成。
 

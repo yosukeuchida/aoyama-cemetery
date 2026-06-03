@@ -172,6 +172,27 @@ def test_regenerate_shorter_passes_previous_text_in_prompt(monkeypatch):
     assert "285" in prompt
 
 
+def test_regenerate_prompt_instructs_to_keep_title_and_url(monkeypatch):
+    """regenerate prompt が title 行と URL 行の維持を明示すること"""
+    captured_prompts = []
+
+    def fake_run(cmd, *a, **kw):
+        captured_prompts.append(cmd[-1])  # 最後が prompt
+        return _run_result(json.dumps({"status": "ok", "post_text": "x", "attempts": 1}))
+
+    monkeypatch.setattr("subprocess.run", fake_run)
+
+    claude_runner.regenerate_shorter(
+        kind="event", url="https://x/y", anniversary_year=148,
+        frontmatter={"title": "X"}, body="本文",
+        previous_text="long text", previous_length=320, target_length=290,
+    )
+    prompt = captured_prompts[0]
+    assert "タイトル行" in prompt
+    assert "URL" in prompt
+    assert "削除禁止" in prompt or "維持" in prompt
+
+
 def test_extract_json_returns_error_on_unknown_status(monkeypatch):
     """旧形式互換削除: status='maybe' のような未知値は error"""
     fake_output = '{"status": "maybe", "post_text": "x"}'
