@@ -12,9 +12,11 @@ CONFIG_DIR="$HOME/.config/aoyama-cemetery"
 
 if [[ ! -d "$VENV" ]]; then
   echo "🔧 arm64 venv を作成: $VENV"
+  trap 'rm -rf "$VENV"' ERR
   arch -arm64 /usr/bin/python3 -m venv "$VENV"
   arch -arm64 "$VENV/bin/pip" install --upgrade pip
   arch -arm64 "$VENV/bin/pip" install -r "$SCRIPT_DIR/requirements.txt"
+  trap - ERR
 fi
 
 ACTUAL_ARCH=$(arch -arm64 "$VENV/bin/python3" -c 'import platform; print(platform.machine())')

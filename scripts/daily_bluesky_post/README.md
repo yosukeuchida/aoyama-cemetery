@@ -22,7 +22,7 @@
 ## テスト
 
 ```
-arch -arm64 scripts/daily_bluesky_post/.venv/bin/pytest scripts/daily_bluesky_post/tests/
+PYTHONPATH=scripts arch -arm64 scripts/daily_bluesky_post/.venv/bin/pytest scripts/daily_bluesky_post/tests/
 ```
 
 仕様: `docs/superpowers/specs/2026-06-03-bluesky-auto-post-design.md`
