@@ -40,10 +40,14 @@ def post(*, handle: str, password: str, text: str, link_url: str, ogp: OGP) -> s
         ) from e
 
     embed = _build_external_embed(client, link_url, ogp)
+    facets = _build_url_facets(text, link_url)
 
     for attempt in range(2):
         try:
-            record = client.send_post(text=text, embed=embed)
+            if facets:
+                record = client.send_post(text=text, embed=embed, facets=facets)
+            else:
+                record = client.send_post(text=text, embed=embed)
             return record.uri
         except NetworkError:
             if attempt == 0:
@@ -53,6 +57,31 @@ def post(*, handle: str, password: str, text: str, link_url: str, ogp: OGP) -> s
 
     # ループを抜けるのは raise されるパスのみ、ここには到達しない
     raise RuntimeError("unreachable")
+
+
+def _build_url_facets(text: str, link_url: str):
+    """text 中の link_url(最後の出現)に対する facet リストを返す。
+
+    Bluesky の facet は UTF-8 byte offset を使うため、bytes 化してから索引する。
+    URL が text 中に無ければ None。
+    """
+    text_bytes = text.encode("utf-8")
+    url_bytes = link_url.encode("utf-8")
+    byte_start = text_bytes.rfind(url_bytes)
+    if byte_start == -1:
+        return None
+    byte_end = byte_start + len(url_bytes)
+    return [
+        models.AppBskyRichtextFacet.Main(
+            index=models.AppBskyRichtextFacet.ByteSlice(
+                byte_start=byte_start,
+                byte_end=byte_end,
+            ),
+            features=[
+                models.AppBskyRichtextFacet.Link(uri=link_url),
+            ],
+        )
+    ]
 
 
 def _build_external_embed(client: Client, link_url: str, ogp: OGP):

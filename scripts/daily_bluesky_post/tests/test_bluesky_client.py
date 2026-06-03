@@ -103,6 +103,57 @@ def test_post_falls_back_to_no_thumb_on_image_download_error(monkeypatch):
     assert external.title == "t"
 
 
+def test_post_builds_url_facet_when_url_in_text(monkeypatch):
+    """text 末尾の URL が facet として送信されること(byte offset 計算込み)"""
+    fake, _ = _fake_atproto_client()
+    monkeypatch.setattr(bluesky_client, "_make_client", lambda: fake)
+
+    text = (
+        "【本日の命日】大久保 利通\n\n本文…\n\n"
+        "https://aoyama-cemetery.pages.dev/people/okubo-toshimichi"
+    )
+    url = "https://aoyama-cemetery.pages.dev/people/okubo-toshimichi"
+
+    bluesky_client.post(
+        handle="a",
+        password="x",
+        text=text,
+        link_url=url,
+        ogp=OGP(None, None, None),
+    )
+    kwargs = fake.send_post.call_args.kwargs
+    assert "facets" in kwargs
+    facets = kwargs["facets"]
+    assert len(facets) == 1
+    f = facets[0]
+    expected_byte_start = text.encode("utf-8").index(url.encode("utf-8"))
+    expected_byte_end = expected_byte_start + len(url.encode("utf-8"))
+    bs = f.index
+    assert bs.byte_start == expected_byte_start
+    assert bs.byte_end == expected_byte_end
+    assert len(f.features) == 1
+    assert f.features[0].uri == url
+
+
+def test_post_omits_facets_when_url_not_in_text(monkeypatch):
+    """text 中に URL がなければ facets は渡されない"""
+    fake, _ = _fake_atproto_client()
+    monkeypatch.setattr(bluesky_client, "_make_client", lambda: fake)
+
+    text = "URL なしの投稿テキスト"
+    url = "https://aoyama-cemetery.pages.dev/people/okubo-toshimichi"
+
+    bluesky_client.post(
+        handle="a",
+        password="x",
+        text=text,
+        link_url=url,
+        ogp=OGP(None, None, None),
+    )
+    kwargs = fake.send_post.call_args.kwargs
+    assert "facets" not in kwargs or not kwargs.get("facets")
+
+
 def test_post_raises_auth_error_on_login_401(monkeypatch):
     fake, _ = _fake_atproto_client()
     fake.login.side_effect = UnauthorizedError()
