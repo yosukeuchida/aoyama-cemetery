@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>jp.aoyama-cemetery.daily-post</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/uchidayousuke/workspace/personal/aoyama-cemetery/scripts/daily_bluesky_post/run.sh</string>
+    </array>
+
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>8</integer>
+        <key>Minute</key>
+        <integer>5</integer>
+    </dict>
+
+    <!-- Mac 起動時に即発火しない(スリープからの catch-up は別キー) -->
+    <key>RunAtLoad</key>
+    <false/>
+
+    <key>StandardOutPath</key>
+    <string>/Users/uchidayousuke/workspace/personal/aoyama-cemetery/logs/launchd.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/uchidayousuke/workspace/personal/aoyama-cemetery/logs/launchd.err.log</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+    </dict>
+</dict>
+</plist>
