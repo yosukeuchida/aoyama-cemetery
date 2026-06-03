@@ -13,6 +13,7 @@ import json
 import os
 import shutil
 import subprocess
+import sys
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 
@@ -95,25 +96,26 @@ def generate_post(
             timeout=timeout_sec,
         )
     except subprocess.TimeoutExpired:
-        return GenerateResult(status="error", error="claude -p timed out")
+        msg = f"claude -p timed out after {timeout_sec}s"
+        print(f"[claude_runner] error: {msg}", file=sys.stderr)
+        return GenerateResult(status="error", error=msg)
 
     if proc.returncode != 0:
-        return GenerateResult(
-            status="error",
-            error=f"claude exit {proc.returncode}: {proc.stderr[:500]}",
-        )
+        msg = f"claude exit {proc.returncode}: {proc.stderr[:500]}"
+        print(f"[claude_runner] error: {msg}", file=sys.stderr)
+        return GenerateResult(status="error", error=msg)
 
     payload = _extract_json(proc.stdout)
     if payload is None:
-        return GenerateResult(
-            status="error",
-            error=f"JSON not found in output: {proc.stdout[-500:]}",
-        )
+        msg = f"JSON not found in output: {proc.stdout[-500:]}"
+        print(f"[claude_runner] error: {msg}", file=sys.stderr)
+        return GenerateResult(status="error", error=msg)
 
     status = payload.get("status")
     if status not in ("ok", "failed"):
-        # 旧形式互換: post_text があれば ok 扱い
-        status = "ok" if "post_text" in payload else "error"
+        msg = f"unknown status in JSON payload: {status!r}"
+        print(f"[claude_runner] error: {msg}", file=sys.stderr)
+        return GenerateResult(status="error", error=msg)
 
     return GenerateResult(
         status=status,
@@ -125,12 +127,29 @@ def generate_post(
 
 
 def _extract_json(text: str) -> Optional[Dict[str, Any]]:
-    """stdout の末尾に近い行から JSON object を探す"""
-    for line in reversed(text.splitlines()):
-        line = line.strip()
-        if line.startswith("{") and line.endswith("}"):
-            try:
-                return json.loads(line)
-            except json.JSONDecodeError:
-                continue
+    """stdout 末尾から greedy に JSON object を抽出。改行入り pretty-print にも対応。
+
+    1. 末尾の `}` を探し、対応する `{` まで遡って json.loads を試す
+    2. parse 失敗時は更にひとつ前の `{` まで遡って再試行
+    3. 全 candidate 失敗で None
+    """
+    end = text.rfind("}")
+    if end == -1:
+        return None
+    # 末尾 `}` 以降は無視
+    s = text[: end + 1]
+    # 候補となる `{` 位置を後ろから列挙
+    starts = []
+    pos = s.rfind("{")
+    while pos != -1:
+        starts.append(pos)
+        pos = s.rfind("{", 0, pos)
+    for start in starts:
+        candidate = s[start : end + 1]
+        try:
+            obj = json.loads(candidate)
+            if isinstance(obj, dict):
+                return obj
+        except json.JSONDecodeError:
+            continue
     return None

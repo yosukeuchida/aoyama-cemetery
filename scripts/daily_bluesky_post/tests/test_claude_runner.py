@@ -72,8 +72,9 @@ def test_command_places_allowed_tools_before_p_flag(monkeypatch):
     claude_runner.generate_post(
         kind="person", url="https://x/y", anniversary_year=0, frontmatter={},
     )
-    if "--allowed-tools" in captured_cmd:
-        assert captured_cmd.index("--allowed-tools") < captured_cmd.index("-p")
+    assert "--allowed-tools" in captured_cmd, "L0 知見: --allowed-tools 不在"
+    assert "-p" in captured_cmd
+    assert captured_cmd.index("--allowed-tools") < captured_cmd.index("-p")
 
 
 def test_returncode_nonzero_returns_error_status(monkeypatch):
@@ -100,3 +101,40 @@ def test_timeout_returns_error_status(monkeypatch):
     )
     assert result.status == "error"
     assert "time" in result.error.lower()
+
+
+def test_extract_json_handles_multiline_pretty_print(monkeypatch):
+    """改行入り pretty-print JSON も取れる"""
+    fake_output = '''Some prefix line
+{
+  "status": "ok",
+  "post_text": "x",
+  "attempts": 1
+}
+'''
+    monkeypatch.setattr("subprocess.run", lambda *a, **kw: _run_result(fake_output))
+    result = claude_runner.generate_post(
+        kind="person", url="https://x/y", anniversary_year=0, frontmatter={},
+    )
+    assert result.status == "ok"
+    assert result.post_text == "x"
+
+
+def test_extract_json_returns_error_on_no_json(monkeypatch):
+    monkeypatch.setattr("subprocess.run", lambda *a, **kw: _run_result("not a json at all"))
+    result = claude_runner.generate_post(
+        kind="person", url="https://x/y", anniversary_year=0, frontmatter={},
+    )
+    assert result.status == "error"
+    assert "JSON not found" in result.error
+
+
+def test_extract_json_returns_error_on_unknown_status(monkeypatch):
+    """旧形式互換削除: status='maybe' のような未知値は error"""
+    fake_output = '{"status": "maybe", "post_text": "x"}'
+    monkeypatch.setattr("subprocess.run", lambda *a, **kw: _run_result(fake_output))
+    result = claude_runner.generate_post(
+        kind="person", url="https://x/y", anniversary_year=0, frontmatter={},
+    )
+    assert result.status == "error"
+    assert "unknown status" in result.error
