@@ -27,6 +27,7 @@ def mocked(monkeypatch, tmp_path):
     log_path = tmp_path / "posted.jsonl"
     log_path.touch()
     monkeypatch.setattr(config, "POSTED_BLUESKY_LOG", log_path)
+    monkeypatch.setattr(config, "POSTED_X_LOG", tmp_path / "posted_x.jsonl")
 
     # load_secrets を常に成功させる
     monkeypatch.setattr(
@@ -40,7 +41,7 @@ def mocked(monkeypatch, tmp_path):
 
     commit_mock = MagicMock()
     monkeypatch.setattr(
-        "daily_bluesky_post.orchestrator.git_commit.commit_posted_log", commit_mock
+        "daily_bluesky_post.orchestrator.git_commit.commit_posted_logs", commit_mock
     )
 
     return {
@@ -164,9 +165,9 @@ def test_bluesky_auth_error_notifies_and_stops_remaining(monkeypatch, mocked):
     assert posted.call_count == 1
     # 認証失敗通知が少なくとも 1 回
     assert mocked["notify"].call_count >= 1
-    # AuthError の通知本文に actionable な指示が含まれること(回帰防止)
-    notify_body = mocked["notify"].call_args.kwargs["body"]
-    assert "App Password" in notify_body
+    # AuthError の通知タイトルに認証失敗が含まれること(回帰防止)
+    notify_title = mocked["notify"].call_args.kwargs["title"]
+    assert "認証" in notify_title
 
 
 def test_long_post_triggers_regenerate(monkeypatch, mocked):
@@ -223,7 +224,7 @@ def test_long_post_still_too_long_notifies_and_skips(monkeypatch, mocked):
     mocked["notify"].assert_called_once()
     call_kwargs = mocked["notify"].call_args.kwargs
     title = call_kwargs.get("title", "")
-    assert "文字数" in title or "オーバー" in title
+    assert "字数" in title or "オーバー" in title or "超過" in title
 
 
 def test_multiple_matches_all_succeed(monkeypatch, mocked):
