@@ -173,13 +173,15 @@ def _process_x(m, today, secrets, entries, dry_run, x_client) -> str:
             agent_name="aoyama-post-writer-x",
             fact_checker_name="aoyama-fact-checker-x",
         )
-        if result.status != "ok" or x_text.x_weighted_length(result.post_text) > x_text.X_LIMIT:
+        final_wl = x_text.x_weighted_length(result.post_text) if result.status == "ok" else wl
+        if result.status != "ok" or final_wl > x_text.X_LIMIT:
             notifier.notify(
                 webhook_url=secrets.discord_webhook_url,
                 title="[x] 字数超過",
-                body=f"slug={m.slug}\nweighted={wl}\ntext:\n{result.post_text}",
+                body=f"slug={m.slug}\nweighted={final_wl}\ntext:\n{result.post_text}",
             )
             return "length_fail"
+        wl = final_wl  # for downstream dry_run print
 
     if dry_run:
         print(f"--- X DRY: {m.slug} ({wl} units) ---\n{result.post_text}\n")
@@ -217,6 +219,13 @@ def _process_x(m, today, secrets, entries, dry_run, x_client) -> str:
                 webhook_url=secrets.discord_webhook_url,
                 title="[x] 投稿失敗",
                 body=f"slug={m.slug}\nerror={e}\ntext=\n{result.post_text}",
+            )
+            return "fail"
+        except Exception as e:  # noqa: BLE001
+            notifier.notify(
+                webhook_url=secrets.discord_webhook_url,
+                title="[x] 投稿失敗(想定外)",
+                body=f"slug={m.slug}\nerror={type(e).__name__}: {e}\ntext=\n{result.post_text}",
             )
             return "fail"
     finally:

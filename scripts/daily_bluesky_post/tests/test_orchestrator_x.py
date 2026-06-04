@@ -111,7 +111,20 @@ def test_x_rate_limit_disables_rest(env, monkeypatch):
 def test_dry_run_does_not_post_either(env, monkeypatch):
     fake_x = _patch_all(monkeypatch)
     fake_bsky = MagicMock()
+    fake_commit = MagicMock()
     monkeypatch.setattr(orchestrator.bluesky_client, "post", fake_bsky)
+    monkeypatch.setattr(orchestrator.git_commit, "commit_posted_logs", fake_commit)
     orchestrator.run(today=date(2026, 5, 14), dry_run=True)
     fake_bsky.assert_not_called()
     fake_x.post.assert_not_called()
+    fake_commit.assert_not_called()
+
+
+def test_x_generic_exception_does_not_crash_run(env, monkeypatch):
+    matches = [_mk_match("a"), _mk_match("b")]
+    fake_x = _patch_all(monkeypatch, match_result=matches,
+                        x_exc=OSError("network down"))
+    rc = orchestrator.run(today=date(2026, 5, 14), dry_run=False)
+    assert rc == 0
+    # generic exception は連鎖 bypass を発火しない(auth/rate のみ)、両 match で X を試行
+    assert fake_x.post.call_count == 2
