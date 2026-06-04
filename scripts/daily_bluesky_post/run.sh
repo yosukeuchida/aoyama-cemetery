@@ -32,6 +32,9 @@ fi
 if [[ -f "$CONFIG_DIR/discord.env" ]]; then
   set -a; source "$CONFIG_DIR/discord.env"; set +a
 fi
+if [[ -f "$CONFIG_DIR/x.env" ]]; then
+  set -a; source "$CONFIG_DIR/x.env"; set +a
+fi
 
 # L0 知見: claude -p 子プロセスに API key を継承させない
 unset ANTHROPIC_API_KEY ANTHROPIC_AUTH_TOKEN
