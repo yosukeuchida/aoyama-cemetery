@@ -28,10 +28,20 @@ class MissingSecretError(RuntimeError):
 
 
 @dataclass(frozen=True)
+class XSecrets:
+    api_key: str
+    api_secret: str
+    access_token: str
+    access_secret: str
+
+
+@dataclass(frozen=True)
 class Secrets:
     bluesky_handle: str
     bluesky_app_password: str
     discord_webhook_url: Optional[str]  # 通知無しでも動作はする
+    x: Optional[XSecrets]
+    x_enabled: bool
 
 
 def load_secrets() -> Secrets:
@@ -42,8 +52,25 @@ def load_secrets() -> Secrets:
             "BLUESKY_HANDLE / BLUESKY_APP_PASSWORD が未設定です。"
             " ~/.config/aoyama-cemetery/bluesky.env を確認してください。"
         )
+
+    x_key = os.environ.get("X_API_KEY")
+    x_secret = os.environ.get("X_API_SECRET")
+    x_token = os.environ.get("X_ACCESS_TOKEN")
+    x_token_secret = os.environ.get("X_ACCESS_SECRET")
+    if x_key and x_secret and x_token and x_token_secret:
+        x_secrets = XSecrets(
+            api_key=x_key, api_secret=x_secret,
+            access_token=x_token, access_secret=x_token_secret,
+        )
+    else:
+        x_secrets = None
+    x_flag = os.environ.get("X_ENABLED", "0") == "1"
+    x_enabled = x_flag and x_secrets is not None
+
     return Secrets(
         bluesky_handle=handle,
         bluesky_app_password=pw,
         discord_webhook_url=os.environ.get("DISCORD_WEBHOOK_URL"),
+        x=x_secrets,
+        x_enabled=x_enabled,
     )

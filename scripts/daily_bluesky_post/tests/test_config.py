@@ -41,3 +41,48 @@ def test_load_secrets_missing_required(monkeypatch):
     monkeypatch.delenv("BLUESKY_APP_PASSWORD", raising=False)
     with pytest.raises(config.MissingSecretError):
         config.load_secrets()
+
+
+def test_load_secrets_includes_x_when_present(monkeypatch):
+    monkeypatch.setenv("BLUESKY_HANDLE", "aoyama-cemetery.bsky.social")
+    monkeypatch.setenv("BLUESKY_APP_PASSWORD", "abcd-1234")
+    monkeypatch.setenv("X_API_KEY", "k")
+    monkeypatch.setenv("X_API_SECRET", "ks")
+    monkeypatch.setenv("X_ACCESS_TOKEN", "t")
+    monkeypatch.setenv("X_ACCESS_SECRET", "ts")
+    monkeypatch.setenv("X_ENABLED", "1")
+    from daily_bluesky_post import config
+    s = config.load_secrets()
+    assert s.x is not None
+    assert s.x.api_key == "k"
+    assert s.x.api_secret == "ks"
+    assert s.x.access_token == "t"
+    assert s.x.access_secret == "ts"
+    assert s.x_enabled is True
+
+
+def test_load_secrets_x_disabled_when_flag_zero(monkeypatch):
+    monkeypatch.setenv("BLUESKY_HANDLE", "h")
+    monkeypatch.setenv("BLUESKY_APP_PASSWORD", "p")
+    monkeypatch.setenv("X_API_KEY", "k")
+    monkeypatch.setenv("X_API_SECRET", "ks")
+    monkeypatch.setenv("X_ACCESS_TOKEN", "t")
+    monkeypatch.setenv("X_ACCESS_SECRET", "ts")
+    monkeypatch.setenv("X_ENABLED", "0")
+    from daily_bluesky_post import config
+    s = config.load_secrets()
+    assert s.x_enabled is False
+
+
+def test_load_secrets_x_disabled_when_credentials_missing(monkeypatch):
+    monkeypatch.setenv("BLUESKY_HANDLE", "h")
+    monkeypatch.setenv("BLUESKY_APP_PASSWORD", "p")
+    monkeypatch.delenv("X_API_KEY", raising=False)
+    monkeypatch.delenv("X_API_SECRET", raising=False)
+    monkeypatch.delenv("X_ACCESS_TOKEN", raising=False)
+    monkeypatch.delenv("X_ACCESS_SECRET", raising=False)
+    monkeypatch.setenv("X_ENABLED", "1")  # flag は ON でも cred 無ければ無効
+    from daily_bluesky_post import config
+    s = config.load_secrets()
+    assert s.x_enabled is False
+    assert s.x is None

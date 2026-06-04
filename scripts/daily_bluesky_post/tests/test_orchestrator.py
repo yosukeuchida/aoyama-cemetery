@@ -31,7 +31,7 @@ def mocked(monkeypatch, tmp_path):
     # load_secrets を常に成功させる
     monkeypatch.setattr(
         "daily_bluesky_post.orchestrator.config.load_secrets",
-        lambda: config.Secrets("h", "p", "https://discord/x"),
+        lambda: config.Secrets("h", "p", "https://discord/x", x=None, x_enabled=False),
     )
 
     # 共通の no-op を差し込めるよう dict で返す
