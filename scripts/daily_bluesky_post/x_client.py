@@ -12,12 +12,15 @@ OAuth 1.0a User Context で
 """
 from __future__ import annotations
 
+import logging
 from pathlib import Path
 from typing import Optional
 
 import tweepy
 
 from daily_bluesky_post.config import XSecrets
+
+logger = logging.getLogger("aoyama-post.x_client")
 
 
 class XAuthError(RuntimeError):
@@ -53,7 +56,7 @@ class XClient:
                 media_ids = [media.media_id_string]
             except tweepy.errors.TweepyException as e:
                 # media upload は best-effort、失敗してもテキストのみで継続
-                print(f"[x_client] media upload failed, falling back to text-only: {e}")
+                logger.warning("media upload failed, falling back to text-only: %s", e)
                 media_ids = None
 
         try:

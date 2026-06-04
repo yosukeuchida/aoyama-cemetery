@@ -110,42 +110,81 @@ admin/
 - 墓写真サムネイルなどスマホ写真を PIL で処理する箇所は `ImageOps.exif_transpose` を必ず通す。iPhone 写真は EXIF orientation(例: 6=90°回転)付きでピクセルは横のまま保存されるため、PIL は無視して横向きになる(ブラウザ・Astro/sharp は EXIF を尊重するので「本番は正しいのに admin だけ横向き」という非対称が起きる)。2026-05-29 に Person_Edit.py の data URI サムネイルで顕在化
 - pytest は `arch -arm64 admin/.venv/bin/pytest admin/tests/`
 
-## Bluesky 自動投稿(`scripts/daily_bluesky_post/`、2026-06-03 新規)
+## SNS 自動投稿(`scripts/daily_bluesky_post/`、2026-06-03 新規 / 2026-06-04 X 並走化)
 
-毎朝 8:05 JST に本日が命日の偉人 / 該当日 events を Bluesky に自動投稿する仕組み。launchd + `claude -p` Max plan 経路 + subagent 2 段(post-writer / fact-checker)構成。
+毎朝 8:05 JST に本日が命日の偉人 / 該当日 events を **Bluesky と X(旧 Twitter)に独立並走で自動投稿** する仕組み。launchd + `claude -p` Max plan 経路 + subagent 2 段 ×2 platform 構成(`aoyama-post-writer` / `aoyama-fact-checker` の Bluesky 用と `-x` サフィックスの X 用)。ディレクトリ名は歴史的経緯で `daily_bluesky_post` のままだが、実態は multi-platform。
 
 ### 起動 / セットアップ
 
-1. シークレット配置(`~/.config/aoyama-cemetery/bluesky.env` と `discord.env`)。フォーマットは `scripts/daily_bluesky_post/README.md` 参照
+1. シークレット配置(`~/.config/aoyama-cemetery/` 配下、フォーマットは `scripts/daily_bluesky_post/README.md` 参照):
+   - `bluesky.env`(必須): `BLUESKY_HANDLE`, `BLUESKY_APP_PASSWORD`
+   - `discord.env`(任意): `DISCORD_WEBHOOK_URL`
+   - `x.env`(X 並走時のみ): `X_API_KEY`, `X_API_SECRET`, `X_ACCESS_TOKEN`, `X_ACCESS_SECRET`, `X_ENABLED=0/1`
 2. dry-run: `scripts/daily_bluesky_post/run.sh --dry-run --today 2026-05-14`
-3. launchd 登録: `infra/launchd/README.md` 手順に従う
+3. launchd 登録: `infra/launchd/README.md` 手順に従う(plist は Bluesky / X 共通、orchestrator が両 platform 担当)
 
 ### アーキテクチャ
 
 ````
-launchd 08:05 JST → run.sh → orchestrator.py
-  → match.py で本日が命日の人物 + 該当日 events を集約(personSlugs 空除外、上限 5)
-  → post_log で既投稿チェック
-  → claude_runner が claude -p で post-writer → fact-checker subagent をループ
-  → bluesky_client(atproto SDK)で external link card 付き投稿
-  → logs/posted.jsonl 追記 + git commit
-  → 失敗時は notifier で Discord webhook
+launchd 08:05 JST → run.sh(bluesky.env + discord.env + x.env を source)
+  → orchestrator.py
+    → match.py で本日が命日の人物 + 該当日 events を集約(personSlugs 空除外、上限 5)
+    → for match in matches:
+        → _process_bluesky:
+            posted_bluesky.jsonl で既投稿 check → claude_runner で post-writer/fact-checker
+            → bluesky_client(atproto SDK)で external link card + facet 付き投稿
+            → posted_bluesky.jsonl 追記
+        → _process_x(X_ENABLED=1 のときのみ):
+            posted_x.jsonl で既投稿 check → claude_runner で post-writer-x/fact-checker-x
+            → image_resolver で portrait/heroImage を絶対 path 解決(5MB 超は PIL リサイズ)
+            → x_client(tweepy)で v2 tweet + v1.1 media upload
+            → posted_x.jsonl 追記
+        → git_commit.commit_posted_logs で両 jsonl をまとめて 1 commit
+    → 失敗時は notifier で Discord webhook(platform 別に [bluesky] / [x] prefix)
 ````
 
-詳細:
-- spec: `docs/superpowers/specs/2026-06-03-bluesky-auto-post-design.md`
-- plan: `docs/superpowers/plans/2026-06-03-bluesky-auto-post.md`
+両 platform は **独立並走**。片方失敗してももう片方は継続。X auth_fail / rate_limit は当日以降の X 処理を bypass(Bluesky は影響なし、逆も同様)。
 
-### 注意事項
+詳細:
+- spec(Bluesky): `docs/superpowers/specs/2026-06-03-bluesky-auto-post-design.md`
+- spec(X 並走): `docs/superpowers/specs/2026-06-03-x-auto-post-design.md`
+- plan(X 並走): `docs/superpowers/plans/2026-06-04-x-auto-post.md`
+
+### 注意事項(両 platform 共通)
 
 - 子プロセスから `ANTHROPIC_API_KEY` / `ANTHROPIC_AUTH_TOKEN` を必ず strip(`claude_runner._child_env` 参照、L0 知見)
 - `--allowed-tools` は `-p` より前に置く(L0 知見、`claude_runner.generate_post` の cmd 構築参照)
-- subagent 定義(`.claude/agents/aoyama-post-writer.md` / `aoyama-fact-checker.md`)は frontmatter のみを根拠にする厳格ルールを保つこと。本文に「ハッシュタグ禁止」「絵文字禁止」を勝手に外さない(サイト全体の重厚トーンと一致させるため)
-- `logs/posted.jsonl` は git commit する(idempotency + 履歴保存)。push は別運用
-- 投稿失敗の事後対応: Discord 通知の生成文を参考に、本物の Bluesky 画面から手動投稿 or skip 判断
-- Bluesky **facet の index は UTF-8 byte offset** で計算する(grapheme/char ではない)。本文 URL を clickable にする際、日本語が混在すると 1 文字 = 3 byte になるため、`text.encode("utf-8").rfind(url.encode("utf-8"))` で byte 位置を計算しないと facet が誤位置に貼られてリンクが効かなかったり別文字を巻き込んだりする(2026-06-03 facet 実装時に確立、`bluesky_client._build_url_facets` 参照)。将来 atproto 互換の AT Protocol サービス(Mastodon の AT 移行版や類似 SNS)に展開する際も同じ前提
+- subagent 定義 4 本(`aoyama-post-writer{,_x}.md` / `aoyama-fact-checker{,_x}.md`)は frontmatter + body のみを根拠にする厳格ルールを保つこと。本文に「ハッシュタグ禁止」「絵文字禁止」を勝手に外さない(サイト全体の重厚トーンと一致させるため)
+- post-writer が body 外の有名な逸話・統計値を加えがちなので、「**body にあるかどうかが唯一の判定軸**」を subagent prompt で繰り返し明示する(2026-06-04 X dry-run チューニングで「死後 8000 円の借金」「電報の零が一つ多い」のような史実だが body 外の情報を post-writer が混入させる事例を検出、5a として禁止条項を強化済み)
+- `logs/posted_bluesky.jsonl` と `logs/posted_x.jsonl` は git commit する(idempotency + 履歴保存)。push は別運用
+- 投稿失敗の事後対応: Discord 通知の生成文を参考に、`--today YYYY-MM-DD` で手動再実行 or 該当 SNS から人手投稿
+- `gen_fail` は subagent の確率的ブレで起きる(再実行で復活することが多い、2026-06-04 shirakawa-yoshinori の X 投稿で初観測)。設計上は 1 回 retry 後諦め、Discord 通知して人間に handle させる方針
+
+### Bluesky 側の注意事項
+
+- **facet の index は UTF-8 byte offset** で計算する(grapheme/char ではない)。本文 URL を clickable にする際、日本語が混在すると 1 文字 = 3 byte になるため、`text.encode("utf-8").rfind(url.encode("utf-8"))` で byte 位置を計算しないと facet が誤位置に貼られてリンクが効かなかったり別文字を巻き込んだりする(2026-06-03 facet 実装時に確立、`bluesky_client._build_url_facets` 参照)。将来 atproto 互換の AT Protocol サービス(Mastodon の AT 移行版や類似 SNS)に展開する際も同じ前提
 - atproto SDK の embed.external.thumb は **pydantic strict validation**、テストで MagicMock を blob として渡すと `ValidationError` で弾かれる。テスト fixture には本物の `BlobRef(mimeType=..., size=..., ref=b"...")` インスタンスを用意する(2026-06-03 Task 6 で顕在化、`test_bluesky_client.py` の `_fake_atproto_client` 参照)
-- pytest: `PYTHONPATH=scripts arch -arm64 scripts/daily_bluesky_post/.venv/bin/pytest scripts/daily_bluesky_post/tests/`
+- 本文に URL を含めて投稿(Bluesky 課金ゼロのため、URL 込みで誘導する)。300 grapheme 上限の安全マージン 290 で生成
+- Bluesky は完全無料、本投稿は無制限に走らせて問題なし
+
+### X 側の注意事項
+
+- **X API は完全 Pay-Per-Use(2025 移行)、Free tier は実質廃止**。Developer Portal で「Sign up for Free Access」と書かれていても実体は PPU。新規アカウントは無料クレジットなしで起動するため、運用前に「クレジットを購入する」($5 最小)で先払いが必要
+- 単価(2026-06-04 docs.x.com/x-api/getting-started/pricing で確認):
+  - POST /2/tweets(通常)= **$0.015 / request**
+  - POST /2/tweets(**URL 含み**)= **$0.200 / request**(13 倍ジャンプ、本案件最大の罠)
+  - POST /1.1/media/upload(metadata)≒ $0.005 / request
+  - → 「URL 含み tweet + 画像」= $0.20/件、「URL なし tweet + 画像」= $0.02/件
+- **本案件の X 投稿は URL を本文に含めない方針**(月 60-90 投稿 × $0.20 = ¥1,800-2,700/月を回避するため)。サイト誘導は X profile bio の website 欄に `https://aoyama-cemetery.pages.dev` を 1 回固定設置で代替。post-writer-x.md の項目 5a で URL 混入を強く禁止、fact-checker-x.md でも検査
+- 構成は 3 行(タイトル / 本文 100-130 字 / `#青山霊園` + 任意 1 個のハッシュタグ行)、URL 行なし
+- 字数カウントは **X weighted units**(CJK=2, ASCII=1, URL=23 だが URL 不使用なので実質 280 ≒ 日本語 140 文字)、safe limit 270 で `x_text.x_weighted_length` 計測
+- 支出上限は Developer Console → 請求書作成 → クレジット → 支出上限を管理 で **月 $5 or $10 推奨**(暴走時の保険、自動チャージは OFF 維持)
+- OAuth 1.0a User Context(`tweepy.Client` v2 + `tweepy.API` v1.1)、Settings で **Read and write** + **Web App, Automated App or Bot** を Token 生成 **前** に設定すること(順序逆だと Read-only token になり投稿失敗 = 403)
+- Developer Portal の用語は **コンシューマーキー** = API Key、**コンシューマーキーシークレット** = API Key Secret、**アクセストークン** / **アクセストークンシークレット**(env では `X_API_KEY` / `X_API_SECRET` / `X_ACCESS_TOKEN` / `X_ACCESS_SECRET` と命名している)。**OAuth 2.0 のクライアント ID / クライアントシークレットは未使用**
+
+### テスト
+
+`PYTHONPATH=scripts arch -arm64 scripts/daily_bluesky_post/.venv/bin/pytest scripts/daily_bluesky_post/tests/`(2026-06-04 時点で 91 件 pass)
 
 ## events の personSlugs 記載基準(直接関与ファースト)
 

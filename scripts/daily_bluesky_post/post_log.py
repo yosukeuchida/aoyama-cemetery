@@ -1,7 +1,13 @@
 """投稿ログ(idempotency 用)。
 
-logs/posted.jsonl に 1 投稿 = 1 行 JSON で append。
-launchd の catch-up や手動再実行で同じ (date, slug) を投稿しないために load して check する。
+platform ごとに別ファイルで 1 投稿 = 1 行 JSON で append する:
+- Bluesky: logs/posted_bluesky.jsonl
+- X      : logs/posted_x.jsonl
+
+呼び出し側(orchestrator)が `config.POSTED_BLUESKY_LOG` / `POSTED_X_LOG`
+を path として渡すので、本モジュールは platform を意識しない。
+launchd の catch-up や手動再実行で同じ (date, slug) を投稿しないために
+load して check する。
 """
 from __future__ import annotations
 

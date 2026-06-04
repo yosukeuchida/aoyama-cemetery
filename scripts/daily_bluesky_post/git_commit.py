@@ -17,8 +17,20 @@ def commit_posted_logs(
 ) -> None:
     """両 platform の posted log をまとめて stage + commit。
 
-    bluesky_status / x_status は "ok" / "fail" / "auth_fail" / "rate_limit" / "skip" / "disabled" 等。
-    両方 stage して diff があれば 1 commit。
+    bluesky_status / x_status に実際に渡される値(orchestrator 由来):
+      "ok"              … 投稿成功 + posted_<platform>.jsonl に追記済
+      "already"         … 既に同 (date, slug) 投稿済で skip
+      "gen_fail"        … claude_runner が status="failed" or error を返した
+      "length_fail"     … 字数超過、再生成後も超過で skip
+      "auth_fail"       … 認証失敗(以降同 platform は当日 bypass)
+      "rate_limit"      … X 月制限到達(以降 X は当日 bypass、X のみ)
+      "fail"            … 上記以外の投稿失敗
+      "skipped_auth"    … 先行 auth_fail を受けて以降の match を skip(Bluesky)
+      "skipped_after_fail" … 先行 auth/rate を受けて以降の match を skip(X)
+      "disabled"        … X_ENABLED=0 or X 認証情報未配置で X 全 skip(X のみ)
+      "dry"             … --dry-run、投稿せず生成文 print のみ
+
+    両 file を stage して diff があれば 1 commit、両方差分なしなら skip。
     """
     from daily_bluesky_post.config import POSTED_BLUESKY_LOG, POSTED_X_LOG
 
