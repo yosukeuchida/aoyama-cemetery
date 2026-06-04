@@ -202,3 +202,40 @@ def test_extract_json_returns_error_on_unknown_status(monkeypatch):
     )
     assert result.status == "error"
     assert "unknown status" in result.error
+
+
+def test_build_prompt_uses_specified_agent_name():
+    from daily_bluesky_post.claude_runner import _build_prompt
+    p_bluesky = _build_prompt(
+        kind="person", url="https://x", anniversary_year=150,
+        frontmatter={"name": "テスト"}, body="本文",
+        agent_name="aoyama-post-writer",
+        fact_checker_name="aoyama-fact-checker",
+    )
+    p_x = _build_prompt(
+        kind="person", url="https://x", anniversary_year=150,
+        frontmatter={"name": "テスト"}, body="本文",
+        agent_name="aoyama-post-writer-x",
+        fact_checker_name="aoyama-fact-checker-x",
+    )
+    assert "aoyama-post-writer subagent" in p_bluesky
+    assert "aoyama-fact-checker subagent" in p_bluesky
+    assert "aoyama-post-writer-x subagent" in p_x
+    assert "aoyama-fact-checker-x subagent" in p_x
+
+
+def test_generate_post_passes_agent_name_through(monkeypatch):
+    from daily_bluesky_post import claude_runner
+    captured = {}
+    def fake_run(prompt, timeout_sec):
+        captured["prompt"] = prompt
+        return claude_runner.GenerateResult(status="ok", post_text="ok")
+    monkeypatch.setattr(claude_runner, "_run_claude", fake_run)
+    claude_runner.generate_post(
+        kind="person", url="https://x", anniversary_year=1,
+        frontmatter={}, body="",
+        agent_name="aoyama-post-writer-x",
+        fact_checker_name="aoyama-fact-checker-x",
+    )
+    assert "aoyama-post-writer-x" in captured["prompt"]
+    assert "aoyama-fact-checker-x" in captured["prompt"]

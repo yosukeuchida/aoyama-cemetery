@@ -34,11 +34,20 @@ def _claude_bin() -> str:
     return shutil.which("claude") or "claude"
 
 
-def _build_prompt(*, kind: str, url: str, anniversary_year: int, frontmatter: Dict[str, Any], body: str) -> str:
+def _build_prompt(
+    *,
+    kind: str,
+    url: str,
+    anniversary_year: int,
+    frontmatter: Dict[str, Any],
+    body: str,
+    agent_name: str = "aoyama-post-writer",
+    fact_checker_name: str = "aoyama-fact-checker",
+) -> str:
     fm_yaml = yaml.safe_dump(frontmatter, allow_unicode=True, sort_keys=False)
     # body は literal block scalar として安全に埋め込み(各行 2 スペースインデント)
     body_indented = "\n".join("  " + line for line in body.splitlines()) if body else "  (なし)"
-    return f"""次の Match を Bluesky に投稿する文を作って、最後に必ず JSON だけを出力してください。
+    return f"""次の Match を投稿する文を作って、最後に必ず JSON だけを出力してください。
 
 ## 入力
 kind: {kind}
@@ -50,8 +59,8 @@ body: |
 {body_indented}
 
 ## 手順
-1. aoyama-post-writer subagent に上記を渡して投稿文を生成する
-2. aoyama-fact-checker subagent に生成文と frontmatter + body を渡して critique する
+1. {agent_name} subagent に上記を渡して投稿文を生成する
+2. {fact_checker_name} subagent に生成文と frontmatter + body を渡して critique する
 3. critique が fail なら、violations を post-writer に渡して再生成 → 再 critique(リトライは 1 回まで)
 4. 2 回目も fail なら status="failed" として終了
 
@@ -82,6 +91,7 @@ def _build_regenerate_prompt(
     previous_text: str,
     previous_length: int,
     target_length: int,
+    agent_name: str = "aoyama-post-writer",
 ) -> str:
     fm_yaml = yaml.safe_dump(frontmatter, allow_unicode=True, sort_keys=False)
     body_indented = "\n".join("  " + line for line in body.splitlines()) if body else "  (なし)"
@@ -92,7 +102,7 @@ def _build_regenerate_prompt(
 - 1 行目のタイトル行(「【今日この日】◯◯(西暦)」または「【本日の命日】◯◯(西暦-西暦)」)
 - 最終行の URL
 
-圧縮対象は本文段落のみ。事実は frontmatter と body の範囲内のみ、トーンは aoyama-post-writer subagent の指示書通り(常体・ストーリー性・現代接続)。
+圧縮対象は本文段落のみ。事実は frontmatter と body の範囲内のみ、トーンは {agent_name} subagent の指示書通り(常体・ストーリー性・現代接続)。
 
 ## 前回生成した文(長すぎたもの)
 {previous_text}
@@ -107,7 +117,7 @@ body: |
 {body_indented}
 
 ## 手順
-1. aoyama-post-writer subagent に上記情報 + 「{target_length} grapheme 以内に圧縮」指示で再生成
+1. {agent_name} subagent に上記情報 + 「{target_length} grapheme 以内に圧縮」指示で再生成
 2. aoyama-fact-checker subagent で critique
 3. critique fail → 再生成 1 回まで
 4. それでも fail → status="failed"
@@ -175,9 +185,12 @@ def generate_post(
     frontmatter: Dict[str, Any],
     body: str = "",
     timeout_sec: int = 300,
+    agent_name: str = "aoyama-post-writer",
+    fact_checker_name: str = "aoyama-fact-checker",
 ) -> GenerateResult:
     prompt = _build_prompt(
         kind=kind, url=url, anniversary_year=anniversary_year, frontmatter=frontmatter, body=body,
+        agent_name=agent_name, fact_checker_name=fact_checker_name,
     )
     return _run_claude(prompt, timeout_sec=timeout_sec)
 
@@ -193,6 +206,7 @@ def regenerate_shorter(
     previous_length: int,
     target_length: int = 280,
     timeout_sec: int = 300,
+    agent_name: str = "aoyama-post-writer",
 ) -> GenerateResult:
     """previous_text が長すぎたので短く再生成。
 
@@ -203,7 +217,7 @@ def regenerate_shorter(
         kind=kind, url=url, anniversary_year=anniversary_year,
         frontmatter=frontmatter, body=body,
         previous_text=previous_text, previous_length=previous_length,
-        target_length=target_length,
+        target_length=target_length, agent_name=agent_name,
     )
     return _run_claude(prompt, timeout_sec=timeout_sec)
 
