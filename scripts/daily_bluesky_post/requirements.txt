@@ -7,4 +7,3 @@ respx>=0.21,<0.24
 pytest-mock>=3.12
 tweepy>=4.14
 Pillow>=10.0
-twitter-text-python>=1.1
