@@ -13,8 +13,17 @@ def test_site_url_constant():
     assert config.SITE_URL == "https://aoyama-cemetery.pages.dev"
 
 
-def test_posted_log_path():
-    assert config.POSTED_LOG == config.PROJECT_ROOT / "logs" / "posted.jsonl"
+def test_posted_log_paths_split_per_platform():
+    from daily_bluesky_post import config
+    assert config.POSTED_BLUESKY_LOG.name == "posted_bluesky.jsonl"
+    assert config.POSTED_X_LOG.name == "posted_x.jsonl"
+    assert config.POSTED_BLUESKY_LOG.parent == config.POSTED_X_LOG.parent
+
+
+def test_legacy_posted_log_alias_removed():
+    # 後方互換 alias を残さない(明示的に platform を選ばせる)
+    from daily_bluesky_post import config
+    assert not hasattr(config, "POSTED_LOG")
 
 
 def test_load_secrets_from_env(monkeypatch):

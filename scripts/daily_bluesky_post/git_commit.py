@@ -7,11 +7,11 @@ from __future__ import annotations
 
 import subprocess
 
-from daily_bluesky_post.config import POSTED_LOG, PROJECT_ROOT
+from daily_bluesky_post.config import POSTED_BLUESKY_LOG, PROJECT_ROOT
 
 
 def commit_posted_log(message: str) -> None:
-    rel = POSTED_LOG.relative_to(PROJECT_ROOT)
+    rel = POSTED_BLUESKY_LOG.relative_to(PROJECT_ROOT)
     rel_str = str(rel)
 
     # stage

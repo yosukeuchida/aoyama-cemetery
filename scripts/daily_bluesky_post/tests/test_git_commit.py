@@ -22,7 +22,7 @@ def test_commit_log_runs_git_add_then_commit(monkeypatch):
     assert any("commit" in c for c in calls)
     add_call = next(c for c in calls if "add" in c)
     commit_call = next(c for c in calls if "commit" in c)
-    assert "logs/posted.jsonl" in " ".join(add_call)
+    assert "logs/posted_bluesky.jsonl" in " ".join(add_call)
     assert "post: 2026-05-14 okubo-toshimichi" in " ".join(commit_call)
 
 

@@ -26,7 +26,7 @@ def mocked(monkeypatch, tmp_path):
     """全 I/O を mock + log file を tmp_path に差し替え"""
     log_path = tmp_path / "posted.jsonl"
     log_path.touch()
-    monkeypatch.setattr(config, "POSTED_LOG", log_path)
+    monkeypatch.setattr(config, "POSTED_BLUESKY_LOG", log_path)
 
     # load_secrets を常に成功させる
     monkeypatch.setattr(

@@ -35,7 +35,7 @@ def run(*, today: date, dry_run: bool = False) -> int:
     if not matches:
         return 0
 
-    entries = post_log.load(config.POSTED_LOG)
+    entries = post_log.load(config.POSTED_BLUESKY_LOG)
     auth_failed = False
 
     for m in matches:
@@ -131,7 +131,7 @@ def run(*, today: date, dry_run: bool = False) -> int:
         entry = post_log.Entry(
             date=today, slug=m.slug, kind=m.kind, post_uri=uri, at=now,
         )
-        post_log.append(config.POSTED_LOG, entry)
+        post_log.append(config.POSTED_BLUESKY_LOG, entry)
         entries.append(entry)
         git_commit.commit_posted_log(f"post: {today.isoformat()} {m.slug}")
         logger.info("posted: %s -> %s", m.slug, uri)

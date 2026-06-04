@@ -16,7 +16,8 @@ SITE_URL = "https://aoyama-cemetery.pages.dev"
 
 PEOPLE_DIR = PROJECT_ROOT / "src" / "content" / "people"
 EVENTS_DIR = PROJECT_ROOT / "src" / "content" / "events"
-POSTED_LOG = PROJECT_ROOT / "logs" / "posted.jsonl"
+POSTED_BLUESKY_LOG = PROJECT_ROOT / "logs" / "posted_bluesky.jsonl"
+POSTED_X_LOG = PROJECT_ROOT / "logs" / "posted_x.jsonl"
 ERRORS_LOG = PROJECT_ROOT / "logs" / "errors.jsonl"
 
 MAX_POSTS_PER_DAY = 5
