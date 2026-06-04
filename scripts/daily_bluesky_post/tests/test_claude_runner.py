@@ -239,3 +239,45 @@ def test_generate_post_passes_agent_name_through(monkeypatch):
     )
     assert "aoyama-post-writer-x" in captured["prompt"]
     assert "aoyama-fact-checker-x" in captured["prompt"]
+
+
+def test_build_regenerate_prompt_uses_specified_fact_checker():
+    from daily_bluesky_post.claude_runner import _build_regenerate_prompt
+    p_bluesky = _build_regenerate_prompt(
+        kind="person", url="https://x", anniversary_year=1,
+        frontmatter={}, body="b",
+        previous_text="...", previous_length=320, target_length=290,
+    )
+    p_x = _build_regenerate_prompt(
+        kind="person", url="https://x", anniversary_year=1,
+        frontmatter={}, body="b",
+        previous_text="...", previous_length=320, target_length=270,
+        agent_name="aoyama-post-writer-x",
+        fact_checker_name="aoyama-fact-checker-x",
+    )
+    assert "aoyama-fact-checker subagent" in p_bluesky
+    assert "aoyama-fact-checker-x subagent" in p_x
+    # Make sure the X variant did NOT leak the bluesky name
+    assert "aoyama-fact-checker subagent" not in p_x or "aoyama-fact-checker-x subagent" in p_x  # tolerate substring nesting
+    # Stronger: bluesky name should not appear as a standalone token in X variant
+    # i.e. no "aoyama-fact-checker " (with trailing space) without -x
+    import re
+    assert not re.search(r"aoyama-fact-checker(?!-x)", p_x), f"Bluesky fact-checker name leaked in X prompt: {p_x}"
+
+
+def test_regenerate_shorter_passes_fact_checker_through(monkeypatch):
+    from daily_bluesky_post import claude_runner
+    captured = {}
+    def fake_run(prompt, timeout_sec):
+        captured["prompt"] = prompt
+        return claude_runner.GenerateResult(status="ok", post_text="ok")
+    monkeypatch.setattr(claude_runner, "_run_claude", fake_run)
+    claude_runner.regenerate_shorter(
+        kind="person", url="https://x", anniversary_year=1,
+        frontmatter={}, body="",
+        previous_text="...", previous_length=320, target_length=270,
+        agent_name="aoyama-post-writer-x",
+        fact_checker_name="aoyama-fact-checker-x",
+    )
+    assert "aoyama-post-writer-x subagent" in captured["prompt"]
+    assert "aoyama-fact-checker-x subagent" in captured["prompt"]

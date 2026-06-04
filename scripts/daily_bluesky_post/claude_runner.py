@@ -92,6 +92,7 @@ def _build_regenerate_prompt(
     previous_length: int,
     target_length: int,
     agent_name: str = "aoyama-post-writer",
+    fact_checker_name: str = "aoyama-fact-checker",
 ) -> str:
     fm_yaml = yaml.safe_dump(frontmatter, allow_unicode=True, sort_keys=False)
     body_indented = "\n".join("  " + line for line in body.splitlines()) if body else "  (なし)"
@@ -118,7 +119,7 @@ body: |
 
 ## 手順
 1. {agent_name} subagent に上記情報 + 「{target_length} grapheme 以内に圧縮」指示で再生成
-2. aoyama-fact-checker subagent で critique
+2. {fact_checker_name} subagent で critique
 3. critique fail → 再生成 1 回まで
 4. それでも fail → status="failed"
 
@@ -207,6 +208,7 @@ def regenerate_shorter(
     target_length: int = 280,
     timeout_sec: int = 300,
     agent_name: str = "aoyama-post-writer",
+    fact_checker_name: str = "aoyama-fact-checker",
 ) -> GenerateResult:
     """previous_text が長すぎたので短く再生成。
 
@@ -218,6 +220,7 @@ def regenerate_shorter(
         frontmatter=frontmatter, body=body,
         previous_text=previous_text, previous_length=previous_length,
         target_length=target_length, agent_name=agent_name,
+        fact_checker_name=fact_checker_name,
     )
     return _run_claude(prompt, timeout_sec=timeout_sec)
 
