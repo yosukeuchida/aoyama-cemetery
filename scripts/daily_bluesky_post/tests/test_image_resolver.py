@@ -45,11 +45,12 @@ def test_prepare_for_upload_small_returns_original(tmp_path):
 
 def test_prepare_for_upload_large_resizes(tmp_path):
     from PIL import Image
+    import os
+    # ランダムピクセルだと JPEG が圧縮できず必ず 5MB を超える
     big = tmp_path / "big.jpg"
-    # 6 MB を超える画像を生成(2000x2000 ランダム JPEG quality 100)
-    Image.new("RGB", (4000, 4000), color="white").save(big, quality=100)
-    if big.stat().st_size < X_MEDIA_LIMIT_BYTES:
-        pytest.skip("test image not large enough on this platform")
+    pixels = os.urandom(2000 * 2000 * 3)
+    Image.frombytes("RGB", (2000, 2000), pixels).save(big, quality=100)
+    assert big.stat().st_size > X_MEDIA_LIMIT_BYTES, "test setup failed to exceed 5MB"
     result = prepare_for_upload(big, tmp_dir=tmp_path)
     assert result != big
     assert result.stat().st_size < X_MEDIA_LIMIT_BYTES

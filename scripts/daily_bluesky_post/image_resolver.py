@@ -57,8 +57,8 @@ def prepare_for_upload(src: Path, *, tmp_dir: Path) -> Path:
     if src.stat().st_size <= X_MEDIA_LIMIT_BYTES:
         return src
 
-    img = Image.open(src)
-    img.thumbnail((RESIZE_LONG_EDGE, RESIZE_LONG_EDGE))
     out = tmp_dir / (src.stem + "_resized.jpg")
-    img.convert("RGB").save(out, format="JPEG", quality=RESIZE_QUALITY)
+    with Image.open(src) as img:
+        img.thumbnail((RESIZE_LONG_EDGE, RESIZE_LONG_EDGE))
+        img.convert("RGB").save(out, format="JPEG", quality=RESIZE_QUALITY)
     return out
