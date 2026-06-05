@@ -22,6 +22,14 @@ stops 順 = 物語順、walkOrder = 歩行効率順 という設計(CLAUDE.md「
   - 経路ラインは効率順だが、Google Maps の徒歩経路 URL(本文中のリンク)は更新しない
     (物語順を残すか効率順に書き換えるかはルートごとに人間判断、本スクリプトは触らない)
   - 本文中の「経路順:」リストも物語順を保持する設計(CLAUDE.md 参照)
+
+estimatedMinutes / 本文の総距離・所要時間の再計算公式(2026-05-25 確立):
+  - 実距離 = 直線距離(walkOrder 順) × 1.4 (曲がり道補正)
+  - walk 15 分 / km
+  - visit 7 分 / 人
+  - 5 分単位 round
+  stops 数や walkOrder が変わると総距離も変わるため、frontmatter の estimatedMinutes と
+  本文「総距離 約 X km、墓所間 Y 分(参拝込み Z 分)」を更新する。
 """
 
 import os

@@ -16,6 +16,31 @@
 - "CC0", "CC-PD"
 - "CC-BY-X.X", "CC-BY-SA-X.X" (artist crediting 必要)
 Wikimedia 由来でも fair use / non-free / unclear は SKIP。
+
+heroImage 補完テクニック(url 一時書き換え):
+事件記事に画像がない・ライセンス不適合・国旗や紋章しか取れない等で SKIP / 弱画像に
+なった event は、md の `url:` を関連 Wikipedia 記事に一時書き換え → 本スクリプト再実行
+→ 元の url に戻す、というワークアラウンドで補完できる(本スクリプト本体は触らない)。
+
+書き換え先候補の優先順位:
+1. 当事者・主導者の人物 Wikipedia 記事(肖像が取れる、最も汎用的)
+   例: 安政の大獄 → 井伊直弼 / 学制発布 → 大木喬任 / 国際連盟脱退 → 松岡洋右
+2. サブ記事・関連記事(画像のバリアントが取れる)
+   例: 満州事変 → 柳条湖事件(本記事は紋章のみ、サブは爆破地点写真)
+3. 別の関連人物(第一候補がライセンス不適のフォールバック)
+   例: 壬午事変 → 閔妃(韓国 KOGL Type 1 で白リスト外) → 三浦梧楼
+
+手順:
+1. md の `url:` を一時書き換え(Edit で 1 行)
+2. 弱画像時は既存の heroImage / heroImageCaption / heroImageCredit 3 行削除 + 画像ファイル削除
+3. 本スクリプト再実行(取得済 event は自動 skip)
+4. 取得成功後、url を元の事件名記事に戻す
+
+注意: heroImageCredit が複数行 YAML scalar の場合 Edit の old_string マッチが失敗するため
+Python の re.sub で multiline 削除が安全。
+
+実例: 2026-05-26 新規 19 件中 4 件 SKIP + 3 件弱画像を本手法で補完、全 19 件で適切な
+heroImage 取得(commit e0453e9)。
 """
 import html
 import json
