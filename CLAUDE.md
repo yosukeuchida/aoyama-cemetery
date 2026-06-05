@@ -83,10 +83,9 @@
 
 - 子プロセスから `ANTHROPIC_API_KEY` / `ANTHROPIC_AUTH_TOKEN` を必ず strip(L0 知見、`claude_runner._child_env` 参照)
 - `--allowed-tools` は `-p` より前に置く(L0 知見、`claude_runner.generate_post` 参照)
-- subagent 定義 4 本は frontmatter + body のみを根拠にする厳格ルールを保つ
-- post-writer が body 外の有名な逸話・統計値を加えがちなので「**body にあるかどうかが唯一の判定軸**」を subagent prompt で繰り返し明示(2026-06-04 「死後 8000 円の借金」等で顕在化、5a として禁止条項強化済み)
-- `logs/posted_bluesky.jsonl` / `posted_x.jsonl` は git commit する(idempotency)
-- `gen_fail` は subagent の確率的ブレで起きる(再実行で復活が多い)。1 回 retry 後諦め Discord 通知 → 人間に handle
+- subagent 定義 4 本(`aoyama-post-writer{,_x}` / `aoyama-fact-checker{,_x}`)は frontmatter + body のみを根拠にする厳格ルールを保つ
+- post-writer が body 外の有名な逸話・統計値を加えがちなので「**body にあるかどうかが唯一の判定軸**」を subagent prompt で繰り返し明示(2026-06-04 「死後 8000 円の借金」等で顕在化、prompt §5a で禁止)
+- `logs/posted_bluesky.jsonl` / `posted_x.jsonl` は git commit する(idempotency 保証 — 「ログだから ignore」と判断しない)
 - **launchd plist には `<key>ProcessType</key><string>Interactive</string>` を必ず入れる**
   - 未指定だと launchd が Background QoS と判定し、`claude -p --allowed-tools Agent`(subagent)起動時の peak memory で jetsam SIGKILL(exit -9)される
   - GUI session 経由なら同 binary・同 prompt で正常動作するため切り分けが難しい
@@ -96,27 +95,16 @@
 
 ### Bluesky 側の注意
 
-- **facet の index は UTF-8 byte offset** で計算(grapheme/char ではない)。本文 URL を clickable にする時、日本語混在で 1 文字 = 3 byte になるため `text.encode("utf-8").rfind(...)` で byte 位置計算が必要(2026-06-03 facet 実装時に確立、`bluesky_client._build_url_facets` 参照)
+- **facet の index は UTF-8 byte offset** で計算(grapheme/char ではない)。日本語混在で 1 文字 = 3 byte になるため `text.encode("utf-8").rfind(...)` で byte 位置計算が必要(`bluesky_client._build_url_facets` 参照)
 - atproto SDK の embed.external.thumb は pydantic strict validation。テスト fixture には本物の `BlobRef(...)` を渡す(MagicMock は `ValidationError`)
-- 本文に URL を含めて投稿(Bluesky 課金ゼロ)。300 grapheme 上限の安全マージン 290 で生成
 
 ### X 側の注意
 
-- **X API は完全 Pay-Per-Use(2025 移行)、Free tier は実質廃止**。新規アカウントは無料クレジットなしで起動 → 運用前に「クレジットを購入」($5 最小)で先払い
-- 単価(2026-06-04 docs.x.com で確認):
-  - POST /2/tweets(通常)= **$0.015 / request**
-  - POST /2/tweets(**URL 含み**)= **$0.200 / request**(13 倍ジャンプ、最大の罠)
-  - POST /1.1/media/upload(metadata)≒ $0.005 / request
-- **本案件は URL を本文に含めない方針**(月 60-90 投稿 × $0.20 = ¥1,800-2,700/月を回避)。サイト誘導は X profile bio の website 欄に 1 回固定設置で代替。post-writer-x.md §5a で URL 混入を禁止、fact-checker-x.md でも検査
-- 構成 3 行(タイトル / 本文 100-130 字 / `#青山霊園` + 任意 1 ハッシュタグ)、URL 行なし
+- **URL 含みツイートは課金が 13 倍ジャンプ($0.015 → $0.200/req)**。本案件は **URL を本文に含めない方針**。post-writer-x.md §5a / fact-checker-x.md でも URL 混入を禁止。詳細単価・支出上限設定は `scripts/daily_bluesky_post/README.md` §「X API 料金の注意」
 - 字数カウントは **X weighted units**(CJK=2, ASCII=1)、safe limit 270 で `x_text.x_weighted_length` 計測
-- 支出上限は Developer Console → 請求書 → クレジット → 支出上限 で **月 $5 or $10 推奨**
-- OAuth 1.0a User Context(`tweepy.Client` v2 + `tweepy.API` v1.1)、Settings で **Read and write** + **Web App, Automated App or Bot** を Token 生成 **前** に設定(順序逆だと Read-only token → 403)
-- env 命名: コンシューマーキー=`X_API_KEY` / コンシューマーキーシークレット=`X_API_SECRET` / アクセストークン=`X_ACCESS_TOKEN` / アクセストークンシークレット=`X_ACCESS_SECRET`。OAuth 2.0 のクライアント ID/シークレットは未使用
+- 出力構成・字数仕様は `.claude/agents/aoyama-post-writer-x.md`(subagent prompt 側に集約)
 
-### テスト
-
-`PYTHONPATH=scripts arch -arm64 scripts/daily_bluesky_post/.venv/bin/pytest scripts/daily_bluesky_post/tests/`(2026-06-04 時点 91 件 pass)
+人間向け初回セットアップ・運用・テスト手順・gen_fail 再実行は `scripts/daily_bluesky_post/README.md` を参照。
 
 ## events の personSlugs 記載基準(直接関与ファースト)
 

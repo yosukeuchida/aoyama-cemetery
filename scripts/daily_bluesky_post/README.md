@@ -41,6 +41,8 @@ chmod 600 ~/.config/aoyama-cemetery/x.env
 
 4 つのキーは X Developer Portal → アプリ → Keys and tokens の **OAuth 1.0 キー** セクションから取得(2025 移行後の用語: コンシューマーキー / コンシューマーキーシークレット / アクセストークン / アクセストークンシークレット = それぞれ env の 4 つに対応)。OAuth 2.0 のクライアント ID / シークレットは使わない。
 
+**重要: Token 生成前に App 権限を「Read and write」+ User authentication settings の Type of App を「Web App, Automated App or Bot」に設定すること**(順序を逆にすると Read-only token が発行され、投稿時 403 で失敗する)。
+
 `X_ENABLED=0` の状態で X 用 subagent の dry-run チューニングをしてから、納得したら `1` に書き換える(launchd 経由でも読まれる)。
 
 ### 2. dry-run 動作確認
