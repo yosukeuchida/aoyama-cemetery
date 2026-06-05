@@ -17,34 +17,26 @@
 
 ## 偉人追加手順
 
-1. **埋葬確認ファースト**: 候補人物を追加する前に必ず青山霊園への埋葬を一次資料で確認する。確認の優先順位は (1) ユーザー提供の `~/Desktop/青山霊園.pptx` → (2) Wikipedia 本人記事 infobox の「墓所: 青山霊園」明記 → (3) 青山霊園 Wikipedia 著名人リスト
-   - 「○○系の有名人なので青山霊園にいるはず」というカテゴリ推測でリストアップしない
-   - 複数霊園に分骨/改葬されているケースもあるため最新情報で確認
-   - 反面教師: 2026-05-23 セッションで 14 名(西郷従道・山田顕義・田中光顕 他)を推測で候補入りさせ後から除外する作業が発生した。詳細: `~/Desktop/Obsidian/claude-code/2026-05-24-aoyama-cemetery-pin未取得偉人リスト.md`
+1. **埋葬確認ファースト**: 候補人物を追加する前に必ず青山霊園の公式資料を確認する `docs/meikan_1.jpg`、`docs/meikan_2.jpg`、`docs/meikan_3.jpg`
 2. `src/content/people/<slug>.md` を作成(slug はローマ字ハイフン区切り、例 `okubo-toshimichi`)
 3. frontmatter は `src/content.config.ts` の zod スキーマに準拠、`references` の出典で事実確認(没年月日・役職・業績)
-4. **墓所位置**: 区画番号を Wikipedia/港区資料で確認し `graveSection` に記入(地図は「地図機能」章参照)
-5. `npm run dev` でローカル目視確認(地図が正しい墓所 POI に着地するかも確認)
-6. `git commit && git push` → Cloudflare Pages が自動デプロイ
-7. **墓参り写真がある場合**: `./scripts/add-grave-photo.sh <slug> <写真ファイル...>` で自動リサイズ(長辺 1600px / quality 85)+ HEIC→JPEG 変換 + 規則ファイル名で配置。frontmatter 編集不要。仕様: `docs/superpowers/specs/2026-05-21-grave-photo-gallery-design.md`
+4. `npm run dev` でローカル目視確認(地図が正しい墓所 POI に着地するかも確認)
+5. `git commit && git push` → Cloudflare Pages が自動デプロイ
+6. **墓参り写真がある場合**: `./scripts/add-grave-photo.sh <slug> <写真ファイル...>` で自動リサイズ(長辺 1600px / quality 85)+ HEIC→JPEG 変換 + 規則ファイル名で配置。frontmatter 編集不要。仕様: `docs/superpowers/specs/2026-05-21-grave-photo-gallery-design.md`
 
 ## 偉人削除手順(墓じまい対応)
 
 青山霊園から墓所が撤去された(墓じまいされた)ことが判明した場合の手順。複数コレクションに連鎖修正が必要(2026-05-24 otori-keisuke / hayashi-tadasu の 2 例で確立)。
 
-1. **削除前に一次資料で墓じまいを確認する(必須)**: 「埋葬確認ファースト」と同じく削除時にも適用。Wikipedia の脚注や伝聞情報だけで削除しない
-   - 確認順: ユーザー現地確認(写真・座標) → 管理事務所公式 → `~/Desktop/青山霊園.pptx` → 複数の独立した二次資料
-   - **1 ソースのみの情報では削除しない**
-   - 反面教師: 2026-05-24 大鳥圭介・林董を未検証で削除 → 翌日ユーザー現地確認で 2 名とも墓所現存判明、復活させた(commit `d218251` 他)
-2. **全参照を grep で網羅検出**: `grep -rn "<slug>\|<日本語名>" src/ scripts/` + Obsidian 進捗メモにも grep
-3. **完全削除**: `src/content/people/<slug>.md` + `src/assets/portraits/<slug>.jpg`
-4. **frontmatter 構造参照を削除**: 他人物の `relatedPeople` / events の `personSlugs` / routes の `stops` から該当 slug を削除
-5. **本文記述の判断 — 墓所言及 vs 史実言及**:
+1. **全参照を grep で網羅検出**: `grep -rn "<slug>\|<日本語名>" src/ scripts/` + Obsidian 進捗メモにも grep
+2. **完全削除**: `src/content/people/<slug>.md` + `src/assets/portraits/<slug>.jpg`
+3. **frontmatter 構造参照を削除**: 他人物の `relatedPeople` / events の `personSlugs` / routes の `stops` から該当 slug を削除
+4. **本文記述の判断 — 墓所言及 vs 史実言及**:
    - 削除: 「青山霊園に眠る」「同区画に並ぶ」型(現状と矛盾)
    - 保持: 「日英同盟を調印」「戊辰戦争で旧幕府軍を指揮」型(史実は墓の有無と独立)
    - 中間: events の関係者紹介セクションは保持、末尾「本霊園 ◯◯側に眠る」は「墓所は当初... 墓じまいされ現在は霊園内に墓所はない」に書き換え
-6. `scripts/download-portraits.py` の PAIRS エントリ削除(再ダウンロード抑止)+ Obsidian 進捗メモも修正
-7. **ビルド検証**: `npm run build` で zod 検証通過 + ページ数 -1 を確認してから commit & push
+5. `scripts/download-portraits.py` の PAIRS エントリ削除(再ダウンロード抑止)+ Obsidian 進捗メモも修正
+6. **ビルド検証**: `npm run build` で zod 検証通過 + ページ数 -1 を確認してから commit & push
 
 実例: 林董(hayashi-tadasu)削除では grep 25 箇所 / 7 カテゴリを順に修正、178 → 177 ページ。詳細: `~/Desktop/Obsidian/claude-code/2026-05-24-aoyama-cemetery-墓じまい対応-相楽総三-林董.md`
 
@@ -52,22 +44,7 @@
 
 既存偉人の coords / 墓写真 / frontmatter 編集はローカル Streamlit 管理画面から行う。新規偉人追加は引き続き `/add-person` スラッシュコマンド。
 
-### 起動
-
-```bash
-aoyama-ui  # ~/.zshrc alias、内部で arch -arm64 admin/.venv/bin/streamlit run
-           # 初回は arm64 venv を自動構築(数分)、以降は数秒で起動
-```
-
-ブラウザで http://localhost:8501。フル形は `admin/run.sh`。
-
-### 画面構成
-
-- **Dashboard**: 全 136 偉人の進捗一覧。coords 状態 / 墓写真枚数 / 最終 commit 日時 + フィルタ
-- **Person_Edit**: 3 タブ
-  - 📍 coords: lat/lng 直接入力 or Google Maps URL ペースト(`@lat,lng` / `?q=lat,lng` 自動抽出)
-  - 📸 写真: 既存サムネ + 削除 + 新規アップロード(`scripts/add-grave-photo.sh` に委譲)
-  - 📝 frontmatter: raw YAML editor(zod 整合は保存後の `npm run build` 任せ)
+起動方法・画面構成は `admin/README.md` および spec(下記)を参照。本節は AI 改修時の挙動仕様と罠のみ。
 
 ### 自動 commit + push(重要)
 
@@ -95,22 +72,12 @@ aoyama-ui  # ~/.zshrc alias、内部で arch -arm64 admin/.venv/bin/streamlit ru
 
 毎朝 8:05 JST に本日が命日の偉人 / 該当日 events を **Bluesky と X(旧 Twitter)に独立並走で自動投稿**。launchd + `claude -p` Max plan 経路 + subagent 2 段 ×2 platform 構成(`aoyama-post-writer{,_x}` / `aoyama-fact-checker{,_x}`)。ディレクトリ名は歴史的経緯で `daily_bluesky_post` のままだが実態は multi-platform。
 
-### 起動 / セットアップ
+起動方法・シークレット配置・アーキテクチャ全体像は `scripts/daily_bluesky_post/README.md` および spec / plan を参照。本節は AI 改修時の罠・運用上の注意のみ。
 
-1. シークレット配置(`~/.config/aoyama-cemetery/` 配下、フォーマット詳細は `scripts/daily_bluesky_post/README.md`):
-   - `bluesky.env`(必須): `BLUESKY_HANDLE`, `BLUESKY_APP_PASSWORD`
-   - `discord.env`(任意): `DISCORD_WEBHOOK_URL`
-   - `x.env`(X 並走時のみ): `X_API_KEY`, `X_API_SECRET`, `X_ACCESS_TOKEN`, `X_ACCESS_SECRET`, `X_ENABLED=0/1`
-2. dry-run: `scripts/daily_bluesky_post/run.sh --dry-run --today 2026-05-14`
-3. launchd 登録: `infra/launchd/README.md` 手順に従う
+- spec: `docs/superpowers/specs/2026-06-03-bluesky-auto-post-design.md` / `2026-06-03-x-auto-post-design.md`
+- plan: `docs/superpowers/plans/2026-06-04-x-auto-post.md`
 
-### アーキテクチャ概要
-
-`launchd 08:05 JST → run.sh(env 読み込み)→ orchestrator.py → match.py(命日 + events 集約)→ for match in matches: _process_bluesky + _process_x → posted_*.jsonl 追記 → git_commit.commit_posted_logs で 1 commit → 失敗時は Discord 通知`
-
-両 platform は**独立並走**。片方失敗してももう片方は継続。X auth_fail / rate_limit は当日以降の X 処理を bypass(Bluesky は影響なし、逆も同様)。
-
-詳細: `docs/superpowers/specs/2026-06-03-bluesky-auto-post-design.md` / `2026-06-03-x-auto-post-design.md` / `docs/superpowers/plans/2026-06-04-x-auto-post.md`
+**重要な挙動仕様**: 両 platform は独立並走。片方失敗してももう片方は継続。X auth_fail / rate_limit は当日以降の X 処理を bypass(Bluesky は影響なし、逆も同様)。
 
 ### 注意事項(両 platform 共通)
 
