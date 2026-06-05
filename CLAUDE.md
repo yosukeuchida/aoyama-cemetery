@@ -7,11 +7,8 @@
 
 ## プロジェクト概要
 
-- 目的: 青山霊園に眠る偉人を紹介する静的サイト
-- 公開 URL: https://aoyama-cemetery.pages.dev
-- スタック: Astro 6.x + TypeScript strict + @astrojs/sitemap
-- ホスティング: Cloudflare Pages(GitHub public repo を watch)
-- アクセス: 完全 public
+- **アクセス: 完全 public**(GitHub public repo + Cloudflare Pages 配信、コミット内容は外部公開される前提)
+- 公開 URL・スタック・ホスティング詳細は `README.md` 参照
 - 設計書: `docs/superpowers/specs/2026-05-21-aoyama-cemetery-site-design.md`
 - 実装計画: `docs/superpowers/plans/2026-05-21-aoyama-cemetery-site.md`
 
@@ -156,7 +153,7 @@ events 追加・更新時、`personSlugs` に人物を記載する基準は「**
 
 **注意: 立山墓地と本園で同じ番地表記が独立に存在する**。番地表記だけで位置を断定せず、必ず coords(または現地確認)と合わせて見る。立山墓地側は `graveSection` 末尾に「(立山墓地)」と注記する慣習(2026-05-25 立見尚文「1種イ1号3側」は立山墓地内で本園 1種イ1号 と別物、ユーザー現地確認済)。
 
-POI 自動判定スクリプト `scripts/verify-map-pois.py` で全偉人を一括検証可能(`exit code 1` で CI 組込可)。手動の coords 取得手順 / 4 通り制御の使い分け手順 / 判定基準の詳細は `README.md` §「地図 coords の取得手順」参照。
+coords 取得手順・POI 確認手順・判定基準は `README.md` 参照(`scripts/verify-map-pois.py` で一括検証可)。
 
 ### 散歩ルートマップの walkOrder(マーカー番号 ≠ 歩行順)
 
