@@ -17,7 +17,7 @@
 
 ## 偉人追加手順
 
-1. **埋葬確認ファースト**: 候補人物を追加する前に必ず青山霊園の公式資料を確認する `docs/meikan_1.jpg`、`docs/meikan_2.jpg`、`docs/meikan_3.jpg`
+1. **埋葬確認ファースト**: 候補人物を追加する前に必ず青山霊園の公式資料を確認する(`~/workspace/personal/aoyama-cemetery/docs/meikan_{1,2,3}.jpeg`、ローカル所持・`.gitignore` 対象・公開不可)
 2. `src/content/people/<slug>.md` を作成(slug はローマ字ハイフン区切り、例 `okubo-toshimichi`)
 3. frontmatter は `src/content.config.ts` の zod スキーマに準拠、`references` の出典で事実確認(没年月日・役職・業績)
 4. `npm run dev` でローカル目視確認(地図が正しい墓所 POI に着地するかも確認)

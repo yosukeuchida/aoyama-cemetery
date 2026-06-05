@@ -43,3 +43,7 @@ scripts/daily_bluesky_post/.venv/
 scripts/daily_bluesky_post/__pycache__/
 scripts/daily_bluesky_post/**/__pycache__/
 scripts/daily_bluesky_post/.pytest_cache/
+
+# 青山霊園 公式資料(ローカル所持、公開不可)
+docs/meikan_*.jpeg
+docs/meikan_*.jpg
