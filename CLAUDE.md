@@ -159,6 +159,7 @@ launchd 08:05 JST → run.sh(bluesky.env + discord.env + x.env を source)
 - `logs/posted_bluesky.jsonl` と `logs/posted_x.jsonl` は git commit する(idempotency + 履歴保存)。push は別運用
 - 投稿失敗の事後対応: Discord 通知の生成文を参考に、`--today YYYY-MM-DD` で手動再実行 or 該当 SNS から人手投稿
 - `gen_fail` は subagent の確率的ブレで起きる(再実行で復活することが多い、2026-06-04 shirakawa-yoshinori の X 投稿で初観測)。設計上は 1 回 retry 後諦め、Discord 通知して人間に handle させる方針
+- **launchd plist には `<key>ProcessType</key><string>Interactive</string>` を必ず入れる**。未指定だと launchd は短命ジョブを Background QoS と判定し、`claude -p --allowed-tools Agent`(subagent 経由)起動時の peak memory で **memory ceiling / jetsam により SIGKILL(exit -9)** される。GUI session 経由なら同 binary・同 prompt で正常動作するため切り分けが難しい。biz-radar が launchd + claude -p で動いていたのは subagent 未使用(`--allowed-tools "WebSearch,WebFetch"`)だったため。判定: `launchctl print gui/$(id -u)/<label>` で `spawn type = interactive (4)` / `jetsam priority = 40` を確認(2026-06-05 朝の自動投稿で初顕在化、`logs/launchd.err.log` の `claude exit -9` が手がかり)
 
 ### Bluesky 側の注意事項
 

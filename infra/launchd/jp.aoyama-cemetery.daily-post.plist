@@ -22,6 +22,11 @@
     <key>RunAtLoad</key>
     <false/>
 
+    <!-- Background QoS の memory ceiling / jetsam 優先 kill を回避するため Interactive 指定 -->
+    <!-- ProcessType 未指定だと subagent 経由(--allowed-tools Agent)の claude -p が起動直後に SIGKILL(exit -9)される -->
+    <key>ProcessType</key>
+    <string>Interactive</string>
+
     <key>StandardOutPath</key>
     <string>/Users/uchidayousuke/workspace/personal/aoyama-cemetery/logs/launchd.out.log</string>
     <key>StandardErrorPath</key>
