@@ -2159,7 +2159,7 @@ Chrome DevTools の Lighthouse タブで `/` を Performance + Accessibility 計
 
 - [ ] **Step 5: スクリーンショットを Obsidian に保存**
 
-Before(刷新前)が無いので After のみ。主要 5 ページのスクリーンショットを `~/Desktop/Obsidian/claude-code/2026-05-25-aoyama-cemetery-ui-refresh.md` に貼る。任意。
+Before(刷新前)が無いので After のみ。主要 5 ページのスクリーンショットを `~/Obsidian/claude-code/2026-05-25-aoyama-cemetery-ui-refresh.md` に貼る。任意。
 
 - [ ] **Step 6: 最終 commit と push**
 

@@ -35,7 +35,7 @@
 5. `scripts/download-portraits.py` の PAIRS エントリ削除(再ダウンロード抑止)+ Obsidian 進捗メモも修正
 6. **ビルド検証**: `npm run build` で zod 検証通過 + ページ数 -1 を確認してから commit & push
 
-実例: 林董(hayashi-tadasu)削除では grep 25 箇所 / 7 カテゴリを順に修正、178 → 177 ページ。詳細: `~/Desktop/Obsidian/claude-code/2026-05-24-aoyama-cemetery-墓じまい対応-相楽総三-林董.md`
+実例: 林董(hayashi-tadasu)削除では grep 25 箇所 / 7 カテゴリを順に修正、178 → 177 ページ。詳細: `~/Obsidian/claude-code/2026-05-24-aoyama-cemetery-墓じまい対応-相楽総三-林董.md`
 
 ## 管理画面(`admin/`、2026-05-28 新規)
 
@@ -55,7 +55,7 @@
 
 - spec: `docs/superpowers/specs/2026-05-28-grave-admin-design.md`
 - plan: `docs/superpowers/plans/2026-05-28-grave-admin.md`
-- 構築ログ: `~/Desktop/Obsidian/claude-code/2026-05-28-aoyama-admin-streamlit-build.md`
+- 構築ログ: `~/Obsidian/claude-code/2026-05-28-aoyama-admin-streamlit-build.md`
 
 ### admin 改修時の注意
 

@@ -334,4 +334,4 @@ PYTHONPATH=scripts arch -arm64 scripts/daily_bluesky_post/.venv/bin/pytest scrip
 - 前提設計: `docs/superpowers/specs/2026-06-03-bluesky-auto-post-design.md`
 - Bluesky 実装: `scripts/daily_bluesky_post/`
 - L0 知見元: `~/workspace/CLAUDE.md`(claude -p subprocess + --allowed-tools 位置 + ANTHROPIC_API_KEY strip)
-- 過去メモ: `~/Desktop/Obsidian/claude-code/2026-06-03-aoyama-bluesky-bot-spec-to-launchd稼働.md`(Bluesky 完走記録、SNS 文字数比較表)
+- 過去メモ: `~/Obsidian/claude-code/2026-06-03-aoyama-bluesky-bot-spec-to-launchd稼働.md`(Bluesky 完走記録、SNS 文字数比較表)

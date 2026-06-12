@@ -24,7 +24,7 @@ npm run preview  # 本番相当を確認
 
 ## 偉人追加方法
 
-`src/content/people/<slug>.md` を 1 ファイル追加するだけで `/people/<slug>/` が生成されます。frontmatter スキーマは `src/content/config.ts` 参照。
+`src/content/people/<slug>.md` を 1 ファイル追加するだけで `/people/<slug>/` が生成されます。frontmatter スキーマは `src/content.config.ts` 参照。
 
 ## 地図 coords の取得手順(Google Maps 航空写真)
 
